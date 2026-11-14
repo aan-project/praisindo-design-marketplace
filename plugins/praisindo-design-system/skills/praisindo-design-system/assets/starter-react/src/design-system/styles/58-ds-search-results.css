@@ -1,0 +1,42 @@
+/* ===== Design page search results (rule DS-14) ===== */
+.dshero-wrap{grid-column:1/-1;height:var(--hero-h,172px)}
+.dshero{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:16px;height:100%;padding:32px 24px 40px;border-radius:var(--r-card)}
+.dshero-th{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.dshero-t{margin:0;font-size:32px;line-height:40px;font-weight:calc(600 + var(--fw-shift,0))}
+.dshero .dsq{position:relative;width:100%;max-width:640px}
+.dshero .dsnote{margin:0;text-align:center;color:inherit;font-size:var(--fs-sm)}
+/* default view: brand hero in the flow. Light: the brand fill mixed with the strong brand so the white title is 4.5:1 or more (brand-default alone is 3.98:1); dark: brand-default is 4.60:1 */
+.dshero.top{background:color-mix(in srgb,var(--color-surface-brand-default) 70%,var(--color-surface-brand-strong-1));color:var(--color-text-white)}
+[data-theme="dark"] .dshero.top{background:var(--color-surface-brand-default)}
+/* small hero: fixed over the content area, only the field; it is shown when the page is scrolled up and slides out when it is scrolled down */
+.dshero.mini,.dshero.hide{position:fixed;top:0;left:var(--hero-l,0);width:var(--hero-w,100%);z-index:6;height:auto;padding:8px 16px;border-radius:0;background:var(--color-surface-neutral-primary);color:var(--color-text-primary);border-bottom:1px solid var(--color-border-neutral-default);transition:transform .2s ease}
+.dshero.mini .dshero-th,.dshero.hide .dshero-th{display:none}
+.dshero.hide{transform:translateY(-100%)}
+.dshero.hide:focus-within{transform:none}
+@media(prefers-reduced-motion:reduce){.dshero.mini,.dshero.hide{transition:none}}
+@media(max-width:1100px){.dshero-wrap{--hero-h:140px}.dshero{padding:24px 16px 28px;gap:12px}.dshero-t{font-size:24px;line-height:32px}}
+@media(min-width:1101px){.dstoc{top:calc(var(--page-pad) + 60px);max-height:calc(100vh - 2 * var(--page-pad) - 60px)}}
+.dsres{position:absolute;z-index:5;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;list-style:none;max-height:360px;overflow:auto;background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px}
+.dsres li{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;min-height:44px;padding:8px 12px;border-radius:4px;cursor:pointer;font-size:var(--fs-sm);color:var(--color-text-primary)}
+.dsres li[aria-selected=true],.dsres li:hover{background:var(--color-surface-brand-subtle-1)}
+.dsres .nm{flex:1 1 100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dsres .kd{flex:none;font-size:var(--fs-xs);color:var(--color-text-secondary)}
+.dsres .pr{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--fs-xs);color:var(--color-text-secondary)}
+.dsres mark{background:var(--color-surface-warning-subtle-1);color:inherit;border-radius:4px}
+.ds-hit{outline:2px solid var(--color-border-brand-strong);outline-offset:4px;border-radius:4px;background:var(--color-surface-brand-subtle-1)}
+/* ===== the result list in groups (DS 2.83, rule DS-27): Pages, Components in the code, Classes, Tokens; each row has the icon of its kind, the name (the code in a monospace line) and where it is ===== */
+.dsres{max-height:480px}
+.dsres li.dsrg{display:flex;align-items:center;justify-content:space-between;min-height:0;padding:12px 12px 4px;cursor:default;font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0));line-height:var(--lh-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-foreground-brand-strong)}
+.dsres li.dsrg:hover{background:none}
+.dsres li.dsrg:not(:first-child){margin-top:4px;border-top:1px solid var(--color-border-neutral-subtle)}
+.dsres li.dsrg .n{font-weight:calc(400 + var(--fw-shift,0));letter-spacing:0;color:var(--color-text-tertiary)}
+.dsres li.dsro{flex-wrap:nowrap;gap:12px}
+.dsres .dsri{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}
+.dsres .dsri .ic{font-size:18px}
+.dsres .k-comp .dsri{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.dsres .k-class .dsri{background:var(--color-surface-info-subtle-1);color:var(--color-foreground-info-strong)}
+.dsres .k-token .dsri{background:var(--color-surface-warning-subtle-1);color:var(--color-foreground-warning-strong)}
+.dsres .dsrb{flex:1;min-width:0;display:flex;flex-direction:column}
+.dsres .dsrb .nm{flex:none}
+.dsres .dsrb .pr{flex:none}
+.dsres code.nm{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:var(--fs-sm)}

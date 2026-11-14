@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined&family=Material+Icons" />
+    <!-- Icons are font ligatures: until the icon font is loaded they would read as words ("chevron_right"). Hide the glyph text until it is ready (it stays hidden if the font is blocked). -->
+    <style>html.icons-wait :is(.material-icons, .material-icons-outlined) { display: inline-block; width: 1em; overflow: hidden; color: transparent !important; }</style>
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('icons-wait');
+        function ready() {
+          if (!document.fonts || !document.fonts.load) return d.classList.remove('icons-wait');
+          Promise.all([document.fonts.load('16px "Material Icons Outlined"', 'home'), document.fonts.load('16px "Material Icons"', 'home')]).then(function (r) { if (r[0].length && r[1].length) d.classList.remove('icons-wait'); }, function () {});
+        }
+        if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

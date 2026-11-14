@@ -1,0 +1,625 @@
+{
+ "note": "Renames of the Praisindo design system, oldest first. Used by scripts/migrate-names.mjs to convert a project built with an older skill. Components and classes since DS 2.76; custom properties since DS 2.79. The old names no longer exist in the stylesheets (no alias).",
+ "latest": "2.88",
+ "components": [
+  {
+   "old": "StepNav",
+   "new": "Wizard",
+   "since": "2.76"
+  },
+  {
+   "old": "Stepper",
+   "new": "NumberInput",
+   "since": "2.76"
+  },
+  {
+   "old": "SegToggle",
+   "new": "SegmentedControl",
+   "since": "2.76"
+  },
+  {
+   "old": "Av",
+   "new": "Avatar",
+   "since": "2.76"
+  },
+  {
+   "old": "LiIc",
+   "new": "IconTile",
+   "since": "2.76"
+  },
+  {
+   "old": "GroupT",
+   "new": "GroupTitle",
+   "since": "2.76"
+  },
+  {
+   "old": "DR",
+   "new": "DetailRow",
+   "since": "2.76"
+  },
+  {
+   "old": "Sugg",
+   "new": "ShortcutChips",
+   "since": "2.76"
+  },
+  {
+   "old": "LinkBtn",
+   "new": "LinkButton",
+   "since": "2.76"
+  },
+  {
+   "old": "RetryBtn",
+   "new": "RetryButton",
+   "since": "2.76"
+  },
+  {
+   "old": "AlertBtn",
+   "new": "AlertAction",
+   "since": "2.76"
+  },
+  {
+   "old": "RowMenu",
+   "new": "ActionMenu",
+   "since": "2.76"
+  },
+  {
+   "old": "TipIcon",
+   "new": "InfoTooltip",
+   "since": "2.76"
+  },
+  {
+   "old": "JumpLayout",
+   "new": "AnchorNav",
+   "since": "2.76"
+  },
+  {
+   "old": "EdgeToggle",
+   "new": "SidebarToggle",
+   "since": "2.76"
+  },
+  {
+   "old": "OptionCard",
+   "new": "RadioCard",
+   "since": "2.76"
+  },
+  {
+   "old": "CollapseCard",
+   "new": "Accordion",
+   "since": "2.76"
+  },
+  {
+   "old": "StdHead",
+   "new": "PageHeader",
+   "since": "2.76"
+  },
+  {
+   "old": "SearchCombo",
+   "new": "SearchBar",
+   "since": "2.76"
+  },
+  {
+   "old": "SiteSearch",
+   "new": "GlobalSearch",
+   "since": "2.76"
+  },
+  {
+   "old": "SimpleTbl",
+   "new": "Table",
+   "since": "2.76"
+  },
+  {
+   "old": "GroupInput",
+   "new": "GroupedNumberInput",
+   "since": "2.76"
+  },
+  {
+   "old": "FileDrop",
+   "new": "FileUpload",
+   "since": "2.76"
+  },
+  {
+   "old": "DialogTpl",
+   "new": "Dialog",
+   "since": "2.76"
+  },
+  {
+   "old": "ModalCard",
+   "new": "DialogCard",
+   "since": "2.76"
+  },
+  {
+   "old": "Section",
+   "new": "PlainSection",
+   "since": "2.76"
+  },
+  {
+   "old": "ErrState",
+   "new": "ErrorState",
+   "since": "2.76"
+  },
+  {
+   "old": "WoCard",
+   "new": "Card",
+   "since": "2.76"
+  }
+ ],
+ "classes": [
+  {
+   "old": "sn",
+   "new": "wz",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-b",
+   "new": "wz-b",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-bar",
+   "new": "wz-bar",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-chevron",
+   "new": "wz-chevron",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-ico",
+   "new": "wz-ico",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-icon",
+   "new": "wz-icon",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-l",
+   "new": "wz-l",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-ln",
+   "new": "wz-ln",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-n",
+   "new": "wz-n",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-numbered",
+   "new": "wz-numbered",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-row",
+   "new": "wz-row",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-s",
+   "new": "wz-s",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-segment",
+   "new": "wz-segment",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-st",
+   "new": "wz-st",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-status",
+   "new": "wz-status",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-t",
+   "new": "wz-t",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-top",
+   "new": "wz-top",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-tx",
+   "new": "wz-tx",
+   "since": "2.76"
+  },
+  {
+   "old": "sn-vertical",
+   "new": "wz-vertical",
+   "since": "2.76"
+  },
+  {
+   "old": "sgt",
+   "new": "sgc",
+   "since": "2.76"
+  },
+  {
+   "old": "sgt-o",
+   "new": "sgc-o",
+   "since": "2.76"
+  },
+  {
+   "old": "sgt-th",
+   "new": "sgc-th",
+   "since": "2.76"
+  },
+  {
+   "old": "sbtc",
+   "new": "rdc",
+   "since": "2.76"
+  },
+  {
+   "old": "sbtc-ck",
+   "new": "rdc-ck",
+   "since": "2.76"
+  },
+  {
+   "old": "sbtc-d",
+   "new": "rdc-d",
+   "since": "2.76"
+  },
+  {
+   "old": "sbtc-h",
+   "new": "rdc-h",
+   "since": "2.76"
+  },
+  {
+   "old": "sbtc-n",
+   "new": "rdc-n",
+   "since": "2.76"
+  },
+  {
+   "old": "cc",
+   "new": "acc",
+   "since": "2.76"
+  },
+  {
+   "old": "cch",
+   "new": "acc-h",
+   "since": "2.76"
+  },
+  {
+   "old": "ccbody",
+   "new": "acc-body",
+   "since": "2.76"
+  },
+  {
+   "old": "ccs",
+   "new": "acc-s",
+   "since": "2.76"
+  },
+  {
+   "old": "cct",
+   "new": "acc-t",
+   "since": "2.76"
+  },
+  {
+   "old": "jl",
+   "new": "anv",
+   "since": "2.76"
+  },
+  {
+   "old": "jnav",
+   "new": "anv-nav",
+   "since": "2.76"
+  },
+  {
+   "old": "jlist",
+   "new": "anv-list",
+   "since": "2.76"
+  },
+  {
+   "old": "jb",
+   "new": "anv-b",
+   "since": "2.76"
+  },
+  {
+   "old": "jg",
+   "new": "anv-g",
+   "since": "2.76"
+  },
+  {
+   "old": "jm",
+   "new": "anv-m",
+   "since": "2.76"
+  },
+  {
+   "old": "jn",
+   "new": "anv-n",
+   "since": "2.76"
+  },
+  {
+   "old": "jt",
+   "new": "anv-t",
+   "since": "2.76"
+  },
+  {
+   "old": "jtools",
+   "new": "anv-tools",
+   "since": "2.76"
+  },
+  {
+   "old": "sse",
+   "new": "gs",
+   "since": "2.76"
+  },
+  {
+   "old": "ssg",
+   "new": "gs-g",
+   "since": "2.76"
+  },
+  {
+   "old": "ssi",
+   "new": "gs-i",
+   "since": "2.76"
+  },
+  {
+   "old": "ssl",
+   "new": "gs-l",
+   "since": "2.76"
+  },
+  {
+   "old": "ssp",
+   "new": "gs-p",
+   "since": "2.76"
+  },
+  {
+   "old": "wo-card",
+   "new": "card-bare",
+   "since": "2.76"
+  },
+  {
+   "old": "c3fl",
+   "new": "dl-grid",
+   "since": "2.88"
+  },
+  {
+   "old": "c3f",
+   "new": "dl-item",
+   "since": "2.88"
+  },
+  {
+   "old": "dr-g",
+   "new": "dl-rows",
+   "since": "2.88"
+  }
+ ],
+ "tokens": [
+  {
+   "old": "--color-foreground-neutral-default",
+   "new": "--color-text-primary",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-subtle-4",
+   "new": "--color-text-secondary",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-subtle-3",
+   "new": "--color-text-tertiary",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-subtle-2",
+   "new": "--color-text-muted",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-subtle-1",
+   "new": "--color-text-faint",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-inverse-white",
+   "new": "--color-text-white",
+   "since": "2.79"
+  },
+  {
+   "old": "--color-foreground-neutral-inverse-black",
+   "new": "--color-text-black",
+   "since": "2.79"
+  },
+  {
+   "old": "--font",
+   "new": "--ff",
+   "since": "2.79"
+  },
+  {
+   "old": "--fwd",
+   "new": "--fw-shift",
+   "since": "2.79"
+  },
+  {
+   "old": "--pad",
+   "new": "--page-pad",
+   "since": "2.79"
+  },
+  {
+   "old": "--scrim",
+   "new": "--color-scrim",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-def",
+   "new": "--int-def",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-h",
+   "new": "--int-hov",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-p",
+   "new": "--int-prs",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-fg",
+   "new": "--int-fg",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-bd",
+   "new": "--int-bd",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-sub",
+   "new": "--int-sub",
+   "since": "2.79"
+  },
+  {
+   "old": "--x-on",
+   "new": "--int-on",
+   "since": "2.79"
+  },
+  {
+   "old": "--cbg",
+   "new": "--card-gap",
+   "since": "2.79"
+  },
+  {
+   "old": "--dbp",
+   "new": "--drawer-pad",
+   "since": "2.79"
+  },
+  {
+   "old": "--ds-l",
+   "new": "--hero-l",
+   "since": "2.79"
+  },
+  {
+   "old": "--ds-w",
+   "new": "--hero-w",
+   "since": "2.79"
+  },
+  {
+   "old": "--dsh",
+   "new": "--hero-h",
+   "since": "2.79"
+  },
+  {
+   "old": "--f",
+   "new": "--dlg-fg",
+   "since": "2.79"
+  },
+  {
+   "old": "--g",
+   "new": "--dlg-glow",
+   "since": "2.79"
+  },
+  {
+   "old": "--fa",
+   "new": "--frozen-r",
+   "since": "2.79"
+  },
+  {
+   "old": "--rh",
+   "new": "--tbl-row-h",
+   "since": "2.79"
+  },
+  {
+   "old": "--rp",
+   "new": "--tbl-row-pad",
+   "since": "2.79"
+  },
+  {
+   "old": "--hp",
+   "new": "--tbl-head-pad",
+   "since": "2.79"
+  },
+  {
+   "old": "--n",
+   "new": "--seg-n",
+   "since": "2.79"
+  },
+  {
+   "old": "--p",
+   "new": "--seg-from",
+   "since": "2.79"
+  },
+  {
+   "old": "--i",
+   "new": "--seg-to",
+   "since": "2.79"
+  },
+  {
+   "old": "--sz",
+   "new": "--ring-sz",
+   "since": "2.79"
+  },
+  {
+   "old": "--th",
+   "new": "--ring-th",
+   "since": "2.79"
+  },
+  {
+   "old": "--v",
+   "new": "--ring-v",
+   "since": "2.79"
+  },
+  {
+   "old": "--lgg",
+   "new": "--sign-glow",
+   "since": "2.79"
+  }
+ ],
+ "review": [
+  {
+   "old": "ErrState",
+   "new": "ErrorState",
+   "why": "ErrState and ErrorState are one component now: with no title and description it is the standard error with Retry; check props (onRetry, cta)."
+  },
+  {
+   "old": "WoCard",
+   "new": "Card",
+   "why": "WoCard is Card without a title (class .card-bare); check that the body and actions props are used."
+  },
+  {
+   "old": "Section",
+   "new": "PlainSection",
+   "why": "Only the layout helper Section is renamed; a variable or tag named Section is not."
+  },
+  {
+   "old": ".ccb",
+   "new": ".acc-b",
+   "why": "Only the badge inside the accordion header changes; .ccb of the phone country button stays."
+  },
+  {
+   "old": "Av",
+   "new": "Avatar",
+   "why": "Short names (Av, DR) are converted only as a JSX tag or an import, never as plain text."
+  },
+  {
+   "old": "dr dr-s",
+   "new": "dl-row",
+   "why": "The row variant split is the DetailList layout rows: replace <DetailRow split> by <DetailItem> inside <DetailList layout=\"rows\">; the markup is <div class=\"dl-row\"><span class=\"mut\">label</span><div>value</div></div>."
+  },
+  {
+   "old": "C3Field",
+   "new": "DetailItem",
+   "why": "C3Field becomes DetailItem inside a DetailList (grid); in HTML use <div class=\"dl-item\"><span>label</span><span class=\"fw6\">value</span></div>."
+  }
+ ],
+ "literals": [
+  {
+   "old": "set('scrim'",
+   "new": "set('color-scrim'",
+   "since": "2.79",
+   "why": "the token engine writes the scrim colour without the dashes"
+  }
+ ]
+}

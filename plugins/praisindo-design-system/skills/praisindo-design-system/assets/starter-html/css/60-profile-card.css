@@ -1,0 +1,25 @@
+/* ===== ProfileCard: a small non-modal popover with the avatar, name, subtitle, rows and, for a customer, a button (rules PC-01 to PC-05, UN-01, UN-02) ===== */
+/* the trigger is the user or customer name wherever it is shown: it takes the font of the text around it and has no text decoration in any state (rules UN-01, UN-02) */
+.pcx-t{display:inline;border-radius:4px;color:inherit;font:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;text-decoration:none;cursor:pointer}
+.pcx-t:hover,.pcx-t[aria-expanded=true]{color:var(--color-foreground-brand-strong);text-decoration:none}
+.hero-card .pcx-t:hover,.hero-card .pcx-t[aria-expanded=true]{color:inherit}
+.pcx-ta{display:inline-flex;border-radius:999px}
+.pcx-ta:hover,.pcx-ta[aria-expanded=true]{color:inherit}
+.pcx-f{flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:calc(500 + var(--fw-shift,0))}
+.pcx-f.pcx-sm{width:24px;height:24px;font-size:var(--fs-xs)}
+.pcx-f.pcx-xl{width:64px;height:64px;font-size:var(--fs-lg)}
+.pcx-f.pcx-sys{background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}
+.pcx-f.pcx-sm .ic{font-size:14px}.pcx-f.pcx-xl .ic{font-size:24px}
+.pcx-w{position:fixed;z-index:100;visibility:hidden}
+.pcx-w[data-ready]{visibility:visible}
+.pcx-w.pcx-pin{position:static;display:inline-block}
+.pcx{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;width:260px;max-width:calc(100vw - 16px);padding:16px;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary);color:var(--color-text-primary);font-size:var(--fs-sm);line-height:var(--lh-sm);font-weight:calc(400 + var(--fw-shift,0))}
+.pcx-n{display:flex;flex-direction:column;align-items:center;min-width:0;padding-top:12px;text-align:center;overflow-wrap:anywhere}
+.pcx-n .fw6{font-size:var(--fs-lg);line-height:var(--lh-lg)}
+.pcx-r{display:flex;flex-direction:column;gap:12px;width:100%;margin:0;padding-top:20px}
+.pcx-r>div{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pcx-r dt{flex:none;color:var(--color-text-secondary)}
+.pcx-r dd{margin:0;font-weight:calc(500 + var(--fw-shift,0));text-align:right;overflow-wrap:anywhere}
+.pcx-act{width:100%;margin-top:24px}
+/* a phone: the touch target is 40px high (padding of an inline box widens the hit area and does not move the lines of text) */
+@media(max-width:640px),(pointer:coarse){.pcx-t:not(.pcx-ta){padding:16px 0}.pcx-ta{margin:-8px;padding:8px}}

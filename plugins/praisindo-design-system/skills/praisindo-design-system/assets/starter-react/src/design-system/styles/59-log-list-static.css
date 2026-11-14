@@ -1,0 +1,8 @@
+/* ===== LogList, static rows: the Activity log of a Signal rule uses the History list item without the button (rules AL-01, AL-02) ===== */
+.alog .alog-i.alog-st{grid-template-columns:52px 32px minmax(0,1fr);cursor:default}
+.alog .alog-i.alog-st:hover{background:none}
+/* contrast 4.5:1 or more in light (subtle-3 of the History list is 2.9:1): the secondary texts of the static rows use subtle-4 */
+.alog-st .alog-m,.alog-st .alog-tm,.alog-st .mut{color:var(--color-text-secondary)}
+.alog-st .btn.b-link{min-height:24px}
+@media(max-width:640px),(pointer:coarse){.alog-st .btn.b-link{min-height:40px}}
+.alog-lkr{display:flex;margin-top:4px}

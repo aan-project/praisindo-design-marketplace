@@ -1,0 +1,14 @@
+/* ===== Design System: changelog + copyable swatches ===== */
+.dslog-more{display:flex;justify-content:flex-start;margin-top:12px}
+button.dssw{width:100%;padding:8px;margin:-8px;border:1px solid transparent;border-radius:8px;background:none;font:inherit;color:inherit;text-align:left;cursor:copy}
+button.dssw:hover,button.dssw:focus-visible{border-color:var(--color-border-neutral-default);background:var(--color-surface-neutral-secondary)}
+button.dssw>.ic{margin-left:auto;font-size:16px;color:var(--color-text-tertiary);opacity:0}
+button.dssw:hover>.ic,button.dssw:focus-visible>.ic{opacity:1}
+.dsramp{height:auto;overflow:visible;border:0;gap:8px}
+.dsrs{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:copy}
+.dsramp .dsrs span{flex:none}
+.dsrk{display:block;height:28px;border-radius:6px;border:1px solid var(--color-border-neutral-subtle)}
+.dsrs:hover .dsrk,.dsrs:focus-visible .dsrk{outline:2px solid var(--color-border-brand-default);outline-offset:1px}
+.dsrl{font-size:10px;color:var(--color-text-secondary)}
+.dsrh{font-size:var(--fs-xs);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.dscopyn{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs)}.dscopyn .ic{font-size:14px}

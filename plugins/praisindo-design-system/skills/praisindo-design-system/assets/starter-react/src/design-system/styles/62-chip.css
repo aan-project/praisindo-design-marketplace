@@ -1,0 +1,20 @@
+/* ===== Chip: the compact non-status label (rules CH-01 to CH-05). Static: a count, a tag, a name, a version. Interactive: selected, clicked or removed. The Badge is the status. ===== */
+.chp{position:relative;display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 12px;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-pill);background:var(--color-surface-neutral-primary);color:var(--color-text-secondary);font:inherit;font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0));line-height:var(--lh-xs);white-space:nowrap}
+.chp.chp-s{justify-content:center;min-width:20px;height:20px;padding:0 4px;border-color:transparent;background:var(--color-surface-neutral-tertiary);color:var(--color-text-secondary)}   /* the count is SOLID by default (rule CH-08) */
+.chp.chp-s.on{background:var(--color-surface-brand-default);color:var(--color-text-white)}
+.chp.chp-s.chp-sf{background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}   /* soft: on a component that has a solid fill (rule CH-08) */
+.chp.chp-s.chp-sf.on{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.btn.b-fill .chp.chp-s{background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}
+.btn.b-fill .chp.chp-s.on{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+button.chp{cursor:pointer}
+button.chp:hover{border-color:var(--color-border-brand-default);color:var(--color-foreground-brand-strong)}
+.chp.on{border-color:var(--color-border-brand-default);background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.chp.chp-s.on{border-color:transparent}
+.chp:focus-visible,.chp-x:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px}
+.chp:disabled{cursor:not-allowed;border-color:var(--color-border-neutral-subtle);background:var(--color-surface-neutral-secondary);color:var(--color-text-tertiary)}
+.chp .ic{width:1em;height:1em;font-size:14px;line-height:1em;flex:none}
+.chp-r{padding:0 4px 0 12px}
+.chp-x{position:relative;display:inline-flex;width:20px;height:20px;align-items:center;justify-content:center;padding:0;border:0;border-radius:var(--r-pill);background:none;color:inherit;cursor:pointer}
+.chp-x:hover{background:color-mix(in srgb,currentColor 15%,transparent)}
+.chp-x:disabled{cursor:not-allowed}
+@media(max-width:640px){button.chp::after{content:"";position:absolute;inset:-8px 0}.chp-x::after{content:"";position:absolute;inset:-12px}}

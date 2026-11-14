@@ -1,0 +1,12 @@
+/* ===== Reports: narrow left column (report + saved configs + files) · preview ===== */
+.rpg{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;align-items:start}
+.rpl{display:flex;flex-direction:column;gap:20px}
+.rpr{min-width:0;display:flex;flex-direction:column;gap:20px}
+.rpl .card p{margin:0}
+.rpl .card .cb{--card-gap:12px}
+.rplist{display:flex;flex-direction:column}
+.rpli{align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--color-border-neutral-subtle)}.rpli:last-child{border-bottom:0}
+.rpli .m .t{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rpli .x{display:flex;gap:4px}
+@media(max-width:1100px){.rpg{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.rpli{flex-wrap:wrap}.rpli .x{width:100%;padding-left:32px}}

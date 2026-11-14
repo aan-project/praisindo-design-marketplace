@@ -1,0 +1,3 @@
+/* ===== list leading icon tile ===== */
+.li>.hp-ic{flex:none}.li>.hp-ic .ic{font-size:20px}
+.li[style*="flex-start"]>.hp-ic{margin-top:4px}

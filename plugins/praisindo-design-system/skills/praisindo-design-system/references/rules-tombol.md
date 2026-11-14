@@ -1,0 +1,79 @@
+# Buttons and segmented toggle (Praisindo DS v2.88, skill v2.88)
+
+The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
+
+## Pattern: button hierarchy
+
+| Role | `type` | `intent` | Example |
+|---|---|---|---|
+| The one primary action of an area (page head, card footer, drawer footer, dialog) | `fill` | `brand` (or `danger` for a destructive primary) | Save, Add customer |
+| A secondary action next to it | `outlined` | `neutral` | Export, Advanced filter |
+| Cancel, Reset, Close, Back next to a primary | `transparent` | `neutral` | Cancel |
+| A light action in a row, a menu item, a bulk action | `transparent` | `neutral` (`danger` for Delete) | Edit, Delete |
+| A soft emphasis (dialog cancel, a toggle-like action) | `soft` | the area's intent | Cancel in a dialog (Dialog does it) |
+| Inline navigation | `link` / `LinkButton` | `brand` | View, View all |
+
+- One `fill` per area. Two `fill` buttons side by side is a finding.
+- Icon side: the icon is on the LEFT (`icon`) for an action (Add, Export, Save); on the RIGHT (`iconRight`) for a direction or a toggle (Next, Submit, Show more, a dropdown chevron).
+- Icon-only buttons always have `aria` (BT-04) and a Tooltip when the icon is not obvious.
+- The button that applies a panel's choices says "Apply" / "Terapkan" (BT-02), never "Done" / "Selesai" / "OK". The button of a `success` dialog is the exception: it says "Done" / "Selesai" (owner decision 2026-11-05).
+- Footer order (drawer, card, page form): secondary and Cancel on the left, the primary LAST (right). Dialog footer (Dialog): Cancel (soft), the third action `alt` (outlined), the primary (fill); a dialog with one action makes it full width.
+- A disabled button says why (Tooltip on it or helper text near it).
+- A count belongs in `count`, not in the label (CH-07).
+- Size is always md for controls (BT-05); `Dialog` uses lg inside dialogs by itself.
+
+## Rules
+
+### BT-01
+**Rule.** Button types are fill, soft, outlined, transparent and link; the cancel / reset next to a primary is transparent
+**Meet.** `Button type="fill|soft|outlined|transparent|link"`; Cancel / Reset next to a primary is `type="transparent" intent="neutral"`.
+**Check.** Audit; one `fill` per area.
+**Guarded in Praisindo by** a unit test.
+
+### BT-02
+**Rule.** The execution button says "Apply", never "Done" (preferences, table and field panels), in English and Indonesian. The button of a `success` dialog keeps "Done" / "Selesai" (`md.success.ok`; owner decision 2026-11-05: not "OK")
+**Meet.** Label of the button that applies a panel: `t('tbl.apply')` = "Apply" / "Terapkan".
+**Check.** Audit (BT-02 check: no "Done" / "Selesai" label).
+**Guarded in Praisindo by** a unit test.
+
+### BT-03
+**Rule.** Link buttons have no horizontal padding; menu items have a 12px gap
+**Meet.** `LinkButton` or `Button type="link"`; menu items are `Button type="transparent"` in a `.pop`.
+**Check.** Look at link buttons and menus.
+**Guarded in Praisindo by** a unit test.
+
+### BT-04
+**Rule.** An icon-only button always has an aria-label (Button requires `aria` when there is no label)
+**Meet.** `<Button icon="more_vert" aria={t('tbl.more')} />`; `Button` without `label` needs `aria`.
+**Check.** Audit (BT-04 check).
+**Guarded in Praisindo by** a unit test.
+
+### BT-05
+**Rule.** Controls are always size M: the default size token is md and there is no density option
+**Meet.** Leave `size` at its default (md) for controls; only `Button size="lg"` inside dialogs, as `Dialog` does.
+**Check.** Audit (no `size="sm"` on controls outside a table row and chip).
+**Guarded in Praisindo by** a unit test.
+
+### BT-06
+**Rule.** Buttons have the 8px control radius (`var(--r-ctl)` / `.btn{border-radius:8px}`); only the count `.cnt`, the chips (CH-01) and the segmented toggle (a pill like the language toggle, TG-01, keputusan owner 2026-10-29, revisi UI) are pills; a badge is an 8px rectangle (`--r-badge`, BD-01)
+**Meet.** Use `Button`; never set a button radius.
+**Check.** Audit (radius literal check).
+**Guarded in Praisindo by** a unit test.
+
+### TG-01
+**Rule.** The SegmentedControl (`.sgc`) looks like the language toggle (`.lgt`): a pill track with 4px padding, the secondary surface and a 1px subtle border; options 28px high, at least 36px wide, padding 0 8px, text `--fs-xs`, weight 600, letter-spacing .04em, the subtle-4 text colour (neutral default on hover); the selected option is the primary surface thumb with the neutral default 1px border and the brand strong text colour; the keyboard focus ring is 2px brand strong with 1px offset. The base selector and the sliding thumb stay (PR-02)
+**Meet.** `<SegmentedControl opts val onChange />` for 2 to 4 exclusive options.
+**Check.** Look at the toggle in light and dark.
+**Guarded in Praisindo by** a unit test.
+
+### CH-07
+**Rule.** A button that shows a count has the label WITHOUT "(n)" and the count as a static Chip inside the button (`Button` props `count`, and `zero` to show a 0): one shared path, no nested interactive element, the button height is unchanged and the accessible name stays "label (n)". The Chip is the solid brand look (`selected`) on a soft, outlined or transparent button, and the soft brand look on a fill button (CH-08: by CSS, `.btn.b-fill .chp-s`). A Badge in a button stays forbidden except BD-10. Sites: Reports (configurations, files), Recommendations (excluded options, combined plan), the Design page What's new (keputusan owner 2026-10-26)
+**Meet.** `<Button label="Advanced filter" count={n} />`; never write "(n)" in the label.
+**Check.** Audit; screen reader name reads "label (n)".
+**Guarded in Praisindo by** a unit test.
+
+### BN-01
+**Rule.** Button names follow the writing rule of the Design System: sentence case (a capital only on the first word and on the names of the product: Take Action, Data & Integration) and a verb first, in English and in Indonesian; one action has one name everywhere: the button that opens the editor of a rejected or proposed rule is Revise (on the Proposal tab and in the lifecycle panel; Resubmit is only the send button of the editor); View opportunity, View activity, View activities, View all reminders, View my opportunities, Open marketing workspace and Advanced filter were Title Case
+**Meet.** Write every label as a verb in sentence case: "Add customer", "Save changes", "Tambah pelanggan"; keep one name per action across the app.
+**Check.** Read all button labels in `en.json` and `id.json`.
+**Guarded in Praisindo by** a unit test.

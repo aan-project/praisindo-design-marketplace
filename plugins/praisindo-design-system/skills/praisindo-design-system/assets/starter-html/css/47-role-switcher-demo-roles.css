@@ -1,0 +1,14 @@
+/* ===== role switcher (demo roles) ===== */
+.upop .al .btn{width:auto}
+.ropt{display:flex;align-items:flex-start;gap:12px;width:100%;padding:8px;border:0;border-radius:8px;background:none;text-align:left;color:var(--color-text-primary)}
+.pop.upop .ropt{min-height:calc(16px + 2px + 1.4 * (var(--fs-sm) + 2 * var(--fs-xs)))}   /* every role option is as high as one with a two-line description (rule AV-06) */
+.ropt:hover,.ropt:focus-visible{background:var(--color-surface-neutral-secondary)}
+.ropt[aria-checked=true]{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.ropt:disabled{color:var(--color-text-tertiary);cursor:not-allowed;background:none}
+.ropt .rt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.ropt .rt .fw6{font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}
+.ropt .rt span{font-size:var(--fs-xs);color:var(--color-text-secondary);white-space:normal}
+.ropt>.ic{margin-top:4px}
+.ropt .chk2{visibility:hidden}.ropt[aria-checked=true] .chk2{visibility:visible}
+.sel:disabled{background:var(--color-surface-neutral-secondary);color:var(--color-text-tertiary);cursor:not-allowed}
+.sw{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid var(--color-border-neutral-default);vertical-align:middle;margin-right:8px}

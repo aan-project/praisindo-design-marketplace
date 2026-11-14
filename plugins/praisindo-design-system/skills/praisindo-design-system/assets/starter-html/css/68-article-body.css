@@ -1,0 +1,34 @@
+/* ===== ArticleBody (rule HC-07) and the Help Center layout (rules HC-02, HC-03) ===== */
+.abd{font-size:var(--fs-md);line-height:var(--lh-md);color:var(--color-text-primary)}
+.abd h2{margin:24px 0 8px;font-size:var(--fs-h-sm);line-height:var(--lh-h-sm)}.abd h2:first-child{margin-top:0}
+.abd h3{margin:16px 0 4px;font-size:var(--fs-lg);line-height:var(--lh-lg);font-weight:calc(500 + var(--fw-shift,0))}
+.abd p{margin:0 0 12px}
+.abd ul,.abd ol{margin:0 0 12px;padding-left:24px}.abd li{margin:0 0 4px}
+.abd code{padding:0 4px;border-radius:4px;background:var(--color-surface-neutral-secondary);font-size:var(--fs-sm)}
+.abd a{color:var(--color-foreground-brand-default);text-decoration:underline}
+.abd table{width:100%;margin:0 0 12px;border-collapse:collapse;font-size:var(--fs-sm);line-height:var(--lh-sm)}
+.abd th,.abd td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--color-border-neutral-default)}
+.abd th{font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-secondary)}
+.hcg{display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;align-items:start}
+.hcl{display:flex;flex-direction:column;gap:4px}
+.hcl a{display:block;padding:8px 12px;border-radius:8px;color:var(--color-text-primary);text-decoration:none}
+.hcl a:hover{background:var(--color-surface-neutral-secondary)}
+.hcl a[aria-current="page"]{background:var(--color-surface-brand-subtle-1);font-weight:calc(500 + var(--fw-shift,0))}
+.hcl .mut{padding:8px 12px 4px}
+.hcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.hcp{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:8px}.hcp a{color:var(--color-foreground-brand-default)}
+.hcq{display:flex;flex-direction:column;gap:20px}
+.hcq>*{flex-shrink:0}.hcq>.dshero{height:auto}
+@media(max-width:1100px){.hcg{grid-template-columns:minmax(0,1fr)}.hcg>nav{order:2}.hcs{grid-template-columns:minmax(0,1fr)}}
+/* The front page of Help Center (2.61, owner request 2026-11-11): the hero of the Design System page, the learning path as link cards, the topics with their first articles, and the report bar. Built from the hero, Card, LiIc and LinkBtn. */
+.hch{height:auto}
+.hcsec{display:flex;flex-direction:column;gap:16px}.hcsec h2{margin:0;font-weight:calc(600 + var(--fw-shift,0))}.hcsec>div>p{margin:4px 0 0}
+.hcc{display:flex;flex-direction:row;align-items:center;gap:12px;text-align:left;min-height:64px;padding:16px;color:var(--color-text-primary);text-decoration:none;font-weight:calc(500 + var(--fw-shift,0))}.hcc:hover{background:var(--color-surface-neutral-secondary)}.hcc:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px}
+.hc2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 48px}
+.hcb{display:flex;flex-direction:column;gap:8px;min-width:0}.hcbh{display:flex;align-items:center;gap:12px}.hcbh h3{margin:0;font-weight:calc(600 + var(--fw-shift,0))}
+.hcr{display:flex;flex-direction:column;padding-left:48px}.hcr a{display:block;padding:12px 0;border-bottom:1px solid var(--color-border-neutral-subtle);color:var(--color-text-secondary);text-decoration:none}.hcr a:hover{color:var(--color-text-primary)}
+.hcb>.btn{align-self:flex-start;margin-left:48px}
+.hcn{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px;border-radius:var(--r-card);background:var(--color-surface-neutral-secondary)}.hcn p{margin:0}
+@media(max-width:1100px){.hc2{grid-template-columns:minmax(0,1fr)}}
+.hcd .li .m .mut{font-size:var(--fs-sm);line-height:var(--lh-sm);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.hcd .li{text-decoration:none;color:inherit}.hcd .li:hover .t{color:var(--color-foreground-brand-strong)}
+.hcg>.dstoc{top:var(--page-pad);max-height:calc(100vh - 2 * var(--page-pad))}

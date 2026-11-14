@@ -1,0 +1,2 @@
+/* ===== toast variants ===== */
+.toast.t-danger{background:var(--color-surface-danger-subtle-1);color:var(--color-foreground-danger-strong)}

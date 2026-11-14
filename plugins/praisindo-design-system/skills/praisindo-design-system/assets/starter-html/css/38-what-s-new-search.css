@@ -1,0 +1,5 @@
+/* ===== What's new search ===== */
+.dslogq{display:flex;flex-direction:column;gap:8px;position:sticky;top:calc(var(--drawer-pad) * -1);z-index:3;margin:calc(var(--drawer-pad) * -1) calc(var(--drawer-pad) * -1) 0;padding:var(--drawer-pad) var(--drawer-pad) 8px;background:var(--color-background-neutral-default)}
+.dslogq [data-act="dslogclear"]{visibility:hidden}
+/* one clear control per search field: hide the browser's own cancel button (the Input component has its own) */
+.inp input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}

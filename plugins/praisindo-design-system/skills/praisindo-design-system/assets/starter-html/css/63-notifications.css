@@ -1,0 +1,25 @@
+/* ===== notifications: the bell of the sidebar footer, the dropdown and the rows (rules NT-01 to NT-12) ===== */
+.nbell{position:relative;display:inline-flex}
+.nbell .chp.chp-s{position:absolute;top:4px;right:4px;min-width:16px;height:16px;padding:0 4px;font-size:10px;line-height:16px;pointer-events:none}
+.ntl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.nti-li{border-bottom:1px solid var(--color-border-neutral-subtle)}
+.nti-li:last-child{border-bottom:0}
+.nti{display:flex;align-items:flex-start;gap:12px;width:100%;padding:12px 8px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.nti:hover{background:var(--color-surface-neutral-secondary)}
+.nti.unread{background:var(--color-surface-brand-subtle-1)}
+.nti .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.nti-d{font-size:var(--fs-sm);color:var(--color-text-secondary);overflow-wrap:anywhere}
+.nti-t{font-size:var(--fs-xs);color:var(--color-text-tertiary)}
+.nti-dot{flex:none;width:8px;height:8px;margin-top:8px;border-radius:999px;background:var(--color-surface-brand-default)}
+/* the dropdown of the bell: like the user menu it opens to the right of the sidebar (a phone: across the screen above the bottom bar); header, tabs, the rows, footer */
+.pop.upop.npop{padding:0;gap:0}
+@media(min-width:641px){.pop.upop.npop{width:400px;min-width:0;max-width:calc(100vw - 32px)}}
+.npop .nph{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}
+.npop .nph h2{margin:0;font-size:var(--fs-md);font-weight:calc(600 + var(--fw-shift,0))}
+.npop .nph .btn{width:auto}   /* `.pop .btn` is 100% wide: the link sits at the right of the title */
+.npop .tabs{padding:0 16px}
+.npop .npl{padding:8px}
+.npop .npf{padding:12px 16px;border-top:1px solid var(--color-border-neutral-subtle)}
+.npop .npf{display:flex;justify-content:center}
+.npop .npf .btn{width:auto}
+.nti-w{margin:0;padding:12px 8px;text-align:center;font-size:var(--fs-xs);color:var(--color-text-tertiary)}   /* the end of the list: only the last 3 months are shown */

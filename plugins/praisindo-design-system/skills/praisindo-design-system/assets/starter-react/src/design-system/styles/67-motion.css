@@ -1,0 +1,28 @@
+/* Motion layer (2.49, owner decision 2026-11-10; rules MO-04 to MO-07): small, quick and calm. Three durations and one easing; only opacity and transform (and the colour of a row); nothing runs longer than 0.4 s
+   except the two quiet loops (the pulse of the waiting step and the skeleton). Everything stands still under [data-motion="off"] (reduced motion, automation, MO-03). */
+:root{--dur-fast:.12s;--dur-base:.2s;--dur-slow:.32s;--ease-out:cubic-bezier(.2,.8,.2,1)}
+@keyframes mo-rise{from{opacity:0;transform:translateY(4px)}}
+@keyframes mo-slide{from{opacity:0;transform:translateY(8px)}}
+@keyframes mo-fade{from{opacity:0}}
+@keyframes mo-new{from{background-color:var(--color-surface-brand-subtle-1)}}
+@keyframes mo-pulse{0%{box-shadow:0 0 0 0 var(--color-border-warning-strong)}70%,100%{box-shadow:0 0 0 6px transparent}}
+@keyframes mo-grow{from{transform:scaleY(0)}}
+@keyframes mo-check{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.08)}100%{transform:scale(1)}}
+:root:not([data-motion="off"]) .btn{transition:transform var(--dur-fast) var(--ease-out),background-color var(--dur-fast),border-color var(--dur-fast),color var(--dur-fast),box-shadow var(--dur-fast)}
+:root:not([data-motion="off"]) .btn:active:not(:disabled){transform:scale(.98)}
+:root:not([data-motion="off"]) .tw tbody tr>td,:root:not([data-motion="off"]) .chp{transition:background-color var(--dur-fast),border-color var(--dur-fast),color var(--dur-fast)}
+:root:not([data-motion="off"]) .fpop,:root:not([data-motion="off"]) .pop{animation:mo-rise var(--dur-base) var(--ease-out)}
+:root:not([data-motion="off"]) .scrim,:root:not([data-motion="off"]) .mdl.fx{animation:mo-fade var(--dur-base) ease-out}
+:root:not([data-motion="off"]) .toast{animation:mo-slide var(--dur-base) var(--ease-out)}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(-n+8){animation:mo-fade var(--dur-base) var(--ease-out) backwards}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(2){animation-delay:20ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(3){animation-delay:40ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(4){animation-delay:60ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(5){animation-delay:80ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(6){animation-delay:100ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(7){animation-delay:120ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(8){animation-delay:140ms}
+:root:not([data-motion="off"]) .tw tr.mo-new>td{animation:mo-new 1.2s ease-out}
+:root:not([data-motion="off"]) .wz-vertical .wz-s.done .wz-ln{transform-origin:top;animation:mo-grow var(--dur-slow) var(--ease-out) backwards}
+:root:not([data-motion="off"]) .wz-vertical .wz-s.cur .wz-n{animation:mo-pulse 2s ease-out infinite}
+:root:not([data-motion="off"]) .state.ok>.ic:first-child{animation:mo-check var(--dur-slow) var(--ease-out) backwards}

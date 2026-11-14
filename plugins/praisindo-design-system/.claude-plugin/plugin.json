@@ -1,0 +1,7 @@
+{
+  "name": "praisindo-design-system",
+  "description": "Praisindo Design System skill: tokens, components, rules, shell, Design System and Branding pages for every web UI.",
+  "version": "2.88",
+  "author": { "name": "Praisindo" },
+  "keywords": ["design-system", "ui", "praisindo"]
+}

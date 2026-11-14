@@ -1,0 +1,17 @@
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{--r-card:8px;--ls:.02em;--lh-xs:16px;--lh-sm:20px;--lh-md:20px;--lh-lg:24px;--lh-h-sm:24px;--lh-h-md:24px;--lh-h-lg:28px;--lh-h-xl:32px;--r-badge:8px;--r-pill:999px}
+html,body{margin:0;min-height:100%}
+body{font-family:var(--ff);font-weight:calc(400 + var(--fw-shift,0));font-size:var(--fs-md);line-height:var(--lh-md);letter-spacing:var(--ls);color:var(--color-text-primary);background:var(--color-background-neutral-page)}
+button{font:inherit;color:inherit;cursor:pointer}
+button,input,select,textarea{letter-spacing:inherit}
+.ic,.tw th .dt-column-order::after{letter-spacing:normal}
+h1,h2,h3,p{margin:0}
+h1{font-size:var(--fs-h-xl);font-weight:calc(700 + var(--fw-shift,0));line-height:var(--lh-h-xl)}
+h2{font-size:var(--fs-h-sm);font-weight:calc(600 + var(--fw-shift,0))}
+.mut{color:var(--color-text-secondary);font-size:var(--fs-sm)}
+.ic{font-size:16px;line-height:16px;user-select:none;flex:none}
+.s-sm .ic{font-size:14px}.s-md .ic,.btn .ic{font-size:18px}.btn.s-sm .ic,.s-sm .ic{font-size:14px}.s-lg .ic,.btn.s-lg .ic{font-size:20px}
+.nav .ic,.bn .ic{font-size:18px}
+.tw td .ic,.tw td .ic,.crumb .ic{font-size:14px}
+:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:1px}

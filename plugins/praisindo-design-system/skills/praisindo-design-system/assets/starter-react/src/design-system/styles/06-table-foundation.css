@@ -1,0 +1,26 @@
+/* ===== table foundation ===== */
+.tw{border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);overflow-x:auto;max-width:100%;background:var(--color-surface-neutral-primary)}
+.tw table{border-collapse:separate;border-spacing:0;width:100%;min-width:1040px}
+.tw th,.tw td{padding:12px 16px;vertical-align:middle;line-height:20px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--color-border-neutral-subtle);background:var(--color-surface-neutral-primary)}
+.tw th{background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary);font-weight:calc(500 + var(--fw-shift,0))}
+.tw td>.mut,.tw .tcl .mut{margin-top:4px;font-size:var(--fs-xs)}
+.tw tr:last-child td{border-bottom:0}
+.tw tr:hover td{background:var(--color-surface-neutral-secondary)}
+.tw tr.dup td{background:var(--color-surface-warning-subtle-1)}
+.tw .fl{position:sticky;left:0;z-index:1;font-weight:calc(500 + var(--fw-shift,0))}   /* z-index: what scrolls under a frozen cell (a chip, a switch) never paints over it (owner revision 2026-11-09, rule TB-18) */
+.tw .fr.fa{right:var(--frozen-r,96px);text-align:left}.tw th.fr.fa .dt-column-order{display:inline-flex}   /* a second frozen column on the right, next to the action column (the Available column of an Administrator, rule PD-04) */
+.tw .fl label{display:flex;align-items:center;gap:8px}
+.tw .fr{position:sticky;right:0;z-index:1;text-align:right}
+.tw a:not(.btn),.tw a.btn.b-link,.tw a.btn.b-link:hover{color:var(--color-text-primary);text-decoration:none;font-weight:inherit}   /* a link in a table is neutral and has no underline (owner revision 2026-11-09, rule TB-19) */
+.acts{display:inline-flex;align-items:center;justify-content:flex-end;gap:4px}
+.tw .num{text-align:right}
+.t-sm{--tbl-row-h:48px;--tbl-row-pad:12px;--tbl-head-pad:12px;font-size:var(--fs-sm)}.t-md{--tbl-row-h:68px;--tbl-row-pad:16px;--tbl-head-pad:12px;font-size:var(--fs-sm)}.t-lg{--tbl-row-h:72px;--tbl-row-pad:20px;--tbl-head-pad:16px;font-size:var(--fs-lg)}
+/* Signal rules library (id ktbl-sr): the name and status columns wrap and the headers wrap so the whole table fits next to the frozen action column at 1440px (the "Hits today" header was hidden under it) */
+#ktbl-sr td:nth-child(1),#ktbl-sr td:nth-child(3),#ktbl-sr th{white-space:normal}
+/* the sort icon of a wrapping header takes no width in the line and lies in the 20px right padding of the cell: in a narrow column (Version, 80px) the inline icon wrapped to a second line and lifted the title (rule TB-15) */
+#ktbl-sr th{padding-right:20px}
+#ktbl-sr th .dt-column-order{margin:0 -20px 0 0}
+#ktbl-sr td:nth-child(1){min-width:200px}
+/* A long name in a table cell (rule TB-20): the cell content is at most 320px wide; the middle of a longer name is cut with an ellipsis and its last word stays */
+.tcl{display:flex;align-items:center;gap:8px;max-width:320px;min-width:0}.tcl>span:last-child{min-width:0}.tcl .btn{max-width:100%;min-width:0}
+.mid{display:flex;min-width:0}.mid-s{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mid-e{flex:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:pre}

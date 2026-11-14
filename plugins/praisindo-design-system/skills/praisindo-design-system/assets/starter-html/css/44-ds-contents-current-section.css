@@ -1,0 +1,2 @@
+/* ===== DS contents: current section ===== */
+.dstoc>button[data-act=dsgo].on{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong);font-weight:calc(500 + var(--fw-shift,0))}

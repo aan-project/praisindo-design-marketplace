@@ -1,0 +1,17 @@
+/* ===== states ===== */
+.state{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:32px 16px}
+.state.s-sm{padding:16px;gap:4px}.state.s-lg{padding:48px 24px;gap:12px}
+.state>.ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;line-height:28px;background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}   /* the icon of the state only, in a round tile: a button inside the state (Retry, a call to action) keeps the icon colour of its own (DS 2.73) */
+.state.s-sm>.ic{width:40px;height:40px;font-size:24px;line-height:24px}
+.state.err>.ic{background:var(--color-surface-danger-subtle-1);color:var(--color-foreground-danger-default)}
+.state h3{font-size:var(--fs-h-sm);font-weight:calc(500 + var(--fw-shift,0))}
+.sk{height:12px;border-radius:4px;background:var(--color-surface-neutral-tertiary);animation:pl 1.2s ease-in-out infinite}
+@keyframes pl{50%{opacity:.45}}
+/* ES-01 (1.80): an empty state with a button. The button follows the description by 16px whatever the size of the state or the gap of the card body (before: the state's own bottom padding of 32 to 48px plus the body gap left 60px); the space below the button is the bottom padding the state had.
+   The button sits inside `.state` (`cta` prop of EmptyState) or, in older markup, in the element right after it (`.state + div > .btn`). */
+.state>.state-cta{margin-top:8px}.state.s-sm>.state-cta{margin-top:12px}.state.s-lg>.state-cta{margin-top:4px}   /* 16px after the description: the gap of the size (8, 4, 12) plus this margin */
+.state:has(+ div>.btn:only-child){padding-bottom:0}
+.state + div:has(>.btn:only-child){margin-top:calc(16px - var(--card-gap,0px));padding-bottom:32px}
+.state.s-sm:has(+ div>.btn:only-child) + div{padding-bottom:16px}.state.s-lg:has(+ div>.btn:only-child) + div{padding-bottom:48px}
+/* ES-01 for ErrState (owner 2026-10-24): the button inside an error state is 16px under the description too (gap of the size 8, 4, 12 plus this margin) */
+.state.err>.btn{margin-top:8px}.state.err.s-sm>.btn{margin-top:12px}.state.err.s-lg>.btn{margin-top:4px}

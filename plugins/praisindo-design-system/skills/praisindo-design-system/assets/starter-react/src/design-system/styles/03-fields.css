@@ -1,0 +1,45 @@
+/* ===== fields ===== */
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld>label{display:flex;align-items:center;gap:4px;font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}
+.sec>.fw6{display:flex;align-items:center;gap:4px}
+.req{color:var(--color-foreground-danger-default);font-weight:calc(500 + var(--fw-shift,0))}
+.opt{font-weight:calc(400 + var(--fw-shift,0));font-size:var(--fs-xs);color:var(--color-text-secondary)}
+.inp{display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px;color:var(--color-text-secondary)}
+.inp:focus-within{border-color:var(--color-border-brand-strong)}
+.inp.err{border-color:var(--color-border-danger-strong)}
+.selw.err>.sel,.sgc.err{border-color:var(--color-border-danger-strong)}   /* 2.31 (FM-12): a Select / SegToggle that is a form field shows its error like .inp.err */
+.inp input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font:inherit;color:var(--color-text-primary)}
+.inp input[type=date]{color-scheme:light}
+[data-theme="dark"] .inp input[type=date]{color-scheme:dark}   /* the calendar icon and the browser's calendar popup follow the theme (rule FM-11) */
+.inp input::placeholder{color:var(--color-text-tertiary);opacity:1}
+.inp.s-sm{height:32px;font-size:var(--fs-sm)}.inp.s-md{height:44px}.inp.s-lg{height:56px;font-size:var(--fs-lg)}
+.hlp{font-size:var(--fs-sm);color:var(--color-foreground-danger-strong)}
+.selw{position:relative;display:inline-grid;max-width:100%}.selw>.sel{width:100%}
+.fld>.selw,.sec>.selw{display:grid;width:100%}
+.selw>.ic{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--color-text-secondary)}
+.sel{appearance:none;-webkit-appearance:none;font:inherit;color:var(--color-text-primary);background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px;padding:0 32px 0 12px;max-width:100%}
+.sel.s-sm{height:32px;font-size:var(--fs-sm)}.sel.s-md{height:44px}.sel.s-lg{height:56px;font-size:var(--fs-lg)}
+.sel:focus-visible{border-color:var(--color-border-brand-strong)}
+.combo{display:flex;border:1px solid var(--color-border-neutral-default);border-radius:8px;overflow:hidden;background:var(--color-surface-neutral-primary);max-width:520px;width:100%}
+.combo .selw{flex:none}.combo .sel{border:0;border-right:1px solid var(--color-border-neutral-default);border-radius:0;background:var(--color-surface-neutral-secondary)}
+.combo .inp{border:0;border-radius:0;flex:1}
+.combo:focus-within{border-color:var(--color-border-brand-strong)}
+input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:var(--color-surface-brand-default)}
+/* Select with a list of its own (DS 2.74, rule SL-01..SL-04): the field is a button, the list a popover in the overlay host; a hidden native select keeps the value */
+.selw.sl>.sl-t{display:flex;align-items:center;width:100%;text-align:left;cursor:pointer;overflow:hidden}
+.sl-v{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.selw.sl.open>.sl-t{border-color:var(--color-border-brand-strong);box-shadow:0 0 0 1px var(--color-border-brand-strong)}
+.selw.sl>.ic{transition:transform .15s}.selw.sl.open>.ic{transform:translateY(-50%) rotate(180deg)}
+.sl-n{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.slp{position:fixed;z-index:95;display:flex;flex-direction:column;width:max-content;max-width:min(360px,calc(100vw - 16px));padding:4px;background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px}
+.slp-q{padding:4px 4px 8px}
+.slp-l{display:flex;flex-direction:column;overflow-y:auto;min-height:0}
+.slo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;width:100%;height:40px;padding:0 12px;border:0;border-radius:8px;background:none;font:inherit;font-size:var(--fs-md);color:var(--color-text-primary);text-align:left;cursor:pointer}
+.slo>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slo:hover,.slo:focus-visible{background:var(--color-surface-neutral-secondary)}
+.slo:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:-2px}
+.slo[aria-selected=true]{color:var(--color-foreground-brand-strong)}
+.slo .ic{flex:none;font-size:16px;color:var(--color-foreground-brand-strong)}
+.slp.s-sm .slo{height:32px;padding:0 8px;font-size:var(--fs-sm)}
+.slp-e{margin:0;padding:12px}
+

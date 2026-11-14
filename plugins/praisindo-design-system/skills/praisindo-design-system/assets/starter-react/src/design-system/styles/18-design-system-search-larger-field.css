@@ -1,0 +1,10 @@
+/* ===== Design System search: larger field ===== */
+.dsq .fld{gap:0}.dsq .inp{height:44px}
+.dsq .inp input{font-size:var(--fs-md)}
+.dstoc{display:flex;flex-direction:column;padding:0}
+@media(max-width:1100px){.dstoc{flex-direction:row;flex-wrap:wrap;gap:8px}.dstoc{width:100%;flex:none}.dstoc>button[data-act=dsgo]{flex:none;width:auto;min-height:32px;padding:4px 12px;border:1px solid var(--color-border-neutral-default);border-radius:999px;font-size:var(--fs-xs)}}
+.dsq .inp>.ic{font-size:22px}
+.dslog{display:flex;flex-direction:column;gap:12px}.dslog>div{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-sm)}.dslog .bdg,.dslog>div>:first-child{flex:none}
+.dslay{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}.dsl2{display:flex;flex-direction:column;gap:8px;font-size:var(--fs-sm)}
+.dssk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:8px;border:1px solid var(--color-border-neutral-default);border-radius:8px;background:var(--color-surface-neutral-secondary);margin-bottom:4px}
+.dssk i{display:block;border-radius:4px;background:var(--color-surface-brand-subtle-1);border:1px solid var(--color-border-brand-default)}

@@ -1,0 +1,51 @@
+/* ===== Sign in: framed two panels, glass aura ===== */
+.lgx{min-height:100vh;display:flex;background:var(--color-surface-neutral-primary)}
+.lgf{width:100%;min-height:100vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--color-surface-neutral-primary)}
+.lga{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:24px;padding:48px 56px;color:var(--color-text-white);background:linear-gradient(155deg,var(--color-surface-brand-strong-2) 0%,color-mix(in srgb,var(--color-surface-brand-default) 62%,var(--color-surface-brand-strong-2)) 45%,color-mix(in srgb,var(--color-surface-info-default) 50%,var(--color-surface-brand-strong-2)) 100%)}   /* LG-04b (1.81): light panel gradient mixed with the navy so white text is 4.5:1 or more over the aura (it ended in cyan, 2.3:1) */
+.lga .au{position:absolute;z-index:-1;border-radius:50%;filter:blur(64px);opacity:.4;mix-blend-mode:screen;will-change:transform}
+.lga .a1{width:70%;aspect-ratio:1;left:-15%;top:-10%;background:radial-gradient(circle,color-mix(in srgb,var(--color-surface-brand-subtle-1) 85%,transparent),transparent 70%);animation:lgau1 22s ease-in-out infinite alternate}
+.lga .a2{width:60%;aspect-ratio:1;right:-20%;top:25%;background:radial-gradient(circle,var(--color-surface-cyan-default),transparent 70%);animation:lgau2 26s ease-in-out infinite alternate}
+.lga .a3{width:65%;aspect-ratio:1;left:10%;bottom:-30%;background:radial-gradient(circle,color-mix(in srgb,var(--color-surface-purple-default) 70%,var(--color-surface-brand-strong-2)),transparent 70%);opacity:.55;animation:lgau3 30s ease-in-out infinite alternate}
+@keyframes lgau1{0%{transform:translate(0,0) scale(1)}50%{transform:translate(18%,12%) scale(1.15)}100%{transform:translate(6%,28%) scale(.95)}}
+@keyframes lgau2{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-22%,-14%) scale(1.2)}100%{transform:translate(-8%,18%) scale(1)}}
+@keyframes lgau3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(20%,-18%) scale(1.1)}100%{transform:translate(-12%,-6%) scale(1.2)}}
+.lga::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--color-surface-brand-strong-2) 55%,transparent))}
+/* F2 (1.79): in dark mode brand-strong-2 is almost white (#f2f8ff) and cyan-default is light, so the white story text had 1.07:1 at the top; the dark gradient is brand-default and info-default mixed with the deep subtle surface (white text 4.5:1 or more with the aura) and the bottom veil uses the deep subtle surface (rule LG-04) */
+[data-theme="dark"] .lga{background:linear-gradient(155deg,color-mix(in srgb,var(--color-surface-brand-default) 70%,var(--color-surface-brand-subtle-1)) 0%,color-mix(in srgb,var(--color-surface-brand-default) 85%,var(--color-surface-brand-subtle-1)) 45%,color-mix(in srgb,var(--color-surface-info-default) 85%,var(--color-surface-brand-subtle-1)) 100%)}
+[data-theme="dark"] .lga .au{opacity:.35}
+[data-theme="dark"] .lga::after{background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--color-surface-brand-subtle-1) 70%,transparent))}
+.lga-logo{display:inline-flex;align-items:center;gap:12px;font-size:18px}
+.lga-mid{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.lga-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:color-mix(in srgb,var(--color-surface-neutral-primary) 18%,transparent);border:1px solid color-mix(in srgb,var(--color-surface-neutral-primary) 30%,transparent);backdrop-filter:blur(10px);font-size:var(--fs-sm)}
+.lga-pill .ic{font-size:16px}
+/* LG-04b (1.81): in light mode the glass surfaces (white on the dark gradient) lighten the pixels behind the white text; a thinner glass keeps it 4.5:1 */
+:root:not([data-theme="dark"]) .lga-pill{background:color-mix(in srgb,var(--color-surface-neutral-primary) 6%,transparent)}
+:root:not([data-theme="dark"]) .lga{--sign-glow:6%}
+.lga h2{margin:0;font-size:48px;line-height:56px;font-weight:calc(600 + var(--fw-shift,0));letter-spacing:-.01em;max-width:520px}
+.lga-mid p{margin:0;font-size:var(--fs-md);opacity:.9}
+.lga-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:760px}
+.lgs{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:136px;padding:16px 16px 16px;border-radius:var(--r-card);border:1px solid color-mix(in srgb,var(--color-surface-neutral-primary) 28%,transparent);background:color-mix(in srgb,var(--color-surface-neutral-primary) var(--sign-glow,16%),transparent);backdrop-filter:blur(14px);color:color-mix(in srgb,var(--color-text-white) 88%,transparent);animation:lgstep 12s infinite}
+.lgs .n{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid color-mix(in srgb,var(--color-surface-neutral-primary) 55%,transparent);font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0))}
+.lgs>.ic{position:absolute;top:16px;right:16px;font-size:20px;opacity:.7}
+.lgs .tx{font-size:var(--fs-sm);line-height:20px;font-weight:calc(500 + var(--fw-shift,0))}
+.lgs .n{animation:lgstepn 12s infinite}
+.lgs.s2,.lgs.s2 .n{animation-delay:-8s}.lgs.s3,.lgs.s3 .n{animation-delay:-4s}
+@keyframes lgstepn{0%,30%{background:var(--color-surface-brand-default);border-color:var(--color-surface-brand-default);color:var(--color-text-white)}36%,100%{background:transparent;border-color:color-mix(in srgb,var(--color-surface-neutral-primary) 55%,transparent);color:inherit}}
+@keyframes lgstep{0%,30%{background:var(--color-surface-neutral-primary);color:var(--color-text-primary);border-color:var(--color-surface-neutral-primary)}36%,100%{background:color-mix(in srgb,var(--color-surface-neutral-primary) var(--sign-glow,16%),transparent);color:color-mix(in srgb,var(--color-text-white) 88%,transparent);border-color:color-mix(in srgb,var(--color-surface-neutral-primary) 28%,transparent)}}
+@media(prefers-reduced-motion:reduce){.lga .au,.lgs,.lgs .n{animation:none}.lgs.s1 .n{background:var(--color-surface-brand-default);color:var(--color-text-white)}.lgs.s1{background:var(--color-surface-neutral-primary);color:var(--color-text-primary)}}
+.lgb{position:relative;display:flex;align-items:center;justify-content:center;padding:48px 40px 16px}
+.lgb .lg-u{position:absolute;top:16px;right:16px;display:flex;gap:8px;align-items:center}
+.lgb .lg-c{width:100%;max-width:400px;display:flex;flex-direction:column;gap:12px}
+.lg-h{text-align:center;margin-bottom:4px}.lg-h h1{margin:0;font-size:32px;line-height:40px;font-weight:calc(500 + var(--fw-shift,0))}.lg-h p{margin:8px 0 0}
+#lf{display:flex;flex-direction:column;gap:16px}#lf>.al{margin:0}
+.lgme{display:flex;align-items:center;gap:12px;padding:12px 12px;border:1px solid var(--color-border-neutral-default);border-radius:8px}
+.lgme .m{flex:1;min-width:0;display:flex;flex-direction:column}.lgme .m .fw6{font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}.lgme .m .mut{font-size:var(--fs-xs);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg-hide{display:none}
+.lg-caps,.lg-left{display:flex;align-items:center;gap:8px;margin:-8px 0 0;font-size:var(--fs-xs);color:var(--color-foreground-warning-default)}
+.lg-caps[hidden]{display:none}.lg-caps .ic,.lg-left .ic{font-size:16px}
+.lg-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lg-or{display:flex;align-items:center;gap:12px;color:var(--color-text-secondary);font-size:var(--fs-sm)}.lg-or::before,.lg-or::after{content:'';flex:1;height:1px;background:var(--color-border-neutral-subtle)}
+.lg-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 8px;margin:-4px 0 0;font-size:var(--fs-xs)}
+.lg-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin:4px 0 0;font-size:var(--fs-xs);text-align:center}.lg-foot .ic{font-size:16px}
+@media(max-width:960px){.lgf{grid-template-columns:minmax(0,1fr)}.lga{min-height:auto;padding:28px}.lga-mid{margin-top:24px}.lga h2{font-size:30px;line-height:40px}.lgb{padding:64px 24px 32px}}
+@media(max-width:640px){.lga{padding:20px 16px 24px;gap:12px}.lga h2{font-size:24px;line-height:32px}.lga-mid p{font-size:var(--fs-sm)}.lga-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.lgs{min-height:0;gap:12px;padding:12px}.lgs>.ic{display:none}.lgs .tx{font-size:var(--fs-xs);line-height:16px}.lgb{padding:56px 16px 24px}.lgb .lg-u{top:12px;right:12px}.lg-h h1{font-size:26px;line-height:36px}.lg-demo .btn{min-height:32px}}

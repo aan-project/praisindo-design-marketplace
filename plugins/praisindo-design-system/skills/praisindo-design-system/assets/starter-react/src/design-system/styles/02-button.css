@@ -1,0 +1,17 @@
+/* ===== button ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid transparent;border-radius:8px;font-weight:calc(400 + var(--fw-shift,0));padding:0 12px;white-space:nowrap;background:none;text-decoration:none}
+.btn.s-sm{height:32px;font-size:var(--fs-xs);padding:0 8px}
+.btn.s-md{height:36px;font-size:var(--fs-sm)}
+.btn.s-lg{height:48px;font-size:var(--fs-md);padding:0 16px}
+.btn.io{padding:0}.btn.io.s-sm{width:32px}.btn.io.s-md{width:36px}.btn.io.s-lg{width:48px}
+.btn.full{width:100%}
+.b-fill{background:var(--int-def);color:var(--int-on)}
+.b-fill:hover{background:var(--int-hov)}.b-fill:active{background:var(--int-prs)}
+.b-soft{background:var(--int-sub);color:var(--int-fg)}.b-soft:hover{border-color:var(--int-bd)}
+.b-outlined{background:var(--color-surface-neutral-primary);border-color:var(--color-border-neutral-default);color:var(--color-text-secondary)}
+.b-outlined:hover{background:var(--color-surface-neutral-secondary)}
+.b-transparent{color:var(--int-fg)}.b-transparent:hover{background:var(--int-sub)}
+.b-link{color:var(--int-fg);height:auto!important;padding:0}.b-link:hover{text-decoration:none;color:var(--int-prs)}
+.i-neutral.b-link:hover{color:var(--color-text-primary)}
+.ch .btn.b-link,.rs-h .btn.b-link{padding-left:0;padding-right:0}
+.btn:disabled{background:var(--color-surface-neutral-secondary);color:var(--color-text-tertiary);border-color:transparent;cursor:not-allowed}

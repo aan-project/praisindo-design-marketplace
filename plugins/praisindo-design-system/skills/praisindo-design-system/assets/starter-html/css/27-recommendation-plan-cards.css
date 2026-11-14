@@ -1,0 +1,42 @@
+/* ===== Recommendation plan cards ===== */
+.rxps{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px;align-items:stretch;padding-top:12px}
+.rxps>div{display:flex;min-width:0}
+.rxp{position:relative;display:flex;flex-direction:column;gap:16px;width:100%;padding:16px;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary);box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.rxp.lead{margin-top:-12px;padding-top:36px;border-color:transparent;color:var(--color-text-white);background:linear-gradient(160deg,var(--color-surface-brand-default) 0%,var(--color-surface-brand-default) 55%,var(--color-foreground-brand-strong) 100%);box-shadow:0 12px 28px -10px rgba(0,98,255,.55);overflow:hidden}
+.rxp-rib{position:absolute;top:0;right:16px;padding:4px 12px;border-radius:0 0 6px 6px;background:var(--color-surface-success-default);color:var(--color-text-white);font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0))}   /* RB-01 (owner 2026-10-25): white text on the success fill, 2.78:1, known and accepted; do not change without the owner */
+.rxp-h{display:flex;min-width:0;min-height:84px}
+.rxp-h .m{display:flex;flex-direction:column;gap:4px;min-width:0}
+.rxp-h .fw6{font-size:var(--fs-md);font-weight:calc(500 + var(--fw-shift,0));line-height:var(--lh-md);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rxp-sub{font-size:var(--fs-xs);color:var(--color-text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rxp.lead .rxp-sub{color:rgba(255,255,255,.88)}
+.rxp-v{display:flex;flex-direction:column;gap:4px;padding-bottom:16px;border-bottom:1px solid var(--color-border-neutral-subtle)}
+.rxp-v .fw6{color:var(--color-text-primary);font-size:28px;font-weight:calc(700 + var(--fw-shift,0));line-height:32px;letter-spacing:-.01em}
+.rxp-v span{font-size:var(--fs-sm);color:var(--color-text-tertiary)}
+.rxp-v .rxp-na{color:var(--color-foreground-warning-strong);font-weight:calc(500 + var(--fw-shift,0))}
+.rxp.lead .rxp-v{border-color:rgba(255,255,255,.28)}.rxp.lead .rxp-v span{color:var(--color-text-white)}.rxp.lead .rxp-v .rxp-na{color:inherit;font-weight:calc(500 + var(--fw-shift,0))}
+.rxp-s{display:flex;align-items:center;flex-wrap:wrap;gap:8px 8px;font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0));margin-top:-4px}
+.rxp-sc{font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0))}
+.rxp-sc small{margin-left:1px;font-size:var(--fs-xs);font-weight:calc(400 + var(--fw-shift,0));color:var(--color-text-tertiary)}
+.rxp.lead .rxp-sc small{color:rgba(255,255,255,.72)}
+.rxp.lead .stars .ic{color:#FFD15C}
+.rxp-l{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none;font-size:var(--fs-sm);flex:1}
+.rxp-l li{display:flex;align-items:flex-start;gap:8px;line-height:var(--lh-md)}
+.rxp-l li>.ic{flex:none;font-size:16px;margin-top:4px;color:var(--color-foreground-success-strong)}
+.rxp-l li.warn>.ic{color:var(--color-foreground-warning-strong)}
+.rxp-l li.bad>.ic{color:var(--color-foreground-danger-strong)}
+.rxp.lead .rxp-l li>.ic{color:inherit}
+.rxp-f{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.rxp-f .btn{width:100%;justify-content:center}
+.rxp.lead .rxp-f .btn.b-fill{background:var(--color-surface-neutral-primary);color:var(--color-foreground-brand-strong);border-color:var(--color-surface-neutral-primary)}
+.rxp.lead .rxp-f .btn.b-transparent{color:var(--color-text-white)}
+.rxp.lead .rxp-f .btn.b-outlined{background:transparent;color:var(--color-text-white);border-color:rgba(255,255,255,.6)}
+.rxp.lead .rxp-f .btn.b-transparent:hover,.rxp.lead .rxp-f .btn.b-outlined:hover{background:rgba(255,255,255,.16);color:var(--color-text-white)}
+.rxp.lead .rxp-f .btn.b-fill:hover{background:var(--color-surface-brand-subtle-1);border-color:var(--color-surface-brand-subtle-1)}
+.rxp.lead .rxp-f .btn:focus-visible{outline:2px solid var(--color-text-white);outline-offset:2px}
+@media(max-width:640px){
+ .rxps{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--page-pad);margin:0 calc(var(--page-pad) * -1);padding:16px var(--page-pad) 8px;scrollbar-width:none}
+ .rxps>div{flex:0 0 84%;scroll-snap-align:start}
+ .rxp.lead{margin-top:0}
+ .rxp-h{min-height:0}
+ .rxp-f .btn{min-height:44px}
+}

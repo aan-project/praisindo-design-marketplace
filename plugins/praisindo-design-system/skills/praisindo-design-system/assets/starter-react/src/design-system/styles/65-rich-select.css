@@ -1,0 +1,22 @@
+/* RichSelect (2.47, owner decision 2026-11-10): a select whose options have an icon tile and a short description. Built from the form-kit tokens (the field, the popover, the intent tiles). */
+.frs{position:relative}
+.inp.rsf{height:auto;min-height:44px;padding:4px 12px;cursor:pointer;flex-wrap:nowrap;gap:12px;color:var(--color-text-primary)}
+.inp.rsf:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:1px}
+.inp.rsf>.ic:last-child{margin-left:auto;color:var(--color-text-secondary)}
+.rsv{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.rsph{color:var(--color-text-tertiary)}
+.rsi{margin:0;width:28px;height:28px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-fg)}
+.rsi .ic{width:20px;height:20px;font-size:20px;line-height:20px;color:var(--int-fg);display:flex;align-items:center;justify-content:center}
+.fpop.rsp{left:0;right:0;max-width:none;min-width:0;padding:4px;gap:0;box-shadow:none}
+.rsl{list-style:none;margin:0;padding:0;max-height:min(392px,60vh);overflow-y:auto;display:flex;flex-direction:column;gap:0}
+.rsl button{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:12px 12px;border:0;border-radius:8px;background:none;font:inherit;color:var(--color-text-primary);text-align:left;cursor:pointer}
+.rsl button:hover,.rsl button:focus-visible{background:var(--color-surface-neutral-secondary)}
+.rsl button:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:-2px}
+.rsl button[aria-selected=true] .rsnm{color:var(--color-foreground-brand-strong)}
+.rsl button:disabled{opacity:.5;cursor:not-allowed}
+.rst{display:flex;flex-direction:column;gap:0;flex:1;min-width:0}
+.rsnm{font-size:var(--fs-md);font-weight:calc(500 + var(--fw-shift,0));line-height:var(--lh-md)}
+.rsd{font-size:var(--fs-sm);line-height:var(--lh-xs);color:var(--color-text-secondary)}
+.rsl button>.ic:last-child{margin-left:auto;flex:none;color:var(--color-foreground-brand-strong)}
+.rsnm .rsns{display:inline;color:var(--color-text-tertiary);font-weight:calc(400 + var(--fw-shift,0))}   /* the soft part of an option name (DS 2.71, 2.72): on the same line as the weight, in a softer colour and a normal weight, not bold */
+/* the name of an option is `.rsnm`: the bare `.rsn` is the section of notes of the rule result drawer (52-login.css), a flex column that squeezed the soft part under the number (CD-23) */

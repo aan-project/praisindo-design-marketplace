@@ -1,0 +1,75 @@
+/* ===== layout ===== */
+:root{--page-pad:24px}
+.shell{display:flex;min-height:100vh}
+.sb{position:sticky;top:0;height:100vh;width:232px;flex:none;display:flex;flex-direction:column;gap:16px;padding:16px 12px;background:var(--color-surface-neutral-primary);border-right:1px solid var(--color-border-neutral-default);z-index:46}
+.coll .sb{width:68px}
+.brandrow{display:flex;align-items:center;gap:12px;padding:0 4px;min-height:40px;font-weight:calc(700 + var(--fw-shift,0));font-size:var(--fs-lg)}
+.mono{width:32px;height:32px;border-radius:8px;background:var(--color-surface-brand-default);color:var(--color-text-white);display:inline-flex;align-items:center;justify-content:center;font-weight:calc(700 + var(--fw-shift,0));flex:none}
+.logo{height:32px;max-width:140px;object-fit:contain}
+.nav{display:flex;flex-direction:column;gap:4px;flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden}
+.nav a{display:flex;align-items:center;gap:12px;height:32px;padding:0 8px;border-radius:8px;text-decoration:none;font-size:var(--fs-sm);font-weight:calc(400 + var(--fw-shift,0));color:var(--color-text-secondary)}
+.nav a:hover{background:var(--color-surface-neutral-secondary)}
+.nav a.on{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong);font-weight:calc(500 + var(--fw-shift,0))}
+.coll .nav a{justify-content:center;padding:0}.coll .lbl,.coll .brandrow .nm{display:none}
+.coll .util{flex-direction:column}.coll .util .grow,.coll .util .lgt{display:none}.coll .lgt1{display:inline-flex}
+.coll .user{justify-content:center;padding:0;width:auto;align-self:center}.coll .user .uname,.coll .user>.ic{display:none}
+.foot{display:flex;flex-direction:column;gap:8px;flex:none;margin-top:auto}   /* the footer is at the bottom of the sidebar (the tip card used to push it there, rule SB-31) */
+.util{display:flex;align-items:center;gap:4px;padding-bottom:8px;border-bottom:1px solid var(--color-border-neutral-subtle)}
+.util .grow{flex:1}
+.lgt1{display:none}.lgt1t{font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0))}
+.mn{flex:1;min-width:0;display:flex;flex-direction:column}
+.ct{padding:var(--page-pad);padding-bottom:calc(var(--page-pad) + 48px);display:flex;flex-direction:column;gap:24px}
+.crumb{display:flex;align-items:center;gap:4px;font-size:var(--fs-xs);color:var(--color-text-secondary)}
+.crumb a{color:inherit;text-decoration:none}.crumb a:hover{text-decoration:underline}
+.crumb [aria-current]{color:var(--color-text-primary);font-weight:calc(500 + var(--fw-shift,0))}
+.crumb .ic{font-size:13px}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.ph>div:first-child{display:flex;flex-direction:column;gap:4px}
+.card{background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);display:flex;flex-direction:column;overflow:hidden}
+.card .card,.card .pv{border-radius:var(--r-card)}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px;border-bottom:1px solid var(--color-border-neutral-default)}
+.ch h2{font-weight:calc(600 + var(--fw-shift,0))}   /* the title of a card is 600; every other bold text is 500 (owner decision 2026-11-09, rule TH-13) */
+.cb{--card-gap:12px;padding:16px;display:flex;flex-direction:column;gap:var(--card-gap)}   /* --cbg: the gap, also read by the empty-state button rule (ES-01) */
+.pv{border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card)}
+.pv:has(>.li){padding:0 12px}   /* CD-15 (1.76) took the side padding off `.li`: a bordered preview box that holds list rows gives the inset (the Reschedule, Dismiss and Assign drawers drew their rows against the border) */
+.pv:has(>.li){container-type:inline-size}
+.pv>.li .t>.mut{white-space:nowrap}
+.pv>.li>.x .mut{color:var(--color-text-tertiary)}   /* the third text of a card (title, second line, then date or status) is softer (owner rule 2026-11-13, DR-11) */
+@container (max-width:480px){.pv>.li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;column-gap:12px;row-gap:4px}.pv>.li>.x{grid-column:2;align-items:flex-start;white-space:normal}}   /* a row of a narrow preview box (the 400px drawers): the date or status goes under the text instead of squeezing it */
+.rw{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rw .sz{width:64px;flex:none}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:16px}
+.user{display:flex;align-items:center;gap:8px;width:100%;padding:0 8px;height:40px;border-radius:8px;border:0;background:none;text-align:left}
+.user:hover,.user.open{background:var(--color-surface-neutral-secondary)}
+.user .ic{color:var(--color-text-tertiary)}
+.user.warn .av{background:var(--color-surface-warning-subtle-1);color:var(--color-foreground-warning-strong)}
+.av{width:32px;height:32px;border-radius:999px;background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong);display:inline-flex;align-items:center;justify-content:center;font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm);flex:none}
+.uname{display:flex;flex-direction:column;align-items:flex-start;line-height:16px;min-width:0;flex:1}
+.uname .fw6{font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0));max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uname .sub{font-size:var(--fs-xs);font-weight:calc(400 + var(--fw-shift,0));color:var(--color-text-tertiary);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pop{position:absolute;right:0;top:calc(100% + 4px);min-width:220px;padding:4px;background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px;z-index:20}
+.pop .btn{width:100%;justify-content:flex-start}
+.pop hr{border:0;border-top:1px solid var(--color-border-neutral-subtle);margin:4px 0}
+/* an action menu (the row menu of a table, the node menu of the builder) is a column as wide as its widest item, never wider than the viewport, and scrolls inside when it is tall (rule MN-01); the buttons are inline-flex, so without the column their widths were summed (520px for four items) */
+.pop:not(.upop){display:flex;flex-direction:column;width:max-content;overflow-x:hidden;z-index:80}   /* above the sticky decision bar (40) and the bottom navigation (70) of a phone, below the scrim (84) */
+.pop:not(.upop)>*{flex:none}
+.pop:not(.upop):not(.srpop){min-width:176px;max-width:min(320px,calc(100vw - 16px));max-height:calc(100vh - 16px);overflow-y:auto}
+.rel{position:relative}
+.upop-scrim{position:fixed;inset:0;z-index:44;background:transparent}
+.pop.upop{position:fixed;right:auto;top:auto;bottom:16px;z-index:45;min-width:300px;max-width:min(340px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:4px}
+.upop .uhb{display:flex;flex-direction:column;gap:4px;width:100%;padding:0;text-align:left}
+.upop .uh{display:flex;align-items:center;gap:12px;padding:4px 8px 8px}
+.upop .pfst{padding:0 8px 4px;gap:4px}
+.upop .pfs{padding:8px 8px;gap:0}.upop .pfs .fw6{font-size:var(--fs-md);line-height:16px}.upop .pfs .mut{line-height:16px}
+/* the menu scrolls instead of squeezing its rows; action buttons are as high as a role option (padding 8px + the two text lines of .ropt) and start at the same left edge */
+.pop.upop>*{flex:none}
+.pop.upop>.btn{height:auto;padding:8px}
+.upop .btn.danger{color:var(--color-foreground-danger-strong)}.upop .btn.danger:hover{background:var(--color-surface-danger-subtle-1)}
+.upop hr{width:100%}
+.rh{display:flex;flex-direction:column;gap:4px;padding:4px 8px 8px}
+.rh .fw6{font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0))}
+.rh span{font-size:var(--fs-xs);color:var(--color-text-secondary);white-space:normal}
+.umore{display:inline-flex}.pop.upop.umpop{top:auto;min-width:0;width:max-content;flex-direction:column;align-items:flex-start;padding:4px;z-index:90}   /* the more menu of the action row of the sidebar (rule PP-02) */
+.util.nobd{border-bottom:0;padding-bottom:0}   /* the profile is in the toolbar: there is no user button under the row, so no divider (rule PP-01) */
+.umpop .btn{width:100%;justify-content:flex-start}
+.nav .nvi .lbl,.nav .nvt .lbl{flex:1;min-width:0}   /* a label is on one line, cut in the middle with its last word kept (SB-34) */

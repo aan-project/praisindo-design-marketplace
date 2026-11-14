@@ -1,0 +1,56 @@
+/* ===== Opportunity detail: customer panel (left) · opportunity summary + tabs (right) · decision bar ===== */
+.od{grid-template-columns:288px minmax(0,1fr)}
+.od.od-r{grid-template-columns:minmax(0,1fr) 288px}   /* the wide column first, the narrow one on the right (DT-06) */
+@media(min-width:1101px){.od.od-r.od-w{grid-template-columns:minmax(0,1fr) 360px}}   /* the product detail (PD-05): a wider right column; below 1100px the page is one column as every detail page */
+.odside{display:flex;flex-direction:column;gap:16px;min-width:0}   /* a stack of cards in the narrow column (DT-06) */
+.c3id .odbdg{justify-content:center}
+.cpanel .odmk{grid-column:1/-1}   /* on a phone .dl-grid is two columns: the actions take the whole row (DT-08) */
+.od .c3m{gap:16px}
+.odbody{display:flex;flex-direction:column;gap:20px;min-width:0}
+.c3nm{display:inline-flex;align-items:center;gap:4px;color:inherit;text-decoration:none}.c3nm .ic{font-size:20px;color:var(--color-text-secondary)}.c3nm:hover{color:var(--color-foreground-brand-default)}.c3nm:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px;border-radius:4px}
+.cpanel .c3qa{padding-bottom:20px}
+.odp{padding:0;gap:0}
+.odh{display:flex;gap:16px;align-items:flex-start;padding:16px}
+.odh .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.odh .c3sub{overflow-wrap:anywhere}.odh h2{margin:0;font-size:20px;line-height:28px;font-weight:calc(600 + var(--fw-shift,0));overflow-wrap:anywhere}
+.odav{width:48px;height:48px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-def)}.odav .ic{font-size:26px}
+.odbdg{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:4px}
+.odue{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);color:var(--color-text-secondary)}.odue .ic{font-size:16px}.odue.over{color:var(--color-foreground-danger-default)}
+.odcta{flex:none;width:232px;display:flex;flex-direction:column;align-items:stretch;gap:8px}.odcta .btn{width:100%;justify-content:center}.odcta .c3hint{margin:0;text-align:left;font-size:var(--fs-xs)}
+.odf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 20px;padding:16px;border-top:1px solid var(--color-border-neutral-subtle)}
+.odf .dl-item>.fw6{font-size:var(--fs-sm)}.odf .dl-item .pb{max-width:92px}
+.odnx{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--color-border-neutral-subtle);background:var(--color-surface-neutral-secondary);border-radius:0 0 calc(var(--r-card) - 1px) calc(var(--r-card) - 1px)}
+.odnx>.c3a,.odnx>.al{flex:1;min-width:0}.odnx>.al{margin:0;padding:0;background:none}
+.odnx.none>.ic{color:var(--color-text-secondary)}.odnx.none .mut{font-size:var(--fs-sm)}
+.odmk{display:flex;flex-direction:column;gap:8px}.odmk p{margin:0;font-size:var(--fs-xs)}.odmk .rw{flex-direction:column;align-items:stretch}.odmk .rw .btn{justify-content:center}
+.rxnone{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--color-border-neutral-subtle)}
+/* decision bar: sticky bottom layer after a recommendation is selected */
+.odbar{position:sticky;bottom:16px;z-index:40;display:flex;flex-direction:column;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary);animation:odup .2s ease-out}
+@keyframes odup{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.odbar{animation:none}}
+.odbar-r{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.odbar-ic{width:40px;height:40px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.odbar .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.odbar-l{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:var(--fs-xs)}.odbar-l .fw6{font-size:var(--fs-sm)}
+.odbar-t{font-size:var(--fs-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.odbar-a{display:flex;align-items:center;gap:8px;flex:none}
+.odbar-x{padding:16px;border-bottom:1px solid var(--color-border-neutral-subtle);max-height:40vh;overflow:auto}
+
+@media(max-width:1100px){.od,.od.od-r{grid-template-columns:minmax(0,1fr)}.od .c3m{display:contents}.od>.cpanel,.od>.odside{order:2}.od .c3m>*{order:3}.od .c3m>.al{order:0}.od .c3m>.odp{order:1}.od .c3m>.odbar{order:4}}
+@media(max-width:760px){.odh{flex-wrap:wrap}.odcta{width:100%}}
+/* Section: plain variant of a card (no frame) */
+.sect{display:flex;flex-direction:column;gap:16px;min-width:0}
+.secth{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.secth h2{margin:0;font-size:18px;line-height:28px;font-weight:calc(600 + var(--fw-shift,0))}.secth .sp{flex:1}
+.sect>.sect-d{margin:-8px 0 0;font-size:var(--fs-sm)}
+.sectb{display:flex;flex-direction:column;gap:12px;min-width:0}.sectb>.al{margin:0}
+/* Recommendation item (compact) */
+.rxi-tg,.rxi-sc{display:flex;flex-wrap:wrap;align-items:center;gap:8px 8px;font-size:var(--fs-xs)}
+/* Recommendation detail drawer */
+.rxd-h,.rxd-k,.rxd-b{flex:none}
+.rxd-h{display:flex;flex-direction:column;gap:8px}.rxd-h>.rk{align-self:flex-start}.rxd-h h3{margin:0;font-size:18px;line-height:28px;font-weight:calc(500 + var(--fw-shift,0))}
+.rxd-k{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:16px 0 4px;border:1px solid var(--color-border-neutral-subtle);border-radius:8px;overflow:hidden;background:var(--color-border-neutral-subtle)}
+.rxd-k>.dl-item{padding:12px 12px;background:var(--color-surface-neutral-primary)}.rxd-k .dl-item>.fw6{font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}
+.rxd-b{display:flex;flex-direction:column;gap:20px}
+.rxd-s{display:flex;flex-direction:column;gap:12px}.rxd-s p{margin:0}
+.od .c3tabs .tabs{overflow-x:auto;scrollbar-width:none}.od .c3tabs .tab{flex:none}
+@media(max-width:640px){.odbar{bottom:calc(72px + env(safe-area-inset-bottom,0px))}.odbar-r{flex-wrap:wrap}.odbar-a{width:100%}.odbar-a .btn{flex:1;justify-content:center;min-height:44px}.odf{grid-template-columns:repeat(2,minmax(0,1fr))}.odh{padding:16px}.odf,.odnx{padding-left:16px;padding-right:16px}.scrim{z-index:88}.drawer{z-index:89}.odcta .btn{min-height:44px}.c3qa{gap:12px}}

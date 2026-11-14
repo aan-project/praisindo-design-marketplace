@@ -1,0 +1,4 @@
+/* ===== Sign-in toolbar: Scenario icon sits in the toolbar next to the theme button ===== */
+.lg-u .qa.qa-lg{position:static;top:auto;right:auto;z-index:auto;display:inline-flex}
+/* hero sentence links flow like text */
+.hero-txt p .btn.b-link{display:inline;height:auto;min-height:0;padding:0;white-space:normal;vertical-align:baseline;line-height:inherit;text-align:left}

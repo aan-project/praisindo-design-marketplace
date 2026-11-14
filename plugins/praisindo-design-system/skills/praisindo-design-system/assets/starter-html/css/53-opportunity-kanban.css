@@ -1,0 +1,33 @@
+/* ===== Kanban board (docs/design-system/kanban-spec.md): lanes + cards, tokens only ===== */
+/* The board scrolls inside itself (both ways) when it has a height limit, so the lane headers can stay at its top (rule KB-13). The limit is --kb-h, or the room under the board: the viewport height minus --kb-top (set by KanbanBoard fit) and --kb-bot; the board is never shorter than 420px. Without either variable there is no limit. */
+.kb{--kb-bot:16px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(288px,1fr);grid-auto-rows:max-content;gap:16px;overflow:auto;align-items:stretch;padding-bottom:8px;max-height:max(420px,var(--kb-h,calc(100dvh - var(--kb-top) - var(--kb-bot))))}
+.kbl{min-width:0;min-height:420px;display:flex;flex-direction:column;gap:0;padding:0 12px 12px;border:1px solid var(--color-border-neutral-subtle);border-radius:var(--r-card);background:var(--color-surface-neutral-secondary)}
+/* the lane header sticks at the top of the board; it carries the 12px above and under it, so a card scrolling by never shows in the gap */
+.kbh{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 -12px;padding:12px;background:var(--color-surface-neutral-secondary)}
+.kbn{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 8px;border:1px solid var(--color-border-neutral-default);border-radius:999px;background:var(--color-surface-neutral-primary);font-size:var(--fs-xs);color:var(--color-text-primary)}
+.kbs{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.kbe{padding:16px;border:1px dashed var(--color-border-neutral-strong);border-radius:var(--r-card);text-align:center;font-size:var(--fs-sm);color:var(--color-text-secondary)}
+.kbk{display:flex;flex-direction:column;gap:12px;padding:16px;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary)}
+.kbk-o{position:relative;cursor:pointer;transition:border-color .15s,background-color .15s}
+.kbk-o:hover{border-color:var(--color-border-neutral-strong);background:var(--color-surface-neutral-secondary)}
+.kbk-o:active{background:var(--color-surface-neutral-tertiary)}
+.kbt-b{margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+.kbt-b::after{content:"";position:absolute;inset:0;border-radius:var(--r-card)}
+.kbt-b:focus-visible{outline:0}
+.kbt-b:focus-visible::after{outline:2px solid var(--color-border-brand-strong);outline-offset:2px}
+.kbk-o .kba,.kbk-o .kbmn{position:relative;z-index:1}
+.kbk-o .kba .btn,.kbk-o .kbmn .btn{cursor:pointer}
+.kbmn{display:inline-flex}
+.kbt{margin:0;font-size:var(--fs-lg);font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-primary);overflow-wrap:anywhere}
+.kbd{margin:0;font-size:var(--fs-sm);color:var(--color-text-secondary)}
+.kbm{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kbm .mut{color:var(--color-text-tertiary)}
+.kbo{font-size:var(--fs-sm);color:var(--color-text-tertiary)}
+.kbf{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kba{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+/* The toolbar of the Kanban view stays under the top of the window (under the top bar below 1100px) while the page scrolls (rule KB-14); the 8px padding and the opposite margin keep the layout as it was */
+.tb.tb-stk{position:sticky;top:0;z-index:30;margin:-8px 0;padding:8px 0;background:var(--color-background-neutral-page)}
+@media(max-width:1099px){.tb.tb-stk{top:56px}}
+@media(max-width:640px){.kb{--kb-bot:calc(64px + env(safe-area-inset-bottom,0px) + 16px)}}
+/* SegToggle option with a leading icon (view switch) */
+.sgc-o .ic{vertical-align:middle;margin-right:8px}.sgc-o.ico{padding:8px 12px}.sgc-o.ico .ic{margin-right:0}

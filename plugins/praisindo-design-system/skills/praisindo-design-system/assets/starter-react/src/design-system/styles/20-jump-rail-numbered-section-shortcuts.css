@@ -1,0 +1,25 @@
+/* ===== Jump rail (numbered section shortcuts) ===== */
+.anv{display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;align-items:start}
+.anv-m{display:flex;flex-direction:column;gap:24px;min-width:0}
+.anv-g{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:var(--page-pad)}
+.anv-g>.sech{margin-top:0}
+.anv-nav{position:sticky;top:var(--page-pad)}
+.anv-list{display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px 0;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary)}
+.anv-b{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:999px;background:none;font:inherit;cursor:pointer}
+.anv-n{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;background:var(--color-surface-neutral-secondary);color:var(--color-text-primary);font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0));transition:background .15s,color .15s,box-shadow .15s}
+.anv-b:hover .anv-n{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.anv-b.on .anv-n{background:var(--color-surface-brand-default);color:var(--color-text-white);box-shadow:0 0 0 4px var(--color-surface-brand-subtle-1)}
+.anv-b:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px}
+.anv-t{display:none}
+@media(max-width:640px){
+ .anv{grid-template-columns:minmax(0,1fr);gap:12px}
+ .anv-nav{top:0;z-index:9;margin:0 calc(var(--page-pad) * -1);padding:8px var(--page-pad);background:var(--color-background-neutral-page);border-bottom:1px solid var(--color-border-neutral-subtle)}
+ .anv-list{flex-direction:row;justify-content:flex-start;gap:8px;padding:0;border:0;background:none;overflow-x:auto;scrollbar-width:none}
+ .anv-b{width:auto;height:36px;gap:8px;padding:0 12px 0 4px;border:1px solid var(--color-border-neutral-default);background:var(--color-surface-neutral-primary);flex:none}
+ .anv-b.on{border-color:var(--color-border-brand-default)}
+ .anv-n{width:28px;height:28px;font-size:var(--fs-xs)}.anv-b.on .anv-n{box-shadow:none}
+ .anv-t{display:inline;font-size:var(--fs-sm);white-space:nowrap}
+ .anv-list .tt-wrap{flex:none}.anv-list .tt{display:none}   /* the label is shown in the button itself on a phone */
+ .anv-g{scroll-margin-top:120px}
+ .anv-g .li{flex-wrap:wrap}.anv-g .li>.m{flex:1 1 calc(100% - 40px);min-width:0}.anv-g .li>.x{flex:1 1 100%;flex-direction:row!important;flex-wrap:wrap;justify-content:flex-start;align-items:center!important;gap:8px 12px;padding-left:36px}
+}

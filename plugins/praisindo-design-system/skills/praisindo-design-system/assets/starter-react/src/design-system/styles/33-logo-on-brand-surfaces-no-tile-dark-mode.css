@@ -1,0 +1,9 @@
+/* ===== logo on brand surfaces: no tile, dark-mode logo ===== */
+.pgveil-lg{width:auto;height:auto;min-width:0;padding:0;border-radius:0;background:none;box-shadow:none}
+.pgveil.full .pgveil-lg{padding:0}
+.logo.ob{height:40px;width:auto;object-fit:contain}
+.pgveil-lg .logo.ob,.pgveil.full .pgveil-lg .logo.ob{height:44px;max-width:220px}
+.lga-logo{gap:12px;font-size:20px}
+.lga-logo .logo.ob{height:40px;max-width:240px;object-fit:contain}
+.mono.inv{background:var(--color-surface-neutral-primary);color:var(--color-foreground-brand-strong);border-radius:10px;font-size:18px}
+@media(max-width:640px){.lga-logo .logo.ob{height:36px;max-width:200px}}

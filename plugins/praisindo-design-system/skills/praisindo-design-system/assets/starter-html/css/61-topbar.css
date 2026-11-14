@@ -1,0 +1,16 @@
+/* ===== Topbar of a tablet or a phone (rule SB-33): menu button, page title, avatar of the user. Rendered only below 1100px (SB-01) ===== */
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:8px;height:56px;padding:0 var(--page-pad);background:var(--color-surface-neutral-primary);border-bottom:1px solid var(--color-border-neutral-subtle)}
+.topbar .grow{flex:1}
+.topbar-t{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--fs-lg);line-height:var(--lh-lg);font-weight:calc(500 + var(--fw-shift,0))}
+.topbar .rel{flex:none}
+.user.user-top{width:40px;height:40px;padding:0;justify-content:center;border-radius:999px}
+.user.user-top .uname,.user.user-top>.ic{display:none}
+.pop.upop.upop-top{top:60px;right:16px;bottom:auto;left:auto!important;min-width:280px;max-width:calc(100vw - 32px);max-height:calc(100vh - 76px);overflow-y:auto}
+/* the small hero of the Design page sits under the topbar */
+@media(max-width:1099px){.dshero.mini,.dshero.hide{top:56px}}
+/* The toolbar of a desktop (DS 2.71, rule PP-03): the items of the panel that My Preferences puts at the top of the page. It is the same bar, but it is not frozen: it scrolls with the page. */
+.topbar.tool{position:static;z-index:auto}
+.topbar.tool .tool-s{flex:0 1 360px;min-width:200px}
+.topbar.tool .lgt1{display:none}
+.topbar.tool .lgt{display:inline-flex}
+.topbar.tool .qa{position:static}

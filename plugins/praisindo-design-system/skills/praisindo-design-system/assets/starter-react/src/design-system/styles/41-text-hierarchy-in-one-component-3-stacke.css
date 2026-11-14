@@ -1,0 +1,3 @@
+/* ===== text hierarchy: in one component, 3 stacked text lines get softer: default · neutral subtle-4 · neutral subtle-3 ===== */
+.t3,.hp-meta,.alog-m,.kpi .mut,.c3c>.mut,.m>.mut~.mut,.mini>.mut~.mut{color:var(--color-text-tertiary)}
+.hp-meta .hp-due.today{color:inherit}.alog-m .alog-res{color:inherit}.alog-m .alog-res.bad{color:var(--color-foreground-danger-default)}

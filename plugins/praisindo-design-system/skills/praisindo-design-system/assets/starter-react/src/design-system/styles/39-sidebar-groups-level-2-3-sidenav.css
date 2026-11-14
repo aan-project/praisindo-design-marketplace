@@ -1,0 +1,42 @@
+/* ===== sidebar groups + level 2/3 (SideNav) ===== */
+.ng{display:flex;flex-direction:column;gap:4px}
+.ng+.ng{margin-top:12px}
+.ngt{padding:4px 8px;font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0));line-height:var(--lh-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav .nvt{display:flex;align-items:center;gap:12px;width:100%;height:32px;padding:0 8px;border:0;border-radius:8px;background:none;font:inherit;font-size:var(--fs-sm);font-weight:calc(400 + var(--fw-shift,0));color:var(--color-text-secondary);cursor:pointer;text-align:left}
+.nav .nvt:hover{background:var(--color-surface-neutral-secondary)}
+.nav .nvt.has-on{color:var(--color-foreground-brand-strong);font-weight:calc(500 + var(--fw-shift,0))}
+.nvc{display:inline-flex;margin-left:auto;color:var(--color-text-tertiary);transition:transform .15s ease}.nvt[aria-expanded=true] .nvc{transform:rotate(180deg)}
+.nvk{position:relative;display:flex;flex-direction:column;gap:4px;margin-top:4px}.nvk[hidden]{display:none}
+.nav a.l2,.nav .nvt.l2{height:32px;padding-left:40px}
+.nav a.l3{height:28px;padding-left:56px;font-size:var(--fs-xs)}
+.nvp.l1>.nvk::before,.nvp.l2>.nvk::before{content:'';position:absolute;top:4px;bottom:4px;width:1px;background:var(--color-border-neutral-subtle)}
+.nvp.l1>.nvk::before{left:16px}.nvp.l2>.nvk::before{left:32px}
+.coll .ngt,.coll .nvk,.coll .nvc{display:none}
+.coll .ng+.ng{margin-top:8px;padding-top:8px;border-top:1px solid var(--color-border-neutral-subtle)}
+.coll .nav .nvt{justify-content:center;padding:0}
+.coll .nav .nvt.has-on{background:var(--color-surface-brand-subtle-1)}
+@media(hover:hover) and (min-width:641px){
+ .shell.coll:not(.nohov) .sb:hover .ngt,.shell.coll:not(.nohov) .sb:focus-within .ngt{display:block}
+ .shell.coll:not(.nohov) .sb:hover .ng+.ng,.shell.coll:not(.nohov) .sb:focus-within .ng+.ng{margin-top:12px;padding-top:0;border-top:0}
+ .shell.coll:not(.nohov) .sb:hover .nvk:not([hidden]),.shell.coll:not(.nohov) .sb:focus-within .nvk:not([hidden]){display:flex}
+ .shell.coll:not(.nohov) .sb:hover .nvc,.shell.coll:not(.nohov) .sb:focus-within .nvc{display:inline-flex}
+ .shell.coll:not(.nohov) .sb:hover .nav .nvt,.shell.coll:not(.nohov) .sb:focus-within .nav .nvt{justify-content:flex-start;padding:0 8px}
+ .shell.coll:not(.nohov) .sb:hover .nav .nvt.has-on,.shell.coll:not(.nohov) .sb:focus-within .nav .nvt.has-on{background:none}
+ .shell.coll:not(.nohov) .sb:hover .nav .nvt.l2,.shell.coll:not(.nohov) .sb:focus-within .nav .nvt.l2,.shell.coll:not(.nohov) .sb:hover .nav a.l2,.shell.coll:not(.nohov) .sb:focus-within .nav a.l2{padding-left:40px}
+ .shell.coll:not(.nohov) .sb:hover .nav a.l3,.shell.coll:not(.nohov) .sb:focus-within .nav a.l3{padding-left:56px}
+}
+@media(max-width:640px){
+ .shell.mnav .sb .ngt{display:block}
+ .shell.mnav .sb .ng+.ng{margin-top:12px;padding-top:0;border-top:0}
+ .shell.mnav .sb .nvk:not([hidden]){display:flex}.shell.mnav .sb .nvc{display:inline-flex}
+ .shell.mnav .sb .nav .nvt{justify-content:flex-start;padding:0 8px;height:44px}
+ .shell.mnav .sb .nav .nvt.l2,.shell.mnav .sb .nav a.l2{padding-left:40px;height:44px}
+ .shell.mnav .sb .nav a.l3{padding-left:56px;height:44px}
+}
+.anv-nav{z-index:5}
+/* permission matrix */
+.pmc{text-align:center;width:96px}.pmy{display:inline-flex;color:var(--color-foreground-success-default)}
+/* DS: SideNav demo */
+.dsnavw{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.dsnavw .nav{width:232px;max-width:100%;padding:8px;border:1px solid var(--color-border-neutral-subtle);border-radius:var(--r-card);background:var(--color-surface-neutral-primary);overflow:visible}
+.dsnavw .coll .nav{width:64px}

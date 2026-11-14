@@ -1,0 +1,4 @@
+/* ===== buttons, menu, alert ===== */
+.btn.b-link{padding-left:0!important;padding-right:0!important}
+.shell:not(.coll) .sb .bm{display:none}
+.pop .btn{gap:12px}

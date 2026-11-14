@@ -1,0 +1,6 @@
+/* ===== sidebar edge toggle (EdgeToggle): round collapse / expand button on the right edge of the sidebar ===== */
+.edge{position:absolute;top:24px;right:-12px;width:24px;height:24px;border-radius:999px;border:1px solid var(--color-border-neutral-default);background:var(--color-surface-neutral-primary);color:var(--color-text-secondary);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;z-index:5}
+.edge .ic{font-size:16px}
+.edge:hover{background:var(--color-surface-neutral-secondary);color:var(--color-text-primary)}
+.edge:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:1px}
+.dsedge{position:relative;display:flex;align-items:center;gap:32px;padding-right:12px}.dsedge .edge{position:static}

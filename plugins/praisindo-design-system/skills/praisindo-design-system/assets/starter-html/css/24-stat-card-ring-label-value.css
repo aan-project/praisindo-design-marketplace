@@ -1,0 +1,14 @@
+/* ===== Stat card: ring + label + value ===== */
+.stat{flex-direction:row;align-items:center;gap:16px;padding:16px 16px}
+.stat .sring{order:2;margin-left:auto;--ring-sz:44px;--ring-th:4px;position:relative;flex:none;width:var(--ring-sz);height:var(--ring-sz);border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--int-def) calc(var(--seg-from) * 1%),var(--color-surface-neutral-secondary) 0)}
+.stat .sring::before{content:'';position:absolute;inset:var(--ring-th);border-radius:50%;background:var(--color-surface-neutral-primary)}
+.stat[aria-pressed=true] .sring::before{background:var(--int-sub)}
+.stat .sring .fw6{position:relative;font-size:var(--fs-xs);font-weight:calc(500 + var(--fw-shift,0));line-height:12px;color:var(--color-text-primary)}
+.stat .sring small{font-size:8px;font-weight:calc(500 + var(--fw-shift,0));margin-left:1px;vertical-align:top}
+.stat .nv{flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.stat .nv .l{max-width:100%}
+.stat.s-sm{padding:12px 12px;gap:12px}.stat.s-sm .sring{--ring-sz:40px;--ring-th:4px}.stat.s-sm .sring .fw6{font-size:var(--fs-xs)}
+.stat.s-lg{padding:16px;gap:16px}.stat.s-lg .sring{--ring-sz:52px;--ring-th:4px}.stat.s-lg .sring .fw6{font-size:var(--fs-xs)}
+.rpsum{display:flex;align-items:center;gap:12px}
+.rpic{width:40px;height:40px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}
+.rpsum .m{display:flex;flex-direction:column;gap:4px;min-width:0}.rpsum .fw6{font-size:24px;line-height:32px;font-weight:calc(500 + var(--fw-shift,0))}

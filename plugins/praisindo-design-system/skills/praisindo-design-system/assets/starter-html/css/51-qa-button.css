@@ -1,0 +1,2 @@
+/* ===== QA button ===== */
+/* The prototype kept an empty `@media(max-width:820px){}` here (a QA control beside an open drawer); removed in 1.83 (rule PR-01b closed). */
