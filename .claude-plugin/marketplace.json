@@ -1,5 +1,5 @@
 {
-  "name": "praisindo-marketplace",
+  "name": "ds-praisindo-marketplace",
   "owner": { "name": "Praisindo" },
   "metadata": { "description": "Praisindo skills for Claude Code", "version": "2.88" },
   "plugins": [
