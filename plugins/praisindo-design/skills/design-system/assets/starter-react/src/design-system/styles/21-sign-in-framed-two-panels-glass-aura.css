@@ -19,7 +19,7 @@
 .lga-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:color-mix(in srgb,var(--color-surface-neutral-primary) 18%,transparent);border:1px solid color-mix(in srgb,var(--color-surface-neutral-primary) 30%,transparent);backdrop-filter:blur(10px);font-size:var(--fs-sm)}
 .lga-pill .ic{font-size:16px}
 /* LG-04b (1.81): in light mode the glass surfaces (white on the dark gradient) lighten the pixels behind the white text; a thinner glass keeps it 4.5:1 */
-:root:not([data-theme="dark"]) .lga-pill{background:color-mix(in srgb,var(--color-surface-neutral-primary) 6%,transparent)}
+:root:not([data-theme="dark"]) .lga-pill{background:color-mix(in srgb,var(--color-surface-brand-strong-2) 45%,transparent)}
 :root:not([data-theme="dark"]) .lga{--sign-glow:6%}
 .lga h2{margin:0;font-size:48px;line-height:56px;font-weight:calc(600 + var(--fw-shift,0));letter-spacing:-.01em;max-width:520px}
 .lga-mid p{margin:0;font-size:var(--fs-md);opacity:.9}

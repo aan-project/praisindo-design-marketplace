@@ -1,8 +1,8 @@
 # Praisindo design
 
-Membuat setiap tampilan web yang Anda minta ke Claude mengikuti Praisindo Design System.
+Membuat setiap tampilan web yang Anda minta ke Claude mengikuti Praisindo Design System, sehingga semua proyek konsisten dan Anda tidak perlu memikirkan detail UI/UX.
 
-Versi terbaru: **<!-- version -->2.113.0<!-- /version -->** (<!-- date -->2026-11-15<!-- /date -->)
+Versi terbaru: **<!-- version -->2.114.0<!-- /version -->** (<!-- date -->2026-11-15<!-- /date -->)
 
 ## Pasang (sekali)
 Yang dibutuhkan: aplikasi **Claude desktop** (Mac atau Windows). Tidak ada berkas yang perlu diunduh.
@@ -22,6 +22,15 @@ Minta pekerjaan tampilan seperti biasa, misalnya "buatkan halaman daftar pelangg
 
 ## Perbarui
 **Settings** → **Capabilities** → **Your plugins** → **Praisindo design**. Bila tombol **Update** aktif, klik, lalu buka sesi baru.
+
+## Proyek yang sudah dibuat
+Update hanya mengubah plugin, **tidak mengubah proyek yang sudah ada**. Tampilan lama tetap seperti saat dibuat, jadi aman. Untuk membawa proyek lama ke desain terbaru:
+1. Simpan pekerjaan Anda dulu (commit), supaya mudah dibatalkan.
+2. Buka proyek itu di sesi baru, lalu minta:
+   > Perbarui proyek ini ke versi terbaru skill design-system. Cek dulu apa yang berbeda, lalu sesuaikan.
+3. Lihat hasilnya di browser sebelum dipakai.
+
+Proyek baru selalu memakai versi terbaru, jadi tidak perlu langkah ini.
 
 ## Kendala
 - Skill tidak muncul: buka sesi baru.
