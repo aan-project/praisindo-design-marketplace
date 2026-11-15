@@ -1,15 +1,15 @@
-# Skill design-system v2.107.0: cara pakai
+# Skill design-system v2.108.0: cara pakai
 
-Nama: plugin **Praisindo design** (`praisindo-design`), skill `design-system`, marketplace `praisindo-design-marketplace`. Panggil skill dengan `/design-system` atau `praisindo-design:design-system`; skill juga aktif sendiri untuk pekerjaan UI. Zip untuk claude.ai: `praisindo-design-v2.107.0.zip` (menggantikan semua zip lama: `praisindo-design-system-v2.88.zip`, v2.62, v2.31 dan sebelumnya).
+Nama: plugin **Praisindo design** (`praisindo-design`), skill `design-system`, marketplace `praisindo-design-marketplace`. Panggil skill dengan `/design-system` atau `praisindo-design:design-system`; skill juga aktif sendiri untuk pekerjaan UI. Zip untuk claude.ai: `praisindo-design-v2.108.0.zip` (menggantikan semua zip lama: `praisindo-design-system-v2.88.zip`, v2.62, v2.31 dan sebelumnya).
 
-Versi tiga bagian `MAJOR.MINOR.PATCH` (aturan VN-01): `MAJOR.MINOR` = nomor Praisindo DS yang disinkronkan dengan skill (2.107.0 berarti DS 2.107, 15 Nov 2026); `PATCH` = perbaikan skill saja (DS tidak berubah) dan kembali ke 0 saat DS naik; `MAJOR` naik hanya bila proyek yang memakai skill harus dikerjakan ulang (keputusan owner).
+Versi tiga bagian `MAJOR.MINOR.PATCH` (aturan VN-01): `MAJOR.MINOR` = nomor Praisindo DS yang disinkronkan dengan skill (2.108.0 berarti DS 2.107, 15 Nov 2026); `PATCH` = perbaikan skill saja (DS tidak berubah) dan kembali ke 0 saat DS naik; `MAJOR` naik hanya bila proyek yang memakai skill harus dikerjakan ulang (keputusan owner).
 
 ## Memasang
 - **Claude Code (marketplace, disarankan):** `/plugin marketplace add aan-project/praisindo-design-marketplace`, lalu `/plugin install praisindo-design@praisindo-design-marketplace` (atau di aplikasi: "Install for me"). Pembaruan datang lewat versi di `plugin.json`.
 - **Claude Code (manual):** ekstrak zip, lalu taruh folder `design-system` di `~/.claude/skills/` (untuk semua proyek) atau di `.claude/skills/` di root proyek (untuk satu proyek). Hapus dulu folder versi lama (`praisindo-design-system`) supaya tidak ada dua versi.
 - **Claude.ai:** unggah zip di pengaturan Skills, lalu nonaktifkan atau hapus versi lama.
 
-Cek versinya di README atau komentar pertama proyek: harus tertulis v2.107.0.
+Cek versinya di README atau komentar pertama proyek: harus tertulis v2.108.0.
 
 ## Memasang di aplikasi yang sudah berjalan (migrasi ke Praisindo DS)
 Panduan migrasi sudah ada di dalam skill (`references/migrate.md`). Anda tidak perlu menempel prompt terpisah.
@@ -88,7 +88,7 @@ Untuk setiap halaman sesuai urutan di rencana (satu halaman = satu atau beberapa
 1. Lepas sisa gaya dan pustaka UI lama yang sudah tidak dipakai (periksa pemakaian dulu; bila ragu, jangan hapus, laporkan).
 2. Jalankan audit penuh: Blockers 0 dan Fixes 0 adalah target; sisa Cleanup dan alasannya dilaporkan.
 3. Daftar periksa akhir dari `SKILL.md`: tanpa literal warna/ukuran/radius/jarak, tanpa px di luar kelipatan 4, shell + Design System + Branding bekerja, log komponen baru terisi, terang/gelap dan EN/ID dicek, ponsel 390px tanpa scroll samping, state kosong/memuat/galat ada, fokus terlihat, tanpa Alert awal.
-4. Tulis versi skill (v2.107.0) di README project atau komentar pertama.
+4. Tulis versi skill (v2.108.0) di README project atau komentar pertama.
 5. Laporan akhir: ringkasan per tahap, daftar halaman dan statusnya, hasil build/tes/audit dibanding baseline, daftar komponen baru yang diusulkan, daftar hal yang tidak dimigrasi dan alasannya, pertanyaan tersisa, nama tangkapan layar yang Anda buka. Jangan push dan jangan buka PR; tunggu perintah saya.
 
 ## Larangan
@@ -107,10 +107,11 @@ Jangan mengubah logika bisnis, API, data, atau perizinan. Jangan menghapus tes a
 - `scripts/audit.mjs` dan `scripts/contrast.mjs`: audit aturan dan cek kontras, tanpa dependensi. `scripts/audit-selftest.mjs`: uji audit pada `scripts/fixtures/violations/`. `scripts/rules-coverage.mjs`: memastikan setiap aturan umum ada di `references/`. `scripts/compare-ds.mjs`: membandingkan starter dengan app DS yang berjalan (CSS persis sama, kerangka DOM sidebar, Branding, drawer Preferences, halaman Design); `scripts/serve-nocache.mjs`: server statis tanpa cache untuk starter HTML.
 
 ## Yang baru
+- **2.108.0** (sinkronisasi dengan DS 2.108.0): daftar Select dengan `pre`/`suf` hanya menampilkan nilai (`5`, `10`, `25`; FM-16, TB-28); BT-09 (warna disabled) dan MO-09 (nilai hover) menjadi aturan (321 aturan umum). Starter: `Controls.tsx` dan `select.js` disesuaikan.
 - **2.107.0** (sinkronisasi dengan DS 2.107.0, melewati 2.89 sampai 2.106):
   - **Nama dan versi baru:** plugin `praisindo-design`, skill `design-system`, marketplace `praisindo-design-marketplace`; versi tiga bagian (VN-01).
   - **Aturan baru di skill (15):** BT-08 (disabled setiap tipe tombol), MO-08 (hover tombol Fluid), FM-16 (Select `pre` dan `suf`), UP-01 sampai UP-04 (file upload: ring progres, status, baris dan validasi ukuran, tipe, satu file), CD-24 (label link Tooltip putih), TS-01 (toast dark pill), WG-03 dan HT-01 (HighlightText), SG-11 (hasil validasi memakai Alert compact), DL-04 (`.dl-grid` tanpa padding sendiri), TB-27 (Pagination), DG-01 (grup menu Komponen rakitan). 318 aturan umum.
-  - **Starter:** CSS identik dengan DS (10 berkas berubah, `70-highlight-text.css` baru); komponen `Alert` (prop `role`), `Badge` (tooltip default), `Controls` (Select `pre`/`suf`, `FileUpload`), `Drawer` (XL), `Pagination` (`pgItems`), `HighlightText`; di starter HTML helper `highlightText`, `select` dengan `pre`/`suf`, modul baru `js/upload.js` (`initUploads`) dan tooltip badge default; halaman Design di kedua starter (53 halaman, grup Komponen rakitan, halaman Highlight text, contoh status file, toast, pagination); changelog starter 2.89.0 sampai 2.107.0.
+  - **Starter:** CSS identik dengan DS (10 berkas berubah, `70-highlight-text.css` baru); komponen `Alert` (prop `role`), `Badge` (tooltip default), `Controls` (Select `pre`/`suf`, `FileUpload`), `Drawer` (XL), `Pagination` (`pgItems`), `HighlightText`; di starter HTML helper `highlightText`, `select` dengan `pre`/`suf`, modul baru `js/upload.js` (`initUploads`) dan tooltip badge default; halaman Design di kedua starter (53 halaman, grup Komponen rakitan, halaman Highlight text, contoh status file, toast, pagination); changelog starter 2.89.0 sampai 2.108.0.
 - **2.88** (sinkronisasi dengan DS 2.88, melewati 2.87):
   - **Aturan baru di skill:** SB-35 (contoh sidebar di halaman Design dibuat seperti sidebar asli), DL-01 sampai DL-03 (komponen `DetailList`: layout `grid`, `rows`, `auto`; `.c3fl`, `.c3f`, `.dr-g`, `.dr.dr-s` menjadi `.dl-grid`, `.dl-item`, `.dl-rows`, `.dl-row`); DR-08 dan CD-22 memakai nama baru. DS-04, DS-13, DS-14 sudah digantikan DS-19 dan DS-22 (di triage menjadi X). `references/renames.json` memuat nama lama dan baru (alat migrasi mengubah kelas, dua kasus lain masuk daftar review).
   - **Starter:** CSS dan komponen `DetailList` identik dengan DS; halaman "Detail list" di kedua halaman Design; contoh sidebar dengan `midText` dan chip hitungan; helper `detailItem`, `detailList`, `watchDetailLists` di `js/ui.js` (starter HTML).

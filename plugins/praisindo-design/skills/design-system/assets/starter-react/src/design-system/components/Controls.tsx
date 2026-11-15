@@ -101,7 +101,7 @@ function ListSelect({ opts, val, size, aria, dis, onChange, id, label, req, err,
       <select className="sl-n" tabIndex={-1} aria-hidden="true" aria-label={label ?? aria} disabled={dis || undefined} value={cur} onChange={(e) => pick(e.target.value)}>
         {opts.map(([v, l]) => <option key={String(v)} value={v}>{deco(l, pre, suf)}</option>)}
       </select>
-      {open && trig.current ? <SelectList opts={pre || suf ? opts.map(([v, l]) => [v, deco(l, pre, suf)] as const) : opts} val={cur} size={size} anchor={trig.current} onPick={pick} onClose={close} /> : null}
+      {open && trig.current ? <SelectList opts={opts} val={cur} size={size} anchor={trig.current} onPick={pick} onClose={close} /> : null}
     </span>
   );
 }

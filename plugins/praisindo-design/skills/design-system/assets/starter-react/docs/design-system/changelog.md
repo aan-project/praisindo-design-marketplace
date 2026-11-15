@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.107.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.108.0). Add the project's updates above it, newest first.
 
+- **2.108.0** (2026-11-15) The list that opens under a Select with `pre` or `suf` shows only the value (`5`, `10`, `25`, no `/page`; FM-16, TB-28); the exact disabled colours (BT-09) and the exact values of the button hover (MO-09) are rules.
 - **2.107.0** (2026-11-15) The version has three parts, MAJOR.MINOR.PATCH (rule VN-01): MAJOR.MINOR is the number of the design system, PATCH is a fix of the skill only and goes back to 0 when the design system goes up, MAJOR goes up only when a project that uses the skill must be reworked (the owner decides). Every version of this log is written as X.Y.0.
 - **2.106.0** (2026-11-15) The file upload no longer repeats the reason under the field when a file is refused: the red row says it (UP-04).
 - **2.105.0** (2026-11-15) The file upload checks the files against its rules (UP-04): over the size, a type that is not in `accept` (extension, MIME or family) and, with `multiple` off, every file after the first; a refused file is a red row with the reason.

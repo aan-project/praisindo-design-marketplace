@@ -1,4 +1,4 @@
-# Buttons and segmented toggle (Praisindo DS v2.107.0, skill v2.107.0)
+# Buttons and segmented toggle (Praisindo DS v2.108.0, skill v2.108.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -88,4 +88,16 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 **Rule.** Hover of the buttons (the option Fluid): fill gets a light sweep and grows to 1.02; soft fills from below with the strong colour (the fill covers the border: `background-origin:border-box`); outlined inverts like soft (fills from below with the intent colour, the border takes that colour, the text turns `--int-on`); transparent wipes its tint in from the left; link shows nothing extra on hover (no chevron, no underline, only the colour change); every icon of a button grows to 1.2 with `--ease-spring`; a disabled button has no effect; the press stays scale .98 (MO-05); every rule is under the `data-motion` guard (MO-03). The effects use the background only: no change of the layout.
 **Meet.** Use the DS CSS (`67-motion.css`) as it is and `Button`; do not write another hover.
 **Check.** Hover each type on the Design page with motion on; with `data-motion="off"` nothing moves.
+**Guarded in Praisindo by** a unit test.
+
+### BT-09
+**Rule.** The exact disabled colours of BT-08 are: fill `--color-surface-neutral-tertiary`, soft `--color-surface-neutral-secondary`, outlined `--color-border-neutral-subtle` (background primary), transparent and link without background; the Select with `suf` has a divider (1px subtle) and 8px of space before its suffix, like the text field.
+**Meet.** Use the DS CSS (`02-button.css`, `45-form-kit.css`) as it is.
+**Check.** Compare the disabled buttons and a Select with a suffix with the Design page.
+**Guarded in Praisindo by** a unit test.
+
+### MO-09
+**Rule.** The exact values of the button hover (MO-08): the sweep of the fill uses `color-mix` of `--color-text-white` (30%) over `--dur-slow` (.32 s) and the press stays scale .98.
+**Meet.** Use the DS CSS (`67-motion.css`) as it is.
+**Check.** Hover and press a fill button with motion on.
 **Guarded in Praisindo by** a unit test.

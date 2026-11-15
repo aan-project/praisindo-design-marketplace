@@ -1,4 +1,4 @@
-# List pages: table, toolbar, pagination, board (Praisindo DS v2.107.0, skill v2.107.0)
+# List pages: table, toolbar, pagination, board (Praisindo DS v2.108.0, skill v2.108.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -216,4 +216,10 @@ The bulk layer sits INSIDE `.tb` (it covers the toolbar while rows are selected)
 **Rule.** The page buttons of the Pagination: only the arrows `chevron_left` and `chevron_right` (icons, no Previous or Next text and no first or last page icon buttons), the FIRST and the LAST page number are always shown, the current page with its two neighbours between them, an ellipsis where numbers are left out (a gap of one number shows that number, up to seven pages are all shown).
 **Meet.** Use `Pagination`; its window comes from `pgItems`.
 **Check.** With 20 pages: 1 … 9 10 11 … 20.
+**Guarded in Praisindo by** a unit test.
+
+### TB-28
+**Rule.** The rows per page options of the Pagination are 5, 10 and 25: the field reads `10 /page` (the `suf` of FM-16) but the list that opens under it shows only the numbers `5`, `10`, `25`; the current page keeps the DS soft brand style.
+**Meet.** Use `Pagination`; do not add text to the options of its list.
+**Check.** Open the rows per page list: only numbers.
 **Guarded in Praisindo by** a unit test.

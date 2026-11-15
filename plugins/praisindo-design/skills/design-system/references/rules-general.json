@@ -1,6 +1,6 @@
 {
- "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.107.0). Full text in references/rules-*.md.",
- "count": 318,
+ "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.108.0). Full text in references/rules-*.md.",
+ "count": 321,
  "ids": [
   "AV-02",
   "AV-03",
@@ -41,6 +41,7 @@
   "BT-05",
   "BT-06",
   "BT-08",
+  "BT-09",
   "CD-01",
   "CD-02",
   "CD-03",
@@ -204,6 +205,7 @@
   "MO-06",
   "MO-07",
   "MO-08",
+  "MO-09",
   "NT-01",
   "NT-02",
   "NT-06",
@@ -296,6 +298,7 @@
   "TB-25",
   "TB-26",
   "TB-27",
+  "TB-28",
   "TG-01",
   "TH-01",
   "TH-02",

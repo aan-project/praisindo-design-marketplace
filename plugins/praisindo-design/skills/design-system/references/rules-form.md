@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.107.0, skill v2.107.0)
+# Forms and fields (Praisindo DS v2.108.0, skill v2.108.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -180,7 +180,7 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Guarded in Praisindo by** a browser test.
 
 ### FM-16
-**Rule.** The `Select` has the variant with `pre` and `suf` (strings): a short text inside the field before and after the value, drawn like the `pre` and `suf` of the text field (`.sl-t .pre` and `.sl-t .suf`, a divider on the inner side, text-secondary, weight 500, aria-hidden); the list, the hidden select and the touch select read each option with them (`10 /page`). The rows per page of the Pagination is this Select with the suffix `/page`.
+**Rule.** The `Select` has the variant with `pre` and `suf` (strings): a short text inside the field before and after the value, drawn like the `pre` and `suf` of the text field (`.sl-t .pre` and `.sl-t .suf`, a divider on the inner side, text-secondary, weight 500, aria-hidden); the hidden select and the touch select read each option with them (`10 /page`), but the list that opens under the field shows only the value (`5`, `10`, `25`). The rows per page of the Pagination is this Select with the suffix `/page`.
 **Meet.** Pass `suf` or `pre` to `Select`; never put the unit in the option text.
 **Check.** Open the list: each option reads with the suffix; the screen reader reads it whole.
 **Guarded in Praisindo by** a unit test.

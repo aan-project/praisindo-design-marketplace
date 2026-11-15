@@ -10,7 +10,7 @@ const FINE = '(hover: hover) and (pointer: fine)';
 export const finePointer = () => typeof matchMedia === 'function' && matchMedia(FINE).matches;
 
 /** Markup of a Select. `opts` is [[value, text], ...]. A `label` makes it a form field (label above, aria-required, aria-invalid); without it it is the bare control of a toolbar. */
-const deco = (l, pre, suf) => [pre, l, suf].filter(Boolean).join(' ');   // the list, the native select and the screen reader read an option with its pre and suf
+const deco = (l, pre, suf) => [pre, l, suf].filter(Boolean).join(' ');   // the native select and the screen reader read an option with its pre and suf; the list under the field shows only the value (FM-16)
 export function select({ id = '', label = '', opts = [], val, size = 'md', aria = '', req = false, err = '', help = '', hint = '', dis = false, search = '', none = '', pre = '', suf = '' }) {
   const cur = val === undefined ? (opts[0]?.[0] ?? '') : val, shown = opts.find(([v]) => String(v) === String(cur)) ?? opts[0] ?? ['', ''];
   const name = label || aria, d = id && (err || help) ? ` aria-describedby="${id}-d"` : '';
@@ -21,12 +21,22 @@ export function select({ id = '', label = '', opts = [], val, size = 'md', aria 
   return `<div class="fld"><label${id ? ` for="${esc(id)}"` : ''}>${esc(label)}${req ? '<span class="req" aria-hidden="true">*</span>' : ''}</label>${ctl}${err ? `<span class="err" id="${id}-d" role="alert">${esc(err)}</span>` : help || hint ? `<span class="mut" id="${id}-d">${esc(help || hint)}</span>` : ''}</div>`;
 }
 
+/** The text of an option without the `pre` and `suf` of its field: the field shows them beside the value and the list under it shows only the value (rule FM-16). */
+function optText(w, o) {
+  if (!o) return '';
+  if (o.dataset.l !== undefined) return o.dataset.l;
+  const pre = w.querySelector('.pre')?.textContent ?? '', suf = w.querySelector('.suf')?.textContent ?? '';
+  let tx = o.textContent ?? '';
+  if (pre && tx.startsWith(pre + ' ')) tx = tx.slice(pre.length + 1);
+  if (suf && tx.endsWith(' ' + suf)) tx = tx.slice(0, -(suf.length + 1));
+  return tx;
+}
+
 /** Shows the value of the native select in its field (after a script changed it). */
 export function syncSelects(root = document) {
   root.querySelectorAll('.selw.sl').forEach((w) => {
     const n = w.querySelector('.sl-n'), v = w.querySelector('.sl-v'); if (!n || !v) return;
-    const o = n.selectedOptions[0], pre = w.querySelector('.pre')?.textContent ?? '', suf = w.querySelector('.suf')?.textContent ?? '', tx = o?.textContent ?? '';
-    v.textContent = o?.dataset.l ?? (pre && tx.startsWith(pre + ' ') ? tx.slice(pre.length + 1) : tx).replace(suf ? new RegExp(' ' + suf.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') : /$^/, '');   // the field shows the value without its pre and suf (they are drawn beside it)
+    v.textContent = optText(w, n.selectedOptions[0]);
   });
 }
 
@@ -49,7 +59,7 @@ function pick(wrap, v) {
 function openList(wrap) {
   const trig = wrap.querySelector('.sl-t'), n = wrap.querySelector('.sl-n'); if (!trig || trig.disabled) return;
   closeList(false);
-  const opts = [...n.options].map((o) => [o.value, o.textContent]), cur = n.value, size = (trig.className.match(/\bs-(sm|md|lg)\b/) ?? [, 'md'])[1], searchable = opts.length > 5;
+  const opts = [...n.options].map((o) => [o.value, optText(wrap, o)]), cur = n.value, size = (trig.className.match(/\bs-(sm|md|lg)\b/) ?? [, 'md'])[1], searchable = opts.length > 5;
   const pop = document.createElement('div'); pop.className = `slp s-${size}`;
   pop.innerHTML = (searchable ? `<div class="slp-q"><div class="fld"><div class="inp s-sm">${icon('search')}<input type="text" autocomplete="off" placeholder="${esc(txt(wrap, 'search'))}" aria-label="${esc(txt(wrap, 'search'))}"></div></div></div>` : '') + '<div class="slp-l" role="listbox"></div>';
   const list = pop.querySelector('.slp-l'), qin = pop.querySelector('input');

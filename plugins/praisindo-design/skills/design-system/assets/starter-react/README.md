@@ -1,4 +1,4 @@
-# starter-react (skill design-system v2.107.0)
+# starter-react (skill design-system v2.108.0)
 
 A complete, building Vite + React 18 + TypeScript app with the Praisindo shell, the full Design System page and the Branding page. Typechecks with `npm run typecheck`, builds with `npm run build`.
 
