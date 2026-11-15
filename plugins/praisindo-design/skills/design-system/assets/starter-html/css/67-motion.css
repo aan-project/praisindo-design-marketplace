@@ -1,0 +1,39 @@
+/* Motion layer (2.49, owner decision 2026-11-10; rules MO-04 to MO-07): small, quick and calm. Three durations and one easing; only opacity and transform (and the colour of a row); nothing runs longer than 0.4 s
+   except the two quiet loops (the pulse of the waiting step and the skeleton). Everything stands still under [data-motion="off"] (reduced motion, automation, MO-03). */
+:root{--dur-fast:.12s;--dur-base:.2s;--dur-slow:.32s;--ease-out:cubic-bezier(.2,.8,.2,1);--ease-spring:cubic-bezier(.34,1.56,.64,1)}   /* --ease-spring (2.94, MO-08): only the icons of the buttons */
+@keyframes mo-rise{from{opacity:0;transform:translateY(4px)}}
+@keyframes mo-slide{from{opacity:0;transform:translateY(8px)}}
+@keyframes mo-fade{from{opacity:0}}
+@keyframes mo-new{from{background-color:var(--color-surface-brand-subtle-1)}}
+@keyframes mo-pulse{0%{box-shadow:0 0 0 0 var(--color-border-warning-strong)}70%,100%{box-shadow:0 0 0 6px transparent}}
+@keyframes mo-grow{from{transform:scaleY(0)}}
+@keyframes mo-check{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.08)}100%{transform:scale(1)}}
+:root:not([data-motion="off"]) .btn{transition:transform var(--dur-fast) var(--ease-out),background-color var(--dur-fast),border-color var(--dur-fast),color var(--dur-fast),box-shadow var(--dur-fast),background-size var(--dur-slow) var(--ease-out),background-position var(--dur-slow) var(--ease-out)}
+/* Button hover (2.94, rule MO-08, owner decision 2026-11-14, the option "Fluid" of tmp/button-hover-mockup): each type has its own effect, made with the background only (no extra element, no change of layout), and every icon grows. */
+:root:not([data-motion="off"]) .b-fill:not(:disabled){background-image:linear-gradient(100deg,transparent 35%,color-mix(in srgb,var(--color-text-white) 30%,transparent) 50%,transparent 65%);background-repeat:no-repeat;background-size:300% 100%;background-position:130% 0}
+:root:not([data-motion="off"]) .b-fill:not(:disabled):hover{transform:scale(1.02);background-position:-30% 0}
+:root:not([data-motion="off"]) .b-soft:not(:disabled){background-image:linear-gradient(var(--int-def),var(--int-def));background-repeat:no-repeat;background-position:bottom;background-size:100% 0%;background-origin:border-box}
+:root:not([data-motion="off"]) .b-soft:not(:disabled):hover{background-size:100% 100%;color:var(--int-on);border-color:transparent}
+:root:not([data-motion="off"]) .b-outlined:not(:disabled){background-image:linear-gradient(var(--int-def),var(--int-def));background-repeat:no-repeat;background-position:bottom;background-size:100% 0%;background-origin:border-box}
+:root:not([data-motion="off"]) .b-outlined:not(:disabled):hover{background-size:100% 100%;border-color:var(--int-def);color:var(--int-on)}
+:root:not([data-motion="off"]) .b-transparent:not(:disabled){background-image:linear-gradient(var(--int-sub),var(--int-sub));background-repeat:no-repeat;background-position:left;background-size:0% 100%}
+:root:not([data-motion="off"]) .b-transparent:not(:disabled):hover{background-color:transparent;background-size:100% 100%}
+:root:not([data-motion="off"]) .btn .ic{transition:transform var(--dur-slow) var(--ease-spring)}
+:root:not([data-motion="off"]) .btn:not(:disabled):hover .ic{transform:scale(1.2)}
+:root:not([data-motion="off"]) .btn:active:not(:disabled){transform:scale(.98)}
+:root:not([data-motion="off"]) .tw tbody tr>td,:root:not([data-motion="off"]) .chp{transition:background-color var(--dur-fast),border-color var(--dur-fast),color var(--dur-fast)}
+:root:not([data-motion="off"]) .fpop,:root:not([data-motion="off"]) .pop{animation:mo-rise var(--dur-base) var(--ease-out)}
+:root:not([data-motion="off"]) .scrim,:root:not([data-motion="off"]) .mdl.fx{animation:mo-fade var(--dur-base) ease-out}
+:root:not([data-motion="off"]) .toast{animation:mo-slide var(--dur-base) var(--ease-out)}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(-n+8){animation:mo-fade var(--dur-base) var(--ease-out) backwards}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(2){animation-delay:20ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(3){animation-delay:40ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(4){animation-delay:60ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(5){animation-delay:80ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(6){animation-delay:100ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(7){animation-delay:120ms}
+:root:not([data-motion="off"]) .tw tbody tr:nth-child(8){animation-delay:140ms}
+:root:not([data-motion="off"]) .tw tr.mo-new>td{animation:mo-new 1.2s ease-out}
+:root:not([data-motion="off"]) .wz-vertical .wz-s.done .wz-ln{transform-origin:top;animation:mo-grow var(--dur-slow) var(--ease-out) backwards}
+:root:not([data-motion="off"]) .wz-vertical .wz-s.cur .wz-n{animation:mo-pulse 2s ease-out infinite}
+:root:not([data-motion="off"]) .state.ok>.ic:first-child{animation:mo-check var(--dur-slow) var(--ease-out) backwards}

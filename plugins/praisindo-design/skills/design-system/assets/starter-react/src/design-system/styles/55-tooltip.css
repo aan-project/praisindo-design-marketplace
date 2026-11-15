@@ -1,0 +1,35 @@
+/* ===== Tooltip: dark bubble with a tail, left-aligned text (docs/DESIGN_SYSTEM.md, component Tooltip) ===== */
+.tt-wrap{position:relative;display:inline-flex;vertical-align:middle}
+.tt-trigger{display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:999px;background:none;color:var(--color-text-tertiary);cursor:help}
+.tt-trigger .ic{font-size:16px;width:16px;height:16px;overflow:hidden;flex:none}
+.tt-trigger{flex:none;max-width:24px}
+.tt-trigger:hover,.tt-trigger[aria-expanded=true]{color:var(--color-foreground-brand-default)}
+.tt{--tt-bg:var(--color-text-black);position:fixed;z-index:100;box-sizing:border-box;width:max-content;max-width:280px;padding:12px;border:1px solid transparent;border-radius:8px;background:var(--tt-bg);color:var(--color-text-white);font-size:var(--fs-sm);font-weight:calc(400 + var(--fw-shift,0));line-height:var(--lh-sm);text-align:left;white-space:normal;visibility:hidden;opacity:0;transition:opacity .12s ease}
+.tt[data-open]{visibility:visible;opacity:1}
+.tt-np{pointer-events:none}   /* the bubble of a Badge (BD-13) has no link: it never catches the pointer, so it cannot cover what is under it */
+:root[data-theme=dark] .tt{border-color:var(--color-border-neutral-strong)}
+.tt-t{margin-bottom:4px;font-weight:calc(500 + var(--fw-shift,0))}
+.tt-d{margin:0}
+.tt-link{display:flex;align-items:center;justify-content:center;gap:4px;box-sizing:border-box;width:100%;margin-top:8px;padding:8px 12px;border:0;border-radius:8px;background:color-mix(in srgb,var(--color-text-white) 14%,transparent);color:var(--color-text-white);font:inherit;font-size:var(--fs-sm);text-align:center;text-decoration:none;cursor:pointer}
+.tt-link:hover{background:color-mix(in srgb,var(--color-text-white) 24%,transparent)}
+.tt-link:focus-visible{outline:2px solid var(--color-text-white);outline-offset:2px}
+.tt-link .ic{font-size:14px}
+.tt a.tt-link,.tt a.tt-link:hover{color:var(--color-text-white)}   /* CD-24 (2.101): the label of the action stays white on the dark bubble, even when the bubble sits inside a table (`.tw a:not(.btn)` made it dark on dark) */
+/* the tail: a CSS triangle in the surface colour, aimed at the trigger (--tt-arrow is set by the placement) */
+.tt::after{content:'';position:absolute;width:0;height:0;border:6px solid transparent}
+.tt-top::after{top:100%;left:var(--tt-arrow);transform:translateX(-50%);border-top-color:var(--tt-bg)}
+.tt-bottom::after{bottom:100%;left:var(--tt-arrow);transform:translateX(-50%);border-bottom-color:var(--tt-bg)}
+.tt-left::after{left:100%;top:var(--tt-arrow);transform:translateY(-50%);border-left-color:var(--tt-bg)}
+.tt-right::after{right:100%;top:var(--tt-arrow);transform:translateY(-50%);border-right-color:var(--tt-bg)}
+@media(prefers-reduced-motion:reduce){.tt{transition:none}}
+/* pinned (documentation previews): placed by CSS next to the trigger instead of by the viewport placement */
+.tt-pin{position:absolute;--tt-arrow:50%}
+.tt-pin.tt-top{bottom:calc(100% + 8px);left:50%;top:auto;transform:translateX(-50%)}
+.tt-pin.tt-bottom{top:calc(100% + 8px);left:50%;transform:translateX(-50%)}
+.tt-pin.tt-left{right:calc(100% + 8px);left:auto;top:50%;transform:translateY(-50%)}
+.tt-pin.tt-right{left:calc(100% + 8px);top:50%;transform:translateY(-50%)}
+/* documentation previews */
+.dsttp{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px;align-items:start;padding:8px 0}
+/* previews: one per column, the bubble sits in the flow under its trigger (no overlap), the tail points up at the icon */
+.dsttp .tt-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.dsttp .tt-pin{position:relative;inset:auto;transform:none;z-index:auto;--tt-arrow:8px}   /* z-index auto: a tooltip that is open on hover (z-index 100) is never painted under a preview */

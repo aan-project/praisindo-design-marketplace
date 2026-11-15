@@ -1,0 +1,6 @@
+/* HighlightText (DS 2.102, rule HT-01): a small text and a highlighted one, left or right aligned, either above the other, three sizes */
+.hlt{display:flex;flex-direction:column;gap:4px;min-width:0}.hlt-r{align-items:flex-end;text-align:right}.hlt-vf{flex-direction:column-reverse}
+.hlt-l{font-size:var(--fs-sm);line-height:var(--lh-sm);color:var(--color-text-secondary)}
+.hlt-v{font-size:var(--fs-h-md);font-weight:calc(700 + var(--fw-shift,0));line-height:var(--lh-h-md);color:var(--color-text-primary)}
+.hlt-sm .hlt-l{font-size:var(--fs-xs);line-height:var(--lh-xs)}.hlt-sm .hlt-v{font-size:var(--fs-lg);line-height:var(--lh-lg)}
+.hlt-lg .hlt-v{font-size:var(--fs-h-lg);line-height:var(--lh-h-lg)}

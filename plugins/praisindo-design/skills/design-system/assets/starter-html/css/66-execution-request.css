@@ -1,0 +1,16 @@
+/* The card of an execution request (2.59, compact layout, owner decision 2026-11-10): the steps across the top, then the product with its order type and amount, the rows in two columns, the note and the actions in one row. Built from Card (flush), StepNav (status), ProductLogo and DR split. */
+.xrt{padding:24px 16px 16px;min-width:0}
+.xrt .wz-status .wz-s.cur .wz-n{border-color:var(--color-border-warning-strong)}.xrt .wz-status .wz-s.cur .wz-n i{background:var(--color-surface-warning-default)}.xrt .wz-status .wz-s.cur .wz-l{color:var(--color-foreground-warning-strong)}   /* the waiting step is warning, as in the vertical steps */
+.xrt .wz-status .wz-st{color:var(--color-text-secondary)}
+.xrx{display:flex;flex-direction:column;gap:16px;padding:0 16px 16px}
+.xrh{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border-top:1px solid var(--color-border-neutral-default)}
+.xrp{display:flex;align-items:center;gap:16px;min-width:0}
+.xrp>div{display:flex;flex-direction:column;min-width:0}
+.xrp .fw6{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xrp .mut{font-size:var(--fs-sm)}
+.xrq{display:flex;align-items:flex-end;gap:32px;flex:none}
+.xrd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;column-gap:32px;padding:0 16px;margin-bottom:-1px;border-top:1px solid var(--color-border-neutral-default)}   /* the last row's line sits under the footer's line, so there is one line */
+.xrf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;border-top:1px solid var(--color-border-neutral-default)}
+.xrn{display:flex;align-items:center;gap:8px;margin:0;font-size:var(--fs-sm);line-height:var(--lh-sm)}
+.xrn .ic{color:var(--color-foreground-info-strong)}
+@media(max-width:640px){.xrt .wz ol{overflow-x:auto}.xrt .wz-s{min-width:160px}.xrh{flex-direction:column;align-items:flex-start}.xrq{width:100%;justify-content:space-between}.xrq .hlt-r{align-items:flex-start;text-align:left}.xrd{grid-template-columns:minmax(0,1fr);grid-auto-flow:row;grid-template-rows:none!important}}

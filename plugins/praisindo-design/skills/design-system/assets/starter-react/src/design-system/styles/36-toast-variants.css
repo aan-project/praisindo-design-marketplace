@@ -1,0 +1,4 @@
+/* ===== toast variants ===== */
+.toast.t-danger::before{background:var(--color-surface-danger-default)}
+.toast.t-warning::before{background:var(--color-surface-warning-default)}
+.toast.t-info::before{background:var(--color-surface-info-default)}
