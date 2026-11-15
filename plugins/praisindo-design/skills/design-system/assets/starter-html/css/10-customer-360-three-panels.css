@@ -17,12 +17,12 @@
 .c3q:hover:not(:disabled) .ci{border-color:var(--color-border-brand-strong);color:var(--color-foreground-brand-default)}
 .c3q:disabled{opacity:.45;cursor:not-allowed}
 .c3hint{margin:0;text-align:center;font-size:var(--fs-xs)}
-.c3lt .tabs{padding:0 12px;overflow:visible}.c3lt .tab{flex:1;justify-content:center}
+.c3lt .tabs{margin:0 16px;padding:0 12px;overflow:visible}.c3lt .tab{flex:1;justify-content:center}
 .dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}.cpanel>.dl-grid{padding:16px}   /* DetailList layout grid (rule DL-01): one column in a narrow panel, the pairs side by side in a wide one; the class has no padding of its own (DL-04), the entity panel pads its list */
 .dl-item{display:flex;flex-direction:column;gap:4px;min-width:0}.dl-item>span{font-size:var(--fs-xs);color:var(--color-text-tertiary)}.dl-item>.fw6{font-size:var(--fs-sm);color:var(--color-text-secondary);font-weight:calc(500 + var(--fw-shift,0));overflow-wrap:anywhere}.dl-item .pb{flex:1;max-width:140px;height:8px}
-.c3tabs .tabs,.tabs.t-seg,.drawer .tabs{background:var(--color-surface-neutral-secondary);border:0;border-radius:8px;padding:4px;gap:4px}
-.c3tabs .tab,.tabs.t-seg .tab,.drawer .tabs .tab{border:1px solid transparent;border-radius:6px;padding:0 12px}
-.c3tabs .tab[aria-selected=true],.tabs.t-seg .tab[aria-selected=true],.drawer .tabs .tab[aria-selected=true]{background:var(--color-surface-neutral-primary);border-color:var(--color-border-neutral-default)}
+.card:not(.dss) .tabs,.tabs.t-seg,.drawer .tabs{background:var(--color-surface-neutral-secondary);border:0;border-radius:8px;padding:4px;gap:4px}
+.card:not(.dss) .tabs .tab,.tabs.t-seg .tab,.drawer .tabs .tab{border:1px solid transparent;border-radius:6px;padding:0 12px}
+.card:not(.dss) .tabs .tab[aria-selected=true],.tabs.t-seg .tab[aria-selected=true],.drawer .tabs .tab[aria-selected=true]{background:var(--color-surface-neutral-primary);border-color:var(--color-border-neutral-default)}
 .c3s{display:flex;flex-direction:column;gap:16px;padding:16px;border-bottom:1px solid var(--color-border-neutral-subtle)}
 .c3sh{display:flex;align-items:center;gap:8px}.c3sh h3{margin:0;font-size:var(--fs-md);font-weight:calc(500 + var(--fw-shift,0))}.c3sh .btn{padding-left:0;padding-right:0}
 .c3aum{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.c3aum .fw6{font-size:28px;line-height:36px;font-weight:calc(500 + var(--fw-shift,0))}

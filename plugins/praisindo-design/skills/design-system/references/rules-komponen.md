@@ -237,3 +237,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Meet.** Use `Alert compact` with the intent of the level.
 **Check.** The Validation levels example on the Design page shows three compact Alerts.
 **Guarded in Praisindo by** a unit test.
+
+### TB-29
+**Rule.** The variant of the tabs follows where they sit, on every page: tabs OUTSIDE a card use the underline variant (the tab bar of a detail page, the tabs above the cards, the tabs of a list page whose card has no border or surface); tabs INSIDE a card use the segmented variant (a tab strip in a card or an entity panel, Key information); a drawer counts as a card, so its tabs are segmented. The context makes the variant (`.card .tabs`, `.drawer .tabs` in the DS CSS), so the markup does not change; the Design page example of the underline variant sits in the documentation card (`.dss`), which is not counted.
+**Meet.** Use `Tabs` with no `variant` and put it where it belongs; do not set `variant="seg"` by hand for a tab strip that sits inside a card or a drawer (it is segmented already), and do not make a detail page tab bar segmented.
+**Check.** Look at the tab bar of a detail page (underline) and at a tab strip inside a card (segmented).
+**Guarded in Praisindo by** a unit test.

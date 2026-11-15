@@ -201,10 +201,11 @@ export function TabsSection() {
   const [a, setA] = useState('1'), [b, setB] = useState('1');
   const rules = [
     B('Tabs inside a drawer always use the segmented variant (DrawerTabs). Any .tabs placed in a drawer is styled segmented automatically.', 'Tab di dalam drawer selalu memakai varian segmented (DrawerTabs). Setiap .tabs di dalam drawer otomatis bergaya segmented.'),
+    B('A drawer counts as a card (TB-29): tabs outside a card are underline, tabs inside a card are segmented. Any .tabs placed inside a .card (other than this documentation) is styled segmented automatically.', 'Drawer dihitung sebagai card (TB-29): tab di luar card underline, tab di dalam card segmented. Setiap .tabs di dalam .card (selain dokumentasi ini) otomatis bergaya segmented.'),
     B('A sticky bar inside a scrolling area must cover the area padding: offset it by the padding (top: -padding) and extend its background to both edges, so no content leaks through a gap.', 'Bar sticky di dalam area scroll harus menutup padding area itu: geser sebesar padding (top: -padding) dan lebarkan latarnya ke kedua sisi, agar tidak ada konten yang bocor lewat celah.'),
   ];
   return (
-    <DsSec id="tabs" title={B('Tabs', 'Tab')} lead={B('Underline tabs switch views of the same object; counts sit in a small pill. Detail pages and every drawer use the segmented variant.', 'Tab bergaris bawah mengganti tampilan objek yang sama; jumlah ada di pill kecil. Halaman detail dan setiap drawer memakai varian segmented.')}>
+    <DsSec id="tabs" title={B('Tabs', 'Tab')} lead={B('Tabs switch views of the same object; counts sit in a small pill. Tabs outside a card, such as the tab bar of a detail page, use the underline variant; tabs inside a card and in a drawer use the segmented variant (rule TB-29).', 'Tab mengganti tampilan objek yang sama; jumlah ada di pill kecil. Tab di luar card, seperti bar tab halaman detail, memakai varian underline; tab di dalam card dan di drawer memakai varian segmented (aturan TB-29).')}>
       <DsDemo label={B('Underline', 'Garis bawah') + ' · Tabs'}><Tabs items={[['1', t('fnd.t1'), 4], ['2', t('fnd.t2')], ['3', t('fnd.t3'), 12]]} active={a} onChange={setA} /></DsDemo>
       <DsDemo label={B('Segmented', 'Segmented') + ' · Tabs variant=seg'}><div style={sty('width:100%')}><Tabs items={[['1', t('fnd.t1')], ['2', t('fnd.t2'), 2], ['3', t('fnd.t3')]]} active={b} variant="seg" onChange={setB} /></div></DsDemo>
       <DsApi rows={[

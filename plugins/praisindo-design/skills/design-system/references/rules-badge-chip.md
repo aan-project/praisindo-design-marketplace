@@ -1,4 +1,4 @@
-# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.109.0, skill v2.109.0)
+# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.110.0, skill v2.110.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -163,3 +163,9 @@ A badge is never clickable. A pill made with CSS is never allowed. A new domain 
 **Meet.** Do not set the colour of a Chip by hand: the `Chip` component draws subtle-4 text, and brand strong when selected.
 **Check.** Look at a Chip that is not selected: subtle-4 text.
 **Guarded in Praisindo by** a unit test.
+
+### BD-15
+**Rule.** The label and the icon of a badge always have the colour and the size of the badge itself, and the badge has its intent colour (`--int-fg`): no rule of the surroundings (a list, a card, a table, the documentation) may recolour or resize them. A descendant rule such as `.list span{color:...}` must name the texts it means (`.list>li>span`) and never reach a badge or its tooltip wrapper `.tt-wrap`.
+**Meet.** Use `Badge` and write the CSS of a container with child selectors that name the texts; never `.container span`.
+**Check.** Compare the label and the icon of every badge with the badge (computed colour and font size) in the browser, on every page.
+**Guarded in Praisindo by** a browser audit of every badge of every route.

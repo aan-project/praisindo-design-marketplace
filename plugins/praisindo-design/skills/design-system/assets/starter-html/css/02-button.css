@@ -9,7 +9,7 @@
 .b-fill:hover{background:var(--int-hov)}.b-fill:active{background:var(--int-prs)}
 .b-soft{background:var(--int-sub);color:var(--int-fg)}.b-soft:hover{border-color:var(--int-bd)}
 .b-outlined{background:var(--color-surface-neutral-primary);border-color:var(--color-border-neutral-default);color:var(--color-text-secondary)}
-.b-outlined:hover{background:var(--color-surface-neutral-secondary)}
+.b-outlined:hover{background:var(--int-sub)}
 .b-transparent{color:var(--int-fg)}.b-transparent:hover{background:var(--int-sub)}
 .b-link{color:var(--int-fg);height:auto!important;padding:0}.b-link:hover{text-decoration:none;color:var(--int-prs)}
 .i-neutral.b-link:hover{color:var(--color-text-primary)}
