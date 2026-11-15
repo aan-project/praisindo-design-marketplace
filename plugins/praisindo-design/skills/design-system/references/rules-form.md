@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.110.0, skill v2.110.0)
+# Forms and fields (Praisindo DS v2.111.0, skill v2.111.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -214,3 +214,9 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Meet.** Use `<Select label req opts>` for such a field; use `SegmentedControl` for a view, a period, Match all / any or a Preferences setting.
 **Check.** The audit flags a `SegmentedControl` with a `label` (and a `.fld` with a `.sgc`) as FM-17; an exception needs `/* ds-allow: <reason> */` and the design of the page asking for it.
 **Guarded in Praisindo by** a unit test and the audit.
+
+### FM-18
+**Rule.** The colour field is the variant `<Input format="color">` of the text field (not a component of its own): it accepts a hex colour with or without the pound sign and adds the pound by itself (`007bff` and `#007bff` both give `#007bff`), drops everything that is not a hex digit and keeps at most six digits; the swatch of the colour (`.csw`) sits at the end of the field and shows a valid colour only; `onChange` gets the value with the pound; a value from outside is shown as it comes; validity and the error text belong to the page.
+**Meet.** Use `<Input format="color" label req val onChange err>` for every colour of a form (the starter HTML: `.inp > input` followed by `.csw` and `initColorFields()`); never draw a swatch by hand.
+**Check.** Type `007bff` in the field: it shows `#007bff` and the swatch is blue.
+**Guarded in Praisindo by** a unit test.

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.110.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.111.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -37,7 +37,8 @@ for (const p of files) {
   const e = ext(p), r = rel(p);
   if (!CODE.has(e) && !STYLE.has(e)) continue;
   if (DS_OWN.test(r) || /\.(test|spec)\./.test(r) || /\.d\.ts$/.test(r)) continue;
-  const src = text(p), L = lines(src);
+  // the loading skeleton of index.html (LD-01) runs before the tokens exist: its own style block (the one with .boot-s) keeps literal sizes, greys and times and is not read as project code
+  const src = text(p).replace(/<style>(?=(?:(?!<\/style>)[\s\S])*\.boot-s)[\s\S]*?<\/style>/, (x) => x.replace(/[^\n]/g, ' ')), L = lines(src);
   // RN-01: a name that the design system renamed (component, class, custom property): the project was built with an older skill; node scripts/migrate-names.mjs converts it
   for (const c of convert(src, p).changes) add('Fix', 'RN-01', r, c.line, `${c.old} was renamed to ${c.new}: run node scripts/migrate-names.mjs <project> --apply`);
   L.forEach((ln, i) => {
@@ -74,7 +75,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.110.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.111.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -108,7 +109,7 @@ for (const p of files) {
   const e = ext(p), r = rel(p);
   if (!['tsx', 'jsx', 'html', 'js', 'vue', 'svelte'].includes(e)) continue;
   if (DS_OWN.test(r) || /\.(test|spec)\./.test(r)) continue;
-  const raw = text(p), jsx = e === 'tsx' || e === 'jsx';
+  const raw = text(p).replace(/<style>(?=(?:(?!<\/style>)[\s\S])*\.boot-s)[\s\S]*?<\/style>/, (x) => x.replace(/[^\n]/g, ' ')), jsx = e === 'tsx' || e === 'jsx';   // the loading skeleton of index.html is not project code (LD-01)
   // comments do not count (blanked with spaces so that line numbers stay); the ds-allow exception is read from the raw text
   const src = e === 'html' ? raw.replace(/<!--[\s\S]*?-->/g, (x) => x.replace(/[^\n]/g, ' ')) : raw.replace(/\/\*[\s\S]*?\*\/|(^|[^:'"`\\])\/\/[^\n]*/g, (x) => x.replace(/[^\n]/g, ' '));
   // FM-01: every labelled field of a form declares `req` (red *) or `opt` ("Optional"); a Select / SegmentedControl with a `label` is a form field too; a search box is not a form field
@@ -131,6 +132,11 @@ for (const p of files) {
   for (const m of src.matchAll(/<div class(?:Name)?=["'`]fld\b[^"'`]*["'`][^>]*>/g)) {
     const b = block(src, m.index);
     if (/<label\b/.test(b) && /class(?:Name)?=["'`][^"'`]*\bsgc\b/.test(b) && !allowed(raw) && !/setPref\(/.test(src)) add('Fix', 'FM-17', r, lineAt(src, m.index), 'a form field with a segmented control: use a Select (FM-17); a segmented control is for a view, a period or Match all / any. Exception: <!-- ds-allow: <reason> -->');
+  }
+  // LD-01: the entry page of the application (index.html with the #root or #app) keeps the loading skeleton: the icons are skeleton blocks until the icon font is loaded (data-icons) and the font stylesheets do not block the first paint
+  if (e === 'html' && /(^|\/)index\.html$/.test(r) && /id=["'](root|app)["']/.test(src) && !allowed(raw)) {
+    if (!/data-icons|dataset\.icons/.test(src)) add('Fix', 'LD-01', r, 1, 'index.html has no loading state for the icons: set data-icons="wait" until the icon font is loaded (the DS CSS draws skeleton blocks), the word of a ligature must never show');
+    if (/<link[^>]*fonts\.googleapis\.com[^>]*rel=["']stylesheet["'](?![^>]*media=["']print["'])[^>]*>|<link[^>]*rel=["']stylesheet["'][^>]*fonts\.googleapis\.com(?![^>]*media=["']print["'])[^>]*>/.test(src.replace(/<noscript>[\s\S]*?<\/noscript>/g, ''))) add('Fix', 'LD-01', r, 1, 'a font stylesheet blocks the first paint: load it with media="print" onload="this.media=\'all\'" so the skeleton shows at once');
   }
   // DK-01: adding or editing data is a form PAGE, not a drawer. A drawer with two or more form fields and a Save / Add / Create / Submit / Update button is a finding; filter, column and apply drawers are not. Exception: /* ds-allow: <reason> */
   if (jsx && !allowed(raw)) for (const m of src.matchAll(/<Drawer\b/g)) {
@@ -241,7 +247,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.110.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.111.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;

@@ -243,3 +243,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Meet.** Use `Tabs` with no `variant` and put it where it belongs; do not set `variant="seg"` by hand for a tab strip that sits inside a card or a drawer (it is segmented already), and do not make a detail page tab bar segmented.
 **Check.** Look at the tab bar of a detail page (underline) and at a tab strip inside a card (segmented).
 **Guarded in Praisindo by** a unit test.
+
+### LD-01
+**Rule.** While the page loads it never shows broken content, it shows a skeleton: until the application is drawn the page is a skeleton of the shell (the sidebar and the content, in `index.html`, replaced when the application mounts; it keeps its own greys because the tokens are built by the application, and it stands still for reduced motion); until the icon font is loaded every icon is a small skeleton block (`html[data-icons="wait"] .ic`, never the long word of its ligature), the attribute is set by `index.html` and becomes `ready` when the font is loaded, and `failed` (icons hidden) after 20 seconds; the font stylesheets do not block the first paint (`media="print" onload="this.media='all'"`).
+**Meet.** Keep the `index.html` of the starter: the boot skeleton in `#root` or `#app`, the `data-icons` script and the non-blocking font links.
+**Check.** The audit flags an `index.html` without `data-icons` or with a blocking font stylesheet; in the browser hold back the icon font: the icons are grey blocks, never words.
+**Guarded in Praisindo by** a unit test and a browser test.

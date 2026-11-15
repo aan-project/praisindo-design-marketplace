@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.110.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.111.0). Add the project's updates above it, newest first.
 
+- **2.111.0** (2026-11-15) Loading shows a skeleton (LD-01): a skeleton of the shell before the application, skeleton blocks for the icons until the icon font is loaded, non-blocking font stylesheets; the colour field, the variant `Input format="color"` (FM-18): the pound sign is optional and added by itself, the swatch shows a valid colour.
 - **2.110.0** (2026-11-15) The variant of the tabs follows where they sit (TB-29): underline outside a card (the tab bar of a detail page), segmented inside a card and in a drawer; made by the context in the CSS, the markup does not change; the segmented tabs of the entity panel keep 16px of margin at the sides. The outlined button fills with the soft tint `--int-sub` on hover and the transparent button keeps its whole radius (MO-08); the label of a badge is never recoloured or resized by a descendant `span` rule (BD-15).
 - **2.109.0** (2026-11-15) A form field that asks for one value from a list is a `Select` by default, also with two to four options; the SegmentedControl is not the default control of a form field (FM-17). The category field of the form example is a Select.
 - **2.108.0** (2026-11-15) The list that opens under a Select with `pre` or `suf` shows only the value (`5`, `10`, `25`, no `/page`; FM-16, TB-28); the exact disabled colours (BT-09) and the exact values of the button hover (MO-09) are rules.

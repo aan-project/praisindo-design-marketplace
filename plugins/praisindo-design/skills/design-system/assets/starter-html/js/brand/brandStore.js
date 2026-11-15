@@ -1,4 +1,4 @@
-// Brand runtime for the Praisindo Design System starter (skill v2.110.0): load / save through the branding contract, normalise, apply to the document.
+// Brand runtime for the Praisindo Design System starter (skill v2.111.0): load / save through the branding contract, normalise, apply to the document.
 // Swap `adapter` for a real HTTP implementation of the contract in references/branding.md. The localStorage adapter below is a TEMPORARY one: say so on the Branding page.
 import { buildTokens } from '../tokens/buildTokens.js';
 import { contrastW, validHex } from '../tokens/colorEngine.js';

@@ -6,7 +6,8 @@ import { usePrefs } from '../../app/providers/PrefsProvider';
 import { Icon } from './Icon';
 import { InfoTooltip } from './Hints';
 import { SZ } from './uiSize';
-import { clearsGroupedError, ffDig, formatGrouped, formatMoney, validateGrouped } from '../../domain/forms/formatters';
+import { clearsGroupedError, colorInput, ffDig, formatGrouped, formatMoney, validateGrouped } from '../../domain/forms/formatters';
+import { validHex } from '../tokens/colorEngine';
 import { useCaretInput } from './useCaretInput';
 import { Chip } from './Chip';
 
@@ -54,7 +55,7 @@ export interface InputProps {
   /** The prototype removes the error styling (class err, aria-invalid) when a digit field is complete, leaving the `err` text in place. */
   errCleared?: boolean;
   /** `format="money"`: currency prefix (`cur`, default Rp), thousands separators while typing, caret kept after the same digit, inputMode decimal; `onValue` gets the formatted text. */
-  format?: 'money'; cur?: string; onValue?: (v: string) => void;
+  format?: 'money' | 'color'; cur?: string; onValue?: (v: string) => void;
 }
 
 function InputBase({ id, label, type = 'text', size = SZ, val = '', ph = '', icon, err = '', trail, auto = '', req, opt, hint, pre = '', suf = '', help = '', sugg, dis, ro, cls = '', inputProps, onChange, onSugg, controlled, inputRef, ffe, ffeMade, errCleared }: InputProps) {
@@ -105,8 +106,19 @@ function MoneyField({ cur = 'Rp', suf = '', val = '', ph = '0', onValue, onSugg,
   );
 }
 
-/** The text field of every form. `format="money"` makes it a money field (the former MoneyInput). */
+/** `format="color"` (rule FM-18): a field for a hex colour with the swatch of the colour at its end. It accepts the colour with or without the pound sign and adds the pound by itself (`007bff` becomes `#007bff`); `onChange` gets the value with the pound; `val` is shown as it comes (an invalid value from outside stays visible so that the page can say why). */
+function ColorField({ val = '', onChange, trail: _t, inputProps, format: _f, ...rest }: InputProps) {
+  void [_t, _f];
+  const [v, setV] = useState(val);
+  useEffect(() => { setV(val); }, [val]);
+  const set = (x: string) => { const n = colorInput(x); setV(n); onChange?.(n); };
+  return <InputBase {...rest} val={v} onChange={set} inputProps={{ spellCheck: false, autoCapitalize: 'off', ...inputProps }}
+    trail={<span className="csw" data-sw aria-hidden="true" style={validHex(v) ? { background: v } : undefined} />} />;
+}
+
+/** The text field of every form. `format="money"` makes it a money field (the former MoneyInput), `format="color"` a colour field. */
 export function Input(p: InputProps) {
+  if (p.format === 'color') return <ColorField {...p} />;
   if (p.format === 'money') { const { format: _f, onChange: _c, controlled: _k, inputRef: _r, ffe: _e, ffeMade: _m, errCleared: _x, ...m } = p; void [_f, _c, _k, _r, _e, _m, _x]; return <MoneyField {...m} />; }
   const { format: _f, cur: _u, onValue: _v, ...rest } = p; void [_f, _u, _v];
   return <InputBase {...rest} />;

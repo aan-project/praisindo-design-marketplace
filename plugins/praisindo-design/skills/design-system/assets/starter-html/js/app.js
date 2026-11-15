@@ -6,6 +6,7 @@ import { adapter } from './brand/adapter.js';
 import { initDateFields } from './datefield.js';
 import { initRichSelects } from './richselect.js';
 import { initSelects } from './select.js';
+import { initColorFields } from './colorfield.js';
 import { initUploads } from './upload.js';
 import { initSideSearch } from './sidesearch.js';
 import { initTooltips } from './tooltip.js';
@@ -45,7 +46,7 @@ function renderPage() {
 function update(withPage = true) { renderChrome(); if (withPage) renderPage(); }
 
 export function boot() {
-  initSelects(); initUploads(); initRichSelects(); initDateFields(); initTooltips(); initSideSearch(); initProfileCards();   // the Select list (SL-01 to SL-05), the calendar of the date field (FP-02) and the tooltip work for markup drawn by a page, now or later
+  initSelects(); initUploads(); initColorFields(); initRichSelects(); initDateFields(); initTooltips(); initSideSearch(); initProfileCards();   // the Select list (SL-01 to SL-05), the calendar of the date field (FP-02) and the tooltip work for markup drawn by a page, now or later
   state.brand = cachedBrand();
   mountShell(document.getElementById('app'));
   state.onRoute = update;

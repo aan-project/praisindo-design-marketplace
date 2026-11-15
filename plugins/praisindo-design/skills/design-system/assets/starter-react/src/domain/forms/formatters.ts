@@ -38,6 +38,12 @@ export function formatGrouped(raw: string, pos: number | null, o: { max: number;
   return { value, caret: caretAfter(value, Math.min(before, d.length), (c) => /\d/.test(c)), digits: d };
 }
 
+/** The colour field (rule FM-18): a hex colour typed with or without the pound sign; the pound is added by itself, anything that is not a hex digit is dropped, at most six digits. `007bff`, `#007bff`, ` 007BFF ` all give a value that starts with `#`. */
+export function colorInput(raw: string): string {
+  const d = raw.replace(/[^0-9a-fA-F]/g, '').slice(0, 6);
+  return d ? '#' + d : '';
+}
+
 /** data-fmt="num" (MoneyInput). */
 export function formatMoney(raw: string, pos: number | null): { value: string; caret: number } {
   const p = pos == null ? raw.length : pos;

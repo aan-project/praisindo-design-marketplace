@@ -7,6 +7,9 @@
 .state h3{font-size:var(--fs-h-sm);font-weight:calc(500 + var(--fw-shift,0))}
 .sk{height:12px;border-radius:4px;background:var(--color-surface-neutral-tertiary);animation:pl 1.2s ease-in-out infinite}
 @keyframes pl{50%{opacity:.45}}
+/* LD-01 (2.111): while the icon font loads (`data-icons="wait"` on the page, set by index.html and cleared by main.tsx) an icon is a small skeleton block, never the long word of its ligature (it broke the sidebar and every row); if the font does not come, `failed` hides the icons */
+html[data-icons="wait"] .ic{color:transparent;width:1em;height:1em;max-width:1em;overflow:hidden;white-space:nowrap;border-radius:4px;background:var(--color-surface-neutral-tertiary);animation:pl 1.2s ease-in-out infinite}
+html[data-icons="failed"] .ic{color:transparent;width:1em;height:1em;max-width:1em;overflow:hidden;white-space:nowrap}
 /* ES-01 (1.80): an empty state with a button. The button follows the description by 16px whatever the size of the state or the gap of the card body (before: the state's own bottom padding of 32 to 48px plus the body gap left 60px); the space below the button is the bottom padding the state had.
    The button sits inside `.state` (`cta` prop of EmptyState) or, in older markup, in the element right after it (`.state + div > .btn`). */
 .state>.state-cta{margin-top:8px}.state.s-sm>.state-cta{margin-top:12px}.state.s-lg>.state-cta{margin-top:4px}   /* 16px after the description: the gap of the size (8, 4, 12) plus this margin */

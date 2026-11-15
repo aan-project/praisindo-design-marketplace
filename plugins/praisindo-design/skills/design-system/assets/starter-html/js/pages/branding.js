@@ -22,7 +22,7 @@ export function renderBranding(main, { onSaved }) {
   if (!session.admin) { main.innerHTML = restricted(); return; }
   let A = draftOf(brand), busy = false, alertHtml = '';
   const sec = (h, inner) => `<div class="sec"><h3 class="grpt">${esc(t(h))}</h3><div style="display:flex;flex-direction:column;gap:16px">${inner}</div></div>`;
-  const input = (id, label, hint = '') => `<div class="fld"><label for="${id}">${esc(label)}<span class="req" aria-hidden="true">*</span><span class="sr-only"> (${esc(t('ui.required'))})</span>${hint ? tooltip({ text: hint, label: hint }) : ''}</label><div class="inp s-md"><input id="${id}" type="text" aria-required="true" spellcheck="false" autocomplete="off">${id === 'adm-name' ? '' : '<span data-sw style="flex:0 0 auto;width:20px;height:20px;border-radius:4px;border:1px solid var(--color-border-neutral-default)"></span>'}</div><span class="hlp" id="${id}-err" role="alert" hidden></span></div>`;
+  const input = (id, label, hint = '') => `<div class="fld"><label for="${id}">${esc(label)}<span class="req" aria-hidden="true">*</span><span class="sr-only"> (${esc(t('ui.required'))})</span>${hint ? tooltip({ text: hint, label: hint }) : ''}</label><div class="inp s-md"><input id="${id}" type="text" aria-required="true" spellcheck="false" autocomplete="off">${id === 'adm-name' ? '' : '<span class="csw" data-sw aria-hidden="true"></span>'}</div><span class="hlp" id="${id}-err" role="alert" hidden></span></div>`;
   const lrow = (k, lab) => `<div class="lrow" data-row="${k}"><div class="th"${k === 'logoD' ? ' data-theme="dark"' : ''}></div><div style="flex:1;min-width:0"><span class="fw6">${esc(t(lab))}</span><div class="mut" data-state></div></div>${button({ label: t('adm.manage'), icon: 'upload', type: 'outlined', intent: 'neutral', size: 'sm', attrs: `data-logo="${k}"` })}</div>`;
   const sel = (id, label, opts, hint = '') => select({ id, label, opts, hint, val: opts[0]?.[0] });
   const form = `<div style="display:flex;flex-direction:column;gap:24px"><div id="adm-alert"></div>
@@ -47,7 +47,7 @@ export function renderBranding(main, { onSaved }) {
   function refresh() {
     for (const [k, id] of [['primary', 'adm-primary'], ['secondary', 'adm-secondary']]) {
       const e = admHexErr(A, k), el = $('#' + id + '-err'); el.hidden = !e; el.textContent = e ? t(e) : '';
-      $('#' + id).closest('.inp').classList.toggle('err', !!e); $('#' + id).setAttribute('aria-invalid', String(!!e)); const sw = $('#' + id).parentElement.querySelector('[data-sw]'); sw.style.background = validHex(A[k]) ? A[k] : 'transparent';
+      $('#' + id).closest('.inp').classList.toggle('err', !!e); $('#' + id).setAttribute('aria-invalid', String(!!e)); const sw = $('#' + id).parentElement.querySelector('[data-sw]'); sw.style.background = validHex(A[k]) ? A[k] : '';
     }
     const ne = $('#adm-name-err'); ne.hidden = !A.nameErr; ne.textContent = A.nameErr ? t('adm.errName') : ''; $('#adm-name').closest('.inp').classList.toggle('err', A.nameErr);
     for (const k of ['logoL', 'logoD', 'fav']) {

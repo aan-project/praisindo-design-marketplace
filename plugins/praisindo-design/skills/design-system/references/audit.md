@@ -67,7 +67,7 @@ Every finding cites a rule id: a register id (area files `rules-*.md`) or a skil
 ## Report format
 
 ```
-# UI audit — <project> — skill design-system v2.110.0 — <date>
+# UI audit — <project> — skill design-system v2.111.0 — <date>
 
 Summary: <screens/files scanned>; Blockers n, Fixes n, Cleanups n, Questions n.
 

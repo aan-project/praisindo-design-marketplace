@@ -13,7 +13,6 @@ import { Input } from '../../design-system/components/Field';
 import { Icon } from '../../design-system/components/Icon';
 import { AlertAction } from '../../design-system/components/States';
 import { buildTokens } from '../../design-system/tokens/buildTokens.ts';
-import { validHex } from '../../design-system/tokens/colorEngine.ts';
 import type { Brand } from '../../design-system/tokens/palette.ts';
 import { admDraft, admHexErr, ADMF, LSLOT, type BrandDraft, type LogoSlot } from '../../branding/brand';
 import { badgeProps } from '../../domain/badgeIcons';
@@ -63,7 +62,6 @@ function LogoRow({ A, k, lab, onLogo }: { A: BrandDraft; k: LogoSlot; lab: strin
     </div>);
 }
 const Sec = ({ h, children }: { h: string; children: ReactNode }) => { const { t } = usePrefs(); return <div className="sec"><GroupTitle text={t(h)} /><div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>{children}</div></div>; };
-const Sw = ({ A, k }: { A: BrandDraft; k: 'primary' | 'secondary' }) => <span data-sw style={{ flex: 'none', width: 20, height: 20, borderRadius: 4, border: '1px solid var(--color-border-neutral-default)', background: validHex(A[k]) ? A[k] : 'transparent' }} />;
 
 const FW = [300, 400, 500, 600] as const;   // the default weight of the text (FW-01): 300 Light, 400 Regular, 500 Medium, 600 Semibold
 export interface BrandingViewProps {
@@ -79,8 +77,8 @@ export function BrandingView(p: BrandingViewProps) {
       {p.alert ? <Alert intent={p.alert.i as 'danger' | 'warning'} text={t(p.alert.m)} extra={p.alert.retry ? <AlertAction k="state.retry" onClick={p.onRetry as never} /> : undefined} /> : null}
       <Sec h="adm.sec.brand">
         <Input id="adm-name" req label={t('adm.name')} val={A.name} err={ne} onChange={(v) => p.onText('name', v)} />
-        <Input id="adm-primary" req label={t('adm.color')} val={A.primary} err={ce ? t(ce) : ''} hint={t('adm.colorH')} inputProps={{ spellCheck: false }} trail={<Sw A={A} k="primary" />} onChange={(v) => p.onText('primary', v)} />
-        <Input id="adm-secondary" req label={t('adm.secondary')} val={A.secondary} err={se ? t(se) : ''} inputProps={{ spellCheck: false }} trail={<Sw A={A} k="secondary" />} onChange={(v) => p.onText('secondary', v)} />
+        <Input id="adm-primary" req label={t('adm.color')} val={A.primary} err={ce ? t(ce) : ''} hint={t('adm.colorH')} format="color" onChange={(v) => p.onText('primary', v)} />
+        <Input id="adm-secondary" req label={t('adm.secondary')} val={A.secondary} err={se ? t(se) : ''} format="color" onChange={(v) => p.onText('secondary', v)} />
         <LogoRow A={A} k="logoL" lab="adm.logoL" onLogo={p.onLogo} /><LogoRow A={A} k="logoD" lab="adm.logoD" onLogo={p.onLogo} /><LogoRow A={A} k="fav" lab="adm.fav" onLogo={p.onLogo} />
         <p className="mut adm-lnote">{t('adm.logoNote') + (A.logoL && !A.fav ? ' ' + t('adm.favTip') : '')}</p>
       </Sec>

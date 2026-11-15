@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.111.0** (2026-11-15) Synchronised with DS 2.111.0: LD-01 (loading shows a skeleton: the shell before the application, skeleton blocks for the icons until the icon font is loaded, non-blocking font stylesheets; the `index.html` of both starters), FM-18 (the colour field, `Input format="color"`: pound sign optional and added by itself); the audit checks `index.html` (LD-01); 326 general rules.
 - **2.110.0** (2026-11-15) Synchronised with DS 2.110.0: TB-29 (tabs outside a card underline, inside a card and in a drawer segmented), the hover of the outlined and the transparent button (MO-08), BD-15 (the label of a badge is never recoloured by a descendant rule) with an audit check for project CSS; 324 general rules.
 - **2.109.0** (2026-11-15) Synchronised with DS 2.109.0: rule FM-17 (a form field that picks one value is a Select by default, not a SegmentedControl; 322 general rules), the decision table row, the audit check FM-17, the Category field of the form example of both starters is a Select. The tab rule (TB-29) waits for the owner.
 - **2.108.0** (2026-11-15) Synchronised with DS 2.108.0: the list under a Select with `pre` or `suf` shows only the value (FM-16, TB-28); BT-09, MO-09 and TB-28 are rules (321 general rules); `Controls.tsx` and `select.js` of the starters follow.

@@ -6,24 +6,33 @@
     <title>My App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined&family=Material+Icons" />
-    <!-- Icons are font ligatures: until the icon font is loaded they would read as words ("chevron_right"). Hide the glyph text until it is ready (it stays hidden if the font is blocked). -->
-    <style>html.icons-wait :is(.material-icons, .material-icons-outlined) { display: inline-block; width: 1em; overflow: hidden; color: transparent !important; }</style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined&family=Material+Icons" media="print" onload="this.media='all'" />
+    <style>
+      /* LD-01: before the application is drawn the page is a skeleton of the shell; the application replaces it when it mounts. It sits outside the tokens (they are built by the application), so it keeps its own greys. */
+      #root>.boot,#app>.boot{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh;background:var(--color-background-neutral-page,#fff)}
+      .boot-s{display:flex;flex-direction:column;gap:16px;padding:16px;border-right:1px solid var(--color-border-neutral-subtle,#ececec)}
+      .boot-m{display:flex;flex-direction:column;gap:16px;padding:24px 32px}
+      .boot-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+      .bk{display:block;border-radius:8px;background:var(--color-surface-neutral-tertiary,#e8e8e8);animation:bkp 1.2s ease-in-out infinite}
+      .bk-l{width:120px;height:32px}.bk-s{height:40px}.bk-r{height:32px}.bk-t{width:240px;height:32px}.bk-p{width:360px;max-width:100%;height:16px}.bk-c{height:120px}
+      @keyframes bkp{50%{opacity:.45}}
+      @media(prefers-reduced-motion:reduce){.bk{animation:none}}
+      @media(max-width:640px){#root>.boot,#app>.boot{grid-template-columns:minmax(0,1fr)}.boot-s{display:none}.boot-m{padding:16px}.boot-g{grid-template-columns:minmax(0,1fr)}}
+    </style>
+    <!-- LD-01: icons are font ligatures; until the icon font is loaded every icon is a skeleton block (css/05-states.css, html[data-icons="wait"]), never the word of its ligature. The font stylesheets do not block the first paint. -->
     <script>
       (function () {
         var d = document.documentElement;
-        d.classList.add('icons-wait');
-        function ready() {
-          if (!document.fonts || !document.fonts.load) return d.classList.remove('icons-wait');
-          Promise.all([document.fonts.load('16px "Material Icons Outlined"', 'home'), document.fonts.load('16px "Material Icons"', 'home')]).then(function (r) { if (r[0].length && r[1].length) d.classList.remove('icons-wait'); }, function () {});
-        }
-        if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+        d.dataset.icons = 'wait';
+        function loaded() { return Array.prototype.some.call(document.fonts || [], function (f) { return String(f.family).replace(/["']/g, '') === 'Material Icons Outlined' && f.status === 'loaded'; }); }
+        function ready() { if (loaded()) d.dataset.icons = 'ready'; }
+        if (document.fonts) { document.fonts.load('16px "Material Icons Outlined"').then(ready, function () {}); document.fonts.ready.then(ready); document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', ready); setTimeout(function () { if (d.dataset.icons === 'wait') d.dataset.icons = 'failed'; }, 20000); } else d.dataset.icons = 'ready';
       })();
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div class="boot" role="status" aria-busy="true" aria-label="Loading"><aside class="boot-s"><i class="bk bk-l"></i><i class="bk bk-s"></i><i class="bk bk-r"></i><i class="bk bk-r"></i><i class="bk bk-r"></i><i class="bk bk-r"></i><i class="bk bk-r"></i><i class="bk bk-r"></i></aside><main class="boot-m"><i class="bk bk-t"></i><i class="bk bk-p"></i><div class="boot-g"><i class="bk bk-c"></i><i class="bk bk-c"></i><i class="bk bk-c"></i></div><i class="bk bk-c"></i></main></div></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
