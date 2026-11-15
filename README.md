@@ -1,26 +1,29 @@
-# Praisindo design marketplace
+# Praisindo design
 
-Plugin **Praisindo design** (`praisindo-design`) with the skill `design-system` for Claude Code, with automatic updates. Call it with `/design-system` or `praisindo-design:design-system`; it also loads itself for UI work.
+Membuat setiap tampilan web yang Anda minta ke Claude mengikuti Praisindo Design System.
 
-## Install once
-```
-/plugin marketplace add aan-project/praisindo-design-marketplace
-/plugin install praisindo-design@praisindo-design-marketplace
-```
-In the desktop app: add the marketplace, then choose **Praisindo design** and "Install for me".
+Versi terbaru: **<!-- version -->2.112.0<!-- /version -->** (<!-- date -->2026-11-15<!-- /date -->)
 
-## Update
-- **Desktop app:** Settings → Capabilities → Your plugins → Praisindo design. The version is shown under the name; the **Update** button is active when a newer version is published (grey when you have the latest). The app has no switch for automatic updates there; update by hand after each release and check the version number.
-- **Claude Code in the terminal:** `/plugin` → tab Marketplaces → praisindo-design-marketplace → Enable auto-update; or by hand: `/plugin marketplace update praisindo-design-marketplace`.
-- Whether the desktop app updates a third-party marketplace by itself is not tested; after the next release look at the version without pressing Update.
+## Pasang (sekali)
+Yang dibutuhkan: aplikasi **Claude desktop** (Mac atau Windows). Tidak ada berkas yang perlu diunduh.
 
-## Version
-Three parts, `MAJOR.MINOR.PATCH` (rule VN-01 of the design system): MAJOR.MINOR is the number of the Praisindo design system the skill was synchronised with; PATCH is a fix of the skill only (the design system does not change) and goes back to 0 when the design system goes up; MAJOR goes up only when a project that uses the skill must be reworked (the owner decides).
+1. Buka **Settings** → **Customize** → **Plugins**.
+2. Klik tombol **Add** (hitam, di kanan atas), lalu pilih menambah marketplace.
+3. Isi alamat repo berikut, lalu konfirmasi:
+   ```
+   aan-project/praisindo-design-marketplace
+   ```
+4. Di daftar plugin akan muncul **Praisindo design**. Klik panah kecil di samping tombol **Add to this computer**, lalu pilih **Install for me** (aktif di semua proyek di komputer Anda).
+5. Pastikan plugin sudah ada di tab **Yours**.
+6. Buka **sesi baru**. Sesi yang sudah berjalan tidak mengenali plugin yang baru dipasang.
 
-## Owner: release a new version
-1. Replace `plugins/praisindo-design/skills/design-system/` with the latest synchronised skill (without `.DS_Store` and `node_modules`).
-2. Raise `version` in `plugins/praisindo-design/.claude-plugin/plugin.json` and in `.claude-plugin/marketplace.json` (plugin entry and `metadata.version`) to the same number. Without a new version the users do not receive the update.
-3. Add one line to `CHANGELOG.md`.
-4. Commit, tag `vMAJOR.MINOR.PATCH` and push `main` and the tag (`git push && git push --tags`).
+## Pakai
+Minta pekerjaan tampilan seperti biasa, misalnya "buatkan halaman daftar pelanggan". Bila perlu, tulis "pakai skill design-system" di awal permintaan.
 
-The zip for claude.ai (`praisindo-design-v<version>.zip`) is built from the same folder.
+## Perbarui
+**Settings** → **Capabilities** → **Your plugins** → **Praisindo design**. Bila tombol **Update** aktif, klik, lalu buka sesi baru.
+
+## Kendala
+- Skill tidak muncul: buka sesi baru.
+- Marketplace tidak ditemukan: cek alamat di atas dan koneksi internet.
+- Masih ada plugin lama bernama `praisindo-design-system`: hapus, lalu pasang ulang.

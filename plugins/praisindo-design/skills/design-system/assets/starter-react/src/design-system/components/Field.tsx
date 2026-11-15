@@ -1,6 +1,6 @@
 // Port of FL(), Input(), ShortcutChips(), MoneyInput(), GroupedNumberInput(), DashBox() (golden: baseline/golden/ui-kit.forms.json).
 // Markup parity: baseline/golden/ui-kit.forms.json. Behaviour (grouping, caret, validation, suggestions): src/domain/forms/formatters.ts + form-behaviour golden.
-import { useEffect, useRef, useState, type ChangeEvent, type FocusEvent, type InputHTMLAttributes, type MutableRefObject, type ReactNode, type Ref } from 'react';
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FocusEvent, type InputHTMLAttributes, type KeyboardEvent as KbEvent, type MutableRefObject, type PointerEvent as PtEvent, type ReactNode, type Ref } from 'react';
 import { fill } from '../../i18n/fill';
 import { usePrefs } from '../../app/providers/PrefsProvider';
 import { Icon } from './Icon';
@@ -8,6 +8,9 @@ import { InfoTooltip } from './Hints';
 import { SZ } from './uiSize';
 import { clearsGroupedError, colorInput, ffDig, formatGrouped, formatMoney, validateGrouped } from '../../domain/forms/formatters';
 import { validHex } from '../tokens/colorEngine';
+import { hexToHsv, hsvToHex, toHex, type Hsv } from '../../domain/forms/color';
+import { Button } from './Button';
+import { useFieldPopover } from './popoverHost';
 import { useCaretInput } from './useCaretInput';
 import { Chip } from './Chip';
 
@@ -56,9 +59,13 @@ export interface InputProps {
   errCleared?: boolean;
   /** `format="money"`: currency prefix (`cur`, default Rp), thousands separators while typing, caret kept after the same digit, inputMode decimal; `onValue` gets the formatted text. */
   format?: 'money' | 'color'; cur?: string; onValue?: (v: string) => void;
+  /** `format="color"`: the swatch opens the color picker (default); `false` makes it a plain swatch (the field inside the picker itself). */
+  picker?: boolean;
+  /** The root of the field (the popover of the color picker is placed under it). */
+  rootRef?: Ref<HTMLDivElement>;
 }
 
-function InputBase({ id, label, type = 'text', size = SZ, val = '', ph = '', icon, err = '', trail, auto = '', req, opt, hint, pre = '', suf = '', help = '', sugg, dis, ro, cls = '', inputProps, onChange, onSugg, controlled, inputRef, ffe, ffeMade, errCleared }: InputProps) {
+function InputBase({ rootRef, id, label, type = 'text', size = SZ, val = '', ph = '', icon, err = '', trail, auto = '', req, opt, hint, pre = '', suf = '', help = '', sugg, dis, ro, cls = '', inputProps, onChange, onSugg, controlled, inputRef, ffe, ffeMade, errCleared }: InputProps) {
   const errOn = !!(err && !errCleared) || !!ffe;
   const own = useRef<HTMLInputElement | null>(null);
   const setRef = (el: HTMLInputElement | null) => { own.current = el; if (typeof inputRef === 'function') inputRef(el); else if (inputRef) (inputRef as MutableRefObject<HTMLInputElement | null>).current = el; };
@@ -72,7 +79,7 @@ function InputBase({ id, label, type = 'text', size = SZ, val = '', ph = '', ico
   };
   const value = controlled ? { value: val } : onChange ? { value: val, onChange: (e: { target: { value: string } }) => onChange(e.target.value) } : { defaultValue: val };
   return (
-    <div className={`fld${cls ? ' ' + cls : ''}`}>
+    <div ref={rootRef} className={`fld${cls ? ' ' + cls : ''}`}>
       {label ? <label htmlFor={id}><FieldLabel label={label} req={req} opt={opt} hint={hint} /></label> : null}
       <div className={`inp s-${size}${errOn ? ' err' : ''}${dis ? ' dis' : ''}${ro ? ' ro' : ''}`}>
         {ro ? <DashBox /> : null}
@@ -106,17 +113,71 @@ function MoneyField({ cur = 'Rp', suf = '', val = '', ph = '0', onValue, onSugg,
   );
 }
 
-/** `format="color"` (rule FM-18): a field for a hex colour with the swatch of the colour at its end. It accepts the colour with or without the pound sign and adds the pound by itself (`007bff` becomes `#007bff`); `onChange` gets the value with the pound; `val` is shown as it comes (an invalid value from outside stays visible so that the page can say why). */
-function ColorField({ val = '', onChange, trail: _t, inputProps, format: _f, ...rest }: InputProps) {
-  void [_t, _f];
-  const [v, setV] = useState(val);
-  useEffect(() => { setV(val); }, [val]);
-  const set = (x: string) => { const n = colorInput(x); setV(n); onChange?.(n); };
-  return <InputBase {...rest} val={v} onChange={set} inputProps={{ spellCheck: false, autoCapitalize: 'off', ...inputProps }}
-    trail={<span className="csw" data-sw aria-hidden="true" style={validHex(v) ? { background: v } : undefined} />} />;
+/** The color picker of the color field (rule FM-19, owner request 2026-11-15, the reference is the picker of Untitled UI): a square of saturation (left to right) and brightness (bottom to top) in the hue of the color, a hue slider, the eyedropper where the browser has one, and the hex field. Keys: the arrows move a handle by 1% or 1 degree (Shift: 10). The alpha of the reference is not here: the field holds an opaque `#rrggbb`. */
+const HUES = [0, 60, 120, 180, 240, 300, 360].map((h) => `hsl(${h} 100% 50%)`).join(',');
+const unit = (n: number) => Math.min(1, Math.max(0, n));
+function ColorPop({ id, hex, onPick, close }: { id: string; hex: string; onPick: (h: string) => void; close: () => void }) {
+  const { t } = usePrefs();
+  const [c, setC] = useState<Hsv>(() => hexToHsv(hex) ?? { h: 210, s: 1, v: 1 });
+  useEffect(() => { const n = hexToHsv(hex); if (n && hsvToHex(n) !== hsvToHex(c)) setC(n); }, [hex]);   // eslint-disable-line react-hooks/exhaustive-deps
+  const push = (n: Hsv) => { setC(n); onPick(hsvToHex(n)); };
+  const cur = hsvToHex(c), eye = typeof window !== 'undefined' && 'EyeDropper' in window;
+  const at = (e: PtEvent<HTMLElement>, f: (x: number, y: number) => void) => { const r = e.currentTarget.getBoundingClientRect(); if (r.width) f(unit((e.clientX - r.left) / r.width), unit((e.clientY - r.top) / r.height)); };
+  const slide = (f: (x: number, y: number) => void) => ({
+    onPointerDown: (e: PtEvent<HTMLElement>) => { e.currentTarget.setPointerCapture?.(e.pointerId); at(e, f); },
+    onPointerMove: (e: PtEvent<HTMLElement>) => { if (e.buttons) at(e, f); },
+  });
+  const step = (e: KbEvent) => (e.shiftKey ? 10 : 1);
+  const svKey = (e: KbEvent<HTMLDivElement>) => {
+    const d = step(e) / 100, k = e.key;
+    if (k === 'ArrowLeft') push({ ...c, s: unit(c.s - d) }); else if (k === 'ArrowRight') push({ ...c, s: unit(c.s + d) }); else if (k === 'ArrowUp') push({ ...c, v: unit(c.v + d) }); else if (k === 'ArrowDown') push({ ...c, v: unit(c.v - d) }); else return;
+    e.preventDefault();
+  };
+  const hueKey = (e: KbEvent<HTMLDivElement>) => {
+    const d = step(e);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') push({ ...c, h: Math.max(0, c.h - d) }); else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') push({ ...c, h: Math.min(360, c.h + d) }); else return;
+    e.preventDefault();
+  };
+  const pickEye = () => { const E = (window as unknown as { EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> } }).EyeDropper; void new E().open().then((r) => { const n = hexToHsv(toHex(r.sRGBHex)); if (n) push(n); }, () => undefined); };
+  return (
+    <div className="fpop cpk" role="dialog" aria-label={t('ff.cpT')}>
+      <div className="cpk-t"><span className="fw6">{t('ff.cpT')}</span><Button icon="close" type="transparent" intent="neutral" size="sm" aria={t('lg.close')} onClick={close} /></div>
+      <div className="cpk-sv" role="slider" tabIndex={0} aria-label={t('ff.cpSv')} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(c.s * 100)} aria-valuetext={`${Math.round(c.s * 100)}% / ${Math.round(c.v * 100)}%`}
+        style={{ backgroundColor: `hsl(${c.h} 100% 50%)` }} onKeyDown={svKey} {...slide((x, y) => push({ ...c, s: x, v: 1 - y }))}>
+        <span className="cpk-hd" style={{ left: `${c.s * 100}%`, top: `${(1 - c.v) * 100}%`, background: cur }} />
+      </div>
+      <div className="cpk-r">
+        {eye ? <Button icon="colorize" type="outlined" intent="neutral" size="md" aria={t('ff.cpEye')} onClick={pickEye} /> : null}
+        <div className="cpk-hue" role="slider" tabIndex={0} aria-label={t('ff.cpHue')} aria-valuemin={0} aria-valuemax={360} aria-valuenow={Math.round(c.h)} style={{ backgroundImage: `linear-gradient(90deg,${HUES})` }} onKeyDown={hueKey} {...slide((x) => push({ ...c, h: x * 360 }))}>
+          <span className="cpk-hd" style={{ left: `${(c.h / 360) * 100}%`, background: `hsl(${c.h} 100% 50%)` }} />
+        </div>
+      </div>
+      <Input id={id + '-hex'} size="md" format="color" picker={false} val={hex} onChange={(v) => { const n = hexToHsv(v); if (n) push(n); else onPick(v); }} />
+    </div>
+  );
 }
 
-/** The text field of every form. `format="money"` makes it a money field (the former MoneyInput), `format="color"` a colour field. */
+/** `format="color"` (rule FM-18): a field for a hex color with the swatch of the color at its end. It accepts the color with or without the pound sign and adds the pound by itself (`007bff` becomes `#007bff`); `onChange` gets the value with the pound; `val` is shown as it comes (an invalid value from outside stays visible so that the page can say why). The swatch is a button that opens the color picker (rule FM-19) under the field. */
+function ColorField({ val = '', onChange, trail: _t, inputProps, format: _f, picker = true, dis, ro, ...rest }: InputProps) {
+  void [_t, _f];
+  const { t } = usePrefs();
+  const [v, setV] = useState(val);
+  useEffect(() => { setV(val); }, [val]);
+  const sw = useRef<HTMLButtonElement>(null);
+  const pop = useFieldPopover(() => sw.current);
+  const set = (x: string) => { const n = colorInput(x); setV(n); onChange?.(n); };
+  const back = validHex(v) ? { background: v } : undefined;
+  const swatch = picker
+    ? <button ref={sw} type="button" className="csw" data-sw aria-haspopup="dialog" aria-expanded={pop.open} aria-label={t('ff.cpOpen')} disabled={dis || ro || undefined} style={back} onClick={pop.toggle} />
+    : <span className="csw" data-sw aria-hidden="true" style={back} />;
+  const memo = useMemo(() => rest.id, [rest.id]);
+  return <>
+    <InputBase {...rest} dis={dis} ro={ro} rootRef={pop.root} val={v} onChange={set} inputProps={{ spellCheck: false, autoCapitalize: 'off', ...inputProps }} trail={swatch} />
+    {pop.open ? pop.float(<ColorPop id={memo} hex={v} onPick={set} close={() => { pop.setOpen(false); sw.current?.focus(); }} />) : null}
+  </>;
+}
+
+/** The text field of every form. `format="money"` makes it a money field (the former MoneyInput), `format="color"` a color field. */
 export function Input(p: InputProps) {
   if (p.format === 'color') return <ColorField {...p} />;
   if (p.format === 'money') { const { format: _f, onChange: _c, controlled: _k, inputRef: _r, ffe: _e, ffeMade: _m, errCleared: _x, ...m } = p; void [_f, _c, _k, _r, _e, _m, _x]; return <MoneyField {...m} />; }

@@ -545,5 +545,10 @@
  "wg.g.sr": "{t}: {p}% — {v} of {g}",
  "wg.g.txt": "{v} of {g}",
  "wg.trend": "Trend",
- "wg.up": "Up"
+ "wg.up": "Up",
+ "ff.cpT": "Pick a color",
+ "ff.cpSv": "Saturation and brightness",
+ "ff.cpHue": "Hue",
+ "ff.cpEye": "Pick a color from the screen",
+ "ff.cpOpen": "Open the color picker"
 }

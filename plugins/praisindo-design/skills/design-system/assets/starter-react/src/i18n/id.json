@@ -545,5 +545,10 @@
  "wg.g.sr": "{t}: {p}% — {v} dari {g}",
  "wg.g.txt": "{v} dari {g}",
  "wg.trend": "Tren",
- "wg.up": "Naik"
+ "wg.up": "Naik",
+ "ff.cpT": "Pilih warna",
+ "ff.cpSv": "Saturasi dan kecerahan",
+ "ff.cpHue": "Rona",
+ "ff.cpEye": "Ambil warna dari layar",
+ "ff.cpOpen": "Buka pemilih warna"
 }
