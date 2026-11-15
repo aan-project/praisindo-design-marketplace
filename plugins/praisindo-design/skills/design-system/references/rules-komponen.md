@@ -214,6 +214,24 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Check.** Open a tooltip with an action inside a table: the label is white.
 **Guarded in Praisindo by** a unit test.
 
+### CD-25
+**Rule.** In dark mode the border of the Tooltip bubble is faint: the subtle neutral border (`--color-border-neutral-subtle`), not the strong one, so the dark bubble does not get a bright outline.
+**Meet.** Use the Tooltip of the system; do not restyle its border.
+**Check.** Open a tooltip in dark mode: no bright outline around the bubble.
+**Guarded in Praisindo by** a unit test.
+
+### CD-26
+**Rule.** Only the glyph of the icon of an Alert rings like a bell, the tile behind it stands still: the glyph swings for about a second when the alert shows and again every 10 seconds (`@keyframes alring`, `.al>.ic`); the tile is the `::before` of the icon, turned back by the same angle (`alringback`); it stands still when the user asks for reduced motion; the animation is a transform only and changes nothing of the layout.
+**Meet.** Use the Alert of the system; do not add a second animation to its icon.
+**Check.** Show an Alert: the icon swings briefly, then again after 10 seconds; with reduced motion it never moves.
+**Guarded in Praisindo by** a unit test.
+
+### CD-27
+**Rule.** Only the glyph of the icon of an Empty state and of an Error state bounces up and down, like the ring of the Alert icon (CD-26): two small bounces of 4px for about a second when the state shows and again every 10 seconds (`@keyframes stbounce`, `.state>.ic`); the round tile behind the glyph stands still (it is the `::before` of the icon, moved back by the same distance, `stbounceback`, in the colour of `--st-tile`); nothing moves for reduced motion; a transform only.
+**Meet.** Use `EmptyState` and `ErrorState` of the system; do not add a second animation to their icon.
+**Check.** Show an empty state: the glyph bounces briefly, the round tile does not move; with reduced motion nothing moves.
+**Guarded in Praisindo by** a unit test.
+
 ### TS-01
 **Rule.** The toast is a dark pill: the black surface (`--color-text-black`) with white text, the radius of the Alert (`--r-card`), and a dot of 8px in the colour of the intent (success, info, warning, danger) before the text, no border; the position stays fixed bottom right (DK-19), the text and the roles are unchanged.
 **Meet.** Use the toast of the shell; never style a toast per page.
@@ -242,6 +260,12 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Rule.** The variant of the tabs follows where they sit, on every page: tabs OUTSIDE a card use the underline variant (the tab bar of a detail page, the tabs above the cards, the tabs of a list page whose card has no border or surface); tabs INSIDE a card use the segmented variant (a tab strip in a card or an entity panel, Key information); a drawer counts as a card, so its tabs are segmented. The context makes the variant (`.card .tabs`, `.drawer .tabs` in the DS CSS), so the markup does not change; the Design page example of the underline variant sits in the documentation card (`.dss`), which is not counted.
 **Meet.** Use `Tabs` with no `variant` and put it where it belongs; do not set `variant="seg"` by hand for a tab strip that sits inside a card or a drawer (it is segmented already), and do not make a detail page tab bar segmented.
 **Check.** Look at the tab bar of a detail page (underline) and at a tab strip inside a card (segmented).
+**Guarded in Praisindo by** a unit test.
+
+### TB-30
+**Rule.** A segmented tab is as wide as its label: it never grows to fill the tab bar (the bar may fill the width, the tabs sit at the left as on the Tabs page). This holds for the tab bar of a drawer and for the tabs of a card or panel; a tab bar that does not fit scrolls sideways instead of squeezing the tabs.
+**Meet.** Use the Tabs of the system with `variant="seg"` (or the drawer tab bar); do not give a tab `flex:1`, `width:100%` or equal columns.
+**Check.** Open a drawer with tabs and a card with segmented tabs: each tab is as wide as its text, with the same look as the Tabs page.
 **Guarded in Praisindo by** a unit test.
 
 ### LD-01

@@ -1,4 +1,4 @@
 /* ===== Drawer tab bar: segmented + sticky flush with the drawer top (covers the body padding and both gutters, so nothing shows above or beside it) ===== */
 .db>.dtabs{flex:none;position:sticky;top:calc(var(--drawer-pad) * -1);z-index:3;margin:-12px calc(var(--drawer-pad) * -1) -12px;padding:12px var(--drawer-pad);background:var(--color-background-neutral-default)}
 .dtabs .tabs{overflow-x:auto;scrollbar-width:none}
-.dtabs .tab{flex:1 0 auto;justify-content:center}
+.dtabs .tab{flex:none;justify-content:center}   /* TB-30: a tab is as wide as its label, it never stretches to fill the bar */

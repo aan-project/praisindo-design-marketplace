@@ -1,9 +1,16 @@
 /* ===== states ===== */
 .state{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:32px 16px}
 .state.s-sm{padding:16px;gap:4px}.state.s-lg{padding:48px 24px;gap:12px}
-.state>.ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;line-height:28px;background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}   /* the icon of the state only, in a round tile: a button inside the state (Retry, a call to action) keeps the icon colour of its own (DS 2.73) */
+.state>.ic{width:56px;height:56px;border-radius:50%;--st-tile:var(--color-surface-neutral-secondary);position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;font-size:28px;line-height:28px;color:var(--color-text-secondary)}   /* the icon of the state only, in a round tile: a button inside the state (Retry, a call to action) keeps the icon colour of its own (DS 2.73) */
+.state>.ic::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:50%;background:var(--st-tile)}
+/* CD-27: only the glyph of the icon of an Empty or Error state bounces up and down, for a moment when the state shows and again every 10 seconds, while the round tile stands still (the tile is the ::before, moved back by the same distance: stbounceback); still for reduced motion */
+.state>.ic{animation:stbounce 10s ease-in-out infinite}
+.state>.ic::before{animation:stbounceback 10s ease-in-out infinite}
+@keyframes stbounce{0%,14%,100%{transform:translateY(0)}3%{transform:translateY(-4px)}6%{transform:translateY(0)}9%{transform:translateY(-4px)}12%{transform:translateY(0)}}
+@keyframes stbounceback{0%,14%,100%{transform:translateY(0)}3%{transform:translateY(4px)}6%{transform:translateY(0)}9%{transform:translateY(4px)}12%{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.state>.ic,.state>.ic::before{animation:none}}
 .state.s-sm>.ic{width:40px;height:40px;font-size:24px;line-height:24px}
-.state.err>.ic{background:var(--color-surface-danger-subtle-1);color:var(--color-foreground-danger-default)}
+.state.err>.ic{--st-tile:var(--color-surface-danger-subtle-1);color:var(--color-foreground-danger-default)}
 .state h3{font-size:var(--fs-h-sm);font-weight:calc(500 + var(--fw-shift,0))}
 .sk{height:12px;border-radius:4px;background:var(--color-surface-neutral-tertiary);animation:pl 1.2s ease-in-out infinite}
 @keyframes pl{50%{opacity:.45}}

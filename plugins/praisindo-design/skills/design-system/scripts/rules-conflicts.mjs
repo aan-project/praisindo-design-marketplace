@@ -4,7 +4,7 @@
 //   node scripts/rules-conflicts.mjs                       the hard conflicts of the whole register (exit 1 when there is one)
 // HARD: an active rule says it replaces / supersedes / overrides another rule that is still active.   CANDIDATE: two active rules share two or more terms (`code`, ids, class names) and one of them
 // forbids what the other requires, or they give a different value (px, ms, count) for the same term. Candidates are for the owner to read; they never fail a test.
-import { readFileSync } from 'node:fs';   // zero dependencies; copy of tools/rules_conflicts.mjs of the Praisindo DS repo (skill v2.115.0)
+import { readFileSync } from 'node:fs';   // zero dependencies; copy of tools/rules_conflicts.mjs of the Praisindo DS repo (skill v2.116.0)
 import { pathToFileURL } from 'node:url';
 
 const ID = /^[A-Z]{2,4}-\d{2}[a-z]?$/;

@@ -75,8 +75,15 @@
 .dl-row:last-child{border-bottom:0}
 .dl-rows{display:flex;flex-direction:column;gap:0}.dl-rows>.grpt{margin:0;padding-bottom:8px}   /* a group of split rows: its title has no line (rule DR-08) */
 .al{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--r-card);border:1px solid var(--color-border-neutral-subtle);background:linear-gradient(90deg,var(--int-sub) 0%,var(--color-surface-neutral-primary) 40%),var(--color-surface-neutral-primary);color:var(--color-text-primary)}
-.al>.ic{flex:none;box-sizing:content-box;width:20px;height:20px;line-height:20px;padding:8px;border-radius:var(--r-card);background:var(--color-surface-neutral-primary);color:var(--int-def);font-size:20px}
+.al>.ic{position:relative;isolation:isolate;flex:none;box-sizing:content-box;width:20px;height:20px;line-height:20px;padding:8px;border-radius:var(--r-card);color:var(--int-def);font-size:20px}
+.al>.ic::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:var(--r-card);background:var(--color-surface-neutral-primary)}
 .al.i-warning>.ic{color:var(--color-foreground-warning-strong)}
+/* CD-26: only the glyph of the icon of an Alert rings like a bell, for a moment when the alert shows and again every 10 seconds, while the tile behind it stands still (the tile is the ::before, turned back by the same angle: alringback); it stands still for reduced motion */
+.al>.ic{transform-origin:50% 8px;animation:alring 10s ease-in-out infinite}
+.al>.ic::before{transform-origin:inherit;animation:alringback 10s ease-in-out infinite}
+@keyframes alring{0%,12%,100%{transform:rotate(0)}2%{transform:rotate(16deg)}4%{transform:rotate(-14deg)}6%{transform:rotate(10deg)}8%{transform:rotate(-8deg)}10%{transform:rotate(4deg)}}
+@keyframes alringback{0%,12%,100%{transform:rotate(0)}2%{transform:rotate(-16deg)}4%{transform:rotate(14deg)}6%{transform:rotate(-10deg)}8%{transform:rotate(8deg)}10%{transform:rotate(-4deg)}}
+@media(prefers-reduced-motion:reduce){.al>.ic,.al>.ic::before{animation:none}}
 .al>span:not(.ic),.al>.alb{flex:1;min-width:0}
 .al>.alb{display:flex;flex-direction:column;gap:4px}
 .al>.alb>.alt{font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-primary)}
@@ -84,7 +91,8 @@
 .al.has-t{align-items:flex-start}
 .al>.btn{flex:none}
 .al.al-sm,.drawer .al{gap:8px;padding:8px 12px}
-.al.al-sm>.ic,.drawer .al>.ic{width:16px;height:16px;line-height:16px;padding:0;background:none;font-size:16px}
+.al.al-sm>.ic,.drawer .al>.ic{width:16px;height:16px;line-height:16px;padding:0;background:none;font-size:16px;transform-origin:50% 0}
+.al.al-sm>.ic::before,.drawer .al>.ic::before{display:none}
 .pb{height:8px;border-radius:4px;background:var(--color-surface-neutral-tertiary);overflow:hidden;flex:1;min-width:60px}
 .pb>i{display:block;height:100%;background:var(--color-surface-brand-default)}
 .ev{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}

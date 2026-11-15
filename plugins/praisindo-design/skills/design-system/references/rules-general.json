@@ -1,5 +1,5 @@
 {
- "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.115.0). Full text in references/rules-*.md.",
+ "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.116.0). Full text in references/rules-*.md.",
  "count": 326,
  "ids": [
   "AV-02",
@@ -61,6 +61,9 @@
   "CD-22",
   "CD-23",
   "CD-24",
+  "CD-25",
+  "CD-26",
+  "CD-27",
   "CH-01",
   "CH-02",
   "CH-03",
@@ -307,6 +310,7 @@
   "TB-27",
   "TB-28",
   "TB-29",
+  "TB-30",
   "TG-01",
   "TH-01",
   "TH-02",

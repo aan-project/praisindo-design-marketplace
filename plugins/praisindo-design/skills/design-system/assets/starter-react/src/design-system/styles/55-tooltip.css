@@ -7,7 +7,7 @@
 .tt{--tt-bg:var(--color-text-black);position:fixed;z-index:100;box-sizing:border-box;width:max-content;max-width:280px;padding:12px;border:1px solid transparent;border-radius:8px;background:var(--tt-bg);color:var(--color-text-white);font-size:var(--fs-sm);font-weight:calc(400 + var(--fw-shift,0));line-height:var(--lh-sm);text-align:left;white-space:normal;visibility:hidden;opacity:0;transition:opacity .12s ease}
 .tt[data-open]{visibility:visible;opacity:1}
 .tt-np{pointer-events:none}   /* the bubble of a Badge (BD-13) has no link: it never catches the pointer, so it cannot cover what is under it */
-:root[data-theme=dark] .tt{border-color:var(--color-border-neutral-strong)}
+:root[data-theme=dark] .tt{border-color:var(--color-border-neutral-subtle)}
 .tt-t{margin-bottom:4px;font-weight:calc(500 + var(--fw-shift,0))}
 .tt-d{margin:0}
 .tt-link{display:flex;align-items:center;justify-content:center;gap:4px;box-sizing:border-box;width:100%;margin-top:8px;padding:8px 12px;border:0;border-radius:8px;background:color-mix(in srgb,var(--color-text-white) 14%,transparent);color:var(--color-text-white);font:inherit;font-size:var(--fs-sm);text-align:center;text-decoration:none;cursor:pointer}
