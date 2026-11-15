@@ -2,7 +2,7 @@
 // Adding or editing data is a PAGE (DK-01): route layout `detail` (the sidebar collapses, SB-05), breadcrumb and Back arrow (NV-01), ONE Card whose title is never the page title (DK-17; several groups of fields = one Card per group, the footer on the last), footer Cancel then Save, the warning dialog on leaving with changes (DR-06).
 // Rules met: NV-02, NV-03 (page head), CD-02, CD-05, CD-09 (one Card, GroupTitle captions, footer for actions), FM-01 (every field `req` or `opt`; `req` draws the red `*`
 // and aria-required), FM-02 (info icon through `hint`, on the label), FM-03 (PhoneInput), FM-04 (money), FM-05, FM-08 (shortcut chips), FM-06 (placeholders),
-// FM-07 (soft checkbox), FM-10 (Switch), FP-02 (DateField), TG-01 (SegmentedControl for 4 exclusive options), BT-01 (Cancel transparent, Save fill, primary last),
+// FM-07 (soft checkbox), FM-10 (Switch), FP-02 (DateField), FM-17 (a field that picks one value is a Select, also for 4 options), BT-01 (Cancel transparent, Save fill, primary last),
 // BN-01 (verbs), CD-08 (the Alert shows only after a failed submit), DR-05, DR-06 (unsaved changes ask in a centred dialog), AX-01, DS-03.
 // Validation: a field is checked when it loses focus and the whole form on Save; the first field in error takes the focus.
 import { useState } from 'react';
@@ -12,12 +12,11 @@ import { PageHeader } from '../../app/shell/PageHead';
 import { Alert } from '../../design-system/components/Alert';
 import { Button } from '../../design-system/components/Button';
 import { Card, GroupTitle } from '../../design-system/components/Card';
-import { Switch } from '../../design-system/components/Controls';
+import { Select, Switch } from '../../design-system/components/Controls';
 import { Input, Textarea } from '../../design-system/components/Field';
 import { Dialog } from '../../design-system/components/Modal';
 import { PhoneInput } from '../../design-system/components/Phone';
 import { DateField } from '../../design-system/components/Pickers';
-import { SegmentedControl } from '../../design-system/components/SegmentedControl';
 import { logActivity } from '../../domain/log/activityLog';
 import { fill } from '../../i18n/fill';
 
@@ -61,8 +60,8 @@ export function FormPage() {
       <div className="g2">
       <Input id={ID.name} label={t('ex.f.name')} req val={v.name} ph={t('ex.ph.name')} err={shown('name')} onChange={set('name')} inputProps={blur('name')} />
       <Input id={ID.code} label={t('ex.f.code')} req hint={t('ex.h.code')} val={v.code} ph="SUP-1043" err={shown('code')} onChange={(x) => set('code')(x.toUpperCase())} inputProps={blur('code')} /></div>
-      <SegmentedControl id="exf-cat" label={t('ex.f.cat')} req val={cat} onChange={(x) => { setCat(x); setDirty(true); }}
-          items={[['raw', t('ex.cat.raw')], ['pack', t('ex.cat.pack')], ['svc', t('ex.cat.svc')], ['log', t('ex.cat.log')]]} />
+      <Select id="exf-cat" label={t('ex.f.cat')} req val={cat} onChange={(x) => { setCat(x); setDirty(true); }}
+          opts={[['raw', t('ex.cat.raw')], ['pack', t('ex.cat.pack')], ['svc', t('ex.cat.svc')], ['log', t('ex.cat.log')]]} />
       <GroupTitle text={t('ex.g.contact')} />
       <div className="g2"><PhoneInput id={ID.phone} label={t('ex.f.phone')} req err={shown('phone')} />
       <Input id={ID.email} label={t('ex.f.email')} type="email" opt hint={t('ex.h.email')} val={v.email} ph="name@company.com" err={shown('email')} onChange={set('email')} inputProps={blur('email')} /></div>

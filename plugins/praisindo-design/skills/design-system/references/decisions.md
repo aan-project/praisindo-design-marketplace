@@ -1,4 +1,4 @@
-# Decision table: which surface for which intent (skill v2.108.0)
+# Decision table: which surface for which intent (skill v2.109.0)
 
 Read this BEFORE you build a page or a flow. The choices below are made already: do not ask the user which surface to use, and do not invent another one. The ids DK-01 to DK-20 are rules of the Praisindo register (decisions of the Praisindo owner, 2026-11-11). If no row fits, STOP and write the need under "Rule proposals" in `docs/design-system/new-components.md`; do not improvise a layout, a drawer or a dialog.
 
@@ -10,6 +10,7 @@ How to use it: (1) name the user's intent, (2) find its row, (3) build exactly t
 |---|---|---|---|---|
 | DK-01 | Add data (simple or complex) | **Form page** (`FormPage` example, route `<list>/new`) | Breadcrumb back to the list, page title and description, `GroupTitle` per group of fields inside cards, footer `Cancel` (transparent) then `Save` (fill, last), the warning dialog when leaving with unsaved changes (DR-06), the menu entry of the list stays highlighted | A drawer, or a dialog with a form |
 | DK-01 | Edit data (simple or complex) | **The same form page** (route `<list>/<id>/edit`), or the detail layout when the page is a full editor of an entity | Values filled in, Back, the same footer and leave dialog | A drawer |
+| FM-17 | Pick ONE value from a list in a form field (category, type, status, channel) | **`Select`** (`label`, `req`/`opt`), also with two to four options | `label`, `req` or `opt`, `opts` | `SegmentedControl` as the field, radio buttons for a long list; a segmented control is for a view, a period or Match all / any |
 | DK-02 | A flow with several steps (a wizard, a long create) | **NumberInput form page** (`Wizard` with Back / Next, `Accordion` for optional parts) | A step with an error turns red; a summary at the last step | One endless form |
 | DK-03 | Change ONE value (a switch, a status, a role) | **Control in place** (`Switch`, `Select` in the row or the page), saved at once | A toast that confirms; a way to undo | A drawer or a page for one value |
 | DK-04 | A contextual action that needs 1 to 2 inputs (assign, reject with a reason) | **Centred dialog** (`Dialog` kind by consequence) | Title as a question, a required reason when the action is a rejection | A drawer *(default, to be confirmed)* |

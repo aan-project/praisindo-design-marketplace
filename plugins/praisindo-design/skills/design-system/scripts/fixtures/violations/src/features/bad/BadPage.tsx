@@ -23,6 +23,7 @@ export function BadPage() {
         </div></td>
       </tr></tbody></table></div>
       <Select id="bad-sel" label="Type" opts={[]} />
+      <SegmentedControl id="bad-seg" label="Category" req items={[['a', 'A'], ['b', 'B']]} />
       <Drawer title="Add customer" onClose={() => {}} footer={<Button label="Save" />}><Input id="bad-n" label="Name" req /><Input id="bad-e" label="Email" opt /></Drawer>
       <Drawer title="Columns" onClose={() => {}} footer={<Button label="Done" />}>x</Drawer>
     </>);

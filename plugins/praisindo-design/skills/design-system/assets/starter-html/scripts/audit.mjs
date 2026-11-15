@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.108.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.109.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -72,7 +72,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.108.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.109.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -113,6 +113,7 @@ for (const p of files) {
   if (jsx) for (const t of tags(src, FIELD)) {
     if (!prop(t.attrs, 'label') || /type=["']search["']/.test(t.attrs)) continue;
     if (/setPref\(/.test(t.attrs)) continue;   // a setting of My Preferences applies at once (PP-04): it is not a field of a form
+    if (t.name === 'SegmentedControl' && !allowed(raw)) add('Fix', 'FM-17', r, lineAt(src, t.i), '<SegmentedControl> with a label is a form field that picks one value: use <Select> (FM-17); a segmented control is for a view, a period or Match all / any. Exception: /* ds-allow: <reason> */');
     if (!prop(t.attrs, 'req') && !prop(t.attrs, 'opt')) add('Fix', 'FM-01', r, lineAt(src, t.i), `<${t.name}> without req or opt: mark it required (req, red *) or optional (opt)`);
   }
   // FM-01 (markup by hand): a .fld whose label has no .req / .opt; a .req label whose control has no aria-required
@@ -123,6 +124,11 @@ for (const p of files) {
     const isReq = /class(Name)?=["']req["']/.test(lab);
     if (!isReq && !/class(Name)?=["']opt["']/.test(lab)) add('Fix', 'FM-01', r, lineAt(src, m.index), 'field label without the required (*) or optional mark');
     if (isReq && !/aria-required/.test(ctl)) add('Fix', 'FM-01', r, lineAt(src, m.index), 'required field without aria-required="true" on its control');
+  }
+  // FM-17 (markup by hand): a .fld whose control is a segmented control (.sgc) picks one value in a form: it is a Select by default
+  for (const m of src.matchAll(/<div class(?:Name)?=["'`]fld\b[^"'`]*["'`][^>]*>/g)) {
+    const b = block(src, m.index);
+    if (/<label\b/.test(b) && /class(?:Name)?=["'`][^"'`]*\bsgc\b/.test(b) && !allowed(raw) && !/setPref\(/.test(src)) add('Fix', 'FM-17', r, lineAt(src, m.index), 'a form field with a segmented control: use a Select (FM-17); a segmented control is for a view, a period or Match all / any. Exception: <!-- ds-allow: <reason> -->');
   }
   // DK-01: adding or editing data is a form PAGE, not a drawer. A drawer with two or more form fields and a Save / Add / Create / Submit / Update button is a finding; filter, column and apply drawers are not. Exception: /* ds-allow: <reason> */
   if (jsx && !allowed(raw)) for (const m of src.matchAll(/<Drawer\b/g)) {
@@ -233,7 +239,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.108.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.109.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;

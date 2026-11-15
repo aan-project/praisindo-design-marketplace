@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.108.0, skill v2.108.0)
+# Forms and fields (Praisindo DS v2.109.0, skill v2.109.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -208,3 +208,9 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Meet.** Use `FileUpload` with `accept`, `maxMb` and `multiple`; use `fileCheck` for the same check elsewhere.
 **Check.** Add a file of a wrong type and one over the size: two red rows with their reasons, no message under the field.
 **Guarded in Praisindo by** a unit test.
+
+### FM-17
+**Rule.** A form field that asks for ONE value from a list of options (a category, a type, a status, a channel) is a `Select` by default, also when there are only two to four options; the `SegmentedControl` is not the default control of a form field: it is for switching how the content below is read (a view, a period, Match all / any) and for a setting that applies at once (My Preferences); the labelled form of the SegmentedControl (FM-12) is used only when the design of the page asks for it.
+**Meet.** Use `<Select label req opts>` for such a field; use `SegmentedControl` for a view, a period, Match all / any or a Preferences setting.
+**Check.** The audit flags a `SegmentedControl` with a `label` (and a `.fld` with a `.sgc`) as FM-17; an exception needs `/* ds-allow: <reason> */` and the design of the page asking for it.
+**Guarded in Praisindo by** a unit test and the audit.
