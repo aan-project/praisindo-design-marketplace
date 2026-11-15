@@ -7,9 +7,12 @@ Plugin **Praisindo design** (`praisindo-design`) with the skill `design-system` 
 /plugin marketplace add aan-project/praisindo-design-marketplace
 /plugin install praisindo-design@praisindo-design-marketplace
 ```
-In the app: add the marketplace, then choose **Praisindo design** and "Install for me".
-Turn on automatic updates: `/plugin` → tab Marketplaces → praisindo-design-marketplace → Enable auto-update.
-Manual update: `/plugin marketplace update praisindo-design-marketplace`.
+In the desktop app: add the marketplace, then choose **Praisindo design** and "Install for me".
+
+## Update
+- **Desktop app:** Settings → Capabilities → Your plugins → Praisindo design. The version is shown under the name; the **Update** button is active when a newer version is published (grey when you have the latest). The app has no switch for automatic updates there; update by hand after each release and check the version number.
+- **Claude Code in the terminal:** `/plugin` → tab Marketplaces → praisindo-design-marketplace → Enable auto-update; or by hand: `/plugin marketplace update praisindo-design-marketplace`.
+- Whether the desktop app updates a third-party marketplace by itself is not tested; after the next release look at the version without pressing Update.
 
 ## Version
 Three parts, `MAJOR.MINOR.PATCH` (rule VN-01 of the design system): MAJOR.MINOR is the number of the Praisindo design system the skill was synchronised with; PATCH is a fix of the skill only (the design system does not change) and goes back to 0 when the design system goes up; MAJOR goes up only when a project that uses the skill must be reworked (the owner decides).
