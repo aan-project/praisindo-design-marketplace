@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.112.0, skill v2.112.0)
+# Forms and fields (Praisindo DS v2.113.0, skill v2.113.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -225,4 +225,10 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Rule.** The swatch of the color field (FM-18) is a button that opens the color picker under the field as a form popover (closes with Escape and a press outside, focus returns to the swatch): a square of saturation (left to right) and brightness (bottom to top) in the hue of the color with its handle, a hue slider, the eyedropper button only where the browser has one (`EyeDropper`), and the hex field (the same color field without a picker, `picker={false}`); nothing else: no alpha, no tabs Gradient or Image, no format select, no saved colors and no Add (owner 2026-11-15). The handles move by the pointer and by the arrow keys (1% or 1 degree, Shift 10) and are sliders for assistive technology; the popover is 320px wide and the full width on a phone. The Design page shows the color field under More inputs on the page of the text field, not under Phone and ID numbers.
 **Meet.** React: `<Input format="color">` already does it (`Field.tsx`, `domain/forms/color.ts`, the classes `.cpk*` in `45-form-kit.css`); the starter HTML: `.inp > input` followed by `button.csw` and `initColorFields()` (`js/colorfield.js`), the picker sets the input and fires `input`; never build a picker by hand.
 **Check.** Press the swatch: the picker opens with the square, the hue slider and the hex field; drag or use the arrows and the field and the swatch follow; Escape closes it.
+**Guarded in Praisindo by** a unit test.
+
+### FM-20
+**Rule.** The color picker (FM-19) leaves out, by the owner's decision (2026-11-15), the alpha slider and field (the field holds an opaque `#rrggbb`), the tabs Gradient and Image, the format select (only Hex), and the saved colors with Add. If tabs are ever added to the picker they follow TB-29: a popover counts as inside a card, so the tabs are segmented.
+**Meet.** Use the picker of `<Input format="color">` as it is (starter HTML: `initColorFields()`); do not add alpha, tabs, a format select or saved colors to it.
+**Check.** Open the picker: two sliders (the square and the hue), the hex field and, only where the browser has it, the eyedropper; no tabs, no select, no Add.
 **Guarded in Praisindo by** a unit test.

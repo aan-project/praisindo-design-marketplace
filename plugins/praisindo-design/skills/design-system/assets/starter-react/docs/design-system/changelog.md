@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.112.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.113.0). Add the project's updates above it, newest first.
 
+- **2.113.0** (2026-11-15) The color picker leaves out alpha, the Gradient and Image tabs, the format select and saved colors (FM-20, owner decision); tabs added later follow TB-29.
 - **2.112.0** (2026-11-15) Color picker (FM-19): the swatch of the color field opens a dropdown under the field (saturation and brightness square, hue slider, eyedropper where the browser has one, hex field; no alpha, no Gradient or Image tabs, no saved colors); the color field example moved to More inputs.
 - **2.111.0** (2026-11-15) Loading shows a skeleton (LD-01): a skeleton of the shell before the application, skeleton blocks for the icons until the icon font is loaded, non-blocking font stylesheets; the colour field, the variant `Input format="color"` (FM-18): the pound sign is optional and added by itself, the swatch shows a valid colour.
 - **2.110.0** (2026-11-15) The variant of the tabs follows where they sit (TB-29): underline outside a card (the tab bar of a detail page), segmented inside a card and in a drawer; made by the context in the CSS, the markup does not change; the segmented tabs of the entity panel keep 16px of margin at the sides. The outlined button fills with the soft tint `--int-sub` on hover and the transparent button keeps its whole radius (MO-08); the label of a badge is never recoloured or resized by a descendant `span` rule (BD-15).

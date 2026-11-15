@@ -2,7 +2,7 @@
 
 Membuat setiap tampilan web yang Anda minta ke Claude mengikuti Praisindo Design System.
 
-Versi terbaru: **<!-- version -->2.112.0<!-- /version -->** (<!-- date -->2026-11-15<!-- /date -->)
+Versi terbaru: **<!-- version -->2.113.0<!-- /version -->** (<!-- date -->2026-11-15<!-- /date -->)
 
 ## Pasang (sekali)
 Yang dibutuhkan: aplikasi **Claude desktop** (Mac atau Windows). Tidak ada berkas yang perlu diunduh.
