@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Rule coverage of the skill (design-system v2.114.0). Zero dependencies.
+// Rule coverage of the skill (design-system v2.115.0). Zero dependencies.
 //   node scripts/rules-coverage.mjs                                   uses references/rules-general.json (the general rule ids of the last triage)
 //   node scripts/rules-coverage.mjs --triage <triage-register.md>     reads the U ids from the triage table (| id | section | summary | U/D/X | ...)
 //   node scripts/rules-coverage.mjs --triage <t.md> --register <rules-register.md>   also checks that every register id is triaged and every U id exists

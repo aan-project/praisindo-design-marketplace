@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.115.0** (2026-11-15) Synchronised with DS 2.115.0: LD-02 (the loading skeleton follows the page: two-panel skeleton for the sign-in screen, shell for other pages; `index.html` of both starters).
 - **2.114.0** (2026-11-15) Synchronised with DS 2.114.0: the light-mode sign-in pill has a dark brand veil (CSS of both starters, LG-04). No new rule.
 - **2.113.0** (2026-11-15) Synchronised with DS 2.113.0: FM-20 (owner decision: the color picker has no alpha, no Gradient or Image tabs, no format select, no saved colors or Add; tabs added later follow TB-29). No code change.
 - **2.112.0** (2026-11-15) Synchronised with DS 2.112.0: FM-19 (the swatch of the color field opens a color picker: saturation and brightness square, hue slider, eyedropper, hex field; no alpha, tabs, saved colors or Add); `js/colorfield.js` of the starter HTML and `Field.tsx`, `color.ts` of the starter React; the color example is under More inputs on the Design page; 327 general rules.

@@ -249,3 +249,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Meet.** Keep the `index.html` of the starter: the boot skeleton in `#root` or `#app`, the `data-icons` script and the non-blocking font links.
 **Check.** The audit flags an `index.html` without `data-icons` or with a blocking font stylesheet; in the browser hold back the icon font: the icons are grey blocks, never words.
 **Guarded in Praisindo by** a unit test and a browser test.
+
+### LD-02
+**Rule.** The skeleton that shows before the application is drawn is the skeleton of the page that will appear: the sign-in page gets the two panels of the sign-in screen (the story panel and the form, no sidebar), every other page the shell of LD-01. `index.html` chooses with a script that runs before the first paint (the sign-in skeleton when the address is `#/login`; a project with a session also picks it when nobody is signed in); on a phone only the form shows; the page margin of the skeleton is 0.
+**Meet.** Keep the `boot-l` section and the small script of the starter `index.html`; add the project's own session check to the script when the project has a sign-in.
+**Check.** Hold the application script back and open `#/login`: the two panels show, not the sidebar; open any other page signed in: the shell shows.
+**Guarded in Praisindo by** a unit test.
