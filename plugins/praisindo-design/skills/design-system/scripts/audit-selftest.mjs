@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Self-test of scripts/audit.mjs (skill design-system v2.124.1): the violation fixture must produce every pattern finding, and the starters (with the example pages) none.
+// Self-test of scripts/audit.mjs (skill design-system v2.124.2): the violation fixture must produce every pattern finding, and the starters (with the example pages) none.
 // node scripts/audit-selftest.mjs   (exit 1 when a check is missing or a starter is not clean)
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
@@ -15,6 +15,7 @@ for (const id of PATTERN) for (const kind of ['tsx', 'html']) {
   if (!hit) { console.log(`MISSING ${id} in the ${kind} fixture`); bad++; }
 }
 if (!fx.findings.some((f) => f.rule === 'LD-01' && f.file.endsWith('index.html'))) { console.log('MISSING LD-01 in the index.html fixture'); bad++; }
+if (!fx.findings.some((f) => f.rule === 'LD-01' && f.file.endsWith('index.html') && /FontFaceSet/.test(f.msg))) { console.log('MISSING LD-01 finding for an array method called on document.fonts'); bad++; }
 if (!fx.findings.some((f) => f.rule === 'BD-15' && f.file.endsWith('.css'))) { console.log('MISSING BD-15 in the css fixture'); bad++; }
 for (const id of ['DK-01', 'GN-03', 'GN-05']) if (!fx.findings.some((f) => f.rule === id && f.file.endsWith('.tsx'))) { console.log(`MISSING ${id} in the tsx fixture`); bad++; }
 const req = fx.findings.filter((f) => f.rule === 'FM-01' && /aria-required/.test(f.msg)).length;
@@ -25,5 +26,8 @@ for (const s of ['starter-react', 'starter-html']) {
   const left = r.findings.filter((f) => f.cls !== 'Cleanup');
   if (left.length || r.counts.Blocker) { console.log(`NOT CLEAN ${s}:`, left.slice(0, 5)); bad++; }
 }
+// the browser test of the icon detector (scripts/icons-check.mjs): only when Playwright is given, node scripts/audit-selftest.mjs --playwright-from <dir with node_modules/playwright>; it needs the network
+const pw = process.argv.indexOf('--playwright-from');
+if (pw > 0) { try { execFileSync('node', [join(here, 'icons-check.mjs'), '--playwright-from', process.argv[pw + 1]], { encoding: 'utf8', stdio: 'inherit' }); } catch (e) { if (e.status === 1) { console.log('icons check failed'); bad++; } } }
 console.log(bad ? `audit self-test: ${bad} problem(s)` : `audit self-test: ok (${PATTERN.length + 5} pattern checks found in the fixtures, starters clean)`);
 process.exit(bad ? 1 : 0);

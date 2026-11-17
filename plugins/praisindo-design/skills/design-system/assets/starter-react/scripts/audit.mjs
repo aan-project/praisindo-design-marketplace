@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.124.1). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.124.2). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -75,7 +75,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.124.1): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.124.2): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -136,6 +136,7 @@ for (const p of files) {
   // LD-01: the entry page of the application (index.html with the #root or #app) keeps the loading skeleton: the icons are skeleton blocks until the icon font is loaded (data-icons) and the font stylesheets do not block the first paint
   if (e === 'html' && /(^|\/)index\.html$/.test(r) && /id=["'](root|app)["']/.test(src) && !allowed(raw)) {
     if (!/data-icons|dataset\.icons/.test(src)) add('Fix', 'LD-01', r, 1, 'index.html has no loading state for the icons: set data-icons="wait" until the icon font is loaded (the DS CSS draws skeleton blocks), the word of a ligature must never show');
+    if (/Array\.prototype\.\w+\.call\(\s*document\.fonts/.test(src)) add('Fix', 'LD-01', r, 1, 'the icon font detector walks document.fonts (a FontFaceSet, a Set without length) with an array method: nothing is ever found and data-icons stays wait, then failed. Use Array.from(document.fonts) or for...of');
     if (/<link[^>]*fonts\.googleapis\.com[^>]*rel=["']stylesheet["'](?![^>]*media=["']print["'])[^>]*>|<link[^>]*rel=["']stylesheet["'][^>]*fonts\.googleapis\.com(?![^>]*media=["']print["'])[^>]*>/.test(src.replace(/<noscript>[\s\S]*?<\/noscript>/g, ''))) add('Fix', 'LD-01', r, 1, 'a font stylesheet blocks the first paint: load it with media="print" onload="this.media=\'all\'" so the skeleton shows at once');
   }
   // DK-01: adding or editing data is a form PAGE, not a drawer. A drawer with two or more form fields and a Save / Add / Create / Submit / Update button is a finding; filter, column and apply drawers are not. Exception: /* ds-allow: <reason> */
@@ -247,7 +248,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.124.1\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.124.2\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;

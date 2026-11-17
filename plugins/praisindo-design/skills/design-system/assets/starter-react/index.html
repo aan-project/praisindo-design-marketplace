@@ -36,9 +36,10 @@
       (function () {
         var d = document.documentElement;
         d.dataset.icons = 'wait';
-        function loaded() { return Array.prototype.some.call(document.fonts || [], function (f) { return String(f.family).replace(/["']/g, '') === 'Material Icons Outlined' && f.status === 'loaded'; }); }
+        /* LD-01: document.fonts is a Set (it has no length): read it with Array.from or for...of, never with an array method called on it */
+        function loaded() { return Array.from(document.fonts || []).some(function (f) { return String(f.family).replace(/["']/g, '') === 'Material Icons Outlined' && f.status === 'loaded'; }); }
         function ready() { if (loaded()) d.dataset.icons = 'ready'; }
-        if (document.fonts) { document.fonts.load('16px "Material Icons Outlined"').then(ready, function () {}); document.fonts.ready.then(ready); document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', ready); setTimeout(function () { if (d.dataset.icons === 'wait') d.dataset.icons = 'failed'; }, 20000); } else d.dataset.icons = 'ready';
+        if (document.fonts) { document.fonts.load('16px "Material Icons Outlined"').then(ready, function () {}); document.fonts.ready.then(ready); document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', ready); var n = 0, tm = setInterval(function () { ready(); if (d.dataset.icons !== 'wait') clearInterval(tm); else if (++n >= 200) { d.dataset.icons = 'failed'; clearInterval(tm); } }, 100); } else d.dataset.icons = 'ready';
       })();
     </script>
   </head>
