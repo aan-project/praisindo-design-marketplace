@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.120.0, skill v2.120.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.121.0, skill v2.121.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -261,4 +261,28 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** A number card has looks (variants) and its place decides which one is shown: the stat card has Ring (default, `StatCards`), Icon (`StatIcon`), Percent (`StatRing`) and Solid (`StatSolid`); the KPI card has Card (default, `KPI`), Compact (`KpiCompact`) and Trend (`KpiTrend`): every number card of the system is a choice. The place is the `slot` prop (stat cards: `statList` a list page, `statDetail` a detail page, `statOther` elsewhere; KPI cards: `kpiPage` the top of a page, `kpiCard` inside a card or a drawer) and the look of a place is read from My Preferences (PP-05); the `variant` prop sets a look that does not depend on the place. Every look keeps the data, the filter of a stat card (TB-31) and the colours (WG-06).
 **Meet.** Give every number card a `slot`; never style a look by hand; use `variant` only on the Design page.
 **Check.** Set the stat cards of the list pages to Icon in My Preferences: the stat cards of every list page show the icon look and the detail pages keep the ring.
+**Guarded in Praisindo by** a unit test.
+
+### WG-08
+**Rule.** A number that goes up or means a gain is green and a number that goes down or means a loss is red, wherever it is written and not only in a `Delta` chip: use the classes `.tnd-up` and `.tnd-dn` (`trendCls(n)`) on the return of a product, the difference of two counts and every signed number; zero and a missing number have no colour.
+**Meet.** Wrap a signed number in `<span className={trendCls(n)}>`; never colour it by hand.
+**Check.** Open a table with a return column: positive returns are green, negative returns are red, zero is plain.
+**Guarded in Praisindo by** a unit test.
+
+### WG-09
+**Rule.** The chart of a number that goes up or means a gain is brand and the chart of a number that goes down or means a loss is red (danger): the sparkline of the KPI card, `KpiTrend`, `KpiCompact`, `WArea`, `WLine`, the bars of `WBars` take their colour from the change (`chartIntentOfDelta(delta, fallback)`), and the line chart of a price from its first and last point; a chart with no change given keeps its own colour and one whose change is zero is neutral. The number itself stays green or red (WG-08).
+**Meet.** Give the card its `delta`; use `chartIntentOfDelta` for a chart of your own.
+**Check.** A KPI with a sparkline and a delta of -6: the line is red; with +6: brand.
+**Guarded in Praisindo by** a unit test.
+
+### WG-10
+**Rule.** The number cards can be one card instead of separate cards, by a choice of the user in My Preferences, Number cards (`statGroup`, `kpiGroup`: Separate cards or One card): `html[data-sg]` and `html[data-kg]` make a row `.stats` or `.kpis` one card with 1px dividers.
+**Meet.** Keep the two places in `CARD_SLOTS`, set `data-sg` and `data-kg` on the page from the preferences and keep the CSS of `42-widgets.css`.
+**Check.** Choose One card for the stat cards: a list page shows its stat cards inside one bordered box with dividers.
+**Guarded in Praisindo by** a unit test.
+
+### WG-11
+**Rule.** The KPI and stat cards do not use the class `wg-sml` (`KpiCompact` writes its value at the normal widget size); the stat card has the look Soft (`StatSoft`, `.wg-soft`: the soft colour of its intent) beside Ring, Icon, Percent and Solid.
+**Meet.** Do not add `wg-sml` to a number card; offer `soft` in the looks of the stat cards.
+**Check.** Choose Soft for the stat cards: each card has the soft colour of its intent and no fill.
 **Guarded in Praisindo by** a unit test.

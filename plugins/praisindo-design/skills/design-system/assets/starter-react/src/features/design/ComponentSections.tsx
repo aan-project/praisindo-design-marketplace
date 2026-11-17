@@ -1,5 +1,5 @@
 // Design System page: Components, first group (buttons, badges, alerts). Text is the prototype's own.
-import { KPI, StatCards, StatIcon, StatRing, StatSolid, KpiCompact, KpiTrend, WArea, WLine, WBars, WDonut, WSegments, WGauge, WProgressList, WRingList, Delta, Spark, Ring } from '../../design-system/components/Widgets';
+import { KPI, StatCards, StatIcon, StatRing, StatSolid, StatSoft, KpiCompact, KpiTrend, WArea, WLine, WBars, WDonut, WSegments, WGauge, WProgressList, WRingList, Delta, Spark, Ring } from '../../design-system/components/Widgets';
 import { Meter } from '../../design-system/components/States';
 import { HighlightText } from '../../design-system/components/HighlightText';
 import { localeOf } from '../../lib/dateFormat';
@@ -208,6 +208,7 @@ export function WidgetsSection() {
         <WVar n={B('Icon stat', 'Ikon + angka') + ' · StatIcon'}><StatIcon icon="lightbulb" value="384" label={B('New opportunities', 'Peluang baru')} delta={25} /></WVar>
         <WVar n={B('Ring stat', 'Ring persentase') + ' · StatRing'}><StatRing pct={47} label={B('Conversion rate', 'Tingkat konversi')} intent="warning" /></WVar>
         <WVar n={B('Solid highlight', 'Sorotan penuh') + ' · StatSolid'}><StatSolid icon="groups" value="1.253" label={B('Customers managed', 'Customer dikelola')} delta={25} /></WVar>
+        <WVar n={B('Soft highlight', 'Sorotan lembut') + ' · StatSoft'}><StatSoft icon="groups" value="1.253" label={B('Customers managed', 'Customer dikelola')} delta={25} /></WVar>
       </>
       <DsTo p="widgets" />
       <DsH>{B('Line, area and bar charts', 'Grafik garis, area dan batang')}</DsH>
@@ -234,6 +235,7 @@ export function WidgetsSection() {
         ['StatIcon({icon, intent, value, label, delta, good})', '—', 'intent brand', B('Icon tile · value · label · delta chip.', 'Ikon · nilai · label · chip delta.')],
         ['StatRing({pct, label, intent, note})', '0–100', '—', B('Small ring with the percentage as the value.', 'Ring kecil dengan persentase sebagai nilai.')],
         ['StatSolid({icon, value, label, delta, intent})', '—', 'intent brand', B('Filled highlight; at most one per group.', 'Sorotan berwarna penuh; maksimal satu per grup.')],
+        ['StatSoft({icon, value, label, delta, intent})', '—', 'intent brand', B('The soft look: the soft colour of the intent, no fill; the look of the stat card when it is chosen in My Preferences.', 'Tampilan lembut: warna lembut dari intent, tanpa isi penuh; tampilan kartu stat bila dipilih di My Preferences.')],
         ['KpiCompact({title, value, label, spark, intent})', 'number[]', '—', B('Value with a small sparkline.', 'Nilai dengan sparkline kecil.')],
         ['KpiTrend({title, value, spark, delta, good, note})', '—', '—', B('Value + sparkline; the footer band is green when the number goes up and red when it goes down.', 'Nilai + sparkline; pita bawah hijau bila angka naik dan merah bila turun.')],
         ['WArea({icon, label, value, delta, spark, intent})', 'number[]', '—', B('Area chart with the last point marked.', 'Grafik area dengan titik terakhir ditandai.')],
@@ -258,7 +260,7 @@ export function WidgetsSection() {
       <ul className="dsrules">{[
         B('A number card answers one question; its label says what is counted.', 'Kartu angka menjawab satu pertanyaan; labelnya menyebut apa yang dihitung.'),
         B('A change is always icon + sign + number; green when it goes up, red when it goes down (WG-01).', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun (WG-01).'),
-        B('Every number card of this page is a look of its family: the stat card is Ring (StatCards), Icon (StatIcon), Percent (StatRing) or Solid (StatSolid), the KPI card is Card (KPI), Compact (KpiCompact) or Trend (KpiTrend). A place (the slot prop) reads its look from My Preferences, Number cards; the variant prop sets a look of its own (WG-07, PP-05).', 'Setiap kartu angka di halaman ini adalah tampilan dari keluarganya: kartu stat adalah Ring (StatCards), Icon (StatIcon), Percent (StatRing) atau Solid (StatSolid), kartu KPI adalah Card (KPI), Compact (KpiCompact) atau Trend (KpiTrend). Sebuah tempat (prop slot) membaca tampilannya dari My Preferences, Kartu angka; prop variant menetapkan tampilan sendiri (WG-07, PP-05).'),
+        B('Every number card of this page is a look of its family: the stat card is Ring (StatCards), Icon (StatIcon), Percent (StatRing), Solid (StatSolid) or Soft (StatSoft), the KPI card is Card (KPI), Compact (KpiCompact) or Trend (KpiTrend). A place (the slot prop) reads its look from My Preferences, Number cards; the variant prop sets a look of its own (WG-07, PP-05).', 'Setiap kartu angka di halaman ini adalah tampilan dari keluarganya: kartu stat adalah Ring (StatCards), Icon (StatIcon), Percent (StatRing), Solid (StatSolid) atau Soft (StatSoft), kartu KPI adalah Card (KPI), Compact (KpiCompact) atau Trend (KpiTrend). Sebuah tempat (prop slot) membaca tampilannya dari My Preferences, Kartu angka; prop variant menetapkan tampilan sendiri (WG-07, PP-05).'),
         B('A stat card above a table is a filter of that table (TB-31).', 'Kartu stat di atas tabel adalah filter tabel itu (TB-31).'),
         B('The stat cards of one row never share a colour: a repeated colour is replaced by the next free one of the palette (WG-06).', 'Kartu stat dalam satu baris tidak memakai warna yang sama: warna yang berulang diganti warna bebas berikutnya dari palet (WG-06).'),
         B('Cards sit in a .kpis row or a .wgrid; never inside another card.', 'Kartu berada di baris .kpis atau .wgrid; tidak di dalam card lain.'),

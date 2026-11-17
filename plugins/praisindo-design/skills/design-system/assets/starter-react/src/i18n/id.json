@@ -568,5 +568,10 @@
  "prefs.cd.v.compact": "Ringkas",
  "prefs.cd.v.icon": "Ikon",
  "prefs.cd.v.percent": "Persen",
- "prefs.cd.v.trend": "Tren"
+ "prefs.cd.v.trend": "Tren",
+ "prefs.cd.statGroup": "Kartu stat: satu card atau terpisah",
+ "prefs.cd.kpiGroup": "Kartu KPI: satu card atau terpisah",
+ "prefs.cd.v.soft": "Soft",
+ "prefs.cd.v.separate": "Card terpisah",
+ "prefs.cd.v.one": "Satu card"
 }

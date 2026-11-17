@@ -53,12 +53,14 @@ export function PrefsDrawer({ onClose }: { onClose: () => void }) {
       <SegmentedControl id="pf-fs" label={t('prefs.fs')} val={prefs.fs} onChange={(v) => setPref('fs', v as 'small' | 'regular' | 'large')} items={(['small', 'regular', 'large'] as const).map((v) => [v, t('prefs.' + v)] as const)} full />
       <SegmentedControl id="pf-tbl" label={t('prefs.table')} val={prefs.table} onChange={(v) => setPref('table', v as 'sm' | 'md' | 'lg')} items={(['sm', 'md', 'lg'] as const).map((v) => [v, t('size.' + v)] as const)} full />
       {/* the only row of the drawer that is a link: it opens the second drawer; it sits last, under the choices */}
+      <div className="prefs-links">
       <a className="li prefs-link" href="#" role="button" data-testid="prefs-panel-open" onClick={(e) => { e.preventDefault(); setPanel(true); }}>
         <IconTile icon="dashboard_customize" /><div className="m"><span className="t">{t('prefs.panel')}</span><span className="mut">{t('prefs.panelL')}</span></div><Icon name="chevron_right" />
       </a>
       <a className="li prefs-link" href="#" role="button" data-testid="prefs-cards-open" onClick={(e) => { e.preventDefault(); setCards(true); }}>
         <IconTile icon="space_dashboard" /><div className="m"><span className="t">{t('prefs.cd.t')}</span><span className="mut">{t('prefs.cd.l')}</span></div><Icon name="chevron_right" />
       </a>
+      </div>
     </Drawer>
   );
 }

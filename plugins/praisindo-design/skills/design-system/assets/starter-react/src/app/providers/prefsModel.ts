@@ -16,8 +16,10 @@ export type PanelItems = Record<PanelItem, PanelPos>;
 /** The look of the number cards in each place (rule PP-05, DS 2.120): a place (slot) and the looks it can have, the first one is the default. The stat cards (`StatCards`) are in a list page, a detail page or elsewhere;
  *  the KPI cards (`KPI`) are at the top of a page or inside a card or a drawer. */
 export const CARD_SLOTS = {
-  statList: ['ring', 'icon', 'percent', 'solid'], statDetail: ['ring', 'icon', 'percent', 'solid'], statOther: ['ring', 'icon', 'percent', 'solid'],
+  statList: ['ring', 'icon', 'percent', 'solid', 'soft'], statDetail: ['ring', 'icon', 'percent', 'solid', 'soft'], statOther: ['ring', 'icon', 'percent', 'solid', 'soft'],
   kpiPage: ['card', 'compact', 'trend'], kpiCard: ['card', 'compact', 'trend'],
+  /** one card or separate cards: the cards of a row are each a card (default) or one card with dividers (`html[data-sg]`, `html[data-kg]`) */
+  statGroup: ['separate', 'one'], kpiGroup: ['separate', 'one'],
 } as const;
 export type CardSlot = keyof typeof CARD_SLOTS;
 export type CardVariants = Record<CardSlot, string>;

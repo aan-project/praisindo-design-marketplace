@@ -31,7 +31,7 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => { let live = true; brandAdapter.getBrand().then((b) => { if (live) setBrandState(normalizeBrand(b)); }).catch(() => { /* keep the cached brand */ }); return () => { live = false; }; }, []);
   // Layout effect: the CSS variables must be written before any child effect reads them.
-  useLayoutEffect(() => { applyBrand(document, brand, prefs.mode, prefs.lang, prefs.fs); }, [brand, prefs]);
+  useLayoutEffect(() => { applyBrand(document, brand, prefs.mode, prefs.lang, prefs.fs); document.documentElement.dataset.sg = prefs.cards.statGroup; document.documentElement.dataset.kg = prefs.cards.kpiGroup; }, [brand, prefs]);   // the cards of a row: separate or one card (WG-10)
 
   const setPref = useCallback<PrefsApi['setPref']>((key, value) => {
     setOvr((o) => { const n = { ...o, [key]: value }; writeJSON('prefs', n); return n; });

@@ -1,4 +1,4 @@
-# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.120.0, skill v2.120.0)
+# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.121.0, skill v2.121.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -346,4 +346,10 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 **Rule.** My Preferences has a third drawer, Number cards (a link row under Panel items, opened with Back like the second drawer): one Select for each place of the number cards (WG-07), each with the looks of its card. The choice is saved for the user in the preferences (`prefs.cards`); a stored choice that is not one of the looks of its place is the default; Reset returns every place to the default.
 **Meet.** Keep `CARD_SLOTS`, `resolveCards` and `CardLooksDrawer` of the starter (`app/providers/prefsModel.ts`, `app/shell/PrefsDrawer.tsx`); an application that adds a place adds it to `CARD_SLOTS` and to the i18n keys `prefs.cd.<slot>`.
 **Check.** Open My Preferences, Number cards: one Select per place; change one, close and reload: the choice is kept.
+**Guarded in Praisindo by** a unit test.
+
+### PP-06
+**Rule.** The Preferences drawer keeps its fields (Font size, Table size) apart from its links (Panel items, Number cards): the links are a list of their own (`.prefs-links`) under the fields, the rows touch each other with no gap between them.
+**Meet.** Put the link rows of the Preferences drawer in one `<div className="prefs-links">` after the fields.
+**Check.** Open My Preferences: the fields, then one block of link rows with only their 1px lines between them.
 **Guarded in Praisindo by** a unit test.

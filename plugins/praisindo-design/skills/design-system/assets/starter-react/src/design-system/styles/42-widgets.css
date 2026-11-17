@@ -35,6 +35,11 @@
 .wg-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--int-def);flex:none}
 .wg-rl{display:flex;flex-direction:column;gap:16px}.wg-rli{display:flex;align-items:center;gap:12px}
 .wg.wg-act{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}.wg.wg-act:hover{border-color:var(--color-border-neutral-strong)}.wg.wg-act[aria-pressed=true]{border-color:var(--int-def);background:var(--int-sub)}   /* a number card that is a filter (TB-31) */
+.stats,.kpis{--grp-line:var(--color-border-neutral-default)}
+html[data-sg=one] .stats,html[data-kg=one] .kpis{gap:0;background:var(--color-surface-neutral-primary);border:1px solid var(--grp-line);border-radius:var(--r-card);overflow:hidden}   /* WG-10: the cards of a row are one card with dividers */
+html[data-sg=one] .stats>.stat,html[data-sg=one] .stats>.wg,html[data-kg=one] .kpis>.kpi,html[data-kg=one] .kpis>.wg{border:0;border-radius:0;box-shadow:-1px 0 0 0 var(--grp-line),0 -1px 0 0 var(--grp-line)}   /* the dividers are shadows that the clipped container shows only between the cards */
+.tnd-up{color:var(--color-foreground-success-default)}.tnd-dn{color:var(--color-foreground-danger-default)}   /* WG-08: a number that goes up is green, one that goes down is red */
+.wg.wg-soft{background:var(--int-sub);border-color:transparent}.wg.wg-soft .hp-ic{background:var(--color-surface-neutral-primary)}   /* the soft look of a stat card: the soft colour of its intent */
 .wg.wg-solid{background:var(--int-def);color:var(--int-on);border-color:transparent}.wg.wg-solid .wg-v,.wg.wg-solid .wg-t{color:inherit}.wg.wg-solid .wg-t{opacity:.9}
 .wg.wg-solid .dlt{background:color-mix(in srgb,currentColor 20%,transparent);color:inherit}
 .wg.wg-solid.wg-act[aria-pressed=true]{background:var(--int-def);outline:2px solid var(--int-def);outline-offset:2px}

@@ -15,6 +15,10 @@ export function deltaModel(v: unknown, lang: string, good = 1, unit = '%'): Delt
   };
 }
 export const dirOf = (v: unknown): 1 | 0 | -1 => (wgN(v) > 0 ? 1 : wgN(v) < 0 ? -1 : 0);
+/** The colour of a chart that shows a number that goes up or down (rule WG-09, owner 2026-11-17): a chart of a number that goes up is brand, one that goes down is red (danger); with no change given the chart keeps its own colour. */
+export const chartIntentOfDelta = (delta: unknown, fallback = 'brand'): string => (delta == null ? fallback : dirOf(delta) < 0 ? 'danger' : dirOf(delta) > 0 ? 'brand' : 'neutral');
+/** The class of a number that goes up (green) or down (red) wherever it is written, not only in a chip (rule WG-08, owner 2026-11-17); 0 and a missing number have none. */
+export const trendCls = (n: unknown): string => { const v = Number(n); return !Number.isFinite(v) || v === 0 ? '' : v > 0 ? 'tnd-up' : 'tnd-dn'; };
 export const intentOfDir = (dir: number, good = 1): 'neutral' | 'success' | 'danger' => (dir === 0 ? 'neutral' : dir === good ? 'success' : 'danger');
 
 const f1 = (x: number) => x.toFixed(1);

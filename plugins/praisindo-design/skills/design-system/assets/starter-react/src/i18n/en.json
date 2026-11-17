@@ -568,5 +568,10 @@
  "prefs.cd.v.compact": "Compact",
  "prefs.cd.v.icon": "Icon",
  "prefs.cd.v.percent": "Percent",
- "prefs.cd.v.trend": "Trend"
+ "prefs.cd.v.trend": "Trend",
+ "prefs.cd.statGroup": "Stat cards: one card or separate",
+ "prefs.cd.kpiGroup": "KPI cards: one card or separate",
+ "prefs.cd.v.soft": "Soft",
+ "prefs.cd.v.separate": "Separate cards",
+ "prefs.cd.v.one": "One card"
 }
