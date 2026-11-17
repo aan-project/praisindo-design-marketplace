@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.117.0** (2026-11-17) Synchronised with DS 2.117.0: TB-31 (a stat card above a table is a filter), BT-10 (the `.seg` buttons are as wide as their label), CT-01 (multi-series line and area charts like Return by period, `multiLine` in `withChart`), DK-24 (the layout of a stepper form page, horizontal or vertical, an icon toggle per page; vertical Wizard rail on the right, sticky and scrollable, actions in a card without a header, `Card title=""`), TB-29 amended (a detail page tab bar is segmented); CSS of both starters, `Card`, i18n keys `fl.*`, the Design page snapshots of the starter HTML regenerated.
 - **2.116.0** (2026-11-16) Synchronised with DS 2.116.0: CD-25 (faint dark Tooltip border), CD-26 (only the glyph of the Alert icon rings every 10 s, the tile stays), CD-27 (the glyph of the Empty and Error state icon bounces, the tile stays), TB-30 (a segmented tab is as wide as its label); CSS of both starters (`55-tooltip.css`, `08-drawer.css`, `05-states.css`, the drawer tab bar and Customer 360 tabs).
 - **2.115.0** (2026-11-15) Synchronised with DS 2.115.0: LD-02 (the loading skeleton follows the page: two-panel skeleton for the sign-in screen, shell for other pages; `index.html` of both starters).
 - **2.114.0** (2026-11-15) Synchronised with DS 2.114.0: the light-mode sign-in pill has a dark brand veil (CSS of both starters, LG-04). No new rule.

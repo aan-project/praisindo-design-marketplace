@@ -550,5 +550,8 @@
  "ff.cpSv": "Saturasi dan kecerahan",
  "ff.cpHue": "Rona",
  "ff.cpEye": "Ambil warna dari layar",
- "ff.cpOpen": "Buka pemilih warna"
+ "ff.cpOpen": "Buka pemilih warna",
+ "fl.t": "Tata letak form",
+ "fl.h": "Horizontal",
+ "fl.v": "Vertikal"
 }

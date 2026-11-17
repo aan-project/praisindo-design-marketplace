@@ -4,12 +4,12 @@ import type { ReactNode } from 'react';
 import { usePrefs } from '../../app/providers/PrefsProvider';
 import { Chip } from './Chip';
 
-/** The framed section. Without `title` it is the bare card (no frame and no header, for a short block that needs none; it was `Card (no title)` until DS 2.76). */
+/** The framed section. Without `title` it is the bare card (no frame and no header, for a short block that needs none; it was `Card (no title)` until DS 2.76). With `title=""` it is the framed card WITHOUT a header (for the actions of a vertical form, DK-24). */
 export function Card({ title, body, actions, flush, footer }: { title?: string; body: ReactNode; actions?: ReactNode; flush?: boolean; footer?: ReactNode }) {
   if (title === undefined) return <section className="card-bare"><div className="cb">{body}</div></section>;
   return (
     <section className="card">
-      <div className="ch"><h2>{title}</h2>{actions ? <div className="rw">{actions}</div> : null}</div>
+      {title === '' && !actions ? null : <div className="ch"><h2>{title}</h2>{actions ? <div className="rw">{actions}</div> : null}</div>}
       <div className={`cb${flush ? ' flush' : ''}`}>{body}</div>
       {footer ? <div className="cf">{footer}</div> : null}
     </section>

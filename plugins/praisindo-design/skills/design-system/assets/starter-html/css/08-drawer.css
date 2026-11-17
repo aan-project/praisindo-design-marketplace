@@ -32,7 +32,6 @@
 .sec{display:flex;flex-direction:column;gap:8px}
 .sec>.fw6{font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0))}
 .seg{display:flex;gap:8px;flex-wrap:wrap}
-.seg .btn{flex:1}
 .tb{position:relative;display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:44px}
 .tb .sp{flex:1}
 .bulk{order:-1;flex:1 1 100%;min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:0 8px 0 16px;background:var(--color-surface-brand-subtle-1);border:1px solid var(--color-border-brand-default);border-radius:8px;color:var(--color-foreground-brand-strong);font-weight:calc(500 + var(--fw-shift,0))}

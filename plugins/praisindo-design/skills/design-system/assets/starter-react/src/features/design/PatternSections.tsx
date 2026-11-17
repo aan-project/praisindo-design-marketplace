@@ -118,7 +118,7 @@ export function LayoutsSection() {
             badges={<Badge label={B('Ready', 'Siap')} {...badgeProps('status', 'active')} />}
             facts={<><DetailItem label={B('Version', 'Versi')}>v2</DetailItem><DetailItem label={B('Owner', 'Pemilik')}><UserName name="Sam Rivera" /></DetailItem></>}
             next={<div className="odnx none"><Icon name="info" /><span className="mut">{B('Live. Evaluated in the daily run.', 'Aktif. Dievaluasi dalam daily run.')}</span></div>} />
-          <div className="c3tabs"><Tabs items={[['ov', B('Overview', 'Ikhtisar')], ['lg', B('Logic', 'Logika')]]} active="ov" size="md" /></div>
+          <div className="c3tabs"><Tabs items={[['ov', B('Overview', 'Ikhtisar')], ['lg', B('Logic', 'Logika')]]} active="ov" size="md" variant="seg" /></div>
         </DetailLayout>
       </DsDemo>
       <DsDemo label={B('Detail layout with the narrow column on the right: side="right" and a stack of cards (Signal rule detail, rule DT-06)', 'Tata letak detail dengan kolom sempit di kanan: side="right" dan tumpukan kartu (detail Signal rule, aturan DT-06)')}>
@@ -128,7 +128,7 @@ export function LayoutsSection() {
         </div>}>
           <DetailSummary label={B('Summary', 'Ringkasan')} icon="check_circle" intent="success" kicker={B('Lifecycle', 'Siklus')} title={B('Active', 'Aktif')}
             facts={<><DetailItem label={B('Version', 'Versi')}>v2</DetailItem><DetailItem label={B('Owner', 'Pemilik')}><UserName name="Sam Rivera" /></DetailItem></>} />
-          <div className="c3tabs"><Tabs items={[['ov', B('Overview', 'Ikhtisar')], ['lg', B('Logic', 'Logika')]]} active="ov" size="md" /></div>
+          <div className="c3tabs"><Tabs items={[['ov', B('Overview', 'Ikhtisar')], ['lg', B('Logic', 'Logika')]]} active="ov" size="md" variant="seg" /></div>
         </DetailLayout>
       </DsDemo>
       <DsDemo label={B('Three panels: third (the panel on the left, the content in the centre, a card on the right), as Customer 360 and the Problem report (rule DK-18)', 'Tiga panel: third (panel di kiri, konten di tengah, card di kanan), seperti Customer 360 dan Problem report (aturan DK-18)') + ' · DetailLayout'}>
@@ -230,7 +230,7 @@ export function NavSection() {
       <DsApi rows={[['AnchorNav(key,groups,tools)', 'tools: HTML of the .anv-tools group', '—', B('Optional third argument; renders inside the sticky nav.', 'Argumen ketiga opsional; dirender di dalam nav sticky.')]]} />
       <DsTo p="wizard" />
       <DsH>{B('Step form (Wizard)', 'Form bertahap (Wizard)')}</DsH>
-      {P(B("Use a stepper to split a long form into steps. Pick one variant per product and keep it. Each step is a button, so the user can go back and forth freely; the current step has aria-current, finished steps show a check, and a step with an error turns red. Phone: the row scrolls sideways.", "Pakai stepper untuk memecah form panjang menjadi beberapa langkah. Pilih satu varian per produk dan konsisten. Tiap langkah adalah tombol, sehingga user bebas maju mundur; langkah aktif memakai aria-current, langkah selesai menampilkan centang, dan langkah yang punya error menjadi merah. Ponsel: baris bisa digeser ke samping."))}
+      {P(B("Use a stepper to split a long form into steps. Pick one variant per product and keep it. Each step is a button, so the user can go back and forth freely; the current step has aria-current, finished steps show a check, and a step with an error turns red. Phone: the row scrolls sideways. A stepper form has two layouts the user chooses: horizontal (the default: the stepper along the top, one step at a time, Back and Next) or vertical (the whole form as one page with the vertical Wizard as the rail to every section, no Back and Next); the icon toggle at the right end of the page title belongs to that page only and is remembered for the user (rule DK-24).", "Pakai stepper untuk memecah form panjang menjadi beberapa langkah. Pilih satu varian per produk dan konsisten. Tiap langkah adalah tombol, sehingga user bebas maju mundur; langkah aktif memakai aria-current, langkah selesai menampilkan centang, dan langkah yang punya error menjadi merah. Ponsel: baris bisa digeser ke samping. Form bertahap punya dua layout yang dipilih user: horizontal (bawaan: stepper di atas, satu langkah per layar, Back dan Next) atau vertikal (seluruh form satu halaman dengan Wizard vertikal sebagai rel ke tiap bagian, tanpa Back dan Next); toggle ikon di kanan judul halaman berlaku untuk halaman itu saja dan diingat untuk user (aturan DK-24)."))}
       {STEP_VARIANTS.map((s) => {
         const id = 'dsst-' + s.v;
         return (

@@ -257,9 +257,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Guarded in Praisindo by** a unit test.
 
 ### TB-29
-**Rule.** The variant of the tabs follows where they sit, on every page: tabs OUTSIDE a card use the underline variant (the tab bar of a detail page, the tabs above the cards, the tabs of a list page whose card has no border or surface); tabs INSIDE a card use the segmented variant (a tab strip in a card or an entity panel, Key information); a drawer counts as a card, so its tabs are segmented. The context makes the variant (`.card .tabs`, `.drawer .tabs` in the DS CSS), so the markup does not change; the Design page example of the underline variant sits in the documentation card (`.dss`), which is not counted.
-**Meet.** Use `Tabs` with no `variant` and put it where it belongs; do not set `variant="seg"` by hand for a tab strip that sits inside a card or a drawer (it is segmented already), and do not make a detail page tab bar segmented.
-**Check.** Look at the tab bar of a detail page (underline) and at a tab strip inside a card (segmented).
+**Rule.** The variant of the tabs follows where they sit, on every page: tabs OUTSIDE a card use the underline variant (the tabs above the cards, the tabs of a list page whose card has no border or surface), EXCEPT the tab bar of a detail page, which is segmented too (owner decision 2026-11-17); tabs INSIDE a card use the segmented variant (a tab strip in a card or an entity panel, Key information); a drawer counts as a card, so its tabs are segmented. The context makes the variant (`.card .tabs`, `.drawer .tabs` in the DS CSS), so the markup does not change; the Design page example of the underline variant sits in the documentation card (`.dss`), which is not counted.
+**Meet.** Use `Tabs` with no `variant` and put it where it belongs; do not set `variant="seg"` by hand for a tab strip that sits inside a card or a drawer (it is segmented already), and give the tab bar of a detail page `variant="seg"` (it sits outside a card but is segmented).
+**Check.** Look at the tab bar of a detail page (segmented), at the tabs of a list page (underline) and at a tab strip inside a card (segmented).
 **Guarded in Praisindo by** a unit test.
 
 ### TB-30
@@ -278,4 +278,28 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Rule.** The skeleton that shows before the application is drawn is the skeleton of the page that will appear: the sign-in page gets the two panels of the sign-in screen (the story panel and the form, no sidebar), every other page the shell of LD-01. `index.html` chooses with a script that runs before the first paint (the sign-in skeleton when the address is `#/login`; a project with a session also picks it when nobody is signed in); on a phone only the form shows; the page margin of the skeleton is 0.
 **Meet.** Keep the `boot-l` section and the small script of the starter `index.html`; add the project's own session check to the script when the project has a sign-in.
 **Check.** Hold the application script back and open `#/login`: the two panels show, not the sidebar; open any other page signed in: the shell shows.
+**Guarded in Praisindo by** a unit test.
+
+### TB-31
+**Rule.** A stat card above a table is a filter of that table: pressing it narrows the rows to its group, pressing it again (or Total) shows every row (`StatCards` with `k`, `on` and `onStat`, `aria-pressed`). A card that counts something that is not a group of rows (a reach, a number of types) is not a filter. The KPI cards of a result are not stat cards.
+**Meet.** Build the stat cards of a list page with `StatCards` and give every item that is a group a `k` and an `on`, and the page an `onStat` that sets the filter of the table.
+**Check.** Press a stat card of a list page: the table keeps the rows of that group and the card shows pressed; press it again: every row is back.
+**Guarded in Praisindo by** a unit test.
+
+### BT-10
+**Rule.** The buttons of a choice group (`.seg`) are as wide as their label: no button grows to fill the row (no `flex` on `.seg .btn`); the group wraps to the next line when it does not fit.
+**Meet.** Use the `.seg` group of the system; do not give its buttons `flex:1` or `width:100%`.
+**Check.** A choice group of buttons: each button is as wide as its text.
+**Guarded in Praisindo by** a unit test.
+
+### CT-01
+**Rule.** A line or area chart with more than one series is drawn like the Return by period chart: smooth lines of 2px, a soft solid fill of 16%, a marker of 4px on every point and the legend below, so the series are easy to compare. It is done once, in `withChart`; a chart with one series, a bar chart and a mixed chart keep their own look.
+**Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `multiLine`); do not style a multi-series line by hand.
+**Check.** Open a chart with two lines: smooth, filled, with markers and the legend below.
+**Guarded in Praisindo by** a unit test.
+
+### DK-24
+**Rule.** A stepper form page has two layouts, chosen on that page: horizontal (the default: the numbered stepper along the top, one step at a time, Back and Next) and vertical (the whole form as one page: every step is a section, the vertical `Wizard` is the rail in the side column on the right, stays in place (sticky) when the page scrolls, its height is the height of the screen (the window less the page padding above and below) and its content scrolls inside it (the cards in it never shrink, so nothing is cut), and the rail scrolls the page to the sections, no Back and no Next; the action buttons of the form sit in that right column, in a card without a header (`Card` with `title=""`) under the rail; a form page always uses the `Wizard`, never a jump rail). The choice is an icon toggle (`SegmentedControl` with the options Horizontal and Vertical, like the Kanban and Table toggle of a list) at the right end of the page title; it belongs to that page only (it is not a setting of all forms and it is not in My Preferences) and is remembered for the user per page.
+**Meet.** Put the toggle in the actions of the page header of the stepper form; keep the choice per page (the starter has the classes `.sbstack` and `.stpv`); in the vertical layout build every step as a section and drop Back and Next.
+**Check.** Open a stepper form: steps on top with Back and Next; press Vertical in the icon toggle at the right of the title: the whole form is one page with a rail and no Back and Next; reload: the choice is kept; another form page keeps its own choice.
 **Guarded in Praisindo by** a unit test.

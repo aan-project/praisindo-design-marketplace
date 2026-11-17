@@ -550,5 +550,8 @@
  "ff.cpSv": "Saturation and brightness",
  "ff.cpHue": "Hue",
  "ff.cpEye": "Pick a color from the screen",
- "ff.cpOpen": "Open the color picker"
+ "ff.cpOpen": "Open the color picker",
+ "fl.t": "Form layout",
+ "fl.h": "Horizontal",
+ "fl.v": "Vertical"
 }
