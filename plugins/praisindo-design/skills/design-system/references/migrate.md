@@ -89,7 +89,7 @@ Untuk setiap halaman sesuai urutan di rencana (satu halaman = satu atau beberapa
 1. Lepas sisa gaya dan pustaka UI lama yang sudah tidak dipakai (periksa pemakaian dulu; bila ragu, jangan hapus, laporkan).
 2. Jalankan audit penuh: Blockers 0 dan Fixes 0 adalah target; sisa Cleanup dan alasannya dilaporkan.
 3. Daftar periksa akhir dari `SKILL.md`: tanpa literal warna/ukuran/radius/jarak, tanpa px di luar kelipatan 4, shell + Design System + Branding bekerja, log komponen baru terisi, terang/gelap dan EN/ID dicek, ponsel 390px tanpa scroll samping, state kosong/memuat/galat ada, fokus terlihat, tanpa Alert awal.
-4. Tulis versi skill (v2.123.0) di README project atau komentar pertama.
+4. Tulis versi skill (v2.124.0) di README project atau komentar pertama.
 5. Laporan akhir: ringkasan per tahap, daftar halaman dan statusnya, hasil build/tes/audit dibanding baseline, daftar komponen baru yang diusulkan, daftar hal yang tidak dimigrasi dan alasannya, pertanyaan tersisa, nama tangkapan layar yang Anda buka. Jangan push dan jangan buka PR; tunggu perintah saya.
 
 ## Larangan

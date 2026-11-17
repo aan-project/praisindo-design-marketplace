@@ -193,7 +193,6 @@ export function WidgetsSection() {
   return (
     <DsSec id="widgets" title={B('Widget', 'Widget')} lead={B('Widgets are small self-contained cards that show data as a chart or a share: a line, an area, bars, a donut, a gauge, a list of progress. The cards that show one number are components of their own, on the pages Stat cards and KPI cards. Charts are inline SVG coloured only through intents, so they follow light and dark tokens. Every line or area chart is drawn like the Opportunity trend, with smooth lines: a soft fill, no markers and a tooltip that lists every series when the pointer is over a point (rule CT-01); the legend of every chart is under the chart (rule CT-02).', 'Widget adalah card kecil mandiri yang menampilkan data sebagai grafik atau porsi: garis, area, batang, donut, gauge, daftar progres. Card yang menampilkan satu angka adalah komponen tersendiri, di halaman Kartu stat dan Kartu KPI. Grafik berupa SVG inline yang diwarnai hanya lewat intent, sehingga mengikuti token terang dan gelap. Setiap grafik garis atau area digambar seperti Opportunity trend dengan garis halus (tidak kaku): isi lembut, tanpa penanda, dan tooltip yang menampilkan semua seri saat pointer di atas satu titik (aturan CT-01); legenda setiap grafik berada di bawah grafik (aturan CT-02).')}>
       <DsTo p="kpi" />
-      <DsH>{B('KPI card', 'Kartu KPI')}</DsH>
       <>
         <WVar n={B('KPI with a note', 'KPI dengan catatan') + ' · KPI'}><KPI variant="card" label={B('Active opportunities', 'Peluang aktif')} n={16} note={B('6 high priority', '6 prioritas tinggi')} /></WVar>
         <WVar n={B('KPI with a delta', 'KPI dengan delta') + ' · KPI delta'}><KPI variant="card" label={B('Conversions', 'Konversi')} n={12} delta={25} note={vs} /></WVar>
@@ -203,7 +202,6 @@ export function WidgetsSection() {
         <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Converted value', 'Nilai konversi')} value="Rp 8,4 M" spark={[10, 12, 11, 15, 14, 18, 17, 21]} delta={12} note={vs} /></WVar>
       </>
       <DsTo p="stat" />
-      <DsH>{B('Stat card', 'Kartu stat')}</DsH>
       <>
         <DsDemo label={B('Stat cards with a ring', 'Kartu statistik dengan ring') + ' · StatCards'}><div style={sty('flex:1 1 100%')}><StatCards variant="ring" items={[{ icon: 'list_alt', intent: 'brand', n: 19, label: t('stat.total'), pct: 100 }, { icon: 'bolt', intent: 'success', n: 16, label: t('stat.active'), pct: 84 }, { icon: 'priority_high', intent: 'danger', n: 6, label: B('High priority', 'Prioritas tinggi'), pct: 32 }]} /></div></DsDemo>
         <WVar n={B('Icon stat', 'Ikon + angka') + ' · StatIcon'}><StatIcon icon="lightbulb" value="384" label={B('New opportunities', 'Peluang baru')} delta={25} /></WVar>

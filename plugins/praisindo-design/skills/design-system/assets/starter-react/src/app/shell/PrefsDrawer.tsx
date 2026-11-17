@@ -65,7 +65,7 @@ export function PrefsDrawer({ onClose }: { onClose: () => void }) {
         <IconTile icon="space_dashboard" /><div className="m"><span className="t">{t('prefs.sv.t')}</span><span className="mut">{t('prefs.sv.l')}</span></div><Icon name="chevron_right" />
       </a>
       <a className="li prefs-link" href="#" role="button" data-testid="prefs-kpi-open" onClick={(e) => { e.preventDefault(); setView('kpi'); }}>
-        <IconTile icon="monitoring" /><div className="m"><span className="t">{t('prefs.kv.t')}</span><span className="mut">{t('prefs.kv.l')}</span></div><Icon name="chevron_right" />
+        <IconTile icon="bar_chart" /><div className="m"><span className="t">{t('prefs.kv.t')}</span><span className="mut">{t('prefs.kv.l')}</span></div><Icon name="chevron_right" />
       </a>
       </div>
     </Drawer>
