@@ -61,7 +61,8 @@ const RAW: readonly DsPageDef[] = [
   P('menu', 'comp', 'Menu and popover', 'Menu dan popover', ['overlays'], ['dropdown menu', 'aksi baris', 'row menu', 'popover', 'more'], 'containers'),
 
   P('table', 'comp', 'Table', 'Tabel', ['tables'], ['tabel', 'daftar', 'list', 'grid', 'listtable'], 'data'),
-  P('widgets', 'asm', 'Widgets', 'Widget', ['widgets'], ['kpi', 'statistik', 'stat', 'grafik', 'chart', 'sparkline', 'ring', 'donut', 'gauge']),
+  P('stats', 'comp', 'Stat and KPI cards', 'Kartu stat dan KPI', ['widgets'], ['kpi', 'stat', 'statistik', 'stat card', 'kartu statistik', 'kartu angka', 'angka', 'number card', 'delta', 'ringkasan'], 'data'),
+  P('widgets', 'asm', 'Widgets', 'Widget', ['widgets'], ['grafik', 'chart', 'sparkline', 'ring', 'donut', 'gauge', 'tren', 'trend', 'bar', 'line', 'area']),
   P('highlight-text', 'comp', 'Highlight text', 'Teks sorotan', ['widgets'], ['statistic', 'statistik', 'sorotan', 'angka besar', 'big number', 'nilai', 'value', 'label value', 'highlight'], 'data'),
   P('detail-layout', 'asm', 'Detail layout', 'Tata letak detail', ['layouts'], ['detail', 'detailpanel', 'detailsummary', 'panel']),
 
@@ -114,6 +115,7 @@ export const DS_OLD_SECTIONS: readonly string[] = Object.keys(SEC_LANDING);
 
 /** The description under the title of a page whose section holds several items (so the lead of the section cannot be the lead of the page), and of the pages that had none (DS 2.77, rule DS-24): [English, Indonesian]. */
 export const DS_LEADS: Readonly<Record<string, readonly [string, string]>> = {
+  stats: ['The cards that show one number: the KPI card (a number with a note, a change or a sparkline) and the stat card (an icon or a ring with a number; above a table it is a filter). They are components, not widgets: a widget shows data as a chart or a share and is on the page Widgets.', 'Card yang menampilkan satu angka: kartu KPI (angka dengan catatan, perubahan atau sparkline) dan kartu stat (ikon atau ring dengan angka; di atas tabel menjadi filter). Keduanya komponen, bukan widget: widget menampilkan data sebagai grafik atau porsi dan ada di halaman Widget.'],
   avatar: ['ProductLogo shows the logo of an issuer or a product in a soft square, with the initials of the name when there is no image; Logo shows the brand of the application.', 'ProductLogo menampilkan logo penerbit atau produk dalam kotak lembut, dengan inisial nama bila tidak ada gambar; Logo menampilkan merek aplikasi.'],
   project: ['Components this project added because the design system had none. Each one is shown here with its states and logged in docs/design-system/new-components.md for the design-system owner.', 'Komponen yang ditambahkan proyek ini karena design system belum punya. Tiap komponen tampil di sini dengan state-nya dan dicatat di docs/design-system/new-components.md untuk pemilik design system.'],
   principles: ['The principles behind every decision of the system. Read them before the components: they say why a screen looks and behaves as it does.', 'Prinsip di balik setiap keputusan sistem. Baca sebelum komponen: prinsip menjelaskan mengapa sebuah layar tampil dan berperilaku seperti itu.'],
@@ -153,7 +155,7 @@ export const DS_ROUTE: Readonly<Record<string, DsRoute>> = {
   badges: { rest: 'badge', rules: [['Chip', 'chip']] },
   cards: { rest: 'card', rules: [['DetailList', 'detail-list'], ['DetailItem', 'detail-list']] },
   tables: { rest: 'table', rules: [['ProductLogo', 'avatar']] },
-  widgets: { rest: 'widgets', rules: [['HighlightText', 'highlight-text']] },
+  widgets: { rest: 'widgets', rules: [['HighlightText', 'highlight-text'], ['KPI', 'stats'], ['StatCards', 'stats'], ['StatIcon', 'stats'], ['StatRing', 'stats'], ['StatSolid', 'stats'], ['KpiCompact', 'stats'], ['KpiTrend', 'stats']] },
   feedback: { rest: 'states', rules: [['AlertAction', 'alert']] },
   overlays: { rest: 'drawer', rules: [['Toast', 'toast'], ['ActionMenu', 'menu'], ['NotificationBell', 'notifications'], ['NotificationItem', 'notifications'], ['NotificationPopover', 'notifications'], ['NotificationPanel', 'notifications'], ['DialogCard', 'modal'], ['Modal', 'modal'], ['.odbar', 'page-layouts']] },
   layouts: { rest: 'page-layouts', rules: [['DetailLayout', 'detail-layout'], ['DetailSummary', 'detail-layout'], ['DetailPanel', 'detail-layout']] },

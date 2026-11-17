@@ -293,9 +293,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Guarded in Praisindo by** a unit test.
 
 ### CT-01
-**Rule.** Every line or area chart is drawn like the Opportunity trend chart: straight lines of 2px, a soft solid fill of 12%, no marker on the points, the legend on top when there is more than one series, and a shared tooltip (`shared: true`, `intersect: false`) that lists the value of every series when the pointer is over a point. It is done once, in `withChart`; a bar chart, a donut and a mixed chart (a series with a type of its own) keep their own look.
+**Rule.** Every line or area chart is drawn like the Opportunity trend chart: smooth lines of 2px, a soft solid fill of 12%, no marker on the points, and a shared tooltip (`shared: true`, `intersect: false`) that lists the value of every series when the pointer is over a point. It is done once, in `withChart`; a bar chart, a donut and a mixed chart (a series with a type of its own) keep their own look.
 **Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `multiLine`); do not style a line or area chart by hand.
-**Check.** Open a line or area chart: straight lines, no markers, the legend on top; hover a point: one tooltip lists every series.
+**Check.** Open a line or area chart: smooth lines, no markers; hover a point: one tooltip lists every series.
 **Guarded in Praisindo by** a unit test.
 
 ### DK-24
@@ -320,4 +320,10 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Rule.** On a form page, above the card of actions, the right panel holds a tools row: Tips (a lightbulb with a count) always; Recent activity (a history button) only on a form of a record that already exists (an add form has no activity yet); Data readiness (a dot: success, warning or danger) only when the page depends on data that needs an integration, and then for every role, one row per source system with its state. The row is horizontal (`.anv-tools`) and each button opens a drawer.
 **Meet.** Build the tools row with the classes `.anv-tools` and `.anv-b.jtl`; pass the tips always, the activity only for an existing record, the readiness only for a page with integrated data; never hide the readiness behind a permission.
 **Check.** Open an add form: Tips only; open an edit form: Tips and Recent activity; open a form that needs source data as any role: Data readiness is there and names the systems.
+**Guarded in Praisindo by** a unit test.
+
+### CT-02
+**Rule.** The legend of every chart is under the chart (`legend.position: 'bottom'`); it is done once in `withChart` (`legendBottom`); a chart that hides its legend keeps it hidden.
+**Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `legendBottom`); do not move a legend to the top or the side.
+**Check.** Open a chart with a legend: the legend is under the chart.
 **Guarded in Praisindo by** a unit test.

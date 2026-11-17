@@ -75,10 +75,19 @@ export function KPI({ animate = true, label, n, note, size = SZ, delta, good = 1
 }
 
 export interface StatItem { k?: string; on?: boolean; intent: string; label: string; n: ReactNode; pct?: number; icon?: string }
+/** The colours of the stat cards of one row (rule WG-06, owner 2026-11-17): no two cards of a row have the same colour. A card keeps the intent it was given when it is the only one with it;
+ *  a card that repeats an intent takes the next colour of the palette that no card of the row uses. */
+const STAT_PALETTE = ['brand', 'info', 'success', 'warning', 'purple', 'cyan', 'danger', 'secondary', 'neutral'] as const;
+export function statIntents(given: readonly string[]): string[] {
+  if (given.length < 2) return [...given];
+  const taken = new Set<string>(), keep = given.map((g) => { if (taken.has(g)) return false; taken.add(g); return true; });
+  return given.map((g, i) => { if (keep[i]) return g; const n = STAT_PALETTE.find((c) => !taken.has(c)); if (!n) return g; taken.add(n); return n; });
+}
 export function StatCards({ animate = true, items, size = SZ, onStat }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; items: readonly StatItem[]; size?: string; onStat?: (k: string) => void }) {
   return (
     <div className="stats">
       {items.map((x, i) => {
+        const intent = statIntents(items.map((y) => y.intent))[i]!;
         const p = statPct(x.pct), b = !!x.k;
         const inner = (
           <>
@@ -86,7 +95,7 @@ export function StatCards({ animate = true, items, size = SZ, onStat }: { /** co
             <span className="nv"><span className="l">{x.label}</span><span className="n"><Cnt v={x.n} animate={animate} /></span></span>
           </>
         );
-        const cls = `stat i-${x.intent} s-${size}${b ? ' act' : ''}`;
+        const cls = `stat i-${intent} s-${size}${b ? ' act' : ''}`;
         return b
           ? <button key={x.k} type="button" className={cls} aria-pressed={!!x.on} onClick={() => onStat?.(x.k!)}>{inner}</button>
           : <div key={i} className={cls}>{inner}</div>;
@@ -97,7 +106,7 @@ export function StatCards({ animate = true, items, size = SZ, onStat }: { /** co
 
 const Fw = ({ children }: { children: ReactNode }) => <span className="fw6">{children}</span>;
 
-export function WTrend({ animate = true, title, value, spark, delta, good = 1, note }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: string; spark: readonly unknown[]; delta?: unknown; good?: number; note?: string }) {
+export function KpiTrend({ animate = true, title, value, spark, delta, good = 1, note }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: string; spark: readonly unknown[]; delta?: unknown; good?: number; note?: string }) {
   const { prefs } = usePrefs();
   const dir = dirOf(delta), intent = intentOfDir(dir, good);
   return (
@@ -107,10 +116,10 @@ export function WTrend({ animate = true, title, value, spark, delta, good = 1, n
     </section>
   );
 }
-export function WIconStat({ animate = true, icon, intent = 'brand', value, label, delta, good = 1 }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; icon: string; intent?: string; value: string; label: string; delta?: unknown; good?: number }) {
+export function StatIcon({ animate = true, icon, intent = 'brand', value, label, delta, good = 1 }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; icon: string; intent?: string; value: string; label: string; delta?: unknown; good?: number }) {
   return <section className="wg wg-row"><IconTile icon={icon} intent={intent} /><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} /></span><span className="wg-t">{label}</span></div>{delta != null ? <D v={delta} good={good} /> : null}</section>;
 }
-export function WRingStat({ animate = true, pct, label, intent = 'brand', note }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; pct: unknown; label: string; intent?: string; note?: string }) {
+export function StatRing({ animate = true, pct, label, intent = 'brand', note }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; pct: unknown; label: string; intent?: string; note?: string }) {
   return (
     <section className="wg wg-row"><Ring pct={pct} intent={intent} size={48} stroke={7} label={label + ' ' + Math.round(wgN(pct)) + '%'} />
       <div className="wg-c"><span className="wg-v"><Cnt v={Math.round(wgN(pct)) + '%'} animate={animate} /></span><span className="wg-t">{label}</span>{note ? <span className="wg-n">{note}</span> : null}</div></section>
@@ -184,7 +193,7 @@ export function WRingList({ animate = true, title, items, actions }: { /** count
       ))}</div></section>
   );
 }
-export function WSolid({ animate = true, icon, value, label, delta, good = 1, intent = 'brand' }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; icon: string; value: string; label: string; delta?: unknown; good?: number; intent?: string }) {
+export function StatSolid({ animate = true, icon, value, label, delta, good = 1, intent = 'brand' }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; icon: string; value: string; label: string; delta?: unknown; good?: number; intent?: string }) {
   return <section className={`wg wg-row wg-solid i-${intent}`}><span className="wg-si"><Icon name={icon} /></span><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} /></span><span className="wg-t">{label}</span></div>{delta != null ? <D v={delta} good={good} /> : null}</section>;
 }
 export function WSegments({ title, segs, center, actions }: { title: string; segs: readonly Seg[]; center?: string; actions?: ReactNode }) {
@@ -195,7 +204,7 @@ export function WSegments({ title, segs, center, actions }: { title: string; seg
         <ul className="wg-lg">{segs.map((x, i) => <li key={i}><WgDot intent={x.intent} /><span>{x.label}</span><Fw>{Math.round(wgN(x.v) / tot * 100)}%</Fw></li>)}</ul></div></section>
   );
 }
-export function WCompact({ animate = true, title, value, label, spark, intent = 'brand' }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: string; label: string; spark: readonly unknown[]; intent?: string }) {
+export function KpiCompact({ animate = true, title, value, label, spark, intent = 'brand' }: { /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: string; label: string; spark: readonly unknown[]; intent?: string }) {
   return (
     <section className="wg"><WgHead title={title} />
       <div className="wg-tr"><div className="wg-c"><span className="wg-v wg-sml"><Cnt v={value} animate={animate} /></span><span className="wg-t">{label}</span></div><div className="wg-sp"><Spark vals={spark} intent={intent} h={36} dot label={title} /></div></div></section>

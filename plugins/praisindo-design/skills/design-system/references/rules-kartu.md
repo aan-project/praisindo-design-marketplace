@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.118.1, skill v2.118.1)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.119.0, skill v2.119.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -237,4 +237,22 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** `.dl-grid` has no padding of its own: the card body (16px) or the panel that holds the list gives it, so a list in a card is not padded twice; only the entity panel pads its list (`.cpanel>.dl-grid`, 16px).
 **Meet.** Put a `DetailList` in a card body or a panel; never add padding to the list.
 **Check.** A DetailList in a card has 16px around it, not 32px.
+**Guarded in Praisindo by** a unit test.
+
+### WG-04
+**Rule.** The cards that show one number, the KPI card and the stat card (and their variants: icon, ring, solid, compact, with a sparkline or with a footer band), are components and not widgets: on the Design page they have a page of their own, Stat and KPI cards, in Components. A widget is a card that shows data as a chart or a share (line, area, bars, donut, gauge, progress list, ring list) and stays on the page Widgets.
+**Meet.** Group the number cards apart from the chart widgets in the Design page and in the code; do not call a number card a widget.
+**Check.** Open the Design page: Stat and KPI cards lists the KPI, stat, solid and compact cards; Widgets lists only charts and shares.
+**Guarded in Praisindo by** a unit test.
+
+### WG-05
+**Rule.** The names of the number cards follow their family and never start with `W` (a `W` name is a widget): the KPI family is `KPI`, `KpiCompact` and `KpiTrend`, the stat family is `StatCards`, `StatIcon`, `StatRing` and `StatSolid`; there is no separate group of highlighted or compact cards, each card is in its family.
+**Meet.** Name a new number card `Kpi...` or `Stat...`; use `W...` only for a chart widget.
+**Check.** Search the code for number cards starting with `W`: none.
+**Guarded in Praisindo by** a unit test.
+
+### WG-06
+**Rule.** When a row holds more than one stat card, no two cards have the same colour: a card keeps the intent it was given when it is the only one with it, and a card that repeats an intent takes the next free colour of the palette (brand, info, success, warning, purple, cyan, danger, secondary, neutral).
+**Meet.** Use `StatCards` of the system (it does it with `statIntents`); do not give the same colour to the cards of a row by hand.
+**Check.** Open a list page with stat cards: every card of the row has its own colour.
 **Guarded in Praisindo by** a unit test.

@@ -1,4 +1,4 @@
-# Design System page (Praisindo DS v2.118.1, skill v2.118.1)
+# Design System page (Praisindo DS v2.119.0, skill v2.119.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -53,7 +53,7 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 **Guarded in Praisindo by** a browser test.
 
 ### DS-17
-**Rule.** Every component example of the Design page sits in a labelled row, like the Badge section: the variant name and the component name (`Icon stat · WIconStat`, `Error · Input err`, `Opportunity row · PrioRow`) on the left (`.dsx .dsl`), the example on the right (`.dsv`); this holds for the 19 component and pattern sections with examples (buttons, badges, chips, alerts, forms, selection, tabs, cards, lists, alog, sigrules, tables, widgets, kanban, tooltip, feedback, overlays, pagehead, nav); no field, card, KPI, stat card, list row, table or widget is shown outside a labelled row; in the Widget section the 3 KPI cards and the stat cards have their row too (17 widget rows); every form field has its own row (25); on a phone the label is above the example (owner decision 2026-11-03: "saya tidak tahu nama style widget compact yang di tengah"; amended 2026-11-03, 2.26: "kenapa variant kpi & stat tidak dibuat seperti compact ... buatkan juga tampilan untuk komponen lainnya")
+**Rule.** Every component example of the Design page sits in a labelled row, like the Badge section: the variant name and the component name (`Icon stat · StatIcon`, `Error · Input err`, `Opportunity row · PrioRow`) on the left (`.dsx .dsl`), the example on the right (`.dsv`); this holds for the 19 component and pattern sections with examples (buttons, badges, chips, alerts, forms, selection, tabs, cards, lists, alog, sigrules, tables, widgets, kanban, tooltip, feedback, overlays, pagehead, nav); no field, card, KPI, stat card, list row, table or widget is shown outside a labelled row; in the Widget section the 3 KPI cards and the stat cards have their row too (17 widget rows); every form field has its own row (25); on a phone the label is above the example (owner decision 2026-11-03: "saya tidak tahu nama style widget compact yang di tengah"; amended 2026-11-03, 2.26: "kenapa variant kpi & stat tidak dibuat seperti compact ... buatkan juga tampilan untuk komponen lainnya")
 **Meet.** Keep the starter Design System page (`src/features/design/`) and add every project component to its "This project" section.
 **Check.** Open the Design System page at 1440 and 390, light and dark; search for a component.
 **Guarded in Praisindo by** a browser test.

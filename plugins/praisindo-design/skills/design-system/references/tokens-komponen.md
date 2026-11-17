@@ -1,4 +1,4 @@
-# Tokens and components (DS v2.118.1)
+# Tokens and components (DS v2.119.0)
 
 Generated from the Praisindo design system document v2.30 (2026-11-03); the section "Changes up to DS 2.62" at the end lists what came after. The tables below leave out the components that came from the Praisindo domain. DomainBadges and RecommendationPickDrawer are not in the starters (build such pieces from `Badge` and the generic components). KanbanBoard / KanbanCard, ProfileCard / ProfileCardBody (the card of a person or a customer name, rules PC-02..PC-04, UN-01, UN-02), NotificationBell / NotificationPanel and the overlay helpers (`toOverlay`, `useActionMenu`) ARE in the starters and the rules require them: read their props in `assets/starter-react/src/design-system/components/`.
 
@@ -480,9 +480,9 @@ export function DonutSegs({ segs, size = 140, stroke = 22, inner, label = '' }: 
 export function KPI({ label, n, note, size = SZ, delta, good = 1, spark, intent = 'brand' }: { label: string; n: ReactNode; note?: string; size?: string; delta?: unknown; good?: number; spark?: readonly unknown[]; intent?: string })
 export interface StatItem { k?: string; on?: boolean; intent: string; label: string; n: ReactNode; pct?: number; icon?: string }
 export function StatCards({ items, size = SZ, onStat }: { items: readonly StatItem[]; size?: string; onStat?: (k: string) => void })
-export function WTrend({ title, value, spark, delta, good = 1, note }: { title: string; value: string; spark: readonly unknown[]; delta?: unknown; good?: number; note?: string })
-export function WIconStat({ icon, intent = 'brand', value, label, delta, good = 1 }: { icon: string; intent?: string; value: string; label: string; delta?: unknown; good?: number })
-export function WRingStat({ pct, label, intent = 'brand', note }: { pct: unknown; label: string; intent?: string; note?: string })
+export function KpiTrend({ title, value, spark, delta, good = 1, note }: { title: string; value: string; spark: readonly unknown[]; delta?: unknown; good?: number; note?: string })
+export function StatIcon({ icon, intent = 'brand', value, label, delta, good = 1 }: { icon: string; intent?: string; value: string; label: string; delta?: unknown; good?: number })
+export function StatRing({ pct, label, intent = 'brand', note }: { pct: unknown; label: string; intent?: string; note?: string })
 export function WArea({ icon, intent = 'brand', label, value, delta, good = 1, spark }: { icon: string; intent?: string; label: string; value: string; delta?: unknown; good?: number; spark: readonly unknown[] })
 export function WDonut({ pct, center, value, label, intent = 'brand' }: { pct: unknown; center?: string; value: string; label: string; intent?: string })
 export function WBars({ title, value, delta, good = 1, note, vals, labels, hi, intent = 'brand', actions }: { title: string; value: string; delta?: unknown; good?: number; note?: string; vals: readonly unknown[]; labels: readonly string[]; hi?: number | null; intent?: string; actions?: ReactNode })
@@ -490,9 +490,9 @@ export function WLine({ title, value, delta, good = 1, note, spark, labels = [],
 export function WProgressList({ title, items, actions }: { title: string; items: readonly { label: string; value: string; target: string; v: unknown; of: unknown; intent?: string }[]; actions?: ReactNode })
 export function WGauge({ title, value, target, fmt = (v: number) => String(v), note = '', intent = 'brand', actions }: { title: string; value: unknown; target: unknown; fmt?: (v: number) => string; note?: string; intent?: string; actions?: ReactNode })
 export function WRingList({ title, items, actions }: { title: string; items: readonly { label: string; value: string; pct: unknown; intent?: string; icon?: string; delta?: unknown; good?: number }[]; actions?: ReactNode })
-export function WSolid({ icon, value, label, delta, good = 1, intent = 'brand' }: { icon: string; value: string; label: string; delta?: unknown; good?: number; intent?: string })
+export function StatSolid({ icon, value, label, delta, good = 1, intent = 'brand' }: { icon: string; value: string; label: string; delta?: unknown; good?: number; intent?: string })
 export function WSegments({ title, segs, center, actions }: { title: string; segs: readonly Seg[]; center?: string; actions?: ReactNode })
-export function WCompact({ title, value, label, spark, intent = 'brand' }: { title: string; value: string; label: string; spark: readonly unknown[]; intent?: string })
+export function KpiCompact({ title, value, label, spark, intent = 'brand' }: { title: string; value: string; label: string; spark: readonly unknown[]; intent?: string })
 ```
 
 ## Changes up to DS 2.62 (components and props that came after v2.30)

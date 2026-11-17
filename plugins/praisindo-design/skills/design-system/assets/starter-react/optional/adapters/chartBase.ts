@@ -17,20 +17,30 @@ export function chartBase(dark: boolean, cv: CssVarReader): ChartOptions & { cha
 /** `Object.assign({}, base, {chart: Object.assign({}, base.chart, chartPatch), ...rest})`, the pattern every prototype chart uses. */
 export function withChart(base: ReturnType<typeof chartBase>, chartPatch: ChartOptions, rest: ChartOptions = {}): ChartOptions {
   const o: ChartOptions = Object.assign({}, base, { chart: Object.assign({}, base.chart, chartPatch) }, rest);
-  return multiLine(o);
+  return chartLook(o);
 }
 
-/** CT-01 (owner 2026-11-17, revised the same day): every line or area chart is drawn like the Opportunity trend chart of Analytics: straight lines of 2px, a soft solid fill of 12%, no marker on the points, the legend on top
+/** CT-01 (owner 2026-11-17, revised the same day): every line or area chart is drawn like the Opportunity trend chart of Analytics: smooth lines of 2px, a soft solid fill of 12%, no marker on the points, the legend on top
  *  (with more than one series) and a shared tooltip that lists the value of every series at the hovered point. A bar chart, a donut and a mixed chart (a series with a type of its own, the candlesticks) keep their own look. */
 export function multiLine(o: ChartOptions): ChartOptions {
   const type = (o.chart as ChartOptions | undefined)?.type, series = o.series as unknown;
   if ((type !== 'area' && type !== 'line') || !Array.isArray(series) || series.length < 1) return o;
   if (series.some((s) => s && typeof s === 'object' && 'type' in (s as object))) return o;
   const out = Object.assign({}, o, {
-    stroke: Object.assign({}, o.stroke as ChartOptions | undefined, { curve: 'straight', width: 2 }),
+    stroke: Object.assign({}, o.stroke as ChartOptions | undefined, { curve: 'smooth', width: 2 }),
     fill: Object.assign({}, o.fill as ChartOptions | undefined, { type: 'solid', opacity: 0.12 }),
     markers: Object.assign({}, o.markers as ChartOptions | undefined, { size: 0 }),
     tooltip: Object.assign({}, o.tooltip as ChartOptions | undefined, { shared: true, intersect: false }),
   });
-  return series.length > 1 ? Object.assign(out, { legend: Object.assign({}, o.legend as ChartOptions | undefined, { position: 'top' }) }) : out;
+  return out;
 }
+
+/** CT-02 (owner 2026-11-17): the legend of every chart is under the chart; a chart that hides its legend keeps it hidden. */
+export function legendBottom(o: ChartOptions): ChartOptions {
+  const lg = o.legend as ChartOptions | undefined;
+  if (!lg || lg.show === false) return o;
+  return Object.assign({}, o, { legend: Object.assign({}, lg, { position: 'bottom' }) });
+}
+
+/** The look every chart builder gets from `withChart`: CT-01 (line and area charts) and CT-02 (the legend below). */
+export function chartLook(o: ChartOptions): ChartOptions { return legendBottom(multiLine(o)); }

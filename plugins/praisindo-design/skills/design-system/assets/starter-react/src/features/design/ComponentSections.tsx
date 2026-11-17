@@ -1,5 +1,5 @@
 // Design System page: Components, first group (buttons, badges, alerts). Text is the prototype's own.
-import { KPI, StatCards, WIconStat, WRingStat, WSolid, WCompact, WTrend, WArea, WLine, WBars, WDonut, WSegments, WGauge, WProgressList, WRingList, Delta, Spark, Ring } from '../../design-system/components/Widgets';
+import { KPI, StatCards, StatIcon, StatRing, StatSolid, KpiCompact, KpiTrend, WArea, WLine, WBars, WDonut, WSegments, WGauge, WProgressList, WRingList, Delta, Spark, Ring } from '../../design-system/components/Widgets';
 import { Meter } from '../../design-system/components/States';
 import { HighlightText } from '../../design-system/components/HighlightText';
 import { localeOf } from '../../lib/dateFormat';
@@ -191,25 +191,27 @@ export function WidgetsSection() {
   const days = B('Mon Tue Wed Thu Fri Sat Sun', 'Sen Sel Rab Kam Jum Sab Min').split(' ');
   const vs = B('vs last month', 'vs bulan lalu'), fromWeek = B('from last week', 'dari minggu lalu');
   return (
-    <DsSec id="widgets" title={B('Widget', 'Widget')} lead={B('Widgets are small self-contained cards that answer one question with a number, a trend or a share. KPI and stat cards are widgets too. Charts are inline SVG coloured only through intents, so they follow light and dark tokens. A line or area chart with more than one series is drawn like Return by period: smooth lines, a soft fill, a marker on every point and the legend below, so the series are easy to compare (rule CT-01).', 'Widget adalah card kecil mandiri yang menjawab satu pertanyaan dengan angka, tren, atau porsi. Kartu KPI dan statistik juga termasuk widget. Grafik berupa SVG inline yang diwarnai hanya lewat intent, sehingga mengikuti token terang dan gelap. Grafik garis atau area dengan lebih dari satu seri digambar seperti Return by period: garis halus, isi lembut, penanda di setiap titik dan legenda di bawah, agar seri mudah dibandingkan (aturan CT-01).')}>
-      <DsH>{B('KPI & stat', 'KPI & statistik')}</DsH>
+    <DsSec id="widgets" title={B('Widget', 'Widget')} lead={B('Widgets are small self-contained cards that show data as a chart or a share: a line, an area, bars, a donut, a gauge, a list of progress. The cards that show one number (KPI and stat) are components of their own, on the page Stat and KPI cards. Charts are inline SVG coloured only through intents, so they follow light and dark tokens. Every line or area chart is drawn like the Opportunity trend, with smooth lines: a soft fill, no markers and a tooltip that lists every series when the pointer is over a point (rule CT-01); the legend of every chart is under the chart (rule CT-02).', 'Widget adalah card kecil mandiri yang menampilkan data sebagai grafik atau porsi: garis, area, batang, donut, gauge, daftar progres. Card yang menampilkan satu angka (KPI dan statistik) adalah komponen tersendiri, di halaman Kartu stat dan KPI. Grafik berupa SVG inline yang diwarnai hanya lewat intent, sehingga mengikuti token terang dan gelap. Setiap grafik garis atau area digambar seperti Opportunity trend dengan garis halus (tidak kaku): isi lembut, tanpa penanda, dan tooltip yang menampilkan semua seri saat pointer di atas satu titik (aturan CT-01); legenda setiap grafik berada di bawah grafik (aturan CT-02).')}>
+      <DsTo p="stats" />
+      <DsH>{B('KPI card', 'Kartu KPI')}</DsH>
       <>
         <WVar n={B('KPI with a note', 'KPI dengan catatan') + ' · KPI'}><KPI label={B('Active opportunities', 'Peluang aktif')} n={16} note={B('6 high priority', '6 prioritas tinggi')} /></WVar>
         <WVar n={B('KPI with a delta', 'KPI dengan delta') + ' · KPI delta'}><KPI label={B('Conversions', 'Konversi')} n={12} delta={25} note={vs} /></WVar>
         <WVar n={B('KPI with a sparkline', 'KPI dengan sparkline') + ' · KPI spark'}><KPI label={B('Customers contacted', 'Customer dihubungi')} n={48} delta={-6} note={vs} spark={[12, 15, 11, 18, 16, 21, 19]} intent="info" /></WVar>
+        <WVar n={B('Compact sparkline', 'Ringkas + sparkline') + ' · KpiCompact'}><KpiCompact title={B('Daily engagement', 'Engagement harian')} value="1.389" label={B('Interactions', 'Interaksi')} spark={[8, 12, 9, 14, 11, 16, 15, 18]} intent="info" /></WVar>
+        <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Total engagements', 'Total engagement')} value="1.870" spark={[18, 22, 17, 25, 21, 19, 24, 20, 18]} delta={-6} note={vs} /></WVar>
+        <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Converted value', 'Nilai konversi')} value="Rp 8,4 M" spark={[10, 12, 11, 15, 14, 18, 17, 21]} delta={12} note={vs} /></WVar>
+      </>
+      <DsH>{B('Stat card', 'Kartu stat')}</DsH>
+      <>
         <DsDemo label={B('Stat cards with a ring', 'Kartu statistik dengan ring') + ' · StatCards'}><div style={sty('flex:1 1 100%')}><StatCards items={[{ icon: 'list_alt', intent: 'brand', n: 19, label: t('stat.total'), pct: 100 }, { icon: 'bolt', intent: 'success', n: 16, label: t('stat.active'), pct: 84 }, { icon: 'priority_high', intent: 'danger', n: 6, label: B('High priority', 'Prioritas tinggi'), pct: 32 }]} /></div></DsDemo>
+        <WVar n={B('Icon stat', 'Ikon + angka') + ' · StatIcon'}><StatIcon icon="lightbulb" value="384" label={B('New opportunities', 'Peluang baru')} delta={25} /></WVar>
+        <WVar n={B('Ring stat', 'Ring persentase') + ' · StatRing'}><StatRing pct={47} label={B('Conversion rate', 'Tingkat konversi')} intent="warning" /></WVar>
+        <WVar n={B('Solid highlight', 'Sorotan penuh') + ' · StatSolid'}><StatSolid icon="groups" value="1.253" label={B('Customers managed', 'Customer dikelola')} delta={25} /></WVar>
       </>
-      <DsH>{B('Compact', 'Ringkas')}</DsH>
+      <DsTo p="widgets" />
+      <DsH>{B('Line, area and bar charts', 'Grafik garis, area dan batang')}</DsH>
       <>
-        <WVar n={B('Icon stat', 'Ikon + angka') + ' · WIconStat'}><WIconStat icon="lightbulb" value="384" label={B('New opportunities', 'Peluang baru')} delta={25} /></WVar>
-        <WVar n={B('Ring stat', 'Ring persentase') + ' · WRingStat'}><WRingStat pct={47} label={B('Conversion rate', 'Tingkat konversi')} intent="warning" /></WVar>
-        <WVar n={B('Solid highlight', 'Sorotan penuh') + ' · WSolid'}><WSolid icon="groups" value="1.253" label={B('Customers managed', 'Customer dikelola')} delta={25} /></WVar>
-        <WVar n={B('Compact sparkline', 'Ringkas + sparkline') + ' · WCompact'}><WCompact title={B('Daily engagement', 'Engagement harian')} value="1.389" label={B('Interactions', 'Interaksi')} spark={[8, 12, 9, 14, 11, 16, 15, 18]} intent="info" /></WVar>
-      </>
-      <DsH>{B('Trend', 'Tren')}</DsH>
-      <>
-        <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · WTrend'}><WTrend title={B('Total engagements', 'Total engagement')} value="1.870" spark={[18, 22, 17, 25, 21, 19, 24, 20, 18]} delta={-6} note={vs} /></WVar>
-        <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · WTrend'}><WTrend title={B('Converted value', 'Nilai konversi')} value="Rp 8,4 M" spark={[10, 12, 11, 15, 14, 18, 17, 21]} delta={12} note={vs} /></WVar>
         <WVar n={B('Area chart', 'Grafik area') + ' · WArea'}><WArea icon="savings" label={B('Assets under management', 'Dana kelolaan')} value="Rp 23,4 M" delta={3} spark={[14, 16, 15, 13, 17, 19, 18, 22, 20, 24]} /></WVar>
         <WVar n={B('Line chart', 'Grafik garis') + ' · WLine'}><WLine title={B('On-time follow-up', 'Tindak lanjut tepat waktu')} value="95%" delta={5} note={fromWeek} spark={[62, 70, 66, 78, 74, 88, 84, 95]} labels={days} intent="purple" /></WVar>
         <WVar n={B('Bar chart', 'Grafik batang') + ' · WBars'}><WBars title={B('Activities completed', 'Aktivitas selesai')} value="98" delta={25} note={fromWeek} vals={[9, 12, 16, 11, 7, 15, 10]} labels={days} hi={3} /></WVar>
@@ -229,11 +231,11 @@ export function WidgetsSection() {
       <DsApi rows={[
         ['KPI({label, n, note, delta, good, spark, intent, size})', 'string · number · string · % · 1|-1 · number[]', 'size=md', B('Page-top number. Label (text-secondary) · value · note (text-tertiary); optional delta chip beside the value and a sparkline below.', 'Angka di atas halaman. Label (text-secondary) · nilai · catatan (text-tertiary); opsional chip delta di samping nilai dan sparkline di bawah.')],
         ['StatCards([{intent, n, label, pct, k, on}], size)', 'intent · number · string · 0–100', 'size=md', B('Stat cards above lists; with k the card is a filter toggle (aria-pressed). Every stat card above a table is a filter of that table (rule TB-31).', 'Kartu statistik di atas daftar; dengan k card menjadi toggle filter (aria-pressed). Setiap kartu statistik di atas tabel adalah filter tabel itu (aturan TB-31).')],
-        ['WIconStat({icon, intent, value, label, delta, good})', '—', 'intent brand', B('Icon tile · value · label · delta chip.', 'Ikon · nilai · label · chip delta.')],
-        ['WRingStat({pct, label, intent, note})', '0–100', '—', B('Small ring with the percentage as the value.', 'Ring kecil dengan persentase sebagai nilai.')],
-        ['WSolid({icon, value, label, delta, intent})', '—', 'intent brand', B('Filled highlight; at most one per group.', 'Sorotan berwarna penuh; maksimal satu per grup.')],
-        ['WCompact({title, value, label, spark, intent})', 'number[]', '—', B('Value with a small sparkline.', 'Nilai dengan sparkline kecil.')],
-        ['WTrend({title, value, spark, delta, good, note})', '—', '—', B('Value + sparkline; the footer band is green when the number goes up and red when it goes down.', 'Nilai + sparkline; pita bawah hijau bila angka naik dan merah bila turun.')],
+        ['StatIcon({icon, intent, value, label, delta, good})', '—', 'intent brand', B('Icon tile · value · label · delta chip.', 'Ikon · nilai · label · chip delta.')],
+        ['StatRing({pct, label, intent, note})', '0–100', '—', B('Small ring with the percentage as the value.', 'Ring kecil dengan persentase sebagai nilai.')],
+        ['StatSolid({icon, value, label, delta, intent})', '—', 'intent brand', B('Filled highlight; at most one per group.', 'Sorotan berwarna penuh; maksimal satu per grup.')],
+        ['KpiCompact({title, value, label, spark, intent})', 'number[]', '—', B('Value with a small sparkline.', 'Nilai dengan sparkline kecil.')],
+        ['KpiTrend({title, value, spark, delta, good, note})', '—', '—', B('Value + sparkline; the footer band is green when the number goes up and red when it goes down.', 'Nilai + sparkline; pita bawah hijau bila angka naik dan merah bila turun.')],
         ['WArea({icon, label, value, delta, spark, intent})', 'number[]', '—', B('Area chart with the last point marked.', 'Grafik area dengan titik terakhir ditandai.')],
         ['WLine({title, value, delta, note, spark, labels, intent, actions})', 'number[] · string[]', '—', B('Line chart with period labels.', 'Grafik garis dengan label periode.')],
         ['WBars({title, value, delta, note, vals, labels, hi, intent, actions})', 'number[] · string[] · index', 'hi = last', B('Bars; the highlighted bar is the current period.', 'Batang; batang yang disorot adalah periode berjalan.')],
@@ -251,7 +253,14 @@ export function WidgetsSection() {
         B('A change is always icon + sign + number; green when it goes up, red when it goes down.', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun.'),
         B('Every chart repeats its numbers as text (value, legend or aria-label); colour never carries meaning alone.', 'Setiap grafik mengulang angkanya sebagai teks (nilai, legenda, atau aria-label); warna tidak pernah menjadi satu-satunya penanda.'),
         B('Widgets sit in a .wgrid (auto-fit, min 240 px; one column on phones) or a .kpis row; never inside another card.', 'Widget berada di .wgrid (auto-fit, min 240 px; satu kolom di ponsel) atau baris .kpis; tidak pernah di dalam card lain.'),
-        B('At most one solid widget per group.', 'Maksimal satu widget solid per grup.'),
+      ].map((x) => <li key={x}>{x}</li>)}</ul>
+      <DsTo p="stats" />
+      <ul className="dsrules">{[
+        B('A number card answers one question; its label says what is counted.', 'Kartu angka menjawab satu pertanyaan; labelnya menyebut apa yang dihitung.'),
+        B('A change is always icon + sign + number; green when it goes up, red when it goes down (WG-01).', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun (WG-01).'),
+        B('A stat card above a table is a filter of that table (TB-31).', 'Kartu stat di atas tabel adalah filter tabel itu (TB-31).'),
+        B('Cards sit in a .kpis row or a .wgrid; never inside another card.', 'Kartu berada di baris .kpis atau .wgrid; tidak di dalam card lain.'),
+        B('At most one solid card per group.', 'Maksimal satu kartu solid per grup.'),
       ].map((x) => <li key={x}>{x}</li>)}</ul>
       <DsTo p="highlight-text" />
       <DsH>{B('Highlight text', 'Teks sorotan')}</DsH>
