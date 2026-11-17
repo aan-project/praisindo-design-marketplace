@@ -3,7 +3,8 @@
 import { NAV, PROFILE_NAV, ROUTE_META, UTIL, UTIL_RUN, navCount } from './nav.config.js';
 import { translate, fill } from './i18n.js';
 import { applyBrand } from './brand/brandStore.js';
-import { prefs, setPref, resetPrefs } from './prefs.js';
+import { prefs, setPref, resetPrefs, CARD_SLOTS, CARD_VIEWS, looksOf } from './prefs.js';
+import { select } from './select.js';
 import { session, signOut } from './session.js';
 import { esc, icon, button, drawer, pageHead, card, menu, midText } from './ui.js';
 import { sideSearch } from './sidesearch.js';
@@ -46,6 +47,7 @@ const userBtn = (top) => { const ini = session.name.split(' ').map((w) => w[0]).
 export function renderChrome() {
   const p = prefs(S.brand), pg = S.page, key = routeKey(pg), coll = collapsed(pg), dark = p.mode === 'dark', below = mq('(max-width: 1099px)');
   applyBrand(document, S.brand, p.mode, p.lang, p.fs);
+  document.documentElement.dataset.sg = p.cards.statGroup; document.documentElement.dataset.kg = p.cards.kpiGroup;   // the cards of a row: each a card, or one card with dividers (PP-05)
   const sh = document.getElementById('shell');
   sh.className = `shell${coll ? ' coll' : ''}${S.still && coll ? ' nohov' : ''}${S.mnav ? ' mnav' : ''}`;
   const full = !!(dark ? S.brand.logoDark || S.brand.logoLight : S.brand.logoLight), url = dark ? S.brand.logoDark || S.brand.logoLight : S.brand.logoLight, ini = esc(S.brand.appName.charAt(0).toUpperCase());
@@ -109,12 +111,24 @@ function prefsDrawer() {
   const body = `<div class="al i-info" role="alert">${icon('info')}<span>${esc(t('prefs.noteG'))}</span></div>`
     + seg('pf-fs', t('prefs.fs'), p.fs, [['small', t('prefs.small')], ['regular', t('prefs.regular')], ['large', t('prefs.large')]])
     + seg('pf-table', t('prefs.table'), p.table, [['sm', t('size.sm')], ['md', t('size.md')], ['lg', t('size.lg')]])
-    + `<a class="li prefs-link" href="#" role="button" data-panel><span class="hp-ic i-brand">${icon('dashboard_customize')}</span><div class="m"><span class="t">${esc(t('prefs.panel'))}</span><span class="mut">${esc(t('prefs.panelL'))}</span></div>${icon('chevron_right')}</a>`;
+    + `<div class="prefs-links"><a class="li prefs-link" href="#" role="button" data-panel><span class="hp-ic i-brand">${icon('dashboard_customize')}</span><div class="m"><span class="t">${esc(t('prefs.panel'))}</span><span class="mut">${esc(t('prefs.panelL'))}</span></div>${icon('chevron_right')}</a><a class="li prefs-link" href="#" role="button" data-view="stat"><span class="hp-ic i-brand">${icon('space_dashboard')}</span><div class="m"><span class="t">${esc(t('prefs.sv.t'))}</span><span class="mut">${esc(t('prefs.sv.l'))}</span></div>${icon('chevron_right')}</a><a class="li prefs-link" href="#" role="button" data-view="kpi"><span class="hp-ic i-brand">${icon('bar_chart')}</span><div class="m"><span class="t">${esc(t('prefs.kv.t'))}</span><span class="mut">${esc(t('prefs.kv.l'))}</span></div>${icon('chevron_right')}</a></div>`;
   const d = drawer({ title: t('prefs.title'), bodyHtml: body, closeLabel: t('lg.close'), footerHtml: button({ label: t('prefs.reset2'), type: 'transparent', intent: 'neutral', attrs: 'data-reset' }) + button({ label: t('prefs.done'), attrs: 'data-done' }) });
   d.el.querySelector('[data-done]').addEventListener('click', d.close);
   d.el.querySelector('[data-reset]').addEventListener('click', () => { resetPrefs(); S.onRoute(true); d.close(); prefsDrawer(); });
   d.el.querySelector('[data-panel]').addEventListener('click', (e) => { e.preventDefault(); d.close(); panelDrawer(); });
+  for (const v of d.el.querySelectorAll('[data-view]')) v.addEventListener('click', (e) => { e.preventDefault(); d.close(); cardDrawer(v.dataset.view); });
   for (const [id, k] of [['pf-fs', 'fs'], ['pf-table', 'table']]) d.el.querySelector('#' + id).addEventListener('click', (e) => { const b = e.target.closest('[data-v]'); if (b) { setPref(k, b.dataset.v); S.onRoute(true); d.close(); prefsDrawer(); } });
+}
+/** The third and the fourth drawer of My preferences: Stat view and KPI view (rule PP-05): the look of the cards in each place, the choice of one card or separate cards first. The options of a look are the registry
+ *  `js/tokens/cardLooks.js`, so a look that is added there appears here by itself (WG-14). */
+function cardDrawer(view) {
+  const cur = prefs(S.brand).cards, en = lang() === 'en', k = view === 'stat' ? 'sv' : 'kv';
+  const field = (slot) => select({ id: 'pf-cd-' + slot, label: t('prefs.cd.' + slot), hint: t('prefs.cd.h.' + slot), size: 'md', val: cur[slot],
+    opts: slot.endsWith('Group') ? CARD_SLOTS[slot].map((v) => [v, t('prefs.cd.v.' + v)]) : looksOf(slot).map((l) => [l.id, en ? l.en : l.idn]) });
+  const back = () => { d.close(); prefsDrawer(); };
+  const d = drawer({ title: t(`prefs.${k}.t`), size: 'sm', layer: 'l2', back: t('hdr.back'), onBack: back, closeLabel: t('lg.close'), bodyHtml: `<p class="mut">${esc(t(`prefs.${k}.h`))}</p><div class="prefs-grp">${CARD_VIEWS[view].map(field).join('')}</div>`, footerHtml: button({ label: t('prefs.done'), attrs: 'data-done' }) });
+  d.el.querySelector('[data-done]').addEventListener('click', back);
+  d.el.addEventListener('change', (e) => { const n = e.target.closest?.('select.sl-n'); if (!n) return; const slot = n.id.replace('pf-cd-', ''); setPref('cards', { ...prefs(S.brand).cards, [slot]: n.value }); const p = prefs(S.brand); document.documentElement.dataset.sg = p.cards.statGroup; document.documentElement.dataset.kg = p.cards.kpiGroup; });
 }
 /** The second drawer of My Preferences (rule PP-01): where each item of the panel sits, the sidebar or the toolbar. Opened from the link of the first drawer, with Back (DR-03). */
 function panelDrawer() {

@@ -1,4 +1,4 @@
-# Mandatory rules: index and summary (Praisindo DS v2.124.0, skill v2.124.0)
+# Mandatory rules: index and summary (Praisindo DS v2.124.0, skill v2.124.1)
 
 This file is the SUMMARY. The full text of every general rule of the Praisindo owner rules register, with how to meet it (component and prop) and how to check it, is in the area files below. Read the area file of what you build before you write code; `scripts/rules-coverage.mjs` checks that every general rule is in them.
 

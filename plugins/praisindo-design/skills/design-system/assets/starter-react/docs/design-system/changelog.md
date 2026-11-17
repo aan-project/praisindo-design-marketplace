@@ -2,9 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.124.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.124.1). Add the project's updates above it, newest first.
 
-- **2.124.0** (2026-11-17) Stat cards above a table are filters (TB-31); the buttons of a `.seg` group are as wide as their label (BT-10); a multi-series line or area chart is drawn like Return by period, in `withChart` (CT-01); a stepper form page has the layout choice horizontal or vertical, an icon toggle per page (DK-24); the tab bar of a detail page is segmented (TB-29 amended).
+- **2.124.1** (2026-11-18) Stat cards above a table are filters (TB-31); the buttons of a `.seg` group are as wide as their label (BT-10); a multi-series line or area chart is drawn like Return by period, in `withChart` (CT-01); a stepper form page has the layout choice horizontal or vertical, an icon toggle per page (DK-24); the tab bar of a detail page is segmented (TB-29 amended).
 - **2.116.0** (2026-11-16) The dark Tooltip border is faint (CD-25); the icon of an Alert rings like a bell every 10 seconds, still for reduced motion (CD-26, only the glyph moves, the tile stays); a segmented tab is as wide as its label (TB-30); the glyph of the Empty and Error state icon bounces, the tile stays (CD-27).
 - **2.115.0** (2026-11-15) The loading skeleton follows the page (LD-02): the sign-in address shows the two panels of the sign-in screen, other pages the shell; `index.html` only.
 - **2.114.0** (2026-11-15) In light mode the pill above the tagline of the sign-in screen has a dark brand veil instead of white glass so a short name keeps 4.5:1 (LG-04).
