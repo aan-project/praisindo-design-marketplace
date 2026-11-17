@@ -21,9 +21,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Guarded in Praisindo by** a unit test.
 
 ### DK-21
-**Rule.** A long form (five groups of fields or more) has a jump rail: a numbered rail that scrolls to each group, the group name in a tooltip; the footer stays on the last card
-**Meet.** `FormShell` with `jump` renders its groups with `AnchorNav`; one group per card.
-**Check.** A form of five groups or more has the rail; each rail item scrolls to its card.
+**Rule.** A long form (five groups of fields or more) has the vertical Wizard as its rail in the right column (DK-24), never a jump rail: a form page always uses the `Wizard`; the `AnchorNav` jump rail stays for the long pages that are not forms.
+**Meet.** Build a long form with groups (one step each); do not use `AnchorNav` on a form page.
+**Check.** A form of five groups or more in the vertical layout has the vertical Wizard on the right; each step scrolls to its card.
 **Guarded in Praisindo by** a unit test.
 
 ### DK-22
@@ -293,13 +293,31 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Guarded in Praisindo by** a unit test.
 
 ### CT-01
-**Rule.** A line or area chart with more than one series is drawn like the Return by period chart: smooth lines of 2px, a soft solid fill of 16%, a marker of 4px on every point and the legend below, so the series are easy to compare. It is done once, in `withChart`; a chart with one series, a bar chart and a mixed chart keep their own look.
-**Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `multiLine`); do not style a multi-series line by hand.
-**Check.** Open a chart with two lines: smooth, filled, with markers and the legend below.
+**Rule.** Every line or area chart is drawn like the Opportunity trend chart: straight lines of 2px, a soft solid fill of 12%, no marker on the points, the legend on top when there is more than one series, and a shared tooltip (`shared: true`, `intersect: false`) that lists the value of every series when the pointer is over a point. It is done once, in `withChart`; a bar chart, a donut and a mixed chart (a series with a type of its own) keep their own look.
+**Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `multiLine`); do not style a line or area chart by hand.
+**Check.** Open a line or area chart: straight lines, no markers, the legend on top; hover a point: one tooltip lists every series.
 **Guarded in Praisindo by** a unit test.
 
 ### DK-24
-**Rule.** A stepper form page has two layouts, chosen on that page: horizontal (the default: the numbered stepper along the top, one step at a time, Back and Next) and vertical (the whole form as one page: every step is a section, the vertical `Wizard` is the rail in the side column on the right, stays in place (sticky) when the page scrolls, its height is the height of the screen (the window less the page padding above and below) and its content scrolls inside it (the cards in it never shrink, so nothing is cut), and the rail scrolls the page to the sections, no Back and no Next; the action buttons of the form sit in that right column, in a card without a header (`Card` with `title=""`) under the rail; a form page always uses the `Wizard`, never a jump rail). The choice is an icon toggle (`SegmentedControl` with the options Horizontal and Vertical, like the Kanban and Table toggle of a list) at the right end of the page title; it belongs to that page only (it is not a setting of all forms and it is not in My Preferences) and is remembered for the user per page.
-**Meet.** Put the toggle in the actions of the page header of the stepper form; keep the choice per page (the starter has the classes `.sbstack` and `.stpv`); in the vertical layout build every step as a section and drop Back and Next.
-**Check.** Open a stepper form: steps on top with Back and Next; press Vertical in the icon toggle at the right of the title: the whole form is one page with a rail and no Back and Next; reload: the choice is kept; another form page keeps its own choice.
+**Rule.** A stepper form page has two layouts, chosen on that page. In both the action buttons of the form (Back and Next, Save, Cancel, Publish) are in a card without a header (`Card` with `title=""`) in the side column on the right and the sections of the form are in the left column; the layouts differ only in where the `Wizard` is: horizontal (the default) has the numbered Wizard along the top of the content, one step at a time, Back and Next move between the steps; vertical has the vertical Wizard as the rail in the right column above the actions card, the whole form is one page of sections and there is no Back and Next. The right column stays in place (sticky) when the page scrolls, its height is the height of the screen (the window less the page padding above and below) and its content scrolls inside it (the cards in it never shrink, so nothing is cut). The choice is an icon toggle (`SegmentedControl` with the options Horizontal and Vertical, like the Kanban and Table toggle of a list) at the right end of the page title; it belongs to that page only (it is not a setting of all forms and it is not in My Preferences) and is remembered for the user per page. A form page always uses the `Wizard`, never a jump rail.
+**Meet.** Put the toggle in the actions of the page header of the stepper form; keep the choice per page (the starter has the classes `.sbstack`, `.stpv`, `.stpa` and `.odstk`); build every step as a section in the vertical layout; put the action buttons in the card on the right in both layouts.
+**Check.** Open a stepper form: the steps on top of the content and Back and Next in the card on the right; press Vertical in the icon toggle at the right of the title: the vertical Wizard is in the right column above the actions card and the form is one page without Back and Next; reload: the choice is kept; another form page keeps its own choice.
+**Guarded in Praisindo by** a unit test.
+
+### DK-25
+**Rule.** The number in the circle of the jump rail (`.anv-n` of the `AnchorNav`) is in the secondary text colour (`--color-text-secondary`) when it is neither hovered nor the current one; the hovered number is brand strong on the brand soft circle and the current one is white on the brand circle.
+**Meet.** Use the `AnchorNav` of the system and its stylesheet; do not recolour the numbers.
+**Check.** Open a long form with the jump rail: the numbers of the other sections are grey, the current one is white on the brand circle.
+**Guarded in Praisindo by** a unit test.
+
+### CD-28
+**Rule.** A Tooltip is shown only while the pointer is on its trigger or on its bubble, or while the trigger has keyboard focus. A focus that a mouse click gave does not open it and a mouse press closes it, so it never stays after the pointer has left.
+**Meet.** Use the `Tooltip` of the system as it is (`onPointerDown` of a mouse closes it, `onFocus` opens it only for `:focus-visible`); do not keep a tooltip open on your own.
+**Check.** Click a trigger with a tooltip, move the pointer away: the tooltip is gone; Tab to a trigger: it shows.
+**Guarded in Praisindo by** a unit test.
+
+### DK-26
+**Rule.** On a form page, above the card of actions, the right panel holds a tools row: Tips (a lightbulb with a count) always; Recent activity (a history button) only on a form of a record that already exists (an add form has no activity yet); Data readiness (a dot: success, warning or danger) only when the page depends on data that needs an integration, and then for every role, one row per source system with its state. The row is horizontal (`.anv-tools`) and each button opens a drawer.
+**Meet.** Build the tools row with the classes `.anv-tools` and `.anv-b.jtl`; pass the tips always, the activity only for an existing record, the readiness only for a page with integrated data; never hide the readiness behind a permission.
+**Check.** Open an add form: Tips only; open an edit form: Tips and Recent activity; open a form that needs source data as any role: Data readiness is there and names the systems.
 **Guarded in Praisindo by** a unit test.

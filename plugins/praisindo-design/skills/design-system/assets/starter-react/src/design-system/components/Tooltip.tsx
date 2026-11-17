@@ -1,6 +1,6 @@
 // Tooltip (DS 1.63): a dark bubble with a tail that points at its trigger, left-aligned text, an optional title and an optional link button below the text.
 // InfoTooltip is the shortcut for a plain text Tooltip (Hints.tsx); use Tooltip directly when the help needs a title or a link to the documentation, or a custom trigger.
-// Behaviour: opens on hover AND keyboard focus, stays open while the pointer is inside the bubble (so its link can be clicked), closes on Escape, on blur and when the pointer
+// Behaviour: opens on hover AND keyboard focus (not on a focus that a mouse click gave; a mouse press closes it, so it is only there while the pointer is on the trigger or the bubble), stays open while the pointer is inside the bubble (so its link can be clicked), closes on Escape, on blur and when the pointer
 // leaves (short delay). Touch: tap opens, a tap outside closes. The bubble is always in the DOM (hidden) so `aria-describedby` on the trigger is always valid; it is
 // `visibility:hidden` while closed, so its link is not in the Tab order until it opens. Placement flips to the opposite side when it does not fit and is kept inside the viewport.
 import { cloneElement, isValidElement, useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type PointerEvent as RPointerEvent, type ReactElement, type ReactNode } from 'react';
@@ -83,9 +83,9 @@ export function Tooltip({ children, variant, placement = 'top', title, action, l
     : <button type="button" className="tt-link" onClick={action.onClick}>{action.label}<Icon name="open_in_new" /></button>) : null;
   return (
     <span ref={wrap} className="tt-wrap"
-      onPointerDown={(e) => { touch.current = e.pointerType !== 'mouse'; }}
+      onPointerDown={(e) => { touch.current = e.pointerType !== 'mouse'; if (!touch.current) { cancel(); setOpen(false); } }}   // a mouse press closes it: a click never leaves it open
       onPointerEnter={(e) => { if (e.pointerType === 'mouse') openNow(); }} onPointerLeave={(e) => { if (e.pointerType === 'mouse') closeSoon(); }}
-      onFocus={() => { if (!touch.current) openNow(); }} onBlur={(e) => { if (!wrap.current?.contains(e.relatedTarget as Node | null)) closeSoon(); }}>
+      onFocus={(e) => { if (!touch.current && (e.target as HTMLElement).matches(':focus-visible')) openNow(); }} onBlur={(e) => { if (!wrap.current?.contains(e.relatedTarget as Node | null)) closeSoon(); }}>
       {trig}
       <div ref={bubble} id={id} role="tooltip" className={`tt tt-${v} tt-${forceOpen ? placement : pos.placement}${forceOpen ? ' tt-pin' : ''}`} data-open={shown ? '' : undefined}
         style={forceOpen ? undefined : { left: pos.left, top: pos.top, ['--tt-arrow' as string]: pos.arrow + 'px' }}>

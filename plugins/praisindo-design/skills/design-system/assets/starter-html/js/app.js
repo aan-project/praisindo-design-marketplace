@@ -55,4 +55,10 @@ export function boot() {
   update();
   adapter().getBrand().then((b) => { state.brand = normalizeBrand(b); renderChrome(); }).catch(() => { /* keep the cached brand */ });
 }
+// FM-21: a single choice is a row of chips (role radio); a press selects it, the check icon moves to it.
+document.addEventListener('click', (e) => {
+  const c = e.target instanceof Element ? e.target.closest('fieldset.rg [role="radio"]') : null;
+  if (!c || c.disabled) return;
+  c.closest('fieldset.rg').querySelectorAll('[role="radio"]').forEach((o) => { const on = o === c; o.classList.toggle('on', on); o.setAttribute('aria-checked', String(on)); o.querySelector('.ic')?.remove(); if (on) o.insertAdjacentHTML('afterbegin', '<span aria-hidden="true" class="material-icons-outlined ic">check</span>'); });
+});
 boot();

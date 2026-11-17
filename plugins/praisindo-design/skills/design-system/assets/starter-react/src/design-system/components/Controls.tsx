@@ -22,10 +22,13 @@ export function Switch({ id, label, on = false, dis, checked, onChange, hideLabe
   );
 }
 
-export function RadioGroup({ name, label, opts, val }: { name: string; label: string; opts: readonly (readonly [string, string])[]; val?: string }) {
+/** A single choice from a few options (rule FM-21, owner decision 2026-11-17): a row of Chips, the selected one soft brand with a check icon (`role="radio"`); it was a column of round radio buttons.
+ *  Uncontrolled (`val` is the first choice) or controlled (`val` + `onChange`). `hideLabel` keeps the legend for assistive technology only (the group already has a title). */
+export function RadioGroup({ name, label, opts, val, onChange, hideLabel }: { name: string; label: string; opts: readonly (readonly [string, string])[]; val?: string; onChange?: (v: string) => void; hideLabel?: boolean }) {
+  const [own, setOwn] = useState(val), cur = onChange ? val : own;
   return (
-    <fieldset className="rg"><legend>{label}</legend>
-      {opts.map(([v, l]) => <label className="rad" key={v}><input type="radio" name={name} value={v} defaultChecked={v === val} /><span>{l}</span></label>)}
+    <fieldset className="rg" role="radiogroup" data-name={name}><legend className={hideLabel ? 'sr-only' : undefined}>{label}</legend>
+      {opts.map(([v, l]) => <Chip key={v} label={l} selected={v === cur} check radio testid={`${name}-${v}`} onClick={() => { setOwn(v); onChange?.(v); }} />)}
     </fieldset>
   );
 }

@@ -13,13 +13,15 @@ export interface ChipProps {
   /** shows the close button */ onRemove?: MouseEventHandler<HTMLButtonElement>; removeLabel?: string;
   /** extra data-* attributes for the hooks of existing screens (testing, scripts) */ data?: Readonly<Record<string, string>>; removeData?: Readonly<Record<string, string>>;
   testid?: string;
+  /** the selected chip shows a leading check icon (a single choice from a few options, rule FM-21: what the radio button was) */ check?: boolean;
+  /** the chip is one option of a single choice (`role="radio"`, `aria-checked`) instead of a toggle (`aria-pressed`) */ radio?: boolean;
   /** a static chip is SOLID by default (neutral default fill; brand default fill when `selected`, rule CH-08); `soft` is the soft look (neutral soft fill; soft brand when `selected`) for a chip that sits on a component with a solid fill. `default` is the old name of the solid look and means the same */ tone?: 'default' | 'soft';
   /** a static chip whose text is repeated for assistive technology elsewhere (a count next to a visually hidden sentence): aria-hidden */ hidden?: boolean;
 }
 const dat = (d?: Readonly<Record<string, string>>) => Object.fromEntries(Object.entries(d ?? {}).map(([k, v]) => ['data-' + k, v]));
 
-export function Chip({ label, icon, title, disabled, selected, onClick, onRemove, removeLabel, data, removeData, testid, hidden, tone }: ChipProps) {
-  const body = <>{icon ? <Icon name={icon} /> : null}{label}</>;
+export function Chip({ label, icon, title, disabled, selected, onClick, onRemove, removeLabel, data, removeData, testid, hidden, tone, check, radio }: ChipProps) {
+  const body = <>{check && selected ? <Icon name="check" /> : icon ? <Icon name={icon} /> : null}{label}</>;
   if (onRemove) {
     return (
       <span className="chp chp-r on" title={title} data-testid={testid} {...dat(data)}>{body}
@@ -28,5 +30,5 @@ export function Chip({ label, icon, title, disabled, selected, onClick, onRemove
   }
   if (!onClick) return <span className={`chp chp-s${tone === 'default' ? ' chp-d' : tone === 'soft' ? ' chp-sf' : ''}${selected ? ' on' : ''}`} title={title} data-testid={testid} aria-hidden={hidden || undefined} {...dat(data)}>{body}</span>;
   return (
-    <button type="button" className={`chp${selected ? ' on' : ''}`} aria-pressed={selected} title={title} disabled={disabled || undefined} onClick={onClick} data-testid={testid} {...dat(data)}>{body}</button>);
+    <button type="button" className={`chp${selected ? ' on' : ''}`} {...(radio ? { role: 'radio', 'aria-checked': !!selected } : { 'aria-pressed': selected })} title={title} disabled={disabled || undefined} onClick={onClick} data-testid={testid} {...dat(data)}>{body}</button>);
 }

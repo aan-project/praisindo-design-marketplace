@@ -1,4 +1,4 @@
-# Decision rules DK-01 to DK-20 (Praisindo DS v2.117.0)
+# Decision rules DK-01 to DK-20 (Praisindo DS v2.118.0)
 
 The ids are those of the Praisindo owner rules register (decisions of the owner, 2026-11-11). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. The decision table that uses them is `decisions.md`; read it first.
 
@@ -13,9 +13,9 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 **Guarded in Praisindo by** a unit test and a browser test.
 
 ### DK-02
-**Rule.** A flow with several steps is a stepper form page (`Wizard` with Back / Next; a step with an error turns red; a summary at the last step); `Wizard` is never inside a drawer
-**Meet.** `Wizard` with Back / Next on a stepper form page; a summary at the last step.
-**Check.** No `Wizard` inside a `Drawer`; walk the steps.
+**Rule.** A form page of several groups of fields, and a flow with several steps, is a stepper form page: every group of fields is a step of the `Wizard` (the numbered Wizard in the horizontal layout, the vertical Wizard as the rail in the vertical layout, DK-24); Back and Next are in the card of actions on the right; a step with an error turns red; a summary at the last step of a flow; a form of one group has no Wizard; `Wizard` is never inside a drawer
+**Meet.** Give every group of fields of a form page as a step; Back and Next in the card of actions; a summary at the last step of a flow.
+**Check.** No `Wizard` inside a `Drawer`; walk the steps; a field with an error turns its step red.
 **Guarded in Praisindo by** a unit test.
 
 ### DK-03
@@ -103,8 +103,8 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 **Guarded in Praisindo by** a unit test.
 
 ### DK-17
-**Rule.** On a form page the title of a card is never the title of the page (a card says what its fields are: Brief basics, Threshold, Report settings); a form with several groups of fields is one card per group, the footer on the last card; a form whose fields feed a live result (a criteria builder with its preview) is two columns: the inputs in cards on the left, the result next to them
-**Meet.** Card title differs from the page title; one card per group of fields; two columns when the fields feed a live result.
+**Rule.** On a form page the title of a card is never the title of the page (a card says what its fields are: Brief basics, Threshold, Report settings); a form with several groups of fields is one card per group and one step per group, a form of one group has one card; the buttons of the form are NOT the footer of the last card: they are the card of actions without a header in the side column on the right (DK-24); a form whose fields feed a live result keeps the inputs and the result as groups of the content and its summary in the right column under the card of actions
+**Meet.** Card title differs from the page title; one card and one step per group of fields; the buttons in the card of actions on the right.
 **Check.** Audit (the Card title equals the `h1`); the example form page.
 **Guarded in Praisindo by** the audit.
 

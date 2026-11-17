@@ -147,13 +147,13 @@ export function SelectionSection() {
   const [opt, setOpt] = useState('idle'), [swOn, setSwOn] = useState(false);
   const { t, prefs } = usePrefs();
   return (
-    <DsSec id="selection" title={B('Selection controls', 'Kontrol pilihan')} lead={B('Checkbox for multi-select and table rows (soft border, brand when checked). Segmented buttons for 2–4 exclusive options. Toggle for language.', 'Checkbox untuk pilihan ganda dan baris tabel (border lembut, brand saat dicentang). Segmented untuk 2–4 pilihan eksklusif. Toggle untuk bahasa.')}>
-      <DsDemo label={B('Unchecked, checked, disabled', 'Tidak dicentang, dicentang, nonaktif') + ' · .chk checkbox'}>
+    <DsSec id="selection" title={B('Selection controls', 'Kontrol pilihan')} lead={B('Several options to switch on or off are a list of Switches (FM-22); the checkbox is only for an agreement (I agree to the terms) and for the rows of a table. One choice from a few options is a row of chips with a check on the selected one (FM-21, RadioGroup). The segmented control is only for a small space: a card header, a toolbar, a drawer (FM-23).', 'Beberapa pilihan hidup atau mati adalah daftar Switch (FM-22); checkbox hanya untuk persetujuan (I agree to the terms) dan baris tabel. Satu pilihan dari beberapa opsi adalah deretan chip dengan centang pada yang terpilih (FM-21, RadioGroup). Segmented control hanya untuk ruang kecil: header card, toolbar, drawer (FM-23).')}>
+      <DsDemo label={B('Unchecked, checked, disabled', 'Tidak dicentang, dicentang, nonaktif') + ' · .chk checkbox (agreement, table rows)'}>
         <label className="chk"><input type="checkbox" />{B('Unchecked', 'Tidak dicentang')}</label>
         <label className="chk"><input type="checkbox" defaultChecked />{B('Checked', 'Dicentang')}</label>
         <label className="chk"><input type="checkbox" disabled />{B('Disabled', 'Nonaktif')}</label>
       </DsDemo>
-      <DsDemo label={B('Radio group', 'Grup radio') + ' · RadioGroup'}><RadioGroup name="ds-rg" label={B('Preferred channel', 'Kanal pilihan')} opts={[['phone', t('ch.phone')], ['whatsapp', t('ch.whatsapp')], ['email', t('ch.email')]]} val="whatsapp" /></DsDemo>
+      <DsDemo label={B('Single choice as chips', 'Pilihan tunggal sebagai chip') + ' · RadioGroup'}><RadioGroup name="ds-rg" label={B('Preferred channel', 'Kanal pilihan')} opts={[['phone', t('ch.phone')], ['whatsapp', t('ch.whatsapp')], ['email', t('ch.email')]]} val="whatsapp" /></DsDemo>
       <DsDemo label={B('On, off, disabled', 'Aktif, nonaktif, disabled') + ' · Switch'}>
         <Switch id="ds-sw1" label={B('Email reminders', 'Pengingat email')} on /><Switch id="ds-sw2" label={B('SMS reminders', 'Pengingat SMS')} /><Switch id="ds-sw3" label={B('Disabled', 'Nonaktif')} dis />
       </DsDemo>

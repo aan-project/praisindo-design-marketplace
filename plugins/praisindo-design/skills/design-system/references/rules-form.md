@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.117.0, skill v2.117.0)
+# Forms and fields (Praisindo DS v2.118.0, skill v2.118.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -231,4 +231,22 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Rule.** The color picker (FM-19) leaves out, by the owner's decision (2026-11-15), the alpha slider and field (the field holds an opaque `#rrggbb`), the tabs Gradient and Image, the format select (only Hex), and the saved colors with Add. If tabs are ever added to the picker they follow TB-29: a popover counts as inside a card, so the tabs are segmented.
 **Meet.** Use the picker of `<Input format="color">` as it is (starter HTML: `initColorFields()`); do not add alpha, tabs, a format select or saved colors to it.
 **Check.** Open the picker: two sliders (the square and the hue), the hex field and, only where the browser has it, the eyedropper; no tabs, no select, no Add.
+**Guarded in Praisindo by** a unit test.
+
+### FM-21
+**Rule.** A single choice from a few options (what was a group of radio buttons) is a row of Chips: the selected chip is soft brand with a leading check icon, the others are neutral outline; every chip has `role="radio"` and `aria-checked` inside a `role="radiogroup"` fieldset. The round radio button is not drawn.
+**Meet.** React: `<RadioGroup name label opts val onChange>` of the starter (`Chip` with `check` and `radio`); the starter HTML: `fieldset.rg` with `button.chp[role=radio]`, the selected one `.chp.on` with a `check` icon. Never build a round radio.
+**Check.** Open a single choice field: chips in a row, the selected one has the check icon and the soft brand fill; arrow keys and a press change the choice.
+**Guarded in Praisindo by** a unit test.
+
+### FM-22
+**Rule.** A field with several options to switch on or off (the columns of Show / hide columns, the sections of an export or a report, a list of candidates, a yes / no setting of a form) is a list of Switches, never a list of checkboxes. A checkbox is only for a checklist of agreement (I agree to the terms) and for the rows of a table.
+**Meet.** One `Switch` per option (`<Switch id label checked onChange />`; a locked option is `dis` with the reason next to it); use a checkbox only for an agreement or a table row.
+**Check.** Open Show / hide columns and an export: every option is a switch; no list of checkboxes exists outside a table and an agreement.
+**Guarded in Praisindo by** a unit test.
+
+### FM-23
+**Rule.** The `SegmentedControl` is only for a small space: the header of a card, a toolbar, a drawer, a table cell or the page head. It is not the control of a field of a form page: that is a `Select` (FM-17) or the chips of FM-21.
+**Meet.** Use `Select` or `RadioGroup` for a field of a form; keep the segmented control to a view switch or a setting in a small space.
+**Check.** Open a form page: no segmented control among the fields; the segmented controls of the app sit in card headers, toolbars, drawers or the page head.
 **Guarded in Praisindo by** a unit test.
