@@ -13,10 +13,26 @@ export type PanelItem = (typeof PANEL_ITEMS)[number];
 export type PanelPos = 'sidebar' | 'toolbar';
 export type PanelItems = Record<PanelItem, PanelPos>;
 
+/** The look of the number cards in each place (rule PP-05, DS 2.120): a place (slot) and the looks it can have, the first one is the default. The stat cards (`StatCards`) are in a list page, a detail page or elsewhere;
+ *  the KPI cards (`KPI`) are at the top of a page or inside a card or a drawer. */
+export const CARD_SLOTS = {
+  statList: ['ring', 'icon', 'percent', 'solid'], statDetail: ['ring', 'icon', 'percent', 'solid'], statOther: ['ring', 'icon', 'percent', 'solid'],
+  kpiPage: ['card', 'compact', 'trend'], kpiCard: ['card', 'compact', 'trend'],
+} as const;
+export type CardSlot = keyof typeof CARD_SLOTS;
+export type CardVariants = Record<CardSlot, string>;
+export const CARD_SLOT_IDS = Object.keys(CARD_SLOTS) as CardSlot[];
+export const CARD_DEFAULTS: CardVariants = Object.fromEntries(CARD_SLOT_IDS.map((k) => [k, CARD_SLOTS[k][0]])) as CardVariants;
+/** A stored choice is kept only when the slot exists and the look is one of its looks; anything else is the default. */
+export const resolveCards = (raw: unknown): CardVariants => {
+  const o = (raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}) as Record<string, unknown>;
+  return Object.fromEntries(CARD_SLOT_IDS.map((k) => [k, (CARD_SLOTS[k] as readonly string[]).includes(o[k] as string) ? o[k] : CARD_DEFAULTS[k]])) as CardVariants;
+};
+
 /** User overrides as stored (`ovr` in the prototype). Every field is optional. */
-export interface PrefOverrides { mode?: Mode; fs?: FontSizePref; lang?: Lang; sidebar?: SidebarPref; table?: TableSize; items?: Partial<Record<PanelItem, PanelPos>>; [legacy: string]: unknown }
+export interface PrefOverrides { mode?: Mode; fs?: FontSizePref; lang?: Lang; sidebar?: SidebarPref; table?: TableSize; items?: Partial<Record<PanelItem, PanelPos>>; cards?: Partial<CardVariants>; [legacy: string]: unknown }
 /** Effective preferences (`prefs` in the prototype). `mode` is never 'system' here and `sidebar` is never 'auto'. */
-export interface Prefs { mode: 'light' | 'dark'; fs: FontSizePref; lang: Lang; sidebar: 'expanded' | 'collapsed'; table: TableSize; items: PanelItems }
+export interface Prefs { mode: 'light' | 'dark'; fs: FontSizePref; lang: Lang; sidebar: 'expanded' | 'collapsed'; table: TableSize; items: PanelItems; cards: CardVariants }
 
 export const DEF = { mode: 'light', fs: 'regular', lang: 'en', sidebar: 'expanded', table: 'md' } as const;
 
@@ -35,5 +51,6 @@ export function effPrefs(brand: Brand, ovr: PrefOverrides): Prefs {
   if (p.sidebar === 'auto') p.sidebar = 'expanded';
   const it = (ovr.items && typeof ovr.items === 'object' ? ovr.items : {}) as Partial<Record<PanelItem, PanelPos>>;
   p.items = Object.fromEntries(PANEL_ITEMS.map((k) => [k, it[k] === 'toolbar' ? 'toolbar' : 'sidebar']));
+  p.cards = resolveCards(ovr.cards);
   return p as unknown as Prefs;
 }

@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.119.0, skill v2.119.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.120.0, skill v2.120.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -255,4 +255,10 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** When a row holds more than one stat card, no two cards have the same colour: a card keeps the intent it was given when it is the only one with it, and a card that repeats an intent takes the next free colour of the palette (brand, info, success, warning, purple, cyan, danger, secondary, neutral).
 **Meet.** Use `StatCards` of the system (it does it with `statIntents`); do not give the same colour to the cards of a row by hand.
 **Check.** Open a list page with stat cards: every card of the row has its own colour.
+**Guarded in Praisindo by** a unit test.
+
+### WG-07
+**Rule.** A number card has looks (variants) and its place decides which one is shown: the stat card has Ring (default, `StatCards`), Icon (`StatIcon`), Percent (`StatRing`) and Solid (`StatSolid`); the KPI card has Card (default, `KPI`), Compact (`KpiCompact`) and Trend (`KpiTrend`): every number card of the system is a choice. The place is the `slot` prop (stat cards: `statList` a list page, `statDetail` a detail page, `statOther` elsewhere; KPI cards: `kpiPage` the top of a page, `kpiCard` inside a card or a drawer) and the look of a place is read from My Preferences (PP-05); the `variant` prop sets a look that does not depend on the place. Every look keeps the data, the filter of a stat card (TB-31) and the colours (WG-06).
+**Meet.** Give every number card a `slot`; never style a look by hand; use `variant` only on the Design page.
+**Check.** Set the stat cards of the list pages to Icon in My Preferences: the stat cards of every list page show the icon look and the detail pages keep the ring.
 **Guarded in Praisindo by** a unit test.

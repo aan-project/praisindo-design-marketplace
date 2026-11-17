@@ -13,7 +13,7 @@ interface PrefsApi {
   prefs: Prefs;
   /** the sidebar choice as stored: 'auto' (collapse on detail pages and narrow windows; nothing stored), 'expanded' or 'collapsed' (rule SB-28) */ sidebarMode: 'auto' | 'expanded' | 'collapsed';
   brand: Brand;
-  setPref: <K extends 'mode' | 'fs' | 'lang' | 'sidebar' | 'table' | 'items'>(key: K, value: NonNullable<PrefOverrides[K]>) => void;
+  setPref: <K extends 'mode' | 'fs' | 'lang' | 'sidebar' | 'table' | 'items' | 'cards'>(key: K, value: NonNullable<PrefOverrides[K]>) => void;
   /** Saves the brand through the adapter. Resolves with an error code when the brand is invalid or the adapter fails. */
   saveBrand: (b: Brand) => Promise<{ ok: boolean; error?: string }>;
   resetBrand: () => Promise<void>;

@@ -553,5 +553,20 @@
  "ff.cpOpen": "Open the color picker",
  "fl.t": "Form layout",
  "fl.h": "Horizontal",
- "fl.v": "Vertical"
+ "fl.v": "Vertical",
+ "prefs.cd.t": "Number cards",
+ "prefs.cd.l": "The look of the stat and KPI cards in each place",
+ "prefs.cd.h": "Choose the look of the cards that show one number, for each place. The choice is saved for you.",
+ "prefs.cd.statList": "Stat cards: list pages",
+ "prefs.cd.statDetail": "Stat cards: detail pages",
+ "prefs.cd.statOther": "Stat cards: other places",
+ "prefs.cd.kpiPage": "KPI cards: top of a page",
+ "prefs.cd.kpiCard": "KPI cards: inside a card",
+ "prefs.cd.v.ring": "Ring",
+ "prefs.cd.v.card": "Card",
+ "prefs.cd.v.solid": "Solid",
+ "prefs.cd.v.compact": "Compact",
+ "prefs.cd.v.icon": "Icon",
+ "prefs.cd.v.percent": "Percent",
+ "prefs.cd.v.trend": "Trend"
 }

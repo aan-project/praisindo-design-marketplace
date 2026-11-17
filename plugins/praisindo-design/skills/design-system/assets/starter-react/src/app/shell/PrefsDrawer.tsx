@@ -9,7 +9,8 @@ import { IconTile } from '../../design-system/components/Hints';
 import { SegmentedControl } from '../../design-system/components/SegmentedControl';
 import { UTIL } from '../nav.config';
 import { usePrefs } from '../providers/PrefsProvider';
-import type { PanelItem, PanelPos } from '../providers/prefsModel';
+import { CARD_SLOTS, CARD_SLOT_IDS, type PanelItem, type PanelPos } from '../providers/prefsModel';
+import { Select } from '../../design-system/components/Controls';
 
 /** The second drawer of My Preferences: where each item of the panel sits, the sidebar or the toolbar (rule PP-01). Opened from a link of the Preferences drawer, with Back (DR-03). */
 export function PanelItemsDrawer({ onBack, onClose }: { onBack: () => void; onClose: () => void }) {
@@ -25,9 +26,23 @@ export function PanelItemsDrawer({ onBack, onClose }: { onBack: () => void; onCl
   );
 }
 
+/** The third drawer of My Preferences: the look of the number cards in each place (rule PP-05): one choice for the stat cards of a list page, of a detail page and elsewhere, one for the KPI cards of a page and of a card. */
+export function CardLooksDrawer({ onBack, onClose }: { onBack: () => void; onClose: () => void }) {
+  const { t, prefs, setPref } = usePrefs();
+  return (
+    <Drawer title={t('prefs.cd.t')} size="sm" id="pf-cards" layer="l2" back={t('hdr.back')} onBack={onBack} onClose={onClose}
+      footer={<Button label={t('prefs.done')} testid="prefs-cards-done" onClick={onBack} />}>
+      <p className="mut">{t('prefs.cd.h')}</p>
+      {CARD_SLOT_IDS.map((k) => <Select key={k} id={'pf-cd-' + k} label={t('prefs.cd.' + k)} size="md" val={prefs.cards[k]} opts={CARD_SLOTS[k].map((v) => [v, t('prefs.cd.v.' + v)] as [string, string])}
+        onChange={(v) => setPref('cards', { ...prefs.cards, [k]: String(v) })} />)}
+    </Drawer>
+  );
+}
+
 export function PrefsDrawer({ onClose }: { onClose: () => void }) {
-  const { t, prefs, setPref, resetPrefs } = usePrefs(), [panel, setPanel] = useState(false);
+  const { t, prefs, setPref, resetPrefs } = usePrefs(), [panel, setPanel] = useState(false), [cards, setCards] = useState(false);
   if (panel) return <PanelItemsDrawer onBack={() => setPanel(false)} onClose={onClose} />;
+  if (cards) return <CardLooksDrawer onBack={() => setCards(false)} onClose={onClose} />;
   return (
     <Drawer title={t('prefs.title')} size="sm" closeLabel={t('lg.close')} onClose={onClose}
       footer={<>
@@ -40,6 +55,9 @@ export function PrefsDrawer({ onClose }: { onClose: () => void }) {
       {/* the only row of the drawer that is a link: it opens the second drawer; it sits last, under the choices */}
       <a className="li prefs-link" href="#" role="button" data-testid="prefs-panel-open" onClick={(e) => { e.preventDefault(); setPanel(true); }}>
         <IconTile icon="dashboard_customize" /><div className="m"><span className="t">{t('prefs.panel')}</span><span className="mut">{t('prefs.panelL')}</span></div><Icon name="chevron_right" />
+      </a>
+      <a className="li prefs-link" href="#" role="button" data-testid="prefs-cards-open" onClick={(e) => { e.preventDefault(); setCards(true); }}>
+        <IconTile icon="space_dashboard" /><div className="m"><span className="t">{t('prefs.cd.t')}</span><span className="mut">{t('prefs.cd.l')}</span></div><Icon name="chevron_right" />
       </a>
     </Drawer>
   );

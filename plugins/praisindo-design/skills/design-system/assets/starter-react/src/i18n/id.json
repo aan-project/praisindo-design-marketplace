@@ -553,5 +553,20 @@
  "ff.cpOpen": "Buka pemilih warna",
  "fl.t": "Tata letak form",
  "fl.h": "Horizontal",
- "fl.v": "Vertikal"
+ "fl.v": "Vertikal",
+ "prefs.cd.t": "Kartu angka",
+ "prefs.cd.l": "Tampilan kartu stat dan KPI di setiap tempat",
+ "prefs.cd.h": "Pilih tampilan kartu yang menampilkan satu angka untuk setiap tempat. Pilihan disimpan untuk Anda.",
+ "prefs.cd.statList": "Kartu stat: halaman daftar",
+ "prefs.cd.statDetail": "Kartu stat: halaman detail",
+ "prefs.cd.statOther": "Kartu stat: tempat lain",
+ "prefs.cd.kpiPage": "Kartu KPI: bagian atas halaman",
+ "prefs.cd.kpiCard": "Kartu KPI: di dalam card",
+ "prefs.cd.v.ring": "Ring",
+ "prefs.cd.v.card": "Kartu",
+ "prefs.cd.v.solid": "Solid",
+ "prefs.cd.v.compact": "Ringkas",
+ "prefs.cd.v.icon": "Ikon",
+ "prefs.cd.v.percent": "Persen",
+ "prefs.cd.v.trend": "Tren"
 }

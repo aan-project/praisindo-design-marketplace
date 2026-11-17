@@ -195,16 +195,16 @@ export function WidgetsSection() {
       <DsTo p="stats" />
       <DsH>{B('KPI card', 'Kartu KPI')}</DsH>
       <>
-        <WVar n={B('KPI with a note', 'KPI dengan catatan') + ' · KPI'}><KPI label={B('Active opportunities', 'Peluang aktif')} n={16} note={B('6 high priority', '6 prioritas tinggi')} /></WVar>
-        <WVar n={B('KPI with a delta', 'KPI dengan delta') + ' · KPI delta'}><KPI label={B('Conversions', 'Konversi')} n={12} delta={25} note={vs} /></WVar>
-        <WVar n={B('KPI with a sparkline', 'KPI dengan sparkline') + ' · KPI spark'}><KPI label={B('Customers contacted', 'Customer dihubungi')} n={48} delta={-6} note={vs} spark={[12, 15, 11, 18, 16, 21, 19]} intent="info" /></WVar>
+        <WVar n={B('KPI with a note', 'KPI dengan catatan') + ' · KPI'}><KPI variant="card" label={B('Active opportunities', 'Peluang aktif')} n={16} note={B('6 high priority', '6 prioritas tinggi')} /></WVar>
+        <WVar n={B('KPI with a delta', 'KPI dengan delta') + ' · KPI delta'}><KPI variant="card" label={B('Conversions', 'Konversi')} n={12} delta={25} note={vs} /></WVar>
+        <WVar n={B('KPI with a sparkline', 'KPI dengan sparkline') + ' · KPI spark'}><KPI variant="card" label={B('Customers contacted', 'Customer dihubungi')} n={48} delta={-6} note={vs} spark={[12, 15, 11, 18, 16, 21, 19]} intent="info" /></WVar>
         <WVar n={B('Compact sparkline', 'Ringkas + sparkline') + ' · KpiCompact'}><KpiCompact title={B('Daily engagement', 'Engagement harian')} value="1.389" label={B('Interactions', 'Interaksi')} spark={[8, 12, 9, 14, 11, 16, 15, 18]} intent="info" /></WVar>
         <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Total engagements', 'Total engagement')} value="1.870" spark={[18, 22, 17, 25, 21, 19, 24, 20, 18]} delta={-6} note={vs} /></WVar>
         <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Converted value', 'Nilai konversi')} value="Rp 8,4 M" spark={[10, 12, 11, 15, 14, 18, 17, 21]} delta={12} note={vs} /></WVar>
       </>
       <DsH>{B('Stat card', 'Kartu stat')}</DsH>
       <>
-        <DsDemo label={B('Stat cards with a ring', 'Kartu statistik dengan ring') + ' · StatCards'}><div style={sty('flex:1 1 100%')}><StatCards items={[{ icon: 'list_alt', intent: 'brand', n: 19, label: t('stat.total'), pct: 100 }, { icon: 'bolt', intent: 'success', n: 16, label: t('stat.active'), pct: 84 }, { icon: 'priority_high', intent: 'danger', n: 6, label: B('High priority', 'Prioritas tinggi'), pct: 32 }]} /></div></DsDemo>
+        <DsDemo label={B('Stat cards with a ring', 'Kartu statistik dengan ring') + ' · StatCards'}><div style={sty('flex:1 1 100%')}><StatCards variant="ring" items={[{ icon: 'list_alt', intent: 'brand', n: 19, label: t('stat.total'), pct: 100 }, { icon: 'bolt', intent: 'success', n: 16, label: t('stat.active'), pct: 84 }, { icon: 'priority_high', intent: 'danger', n: 6, label: B('High priority', 'Prioritas tinggi'), pct: 32 }]} /></div></DsDemo>
         <WVar n={B('Icon stat', 'Ikon + angka') + ' · StatIcon'}><StatIcon icon="lightbulb" value="384" label={B('New opportunities', 'Peluang baru')} delta={25} /></WVar>
         <WVar n={B('Ring stat', 'Ring persentase') + ' · StatRing'}><StatRing pct={47} label={B('Conversion rate', 'Tingkat konversi')} intent="warning" /></WVar>
         <WVar n={B('Solid highlight', 'Sorotan penuh') + ' · StatSolid'}><StatSolid icon="groups" value="1.253" label={B('Customers managed', 'Customer dikelola')} delta={25} /></WVar>
@@ -229,8 +229,8 @@ export function WidgetsSection() {
         <span className="rw" style={sty('gap:16px;align-items:center')}><Delta v={25} /><Delta v={-6} /><Delta v={0} /><span style={sty('width:120px')}><Spark vals={[4, 7, 5, 9, 8, 12]} label="demo" /></span><Ring pct={64} intent="success" /><span style={sty('width:160px')}><Meter v={64} /></span></span>
       </DsDemo>
       <DsApi rows={[
-        ['KPI({label, n, note, delta, good, spark, intent, size})', 'string · number · string · % · 1|-1 · number[]', 'size=md', B('Page-top number. Label (text-secondary) · value · note (text-tertiary); optional delta chip beside the value and a sparkline below.', 'Angka di atas halaman. Label (text-secondary) · nilai · catatan (text-tertiary); opsional chip delta di samping nilai dan sparkline di bawah.')],
-        ['StatCards([{intent, n, label, pct, k, on}], size)', 'intent · number · string · 0–100', 'size=md', B('Stat cards above lists; with k the card is a filter toggle (aria-pressed). Every stat card above a table is a filter of that table (rule TB-31).', 'Kartu statistik di atas daftar; dengan k card menjadi toggle filter (aria-pressed). Setiap kartu statistik di atas tabel adalah filter tabel itu (aturan TB-31).')],
+        ['KPI({label, n, note, delta, good, spark, intent, size, slot, variant})', 'string · number · string · % · 1|-1 · number[]', 'size=md', B('Page-top number. Label (text-secondary) · value · note (text-tertiary); optional delta chip beside the value and a sparkline below.', 'Angka di atas halaman. Label (text-secondary) · nilai · catatan (text-tertiary); opsional chip delta di samping nilai dan sparkline di bawah.')],
+        ['StatCards([{intent, n, label, pct, k, on}], size, slot, variant)', 'intent · number · string · 0–100', 'size=md', B('Stat cards above lists; with k the card is a filter toggle (aria-pressed). Every stat card above a table is a filter of that table (rule TB-31).', 'Kartu statistik di atas daftar; dengan k card menjadi toggle filter (aria-pressed). Setiap kartu statistik di atas tabel adalah filter tabel itu (aturan TB-31).')],
         ['StatIcon({icon, intent, value, label, delta, good})', '—', 'intent brand', B('Icon tile · value · label · delta chip.', 'Ikon · nilai · label · chip delta.')],
         ['StatRing({pct, label, intent, note})', '0–100', '—', B('Small ring with the percentage as the value.', 'Ring kecil dengan persentase sebagai nilai.')],
         ['StatSolid({icon, value, label, delta, intent})', '—', 'intent brand', B('Filled highlight; at most one per group.', 'Sorotan berwarna penuh; maksimal satu per grup.')],
@@ -258,7 +258,9 @@ export function WidgetsSection() {
       <ul className="dsrules">{[
         B('A number card answers one question; its label says what is counted.', 'Kartu angka menjawab satu pertanyaan; labelnya menyebut apa yang dihitung.'),
         B('A change is always icon + sign + number; green when it goes up, red when it goes down (WG-01).', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun (WG-01).'),
+        B('Every number card of this page is a look of its family: the stat card is Ring (StatCards), Icon (StatIcon), Percent (StatRing) or Solid (StatSolid), the KPI card is Card (KPI), Compact (KpiCompact) or Trend (KpiTrend). A place (the slot prop) reads its look from My Preferences, Number cards; the variant prop sets a look of its own (WG-07, PP-05).', 'Setiap kartu angka di halaman ini adalah tampilan dari keluarganya: kartu stat adalah Ring (StatCards), Icon (StatIcon), Percent (StatRing) atau Solid (StatSolid), kartu KPI adalah Card (KPI), Compact (KpiCompact) atau Trend (KpiTrend). Sebuah tempat (prop slot) membaca tampilannya dari My Preferences, Kartu angka; prop variant menetapkan tampilan sendiri (WG-07, PP-05).'),
         B('A stat card above a table is a filter of that table (TB-31).', 'Kartu stat di atas tabel adalah filter tabel itu (TB-31).'),
+        B('The stat cards of one row never share a colour: a repeated colour is replaced by the next free one of the palette (WG-06).', 'Kartu stat dalam satu baris tidak memakai warna yang sama: warna yang berulang diganti warna bebas berikutnya dari palet (WG-06).'),
         B('Cards sit in a .kpis row or a .wgrid; never inside another card.', 'Kartu berada di baris .kpis atau .wgrid; tidak di dalam card lain.'),
         B('At most one solid card per group.', 'Maksimal satu kartu solid per grup.'),
       ].map((x) => <li key={x}>{x}</li>)}</ul>
