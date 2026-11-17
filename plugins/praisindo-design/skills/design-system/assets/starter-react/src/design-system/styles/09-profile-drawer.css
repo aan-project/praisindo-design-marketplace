@@ -136,3 +136,4 @@ a.rem{text-decoration:none}
 .li.prefs-link .t{color:var(--color-text-primary);font-weight:calc(500 + var(--fw-shift,0))}
 .li.prefs-link:hover{background:var(--color-surface-neutral-secondary)}
 .prefs-links{display:flex;flex-direction:column;gap:0}
+.prefs-grp{display:flex;flex-direction:column;gap:16px}.prefs-grp+.prefs-grp{margin-top:8px}   /* PP-05: the fields of a group of Number cards are 16px apart */

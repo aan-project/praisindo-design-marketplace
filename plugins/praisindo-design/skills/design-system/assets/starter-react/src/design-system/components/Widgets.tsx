@@ -86,6 +86,8 @@ export function statIntents(given: readonly string[]): string[] {
   const taken = new Set<string>(), keep = given.map((g) => { if (taken.has(g)) return false; taken.add(g); return true; });
   return given.map((g, i) => { if (keep[i]) return g; const n = STAT_PALETTE.find((c) => !taken.has(c)); if (!n) return g; taken.add(n); return n; });
 }
+/** The Total card of a row (`all`, `c:all` ...): it stands for no filter. */
+const isAllStat = (k?: string): boolean => k === 'all' || (k != null && k.endsWith(':all'));
 /** The icon of a stat card that was given none, by its intent (the looks Icon, Solid and Soft need one). */
 const STAT_ICONS: Record<string, string> = { brand: 'list_alt', success: 'check_circle', warning: 'schedule', danger: 'priority_high', info: 'info', purple: 'category', cyan: 'insights', secondary: 'label', neutral: 'remove_circle_outline' };
 export function StatCards({ animate = true, items, size = SZ, onStat, slot = 'statList', variant }: { /** the place of the cards (rule PP-05): the look comes from My Preferences */ slot?: 'statList' | 'statDetail' | 'statOther'; /** a look that does not depend on the place (Design page): ring, bar or plain */ variant?: string; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; items: readonly StatItem[]; size?: string; onStat?: (k: string) => void }) {
@@ -96,10 +98,11 @@ export function StatCards({ animate = true, items, size = SZ, onStat, slot = 'st
         const intent = statIntents(items.map((y) => y.intent))[i]!, v = look;
         const p = statPct(x.pct), b = !!x.k;
         const click = b ? () => onStat?.(x.k!) : undefined;
-        if (v === 'icon') return <StatIcon key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
-        if (v === 'soft') return <StatSoft key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
-        if (v === 'solid') return <StatSolid key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
-        if (v === 'percent') return <StatRing key={x.k ?? i} animate={animate} pct={p} intent={intent} label={x.label} note={String(x.n)} onClick={click} pressed={!!x.on} />;
+        const on = !!x.on && !isAllStat(x.k);   // the Total card is never shown active (WG-13): with no filter nothing is active, and pressing it clears the filter
+        if (v === 'icon') return <StatIcon key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={on} />;
+        if (v === 'soft') return <StatSoft key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={on} />;
+        if (v === 'solid') return <StatSolid key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={on} />;
+        if (v === 'percent') return <StatRing key={x.k ?? i} animate={animate} pct={p} intent={intent} label={x.label} note={String(x.n)} onClick={click} pressed={on} />;
         const inner = (
           <>
             <span className="sring" role="progressbar" aria-valuenow={p} aria-valuemin={0} aria-valuemax={100} aria-label={`${x.label}: ${p}%`} style={{ '--seg-from': p } as CSSProperties}><span className="fw6"><Cnt v={p} animate={animate} /><small>%</small></span></span>
@@ -108,7 +111,7 @@ export function StatCards({ animate = true, items, size = SZ, onStat, slot = 'st
         );
         const cls = `stat i-${intent} s-${size}${b ? ' act' : ''}`;
         return b
-          ? <button key={x.k} type="button" className={cls} aria-pressed={!!x.on} onClick={() => onStat?.(x.k!)}>{inner}</button>
+          ? <button key={x.k} type="button" className={cls} aria-pressed={on} onClick={() => onStat?.(x.k!)}>{inner}</button>
           : <div key={i} className={cls}>{inner}</div>;
       })}
     </div>
@@ -128,15 +131,16 @@ export function KpiTrend({ animate = true, title, value, spark, delta, good = 1,
   );
 }
 /** The root of a number card: a `section`, or a `button` (a filter: TB-31) when the card has `onClick`. */
-function WgRoot({ cls, onClick, pressed, children }: { cls: string; onClick?: () => void; pressed?: boolean; children: ReactNode }) {
-  return onClick ? <button type="button" className={`${cls} wg-act`} aria-pressed={!!pressed} onClick={onClick}>{children}</button> : <section className={cls}>{children}</section>;
+function WgRoot({ cls, intent, onClick, pressed, children }: { cls: string; intent?: string; onClick?: () => void; pressed?: boolean; children: ReactNode }) {
+  // a filter carries its intent on the card itself: the soft border and the soft background of the active state use its colour (WG-12)
+  return onClick ? <button type="button" className={`${cls} wg-act${intent && !cls.includes(' i-') ? ' i-' + intent : ''}`} aria-pressed={!!pressed} onClick={onClick}>{children}</button> : <section className={cls}>{children}</section>;
 }
 export function StatIcon({ animate = true, icon, intent = 'brand', value, label, delta, good = 1, onClick, pressed }: { onClick?: () => void; pressed?: boolean; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; icon: string; intent?: string; value: ReactNode; label: string; delta?: unknown; good?: number }) {
-  return <WgRoot cls="wg wg-row" onClick={onClick} pressed={pressed}><IconTile icon={icon} intent={intent} /><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} /></span><span className="wg-t">{label}</span></div>{delta != null ? <D v={delta} good={good} /> : null}</WgRoot>;
+  return <WgRoot cls="wg wg-row" intent={intent} onClick={onClick} pressed={pressed}><IconTile icon={icon} intent={intent} /><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} /></span><span className="wg-t">{label}</span></div>{delta != null ? <D v={delta} good={good} /> : null}</WgRoot>;
 }
 export function StatRing({ animate = true, pct, label, intent = 'brand', note, onClick, pressed }: { onClick?: () => void; pressed?: boolean; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; pct: unknown; label: string; intent?: string; note?: string }) {
   return (
-    <WgRoot cls="wg wg-row" onClick={onClick} pressed={pressed}><Ring pct={pct} intent={intent} size={48} stroke={7} label={label + ' ' + Math.round(wgN(pct)) + '%'} />
+    <WgRoot cls="wg wg-row" intent={intent} onClick={onClick} pressed={pressed}><Ring pct={pct} intent={intent} size={48} stroke={7} label={label + ' ' + Math.round(wgN(pct)) + '%'} />
       <div className="wg-c"><span className="wg-v"><Cnt v={Math.round(wgN(pct)) + '%'} animate={animate} /></span><span className="wg-t">{label}</span>{note ? <span className="wg-n">{note}</span> : null}</div></WgRoot>
   );
 }

@@ -1,5 +1,6 @@
 // Pure model of the prototype's preferences (the prototype section 1: DEF, ovr, effPrefs, resolvedMode) and
 // brand validation (setBrand). No React, no DOM, no storage: persistence lives in PrefsProvider via reactStorage.
+import { KPI_LOOKS, STAT_LOOKS, type CardLook } from '../../design-system/tokens/cardLooks.ts';
 import type { Brand } from '../../design-system/tokens/palette.ts';
 
 export type Mode = 'light' | 'dark' | 'system';
@@ -15,16 +16,19 @@ export type PanelItems = Record<PanelItem, PanelPos>;
 
 /** The look of the number cards in each place (rule PP-05, DS 2.120): a place (slot) and the looks it can have, the first one is the default. The stat cards (`StatCards`) are in a list page, a detail page or elsewhere;
  *  the KPI cards (`KPI`) are at the top of a page or inside a card or a drawer. */
+const STAT_IDS = STAT_LOOKS.map((l) => l.id), KPI_IDS = KPI_LOOKS.map((l) => l.id);   // the looks come from the registry of the Design System (WG-14)
 export const CARD_SLOTS = {
-  statList: ['ring', 'icon', 'percent', 'solid', 'soft'], statDetail: ['ring', 'icon', 'percent', 'solid', 'soft'], statOther: ['ring', 'icon', 'percent', 'solid', 'soft'],
-  kpiPage: ['card', 'compact', 'trend'], kpiCard: ['card', 'compact', 'trend'],
+  statList: STAT_IDS, statDetail: STAT_IDS, statOther: STAT_IDS,
+  kpiPage: KPI_IDS, kpiCard: KPI_IDS,
   /** one card or separate cards: the cards of a row are each a card (default) or one card with dividers (`html[data-sg]`, `html[data-kg]`) */
   statGroup: ['separate', 'one'], kpiGroup: ['separate', 'one'],
-} as const;
+} as const satisfies Record<string, readonly string[]>;
 export type CardSlot = keyof typeof CARD_SLOTS;
 export type CardVariants = Record<CardSlot, string>;
-/** The places in the drawer, grouped: for each family the choice of one card or separate cards comes first (rule PP-05). */
-export const CARD_GROUPS: readonly (readonly [string, readonly CardSlot[]])[] = [['stat', ['statGroup', 'statList', 'statDetail', 'statOther']], ['kpi', ['kpiGroup', 'kpiPage', 'kpiCard']]];
+/** The two drawers of the number cards, Stat view and KPI view: the fields of each, the choice of one card or separate cards first (rule PP-05). */
+export const CARD_VIEWS: Readonly<Record<'stat' | 'kpi', readonly CardSlot[]>> = { stat: ['statGroup', 'statList', 'statDetail', 'statOther'], kpi: ['kpiGroup', 'kpiPage', 'kpiCard'] };
+/** The looks of a place, with their names: the options of the fields of the drawers. */
+export const looksOf = (slot: CardSlot): readonly CardLook[] => (slot.startsWith('stat') ? STAT_LOOKS : KPI_LOOKS);
 export const CARD_SLOT_IDS = Object.keys(CARD_SLOTS) as CardSlot[];
 export const CARD_DEFAULTS: CardVariants = Object.fromEntries(CARD_SLOT_IDS.map((k) => [k, CARD_SLOTS[k][0]])) as CardVariants;
 /** A stored choice is kept only when the slot exists and the look is one of its looks; anything else is the default. */

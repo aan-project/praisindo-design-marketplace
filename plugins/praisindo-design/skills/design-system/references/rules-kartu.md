@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.122.0, skill v2.122.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.123.0, skill v2.123.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -240,7 +240,7 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a unit test.
 
 ### WG-04
-**Rule.** The cards that show one number, the KPI card and the stat card (and their variants: icon, ring, solid, compact, with a sparkline or with a footer band), are components and not widgets: on the Design page they have a page of their own, Stat and KPI cards, in Components. A widget is a card that shows data as a chart or a share (line, area, bars, donut, gauge, progress list, ring list) and stays on the page Widgets.
+**Rule.** The cards that show one number, the KPI card and the stat card (and their variants: icon, ring, solid, compact, with a sparkline or with a footer band), are components and not widgets: on the Design page each has a page of its own, Stat cards and KPI cards (two pages), in Components. A widget is a card that shows data as a chart or a share (line, area, bars, donut, gauge, progress list, ring list) and stays on the page Widgets.
 **Meet.** Group the number cards apart from the chart widgets in the Design page and in the code; do not call a number card a widget.
 **Check.** Open the Design page: Stat and KPI cards lists the KPI, stat, solid and compact cards; Widgets lists only charts and shares.
 **Guarded in Praisindo by** a unit test.
@@ -288,7 +288,19 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a unit test.
 
 ### WG-12
-**Rule.** The border of a number card that is a filter and is active (pressed) is soft and follows the colour of the card: 40% of the intent colour over the neutral border, with the soft colour of the intent as its background; the solid look has a soft ring of the intent colour instead of an outline.
+**Rule.** The border of a number card that is a filter and is active (pressed) is soft and follows the colour of the card: 40% of the intent colour over the neutral border, with the soft colour of the intent as its background; the solid look has a soft ring of the intent colour instead of an outline. Every card that is a filter carries its intent class on the card itself in every look, so that these colours exist.
 **Meet.** Use the pressed rules of `.stat` and `.wg.wg-act` of the stylesheets; do not draw a strong border on an active card.
 **Check.** Press a stat card of a list page: its border is a soft tint of its colour, not a strong line.
+**Guarded in Praisindo by** a unit test.
+
+### WG-13
+**Rule.** The Total card of a row of stat cards (the key `all`, `c:all` and the like: the card that stands for no filter) is never shown active: with no status filter set no card of the row is active, and pressing the Total card clears the filter. It looks like every card that is not active, on every list page and in every look.
+**Meet.** Use `StatCards` of the system (it ignores `on` for a key `all` or `*:all`); give the Total card the key `all`.
+**Check.** Open a list page with no filter: no stat card is highlighted; press Active: only Active is highlighted; press Total: none is.
+**Guarded in Praisindo by** a unit test.
+
+### WG-14
+**Rule.** The looks of the number cards are written once, in a registry (`STAT_LOOKS` and `KPI_LOOKS` in `design-system/tokens/cardLooks.ts`: id, the name in English and in Indonesian, the component that draws it). A look that is added to the registry is an option of Stat view or KPI view in My preferences by itself and a stored choice is checked against it; the component must draw it and the Design page must show it with its component.
+**Meet.** Add a new look to the registry, draw it in `StatCards` or `KPI` and give it a demo on the Design page; never list the looks by hand in the preferences.
+**Check.** Add a look to `STAT_LOOKS`: it is in the Stat view drawer without any other change, and the unit test fails until the component draws it.
 **Guarded in Praisindo by** a unit test.

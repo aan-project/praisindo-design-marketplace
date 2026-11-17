@@ -9,8 +9,7 @@ import { IconTile } from '../../design-system/components/Hints';
 import { SegmentedControl } from '../../design-system/components/SegmentedControl';
 import { UTIL } from '../nav.config';
 import { usePrefs } from '../providers/PrefsProvider';
-import { CARD_GROUPS, CARD_SLOTS, type PanelItem, type PanelPos } from '../providers/prefsModel';
-import { GroupTitle } from '../../design-system/components/Card';
+import { CARD_SLOTS, CARD_VIEWS, looksOf, type PanelItem, type PanelPos } from '../providers/prefsModel';
 import { Select } from '../../design-system/components/Controls';
 
 /** The second drawer of My Preferences: where each item of the panel sits, the sidebar or the toolbar (rule PP-01). Opened from a link of the Preferences drawer, with Back (DR-03). */
@@ -27,26 +26,27 @@ export function PanelItemsDrawer({ onBack, onClose }: { onBack: () => void; onCl
   );
 }
 
-/** The third drawer of My Preferences: the look of the number cards in each place (rule PP-05): one choice for the stat cards of a list page, of a detail page and elsewhere, one for the KPI cards of a page and of a card. */
-export function CardLooksDrawer({ onBack, onClose }: { onBack: () => void; onClose: () => void }) {
-  const { t, prefs, setPref } = usePrefs();
+/** The third and the fourth drawer of My preferences: Stat view and KPI view (rule PP-05): the look of the cards in each place, the choice of one card or separate cards first. The options of a look
+ *  are the registry of the Design System (`STAT_LOOKS`, `KPI_LOOKS`), so a look that is added there appears here by itself (WG-14). */
+export function CardViewDrawer({ view, onBack, onClose }: { view: 'stat' | 'kpi'; onBack: () => void; onClose: () => void }) {
+  const { t, prefs, setPref } = usePrefs(), en = prefs.lang === 'en';
   return (
-    <Drawer title={t('prefs.cd.t')} size="sm" id="pf-cards" layer="l2" back={t('hdr.back')} onBack={onBack} onClose={onClose}
-      footer={<Button label={t('prefs.done')} testid="prefs-cards-done" onClick={onBack} />}>
-      <p className="mut">{t('prefs.cd.h')}</p>
-      {CARD_GROUPS.map(([g, ids]) => (
-        <div className="sec" key={g}><GroupTitle text={t('prefs.cd.g.' + g)} />
-          {ids.map((k) => <Select key={k} id={'pf-cd-' + k} label={t('prefs.cd.' + k)} hint={t('prefs.cd.h.' + k)} size="md" val={prefs.cards[k]} opts={CARD_SLOTS[k].map((v) => [v, t('prefs.cd.v.' + v)] as [string, string])}
-            onChange={(v) => setPref('cards', { ...prefs.cards, [k]: String(v) })} />)}
-        </div>))}
+    <Drawer title={t(`prefs.${view === 'stat' ? 'sv' : 'kv'}.t`)} size="sm" id={`pf-${view}`} layer="l2" back={t('hdr.back')} onBack={onBack} onClose={onClose}
+      footer={<Button label={t('prefs.done')} testid={`prefs-${view}-done`} onClick={onBack} />}>
+      <p className="mut">{t(`prefs.${view === 'stat' ? 'sv' : 'kv'}.h`)}</p>
+      <div className="prefs-grp">
+        {CARD_VIEWS[view].map((k) => <Select key={k} id={'pf-cd-' + k} label={t('prefs.cd.' + k)} hint={t('prefs.cd.h.' + k)} size="md" val={prefs.cards[k]}
+          opts={k.endsWith('Group') ? CARD_SLOTS[k].map((v) => [v, t('prefs.cd.v.' + v)] as [string, string]) : looksOf(k).map((l) => [l.id, en ? l.en : l.idn] as [string, string])}
+          onChange={(v) => setPref('cards', { ...prefs.cards, [k]: String(v) })} />)}
+      </div>
     </Drawer>
   );
 }
 
 export function PrefsDrawer({ onClose }: { onClose: () => void }) {
-  const { t, prefs, setPref, resetPrefs } = usePrefs(), [panel, setPanel] = useState(false), [cards, setCards] = useState(false);
+  const { t, prefs, setPref, resetPrefs } = usePrefs(), [panel, setPanel] = useState(false), [view, setView] = useState<'stat' | 'kpi' | null>(null);
   if (panel) return <PanelItemsDrawer onBack={() => setPanel(false)} onClose={onClose} />;
-  if (cards) return <CardLooksDrawer onBack={() => setCards(false)} onClose={onClose} />;
+  if (view) return <CardViewDrawer view={view} onBack={() => setView(null)} onClose={onClose} />;
   return (
     <Drawer title={t('prefs.title')} size="sm" closeLabel={t('lg.close')} onClose={onClose}
       footer={<>
@@ -61,8 +61,11 @@ export function PrefsDrawer({ onClose }: { onClose: () => void }) {
       <a className="li prefs-link" href="#" role="button" data-testid="prefs-panel-open" onClick={(e) => { e.preventDefault(); setPanel(true); }}>
         <IconTile icon="dashboard_customize" /><div className="m"><span className="t">{t('prefs.panel')}</span><span className="mut">{t('prefs.panelL')}</span></div><Icon name="chevron_right" />
       </a>
-      <a className="li prefs-link" href="#" role="button" data-testid="prefs-cards-open" onClick={(e) => { e.preventDefault(); setCards(true); }}>
-        <IconTile icon="space_dashboard" /><div className="m"><span className="t">{t('prefs.cd.t')}</span><span className="mut">{t('prefs.cd.l')}</span></div><Icon name="chevron_right" />
+      <a className="li prefs-link" href="#" role="button" data-testid="prefs-stat-open" onClick={(e) => { e.preventDefault(); setView('stat'); }}>
+        <IconTile icon="space_dashboard" /><div className="m"><span className="t">{t('prefs.sv.t')}</span><span className="mut">{t('prefs.sv.l')}</span></div><Icon name="chevron_right" />
+      </a>
+      <a className="li prefs-link" href="#" role="button" data-testid="prefs-kpi-open" onClick={(e) => { e.preventDefault(); setView('kpi'); }}>
+        <IconTile icon="monitoring" /><div className="m"><span className="t">{t('prefs.kv.t')}</span><span className="mut">{t('prefs.kv.l')}</span></div><Icon name="chevron_right" />
       </a>
       </div>
     </Drawer>

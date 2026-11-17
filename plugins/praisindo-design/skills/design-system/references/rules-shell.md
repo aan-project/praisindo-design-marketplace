@@ -1,4 +1,4 @@
-# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.122.0, skill v2.122.0)
+# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.123.0, skill v2.123.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -343,9 +343,9 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 **Guarded in Praisindo by** a unit test.
 
 ### PP-05
-**Rule.** My Preferences has a third drawer, Number cards (a link row under Panel items, opened with Back like the second drawer): the places of the number cards (WG-07) in two groups, Stat cards and KPI cards, the choice of one card or separate cards first in each group, then one Select for each place with the looks of its card, and an info icon with a short explanation on every field. The choice is saved for the user in the preferences (`prefs.cards`); a stored choice that is not one of the looks of its place is the default; Reset returns every place to the default.
-**Meet.** Keep `CARD_SLOTS`, `resolveCards` and `CardLooksDrawer` of the starter (`app/providers/prefsModel.ts`, `app/shell/PrefsDrawer.tsx`); an application that adds a place adds it to `CARD_SLOTS` and to the i18n keys `prefs.cd.<slot>`.
-**Check.** Open My Preferences, Number cards: one Select per place; change one, close and reload: the choice is kept.
+**Rule.** My preferences has two more drawers, Stat view and KPI view (two link rows under Panel items, each opened with Back like the second drawer; no groups inside): the places of the stat cards (the choice of one card or separate cards first, then the list pages, the detail pages and other places) and of the KPI cards (the choice of one card or separate cards first, then the top of a page and inside a card), one Select for each with the looks of its card and an info icon with a short explanation, the fields 16px apart; the options of a look are the registry (WG-14). The choice is saved for the user in the preferences (`prefs.cards`); a stored choice that is not one of the looks of its place is the default; Reset returns every place to the default.
+**Meet.** Keep `CARD_SLOTS`, `CARD_VIEWS`, `resolveCards` and `CardViewDrawer` of the starter (`app/providers/prefsModel.ts`, `app/shell/PrefsDrawer.tsx`); an application that adds a place adds it to `CARD_SLOTS` and `CARD_VIEWS` and to the i18n keys `prefs.cd.<slot>`.
+**Check.** Open My preferences, Stat view: the one card or separate choice first, then one Select per place; change one, close and reload: the choice is kept.
 **Guarded in Praisindo by** a unit test.
 
 ### PP-06
@@ -358,4 +358,10 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 **Rule.** The preferences belong to the person who is signed in: what one person sets in My Preferences is saved under their own key (`prefs.u.<email>`, every character that is not a letter or a digit as `_`) and another person on the same device never sees it; without a session the shared `prefs` are the base under the personal ones, and Reset clears only the personal ones. The brand stays the application's.
 **Meet.** Read and write the preferences with `prefsKeyOf()` of the `PrefsProvider`; after a sign-in or a sign-out dispatch `window.dispatchEvent(new Event('kora-session'))` so the provider reads the preferences of the person.
 **Check.** Sign in as A, change the font size, sign out, sign in as B: B has the default; sign in as A again: the choice is back.
+**Guarded in Praisindo by** a unit test.
+
+### PP-08
+**Rule.** The drawer of the preferences is titled like the button that opens it, My preferences; one name for one thing.
+**Meet.** Use the same i18n text for the button and for the title of the drawer.
+**Check.** Open the user menu and press My preferences: the drawer is titled My preferences.
 **Guarded in Praisindo by** a unit test.
