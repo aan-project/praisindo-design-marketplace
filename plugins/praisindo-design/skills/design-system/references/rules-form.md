@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.118.0, skill v2.118.0)
+# Forms and fields (Praisindo DS v2.118.1, skill v2.118.1)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -240,7 +240,7 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Guarded in Praisindo by** a unit test.
 
 ### FM-22
-**Rule.** A field with several options to switch on or off (the columns of Show / hide columns, the sections of an export or a report, a list of candidates, a yes / no setting of a form) is a list of Switches, never a list of checkboxes. A checkbox is only for a checklist of agreement (I agree to the terms) and for the rows of a table.
+**Rule.** A field with several options to switch on or off (the columns of Show / hide columns, the sections of an export or a report, a list of candidates, a yes / no setting of a form) is a list of Switches, never a list of checkboxes. A checkbox is only for a checklist of agreement (I agree to the terms), for the rows of a table with its select-all, for Remember me on the sign-in page and for an Include choice in a comparison table (the exceptions of the owner, FM-24).
 **Meet.** One `Switch` per option (`<Switch id label checked onChange />`; a locked option is `dis` with the reason next to it); use a checkbox only for an agreement or a table row.
 **Check.** Open Show / hide columns and an export: every option is a switch; no list of checkboxes exists outside a table and an agreement.
 **Guarded in Praisindo by** a unit test.
