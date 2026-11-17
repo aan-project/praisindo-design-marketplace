@@ -9,7 +9,8 @@ import { IconTile } from '../../design-system/components/Hints';
 import { SegmentedControl } from '../../design-system/components/SegmentedControl';
 import { UTIL } from '../nav.config';
 import { usePrefs } from '../providers/PrefsProvider';
-import { CARD_SLOTS, CARD_SLOT_IDS, type PanelItem, type PanelPos } from '../providers/prefsModel';
+import { CARD_GROUPS, CARD_SLOTS, type PanelItem, type PanelPos } from '../providers/prefsModel';
+import { GroupTitle } from '../../design-system/components/Card';
 import { Select } from '../../design-system/components/Controls';
 
 /** The second drawer of My Preferences: where each item of the panel sits, the sidebar or the toolbar (rule PP-01). Opened from a link of the Preferences drawer, with Back (DR-03). */
@@ -33,8 +34,11 @@ export function CardLooksDrawer({ onBack, onClose }: { onBack: () => void; onClo
     <Drawer title={t('prefs.cd.t')} size="sm" id="pf-cards" layer="l2" back={t('hdr.back')} onBack={onBack} onClose={onClose}
       footer={<Button label={t('prefs.done')} testid="prefs-cards-done" onClick={onBack} />}>
       <p className="mut">{t('prefs.cd.h')}</p>
-      {CARD_SLOT_IDS.map((k) => <Select key={k} id={'pf-cd-' + k} label={t('prefs.cd.' + k)} size="md" val={prefs.cards[k]} opts={CARD_SLOTS[k].map((v) => [v, t('prefs.cd.v.' + v)] as [string, string])}
-        onChange={(v) => setPref('cards', { ...prefs.cards, [k]: String(v) })} />)}
+      {CARD_GROUPS.map(([g, ids]) => (
+        <div className="sec" key={g}><GroupTitle text={t('prefs.cd.g.' + g)} />
+          {ids.map((k) => <Select key={k} id={'pf-cd-' + k} label={t('prefs.cd.' + k)} hint={t('prefs.cd.h.' + k)} size="md" val={prefs.cards[k]} opts={CARD_SLOTS[k].map((v) => [v, t('prefs.cd.v.' + v)] as [string, string])}
+            onChange={(v) => setPref('cards', { ...prefs.cards, [k]: String(v) })} />)}
+        </div>))}
     </Drawer>
   );
 }

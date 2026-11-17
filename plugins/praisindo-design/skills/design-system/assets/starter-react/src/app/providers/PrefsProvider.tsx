@@ -23,8 +23,23 @@ interface PrefsApi {
 
 const Ctx = createContext<PrefsApi | null>(null);
 
+/** The storage key of the preferences of the person who is signed in (rule PP-07, owner 2026-11-17): one key for each person, so what one person sets is never seen by another on the same device.
+ *  Without a session (the sign-in page) the preferences are the shared ones, `prefs`; they are also the base under the personal ones. */
+export const prefsKeyOf = (): string | null => {
+  const s = readJSON<{ email?: string; name?: string } | null>('sess', null, 'session');
+  const id = (s?.email || s?.name || '').trim().toLowerCase();
+  return id ? 'prefs.u.' + id.replace(/[^a-z0-9]+/g, '_') : null;   // a storage key is letters, digits and _ . -
+};
+export const SESSION_EVENT = 'kora-session';
+
 export function PrefsProvider({ children }: { children: ReactNode }) {
-  const [ovr, setOvr] = useState<PrefOverrides>(() => sanitizeOverrides(readJSON<unknown>('prefs', {})));
+  const [base, setBase] = useState<PrefOverrides>(() => sanitizeOverrides(readJSON<unknown>('prefs', {})));
+  const [mine, setMine] = useState<PrefOverrides>(() => { const k = prefsKeyOf(); return k ? sanitizeOverrides(readJSON<unknown>(k, {})) : {}; });
+  const ovr = useMemo<PrefOverrides>(() => ({ ...base, ...mine }), [base, mine]);
+  useEffect(() => {   // a person signs in or out (the application dispatches `kora-session`): their own preferences are read
+    const on = () => { const k = prefsKeyOf(); setMine(k ? sanitizeOverrides(readJSON<unknown>(k, {})) : {}); };
+    window.addEventListener(SESSION_EVENT, on); return () => window.removeEventListener(SESSION_EVENT, on);
+  }, []);
   const [brand, setBrandState] = useState<Brand>(() => cachedBrand());   // first paint from the cache, then the adapter (server) decides
   const prefs = useMemo(() => effPrefs(brand, ovr), [brand, ovr]);
   const sidebarMode = ovr.sidebar === 'expanded' || ovr.sidebar === 'collapsed' ? ovr.sidebar : 'auto';
@@ -34,7 +49,9 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
   useLayoutEffect(() => { applyBrand(document, brand, prefs.mode, prefs.lang, prefs.fs); document.documentElement.dataset.sg = prefs.cards.statGroup; document.documentElement.dataset.kg = prefs.cards.kpiGroup; }, [brand, prefs]);   // the cards of a row: separate or one card (WG-10)
 
   const setPref = useCallback<PrefsApi['setPref']>((key, value) => {
-    setOvr((o) => { const n = { ...o, [key]: value }; writeJSON('prefs', n); return n; });
+    const k = prefsKeyOf();
+    if (k) setMine((o) => { const n = { ...o, [key]: value }; writeJSON(k, n); return n; });
+    else setBase((o) => { const n = { ...o, [key]: value }; writeJSON('prefs', n); return n; });
   }, []);
   const saveBrand = useCallback<PrefsApi['saveBrand']>(async (b) => {
     const n = normalizeBrand(b), e = brandError(n);
@@ -42,7 +59,7 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     try { setBrandState(normalizeBrand(await brandAdapter.saveBrand(n))); return { ok: true }; } catch (x) { return { ok: false, error: x instanceof Error ? x.message : 'adm.upfail' }; }
   }, []);
   const resetBrand = useCallback(async () => { setBrandState(normalizeBrand(await brandAdapter.saveBrand({ ...BDEF }))); }, []);
-  const resetPrefs = useCallback(() => { writeJSON('prefs', {}); setOvr({}); }, []);
+  const resetPrefs = useCallback(() => { const k = prefsKeyOf(); if (k) { writeJSON(k, {}); setMine({}); } else { writeJSON('prefs', {}); setBase({}); } }, []);
   const t = useCallback((key: string) => translate(prefs.lang, key), [prefs.lang]);
 
   const api = useMemo<PrefsApi>(() => ({ prefs, sidebarMode, brand, setPref, saveBrand, resetBrand, resetPrefs, t }), [prefs, sidebarMode, brand, setPref, saveBrand, resetBrand, resetPrefs, t]);

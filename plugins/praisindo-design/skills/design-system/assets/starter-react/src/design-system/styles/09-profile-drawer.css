@@ -17,7 +17,7 @@
 .stat .bar>i{display:block;height:100%;border-radius:4px;background:var(--int-def)}
 .stat.act{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
 .stat.act:hover{border-color:var(--color-border-neutral-strong)}
-.stat[aria-pressed=true]{border-color:var(--int-def);background:var(--int-sub)}
+.stat[aria-pressed=true]{border-color:color-mix(in srgb,var(--int-def) 40%,var(--color-border-neutral-default));background:var(--int-sub)}
 .stat .bar{display:block}
 .stat.i-neutral .bar>i{background:var(--color-text-secondary)}
 .stat.s-sm{padding:12px;gap:8px}.stat.s-sm .n{font-size:var(--fs-h-md)}.stat.s-sm .l{font-size:var(--fs-sm)}
@@ -132,7 +132,7 @@ a.rem{text-decoration:none}
 .hrail .rail:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px}
 .tw .c2{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 /* the link row of My Preferences that opens the panel items drawer (DS 2.72): a list row, not a text link */
-.li.prefs-link{color:inherit;text-decoration:none;cursor:pointer;border-top:1px solid var(--color-border-neutral-subtle)}
+.li.prefs-link{color:inherit;text-decoration:none;cursor:pointer}
 .li.prefs-link .t{color:var(--color-text-primary);font-weight:calc(500 + var(--fw-shift,0))}
 .li.prefs-link:hover{background:var(--color-surface-neutral-secondary)}
 .prefs-links{display:flex;flex-direction:column;gap:0}

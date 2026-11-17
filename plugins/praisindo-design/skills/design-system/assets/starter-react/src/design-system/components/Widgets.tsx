@@ -67,8 +67,8 @@ const WgDot = ({ intent }: { intent: string }) => <i className={`wg-dot i-${inte
 
 export function KPI({ animate = true, label, n, note, size = SZ, delta, good = 1, spark, intent = 'brand', slot = 'kpiPage', variant }: { /** the place of the card (rule PP-05): the look comes from My Preferences */ slot?: 'kpiPage' | 'kpiCard'; /** a look that does not depend on the place (Design page): card, solid or compact */ variant?: string; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; label: string; n: ReactNode; note?: string; size?: string; delta?: unknown; good?: number; spark?: readonly unknown[]; intent?: string }) {
   const pf = usePrefsOptional(), v = variant ?? pf?.prefs.cards[slot] ?? 'card';
-  if (v === 'compact') return <KpiCompact animate={animate} title={label} value={n} label={note} spark={spark} intent={intent} delta={delta} />;
-  if (v === 'trend') return <KpiTrend animate={animate} title={label} value={n} spark={spark} delta={delta} good={good} note={note} />;
+  if (v === 'compact') return <KpiCompact animate={animate} title={label} value={n} label={note} spark={spark} intent={intent} delta={delta} good={good} />;
+  if (v === 'trend' && (spark || delta != null)) return <KpiTrend animate={animate} title={label} value={n} spark={spark} delta={delta} good={good} note={note} />;
   return (
     <div className={`kpi s-${size}${spark ? ' has-sp' : ''}`}>
       <span className="l">{label}</span><span className="n"><Cnt v={n} animate={animate} />{delta != null ? <> <Delta v={delta} good={good} /></> : null}</span>
@@ -86,6 +86,8 @@ export function statIntents(given: readonly string[]): string[] {
   const taken = new Set<string>(), keep = given.map((g) => { if (taken.has(g)) return false; taken.add(g); return true; });
   return given.map((g, i) => { if (keep[i]) return g; const n = STAT_PALETTE.find((c) => !taken.has(c)); if (!n) return g; taken.add(n); return n; });
 }
+/** The icon of a stat card that was given none, by its intent (the looks Icon, Solid and Soft need one). */
+const STAT_ICONS: Record<string, string> = { brand: 'list_alt', success: 'check_circle', warning: 'schedule', danger: 'priority_high', info: 'info', purple: 'category', cyan: 'insights', secondary: 'label', neutral: 'remove_circle_outline' };
 export function StatCards({ animate = true, items, size = SZ, onStat, slot = 'statList', variant }: { /** the place of the cards (rule PP-05): the look comes from My Preferences */ slot?: 'statList' | 'statDetail' | 'statOther'; /** a look that does not depend on the place (Design page): ring, bar or plain */ variant?: string; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; items: readonly StatItem[]; size?: string; onStat?: (k: string) => void }) {
   const pf = usePrefsOptional(), look = variant ?? pf?.prefs.cards[slot] ?? 'ring';
   return (
@@ -94,9 +96,9 @@ export function StatCards({ animate = true, items, size = SZ, onStat, slot = 'st
         const intent = statIntents(items.map((y) => y.intent))[i]!, v = look;
         const p = statPct(x.pct), b = !!x.k;
         const click = b ? () => onStat?.(x.k!) : undefined;
-        if (v === 'icon') return <StatIcon key={x.k ?? i} animate={animate} icon={x.icon ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
-        if (v === 'soft') return <StatSoft key={x.k ?? i} animate={animate} icon={x.icon ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
-        if (v === 'solid') return <StatSolid key={x.k ?? i} animate={animate} icon={x.icon ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
+        if (v === 'icon') return <StatIcon key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
+        if (v === 'soft') return <StatSoft key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
+        if (v === 'solid') return <StatSolid key={x.k ?? i} animate={animate} icon={x.icon ?? STAT_ICONS[intent] ?? 'analytics'} intent={intent} value={x.n} label={x.label} onClick={click} pressed={!!x.on} />;
         if (v === 'percent') return <StatRing key={x.k ?? i} animate={animate} pct={p} intent={intent} label={x.label} note={String(x.n)} onClick={click} pressed={!!x.on} />;
         const inner = (
           <>
@@ -120,7 +122,7 @@ export function KpiTrend({ animate = true, title, value, spark, delta, good = 1,
   const dir = dirOf(delta), intent = intentOfDir(dir, good);
   return (
     <section className="wg wg-trend">
-      <div className="wg-tr"><div className="wg-c"><span className="wg-t">{title}</span><span className="wg-v wg-big"><Cnt v={value} animate={animate} /></span></div>{spark ? <div className="wg-sp"><Spark vals={spark} intent={chartIntentOfDelta(delta)} h={44} label={title} /></div> : null}</div>
+      <div className="wg-tr"><div className="wg-c"><span className="wg-t">{title}</span><span className="wg-v wg-big"><Cnt v={value} animate={animate} /></span></div>{spark ? <div className="wg-sp"><Spark vals={spark} intent={intent} h={44} label={title} /></div> : null}</div>
       {delta == null ? (note ? <div className="wg-n">{note}</div> : null) : <div className={`wg-f i-${intent}`}><Icon name={dir > 0 ? 'trending_up' : dir < 0 ? 'trending_down' : 'trending_flat'} /><Fw>{(dir > 0 ? '+' : dir < 0 ? '−' : '') + Math.abs(wgN(delta)).toLocaleString(localeOf(prefs.lang)) + '%'}</Fw><span>{note || ''}</span></div>}
     </section>
   );
@@ -220,9 +222,9 @@ export function WSegments({ title, segs, center, actions }: { title: string; seg
         <ul className="wg-lg">{segs.map((x, i) => <li key={i}><WgDot intent={x.intent} /><span>{x.label}</span><Fw>{Math.round(wgN(x.v) / tot * 100)}%</Fw></li>)}</ul></div></section>
   );
 }
-export function KpiCompact({ animate = true, title, value, label, spark, intent = 'brand', delta }: { /** the change: it gives the colour of the sparkline (WG-09) */ delta?: unknown; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: ReactNode; label?: string; spark?: readonly unknown[]; intent?: string }) {
+export function KpiCompact({ animate = true, title, value, label, spark, intent = 'brand', delta, good = 1 }: { /** the change: a chip beside the value (only when it is given: a card whose number does not go up or down has none) and the colour of the sparkline (WG-09) */ delta?: unknown; good?: number; /** count the numbers up once when they appear (MO-02); false shows them at once */ animate?: boolean; title: string; value: ReactNode; label?: string; spark?: readonly unknown[]; intent?: string }) {
   return (
     <section className="wg"><WgHead title={title} />
-      <div className="wg-tr"><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} /></span>{label ? <span className="wg-t">{label}</span> : null}</div>{spark ? <div className="wg-sp"><Spark vals={spark} intent={chartIntentOfDelta(delta, intent)} h={36} dot label={title} /></div> : null}</div></section>
+      <div className="wg-tr"><div className="wg-c"><span className="wg-v"><Cnt v={value} animate={animate} />{delta != null ? <> <Delta v={delta} good={good} /></> : null}</span>{label ? <span className="wg-t">{label}</span> : null}</div>{spark ? <div className="wg-sp"><Spark vals={spark} intent={chartIntentOfDelta(delta, intent)} h={36} dot label={title} /></div> : null}</div></section>
   );
 }

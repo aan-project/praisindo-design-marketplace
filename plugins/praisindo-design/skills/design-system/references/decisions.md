@@ -1,4 +1,4 @@
-# Decision table: which surface for which intent (skill v2.121.0)
+# Decision table: which surface for which intent (skill v2.122.0)
 
 Read this BEFORE you build a page or a flow. The choices below are made already: do not ask the user which surface to use, and do not invent another one. The ids DK-01 to DK-20 are rules of the Praisindo register (decisions of the Praisindo owner, 2026-11-11). If no row fits, STOP and write the need under "Rule proposals" in `docs/design-system/new-components.md`; do not improvise a layout, a drawer or a dialog.
 

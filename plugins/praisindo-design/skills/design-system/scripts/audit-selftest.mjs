@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Self-test of scripts/audit.mjs (skill design-system v2.121.0): the violation fixture must produce every pattern finding, and the starters (with the example pages) none.
+// Self-test of scripts/audit.mjs (skill design-system v2.122.0): the violation fixture must produce every pattern finding, and the starters (with the example pages) none.
 // node scripts/audit-selftest.mjs   (exit 1 when a check is missing or a starter is not clean)
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';

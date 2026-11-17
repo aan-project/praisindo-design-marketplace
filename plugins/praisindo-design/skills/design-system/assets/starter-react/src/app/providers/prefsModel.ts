@@ -23,6 +23,8 @@ export const CARD_SLOTS = {
 } as const;
 export type CardSlot = keyof typeof CARD_SLOTS;
 export type CardVariants = Record<CardSlot, string>;
+/** The places in the drawer, grouped: for each family the choice of one card or separate cards comes first (rule PP-05). */
+export const CARD_GROUPS: readonly (readonly [string, readonly CardSlot[]])[] = [['stat', ['statGroup', 'statList', 'statDetail', 'statOther']], ['kpi', ['kpiGroup', 'kpiPage', 'kpiCard']]];
 export const CARD_SLOT_IDS = Object.keys(CARD_SLOTS) as CardSlot[];
 export const CARD_DEFAULTS: CardVariants = Object.fromEntries(CARD_SLOT_IDS.map((k) => [k, CARD_SLOTS[k][0]])) as CardVariants;
 /** A stored choice is kept only when the slot exists and the look is one of its looks; anything else is the default. */

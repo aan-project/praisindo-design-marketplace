@@ -34,15 +34,15 @@
 .wg-g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:12px;border-top:1px solid var(--color-border-neutral-subtle)}
 .wg-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--int-def);flex:none}
 .wg-rl{display:flex;flex-direction:column;gap:16px}.wg-rli{display:flex;align-items:center;gap:12px}
-.wg.wg-act{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}.wg.wg-act:hover{border-color:var(--color-border-neutral-strong)}.wg.wg-act[aria-pressed=true]{border-color:var(--int-def);background:var(--int-sub)}   /* a number card that is a filter (TB-31) */
+.wg.wg-act{cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}.wg.wg-act:hover{border-color:var(--color-border-neutral-strong)}.wg.wg-act[aria-pressed=true]{border-color:color-mix(in srgb,var(--int-def) 40%,var(--color-border-neutral-default));background:var(--int-sub)}   /* a number card that is a filter (TB-31) */
 .stats,.kpis{--grp-line:var(--color-border-neutral-default)}
 html[data-sg=one] .stats,html[data-kg=one] .kpis{gap:0;background:var(--color-surface-neutral-primary);border:1px solid var(--grp-line);border-radius:var(--r-card);overflow:hidden}   /* WG-10: the cards of a row are one card with dividers */
 html[data-sg=one] .stats>.stat,html[data-sg=one] .stats>.wg,html[data-kg=one] .kpis>.kpi,html[data-kg=one] .kpis>.wg{border:0;border-radius:0;box-shadow:-1px 0 0 0 var(--grp-line),0 -1px 0 0 var(--grp-line)}   /* the dividers are shadows that the clipped container shows only between the cards */
 .tnd-up{color:var(--color-foreground-success-default)}.tnd-dn{color:var(--color-foreground-danger-default)}   /* WG-08: a number that goes up is green, one that goes down is red */
-.wg.wg-soft{background:var(--int-sub);border-color:transparent}.wg.wg-soft .hp-ic{background:var(--color-surface-neutral-primary)}   /* the soft look of a stat card: the soft colour of its intent */
+.wg.wg-soft{background:var(--int-sub);border-color:transparent}.wg.wg-soft .hp-ic{background:var(--color-surface-neutral-primary);border-radius:50%}   /* the soft look of a stat card: the soft colour of its intent */
 .wg.wg-solid{background:var(--int-def);color:var(--int-on);border-color:transparent}.wg.wg-solid .wg-v,.wg.wg-solid .wg-t{color:inherit}.wg.wg-solid .wg-t{opacity:.9}
 .wg.wg-solid .dlt{background:color-mix(in srgb,currentColor 20%,transparent);color:inherit}
-.wg.wg-solid.wg-act[aria-pressed=true]{background:var(--int-def);outline:2px solid var(--int-def);outline-offset:2px}
+.wg.wg-solid.wg-act[aria-pressed=true]{background:var(--int-def);box-shadow:0 0 0 3px color-mix(in srgb,var(--int-def) 25%,transparent)}
 .wg-si{width:40px;height:40px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:color-mix(in srgb,currentColor 20%,transparent);flex:none}.wg-si .ic{font-size:20px}
 .wg-seg{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .wg-lg{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;flex:1;min-width:120px}.wg-lg li{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm);color:var(--color-text-secondary)}.wg-lg li .fw6{margin-left:auto;color:var(--color-text-primary);font-weight:calc(500 + var(--fw-shift,0))}
