@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.130.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.131.0). Add the project's updates above it, newest first.
 
+- **2.131.0** (2026-11-18) The detail page of a person or an organisation has the layout of Customer 360 (DT-17), the detail of a product the layout of the Product detail (DT-18), a finding or a filter note outside a card is an Alert (CD-29); the example detail page has the third (right) card.
 - **2.130.0** (2026-11-18) The green and the red of a number that goes up or down are the strong variant of the foreground token (WG-15): CSS files 42, 10 and 50.
 - **2.129.0** (2026-11-18) The icon in the round avatar of an entity panel is 32px (`.c3av .ic`, CSS file 10-customer-360-three-panels).
 - **2.127.0** (2026-11-18) The name or label of a product shows its quick view on hover, the profile card with the logo and only the most important facts (UN-03): `ProductName` (HTML `productName()`), `PROFILE_PRODUCTS` in `profile.config`, `ProfileCard` `logo`.

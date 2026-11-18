@@ -1,5 +1,5 @@
 // REFERENCE EXAMPLE (not a product page): the detail page pattern of references/rules-kartu.md. Route with layout 'detail' (the sidebar collapses on entry, SB-05, SB-30).
-// Rules met: NV-01, BK-01 (Back only on a detail page, to the previous screen), NV-02, NV-03 (page head), DT-05 (DetailLayout, DetailPanel, DetailSummary), CU-02 (the side
+// Rules met: NV-01, BK-01 (Back only on a detail page, to the previous screen), NV-02, NV-03 (page head), DT-05 (DetailLayout, DetailPanel, DetailSummary), DT-17 (a supplier is an organisation, so the page has the layout of Customer 360: the entity panel on the left, the tabs in the centre, a summary card on the right: `third`), CU-02 (the side
 // panel scrolls with the page), CD-06 (DR rows), CD-02, CD-09 (cards, no card in a card), NV-11, NV-12, CH-06 (Tabs with counts), BD-01..BD-03, BD-13 (status Badge),
 // DR-01, DR-03 (details drawer, a second drawer with Back), MN-01, MN-02 (action menu), OR-01 (log newest first), BT-01, BT-04, ES-01 (empty state), DS-03.
 import { useState, type MouseEvent, type ReactNode } from 'react';
@@ -53,7 +53,7 @@ export function DetailPage({ id }: { id?: string }) {
       <PageHeader crumbs={[...crumbs, ['#/ex-detail/' + s.id, s.name]]} title={s.name} sub={t('ex.det.sub')} onBack={back} backLabel={t('ex.back')}
         actions={<><Button label={t('ex.edit')} icon="edit" type="outlined" intent="neutral" onClick={() => toast(fill(t('ex.done.edit'), { id: s.id }))} />
           <Button icon="more_vert" type="outlined" intent="neutral" aria={t('tbl.more')} onClick={(e: MouseEvent<HTMLButtonElement>) => setMenu(menuPos(s.id, e.currentTarget, MENU.length))} /></>} />
-      <DetailLayout panel={<DetailPanel label={t('ex.det.panel')}
+      <DetailLayout third={<Card title={t('ex.tab.log')} flush body={<>{log.slice(0, 3).map((e) => <div className="li" key={e.at}><div className="m"><span>{t(e.key)}</span><span className="mut">{e.at}</span></div></div>)}</>} />} panel={<DetailPanel label={t('ex.det.panel')}
         head={<div className="c3id"><div className="c3av"><Icon name="storefront" /></div><h2>{s.name}</h2><span className="c3sub">{s.id} · {s.city}</span></div>}
         body={<><DetailItem label={t('ex.f.cat')}>{t('ex.cat.' + s.cat)}</DetailItem><DetailItem label={t('ex.f.phone')}>+62 {s.phone}</DetailItem><DetailItem label={t('ex.f.since')}>{dfmt(s.since, prefs.lang)}</DetailItem></>} note={t('ex.det.note')} />}>
         <DetailSummary label={t('ex.det.sum')} icon="payments" intent="brand" kicker={t('ex.f.limit')} title={'Rp' + money.format(s.limit)} badges={st}

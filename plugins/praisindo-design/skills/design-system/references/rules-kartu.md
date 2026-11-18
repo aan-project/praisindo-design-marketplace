@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.130.0, skill v2.130.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.131.0, skill v2.131.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -171,6 +171,24 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** The name or label of a PRODUCT (a catalogue item, or the thing the product sells or manages) shows its quick view when the cursor is on it, as the name of a user (UN-01) and of a customer (UN-02) do, with only the most important facts. The card is the `ProfileCard` with `logo` (the image of the product or of its issuer instead of the initials, the texts say product): the name, the category under it, three or four rows (the code, the issuer or owner, one more fact such as risk or stock) and one link to the detail; the trigger is `ProductName` (HTML: `productName()`), a name from the product's own catalogue (`profile.config`): hover after a short delay, keyboard focus and tap, no text decoration, the font of the text around it. Not covered: a product name inside another interactive control (a link, a menu item, an option), chart labels, exported files, the title of the product's own detail page, and a category label that is not a catalogue item. A name that is not in the catalogue stays plain text.
 **Meet.** Never print a product name from a record as plain text: use `ProductName` (`profileProduct`, `productRows` in `profile.config`); give the card only the facts that matter.
 **Check.** Hover a product name in a table and in a sentence: the card opens with the logo, name, category, code, issuer and one fact, and View product opens the detail.
+**Guarded in Praisindo by** a unit test.
+
+### DT-17
+**Rule.** A detail page that shows a PERSON or an ORGANISATION in detail (a customer, an internal user, a company, a counterparty, a supplier) uses the layout of Customer 360: `DetailLayout` with `third` (the entity panel on the left with the avatar, the name, the id and the key facts, `DetailPanel`; the tabs of the entity and their body in the centre; a summary card on the right; one column under 1100px), as a full page with a breadcrumb back to its list, never a drawer and never a layout of its own.
+**Meet.** Build the detail of a person or an organisation with `DetailLayout panel={<DetailPanel .../>} third={<Card .../>}`; the example `features/examples/DetailPage.tsx` is the pattern.
+**Check.** Open the detail of a person or an organisation: panel on the left, tabs in the centre, a card on the right.
+**Guarded in Praisindo by** a unit test.
+
+### DT-18
+**Rule.** A detail page that shows a PRODUCT (an investment product or any other) in detail uses the layout of the Product detail: a full page with a breadcrumb back to its list, `DetailLayout side="right" wide` (the wide column on the left: the head `DetailSummary` with the logo, the charts and the tables; the right column of 360px: availability, documents and key information), never a drawer and never a layout of its own.
+**Meet.** Build the detail of a product with `DetailLayout side="right" wide panel={<div className="odside">...</div>}`.
+**Check.** Open the detail of a product: wide column with the charts and tables on the left, the narrow column with availability, documents and key information on the right.
+**Guarded in Praisindo by** a unit test.
+
+### CD-29
+**Rule.** A sentence that states a FINDING about the data of the page, or that a filter is on, and that sits on the page outside a card (for example "AUM is stable (-2% in the last 30 days)" under the tabs of a customer, or the note of an active quick filter with its Clear button) is an `Alert`, never a plain grey line: `info` for a note, `danger` only for a real problem (CD-08). A line inside a card that describes the card, and the help text of a field, stay plain.
+**Meet.** Use `<Alert intent="info" text extra />` for the finding or the note of a filter; put an action in `extra`.
+**Check.** Look at the insight and the filter notes of a page: they are Alerts, not grey lines; a card description and field help are plain.
 **Guarded in Praisindo by** a unit test.
 
 ### OR-01
