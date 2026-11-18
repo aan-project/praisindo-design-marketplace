@@ -37,3 +37,10 @@
 :root:not([data-motion="off"]) .wz-vertical .wz-s.done .wz-ln{transform-origin:top;animation:mo-grow var(--dur-slow) var(--ease-out) backwards}
 :root:not([data-motion="off"]) .wz-vertical .wz-s.cur .wz-n{animation:mo-pulse 2s ease-out infinite}
 :root:not([data-motion="off"]) .state.ok>.ic:first-child{animation:mo-check var(--dur-slow) var(--ease-out) backwards}
+/* MO-10: a drawer slides in from the right edge and leaves the same way (the copy `.dw-out` that Drawer keeps while it slides out); the scrim fades. Still under [data-motion="off"] */
+:root:not([data-motion="off"]) .drawer{animation:dw-in var(--dur-slow) var(--ease-out)}
+:root:not([data-motion="off"]) .drawer.dw-out{animation:dw-out var(--dur-slow) var(--ease-out) forwards;pointer-events:none}
+:root:not([data-motion="off"]) .scrim.dw-out{animation:mo-fade-out var(--dur-slow) ease-out forwards;pointer-events:none}
+@keyframes dw-in{from{transform:translateX(100%)}}
+@keyframes dw-out{to{transform:translateX(100%)}}
+@keyframes mo-fade-out{to{opacity:0}}

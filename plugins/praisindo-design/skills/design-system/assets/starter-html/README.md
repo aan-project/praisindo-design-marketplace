@@ -1,4 +1,4 @@
-# starter-html (skill design-system v2.125.0)
+# starter-html (skill design-system v2.126.0)
 
 A plain HTML + CSS + JavaScript (ES modules) app with the Praisindo shell, the Design System page and the Branding page. No build step.
 

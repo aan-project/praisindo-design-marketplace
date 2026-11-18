@@ -1,4 +1,4 @@
-# Buttons and segmented toggle (Praisindo DS v2.125.0, skill v2.125.0)
+# Buttons and segmented toggle (Praisindo DS v2.126.0, skill v2.126.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -100,4 +100,10 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 **Rule.** The exact values of the button hover (MO-08): the sweep of the fill uses `color-mix` of `--color-text-white` (30%) over `--dur-slow` (.32 s) and the press stays scale .98.
 **Meet.** Use the DS CSS (`67-motion.css`) as it is.
 **Check.** Hover and press a fill button with motion on.
+**Guarded in Praisindo by** a unit test.
+
+### MO-10
+**Rule.** A drawer slides in from the right edge of the screen to its place (right to left, `--dur-slow`, `--ease-out`, keyframes `dw-in`) and leaves the same way to the right (left to right, `dw-out`): the `Drawer` keeps a copy of itself and of its scrim, class `dw-out`, for the length of the slide-out because the framework removes the node at once; the scrim fades. It stands still, and the drawer is gone at once, under `data-motion="off"` (reduced motion, automated browsers, MO-03). A drawer opened from a drawer slides in over the one that slides out.
+**Meet.** Use the `Drawer` of the system (HTML: `drawer()` in `js/ui.js`) and the CSS of `67-motion.css`; do not set your own animation on `.drawer`.
+**Check.** Open a drawer: it comes in from the right; close it: it goes out to the right; with reduced motion it appears and disappears at once.
 **Guarded in Praisindo by** a unit test.

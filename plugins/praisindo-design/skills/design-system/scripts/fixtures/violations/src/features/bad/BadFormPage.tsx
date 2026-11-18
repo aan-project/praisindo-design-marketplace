@@ -3,6 +3,7 @@ import { PageHeader } from '../../app/shell/PageHead';
 import { Button } from '../../design-system/components/Button';
 import { Card, GroupTitle } from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Field';
+import { FormShell } from '../shared/FormShell';
 
 export function BadFormPage({ cancel, save }: { cancel: () => void; save: () => void }) {
   const body = (<>
@@ -17,3 +18,6 @@ export function BadFormPage({ cancel, save }: { cancel: () => void; save: () => 
       <Card title="Supplier details" body={body} footer={<><Button label="Cancel" type="transparent" intent="neutral" onClick={cancel} /><Button label="Save supplier" onClick={save} /></>} />
     </>);
 }
+
+// DK-29 fixture: a Cancel button in the footer of a FormShell
+export const BadShell = ({ leave, save }: { leave: () => void; save: () => void }) => <FormShell title="Add" sub="x" parents={[]} crumb="Add" dirty onLeave={leave} tips={['x']} footer={() => <><Button label="Cancel" type="transparent" intent="neutral" onClick={leave} /><Button label="Save" onClick={save} /></>} />;

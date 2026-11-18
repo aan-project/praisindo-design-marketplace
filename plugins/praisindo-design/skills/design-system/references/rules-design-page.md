@@ -1,4 +1,4 @@
-# Design System page (Praisindo DS v2.125.0, skill v2.125.0)
+# Design System page (Praisindo DS v2.126.0, skill v2.126.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 

@@ -1,4 +1,4 @@
-# Decision rules DK-01 to DK-20 (Praisindo DS v2.125.0)
+# Decision rules DK-01 to DK-20 (Praisindo DS v2.126.0)
 
 The ids are those of the Praisindo owner rules register (decisions of the owner, 2026-11-11). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. The decision table that uses them is `decisions.md`; read it first.
 
@@ -7,8 +7,8 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 ## Rules
 
 ### DK-01
-**Rule.** Adding or editing data, short or long, is a form PAGE (route `<list>/new`, `<list>/<id>/edit`; page layout `detail` like the Signal rule editor; breadcrumb back, the buttons Cancel then Save in the card of actions on the right and never the footer of a card (DK-17, DK-24, DK-27), the leave dialog DR-06, the menu entry stays highlighted), never a drawer or a dialog with a form. The exceptions are DK-03 (one value in place) and DK-04 (a contextual action). The guard `tools/dk01_allowlist.json` lists the DK-04 contextual actions (no conversion is waiting since DS 2.66); the list only shrinks
-**Meet.** Form page pattern at `<list>/new` and `<list>/<id>/edit` (the example `features/examples/FormPage.tsx`, route layout `detail`); Cancel then Save in the card of actions on the right (`FormShell`); leave dialog `warning`.
+**Rule.** Adding or editing data, short or long, is a form PAGE (route `<list>/new`, `<list>/<id>/edit`; page layout `detail` like the Signal rule editor; breadcrumb back, the buttons Save and, last at the bottom, Cancel in the card of actions on the right and never the footer of a card (DK-17, DK-24, DK-27, DK-29), the leave dialog DR-06, the menu entry stays highlighted), never a drawer or a dialog with a form. The exceptions are DK-03 (one value in place) and DK-04 (a contextual action). The guard `tools/dk01_allowlist.json` lists the DK-04 contextual actions (no conversion is waiting since DS 2.66); the list only shrinks
+**Meet.** Form page pattern at `<list>/new` and `<list>/<id>/edit` (the example `features/examples/FormPage.tsx`, route layout `detail`); Save and then Cancel (last, at the bottom) in the card of actions on the right (`FormShell`); leave dialog `warning`.
 **Check.** Audit (DK-01: a `Drawer` with two or more fields and a Save / Add / Create / Update button; exception `/* ds-allow: <reason> */`). Open every add and edit flow: it is a page.
 **Guarded in Praisindo by** a unit test and a browser test.
 
@@ -103,7 +103,7 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 **Guarded in Praisindo by** a unit test.
 
 ### DK-17
-**Rule.** On a form page the title of a card is never the title of the page (a card says what its fields are: Brief basics, Threshold, Report settings); a form with several groups of fields is one card per group and one step per group, a form of one group has one card; the buttons of the form are NOT the footer of the last card: they are the card of actions without a header in the side column on the right (DK-24); a form whose fields feed a live result keeps the inputs and the result as groups of the content and its summary in the right column under the card of actions
+**Rule.** On a form page the title of a card is never the title of the page (a card says what its fields are: Brief basics, Threshold, Report settings); a form with several groups of fields is one step per group and each step holds one or more cards, each with its own title (DK-28), a form of one group has one card; the buttons of the form are NOT the footer of the last card: they are the card of actions without a header in the side column on the right (DK-24); a form whose fields feed a live result keeps the inputs and the result as groups of the content and its summary in the right column under the card of actions
 **Meet.** Card title differs from the page title; one card and one step per group of fields; the buttons in the card of actions on the right.
 **Check.** Audit (the Card title equals the `h1`); the example form page.
 **Guarded in Praisindo by** the audit.

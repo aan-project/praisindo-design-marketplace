@@ -14,7 +14,12 @@ function mount(main, page, html, first) {
   const doc = document.createElement('div'); doc.innerHTML = html;
   const tpl = (kind, name) => doc.querySelector(`template[data-${kind}="${name}"]`)?.innerHTML ?? '';
   let ov = null, opener = null;
-  const closeOv = () => { if (!ov) return; ov.remove(); ov = null; opener?.focus?.(); };
+  const closeOv = () => {
+    if (!ov) return; const gone = ov, dw = gone.querySelector('.drawer'); ov = null;
+    if (dw && document.documentElement.dataset.motion === 'on') { gone.inert = true; gone.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); dw.addEventListener('animationend', () => gone.remove(), { once: true }); setTimeout(() => gone.remove(), 600); }   // MO-10: a drawer leaves to the right
+    else gone.remove();
+    opener?.focus?.();
+  };
   const openOv = (name, from) => {
     const h = tpl('ov', name); if (!h) return false;
     if (!ov) opener = from;

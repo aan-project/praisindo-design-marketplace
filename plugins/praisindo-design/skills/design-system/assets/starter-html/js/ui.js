@@ -43,7 +43,9 @@ export function drawer({ title, size = 'sm', bodyHtml, footerHtml = '', closeLab
   const opener = document.activeElement, host = document.createElement('div');
   host.innerHTML = `<div class="scrim ${layer}"></div><aside class="drawer ${layer} dw-${size}" role="dialog" aria-modal="true" aria-label="${esc(title)}" tabindex="-1"><div class="dh">${back ? button({ icon: 'arrow_back', type: 'transparent', intent: 'neutral', aria: back, attrs: 'data-back' }) : ''}<h2>${esc(title)}</h2>${button({ icon: 'close', type: 'transparent', intent: 'neutral', aria: closeLabel, attrs: 'data-close' })}</div><div class="db">${bodyHtml}</div>${footerHtml ? `<div class="df">${footerHtml}</div>` : ''}</aside>`;
   document.body.appendChild(host);
-  const close = () => { live.delete(close); document.removeEventListener('keydown', key); host.remove(); opener?.focus?.(); onClose?.(); };
+  // MO-10: a drawer slides in from the right and leaves to the right; the node stays for the length of the slide-out (`.dw-out`) and is removed after it. Still under data-motion="off".
+  const gone = () => { if (document.documentElement.dataset.motion !== 'on') { host.remove(); return; } host.inert = true; host.setAttribute('aria-hidden', 'true'); host.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); host.querySelector('.drawer').addEventListener('animationend', () => host.remove(), { once: true }); setTimeout(() => host.remove(), 600); };
+  const close = () => { live.delete(close); document.removeEventListener('keydown', key); gone(); opener?.focus?.(); onClose?.(); };
   const key = (e) => { if (e.key === 'Escape') close(); };
   live.add(close); document.addEventListener('keydown', key);
   host.querySelector('.scrim').addEventListener('click', close); host.querySelector('[data-close]').addEventListener('click', close);

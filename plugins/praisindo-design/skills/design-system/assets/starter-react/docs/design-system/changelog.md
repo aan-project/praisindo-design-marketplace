@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.125.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.126.0). Add the project's updates above it, newest first.
 
+- **2.126.0** (2026-11-18) A step of a form page may hold several cards and the fields are grouped first (DK-28); the card of actions stacks Back, the action and Cancel last, `FormShell` draws Cancel (DK-29); a drawer slides in from the right and out to the right (MO-10); the example form is two steps of two cards.
 - **2.125.0** (2026-11-18) One rule for a form page (DK-27, the whole of DK-17 and DK-24): the example form page is rewritten with `FormShell` (one card per group with its own title, the Wizard horizontal or vertical, the buttons in the card of actions on the right and never a card footer, the tools row with Tips, the leave dialog); the audit flags a card footer with Save and several GroupTitle captions on a form page. DK-01 and CD-09 no longer say footer.
 - **2.124.2** (2026-11-18) Skill-only fix (LD-01, VN-01): the icon font detector of `index.html` reads `document.fonts` with `Array.from` and checks every 100 ms (it never found the font, so the icons stayed transparent); the DS is unchanged.
 - **2.124.1** (2026-11-18) Stat cards above a table are filters (TB-31); the buttons of a `.seg` group are as wide as their label (BT-10); a multi-series line or area chart is drawn like Return by period, in `withChart` (CT-01); a stepper form page has the layout choice horizontal or vertical, an icon toggle per page (DK-24); the tab bar of a detail page is segmented (TB-29 amended).

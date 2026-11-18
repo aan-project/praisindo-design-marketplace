@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.125.0, skill v2.125.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.126.0, skill v2.126.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -162,7 +162,7 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a browser test.
 
 ### UN-02
-**Rule.** The same for the name of a customer: wherever a customer name is shown as a value or a label it is a `CustomerName` (the trigger of the customer card, PC-05): hover, focus, tap, no text decoration, the font of the text around it. Not covered: a customer name inside another interactive control (a link or button to the customer, a row that is one button, an option), chart labels, system sentences, exported files, and the page title of the customer itself. `tests/e2e/rules/usernames.spec.ts` scans the routes for it
+**Rule.** The same for the name of a customer or of a company (a corporate customer; every name or label of a person or an organisation shows its quick view on hover, owner 2026-11-18): wherever a customer name is shown as a value or a label it is a `CustomerName` (the trigger of the customer card, PC-05): hover, focus, tap, no text decoration, the font of the text around it. Not covered: a customer name inside another interactive control (a link or button to the customer, a row that is one button, an option), chart labels, system sentences, exported files, and the page title of the customer itself. `tests/e2e/rules/usernames.spec.ts` scans the routes for it
 **Meet.** Every customer-like entity name shown as a value is the trigger of its card (same pattern as `ProfileCard`).
 **Check.** Hover names.
 **Guarded in Praisindo by** a browser test.

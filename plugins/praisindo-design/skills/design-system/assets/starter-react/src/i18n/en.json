@@ -586,7 +586,9 @@
  "ft.rd": "Data readiness",
  "sn.back": "Back",
  "sn.next": "Next",
- "ft.ex.1": "Every group of fields is its own card and its own step.",
+ "ft.ex.1": "The fields are grouped first: each card holds related fields, and a step can hold more than one card.",
  "ft.ex.2": "A field marked * is required; the others are optional.",
- "ft.ex.3": "Leaving with changes asks first; nothing is saved until you press Save supplier."
+ "ft.ex.3": "Leaving with changes asks first; nothing is saved until you press Save supplier.",
+ "ex.s.supplier": "Supplier",
+ "ex.s.terms": "Terms and settings"
 }
