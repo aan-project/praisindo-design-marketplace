@@ -308,7 +308,7 @@ export function KanbanSection() {
   ];
   const many = Array.from({ length: 8 }, (_, i) => ({ ...items[i % 3]!, id: 'm' + i, st: i < 6 ? 'pending' : 'in_progress' }));
   const card = (x: (typeof items)[number]) => (
-    <KanbanCard id={x.id} title={x.name} desc={x.desc} priority={<Badge label={x.pri.replace(/^./, (c) => c.toUpperCase())} {...badgeProps('priority', x.pri)} />} due={x.due} owner={x.rm ? <UserName name={x.rm} /> : <Badge label={t('kb.noOwner')} intent="warning" icon="person_off" />}
+    <KanbanCard id={x.id} title={x.name} desc={x.desc} priority={<Badge label={x.pri.replace(/^./, (c) => c.toUpperCase())} {...badgeProps('priority', x.pri)} />} due={x.due} owner={x.rm ? <UserName name={x.rm} /> : <Badge label={t('kb.noOwner')} intent="warning" />}
       onOpen={() => { window.location.hash = '#/design'; }} openLabel={t('tbl.view')}
       actions={x.st !== 'completed' ? <Button label={t('tbl.take')} type="link" /> : null}
       menu={<Button icon="more_vert" type="transparent" intent="neutral" size="sm" aria={t('tbl.more')} />} />);

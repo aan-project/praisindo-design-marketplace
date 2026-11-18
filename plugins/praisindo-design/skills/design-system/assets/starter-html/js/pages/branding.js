@@ -14,7 +14,7 @@ import { tooltip } from '../tooltip.js';
 
 const FW = [300, 400, 500, 600];   // the default weight of the text (FW-01): 300 Light, 400 Regular, 500 Medium, 600 Semibold
 const SLOT = { logoL: 'logoLight', logoD: 'logoDark', fav: 'favicon' };
-const badge = (label, intent, ic) => `<span class="bdg t-soft i-${intent} bdg-u"><span class="material-icons-outlined ic" data-ic="${esc(ic)}" aria-hidden="true"></span><span class="bdg-t">${esc(label)}</span></span>`;
+const badge = (label, intent) => `<span class="bdg t-soft i-${intent} bdg-u"><span class="bdg-t">${esc(label)}</span></span>`;
 
 export function renderBranding(main, { onSaved }) {
   const brand = state.brand;
@@ -36,12 +36,12 @@ export function renderBranding(main, { onSaved }) {
   const $ = (s) => main.querySelector(s);
   const bars = [34, 52, 41, 68, 57, 80].map((h, i) => `<rect x="${10 + i * 34}" y="${96 - h}" width="22" height="${h}" rx="3" fill="var(--color-surface-brand-default)"/>`).join('');
   function preview() {
-    const dk = A.pmode === 'dark', lg = (dk && A.logoD) || A.logoL, nm = A.name || '—', full = !!lg, hi = badge(t('adm.pv.hi'), 'danger', 'keyboard_double_arrow_up'), md = badge(t('adm.pv.md'), 'warning', 'drag_handle');
+    const dk = A.pmode === 'dark', lg = (dk && A.logoD) || A.logoL, nm = A.name || '—', full = !!lg, hi = badge(t('adm.pv.hi'), 'danger'), md = badge(t('adm.pv.md'), 'warning');
     $('#bpwrap').innerHTML = `<style id="bpcss">${buildTokens(admDraft(A, brand), '.bp')}</style><div class="rw">${button({ label: t('adm.pv.light'), type: A.pmode === 'light' ? 'soft' : 'outlined', intent: A.pmode === 'light' ? 'brand' : 'neutral', size: 'sm', attrs: 'data-pm="light"' })}${button({ label: t('adm.pv.dark'), type: dk ? 'soft' : 'outlined', intent: dk ? 'brand' : 'neutral', size: 'sm', attrs: 'data-pm="dark"' })}</div>
       <div class="bp" data-theme="${A.pmode}"><div class="bp-app"><aside class="bp-sb"><div class="bp-brand${full ? ' full' : ''}">${lg ? `<img src="${esc(lg)}" alt="${full ? esc(nm) : ''}">` : `<span class="mono" style="width:24px;height:24px">${esc(nm.charAt(0).toUpperCase())}</span>`}${full ? '' : `<span class="bp-name">${esc(nm)}</span>`}</div><div class="bp-nav on">${esc(t('adm.pv.nav1'))}</div><div class="bp-nav">${esc(t('adm.pv.nav2'))}</div><div class="bp-nav">${esc(t('adm.pv.nav3'))}</div></aside>
       <div><header class="bp-hd"><span class="fw6">${esc(t('adm.pv.page'))}</span><span class="av">AW</span></header><div class="bp-body"><div class="rw"><span class="btn b-fill i-brand s-md">${esc(t('adm.pv.btn1'))}</span><span class="btn b-fill i-secondary s-md">${esc(t('adm.pv.btn2'))}</span><span class="btn b-outlined i-neutral s-md">${esc(t('adm.pv.btn3'))}</span></div>
-      <div class="inp s-md"><input placeholder="${esc(t('adm.pv.inp'))}" tabindex="-1" aria-hidden="true"></div><div class="rw">${badge(t('adm.pv.st1'), 'success', 'check_circle')}${badge(t('adm.pv.st2'), 'info', 'local_fire_department')}${hi}${md}</div>
-      <div class="bp-card"><table><thead><tr><th>${esc(t('adm.pv.th1'))}</th><th>${esc(t('adm.pv.th2'))}</th><th>${esc(t('adm.pv.th3'))}</th></tr></thead><tbody><tr><td>Alex Morgan</td><td>${hi}</td><td>${badge(t('adm.pv.st1'), 'success', 'check_circle')}</td></tr><tr><td>Sam Rivera</td><td>${md}</td><td>${badge(t('adm.pv.st2'), 'info', 'local_fire_department')}</td></tr></tbody></table></div>
+      <div class="inp s-md"><input placeholder="${esc(t('adm.pv.inp'))}" tabindex="-1" aria-hidden="true"></div><div class="rw">${badge(t('adm.pv.st1'), 'success')}${badge(t('adm.pv.st2'), 'info')}${hi}${md}</div>
+      <div class="bp-card"><table><thead><tr><th>${esc(t('adm.pv.th1'))}</th><th>${esc(t('adm.pv.th2'))}</th><th>${esc(t('adm.pv.th3'))}</th></tr></thead><tbody><tr><td>Alex Morgan</td><td>${hi}</td><td>${badge(t('adm.pv.st1'), 'success')}</td></tr><tr><td>Sam Rivera</td><td>${md}</td><td>${badge(t('adm.pv.st2'), 'info')}</td></tr></tbody></table></div>
       <div class="bp-card"><span class="fw6">${esc(t('adm.pv.chart'))}</span><svg viewBox="0 0 220 100" width="100%" height="100" role="img" aria-label="${esc(t('adm.pv.chart'))}">${bars}<polyline fill="none" stroke="var(--color-surface-secondary-default)" stroke-width="3" points="21,70 55,56 89,62 123,36 157,44 191,18"/></svg></div></div></div></div></div>`;
   }
   function refresh() {

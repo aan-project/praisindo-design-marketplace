@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.131.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.132.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -67,7 +67,7 @@ for (const p of files) {
     if (/<b[\s>]/.test(code)) add('Cleanup', 'CODE-01', r, n, '<b> tag: use a weight class (fw6)');
     if (/outline\s*:\s*(none|0)\b/.test(code) && !/:focus-visible|:focus\s*\{[^}]*outline-offset/.test(ln)) add('Fix', 'AX-01', r, n, 'outline removed: the focus ring (2px --color-border-brand-strong) must stay');
     if (/data-tip\b|data-tooltip\b/.test(code)) add('Fix', 'CD-07', r, n, 'home-made tooltip: use the Tooltip component');
-    if (/DotBadge|bdg-dot|class(Name)?=["'][^"']*\bdot\b/.test(code)) add('Fix', 'BD-01', r, n, 'dot badge: there is one soft Badge with an icon');
+    if (/DotBadge|bdg-dot|class(Name)?=["'][^"']*\bdot\b/.test(code)) add('Fix', 'BD-01', r, n, 'dot badge: there is one soft Badge, without an icon');
     // storage outside the storage module
     if (/\b(localStorage|sessionStorage|indexedDB)\b/.test(code) && !/(reactStorage|brandStore|prefs)\.(ts|js)$/.test(r)) add('Cleanup', 'TH-03', r, n, 'direct Web Storage use: go through the storage module (reactStorage.ts / prefs.js)');
     // home-made alert on mount is hard to see by script: flag only the obvious literal
@@ -75,7 +75,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.131.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.132.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -128,6 +128,9 @@ for (const p of files) {
     const m = /footer=\{([\s\S]*)/.exec(t.attrs)?.[1] || '';
     if (/(label=\{?\s*t\(['"`][^'"`)]*cancel|label=["'`]cancel["'`]|label=["'`]batal["'`])/i.test(m)) add('Fix', 'DK-29', r, lineAt(src, t.i), 'a Cancel button in the footer of a FormShell: FormShell draws Cancel itself, last at the bottom of the card of actions (DK-29); the footer holds the action only');
   }
+  // BD-02: a badge never has an icon (owner 2026-11-18): no `icon` and no `noIcon` on a Badge, no icon element inside a `.bdg` of hand-written markup. Exception: /* ds-allow: <reason> */
+  if (jsx && !allowed(raw)) for (const t of tags(src, 'Badge')) if (prop(t.attrs, 'icon') || prop(t.attrs, 'noIcon')) add('Fix', 'BD-02', r, lineAt(src, t.i), 'a Badge with `icon` or `noIcon`: the badge has no icon any more (BD-02)');
+  if (e === 'html' && !allowed(raw)) for (const m of src.matchAll(/<span class=["'][^"']*\bbdg\b[^"']*["'][^>]*>\s*<span class=["'][^"']*\bic\b/g)) add('Fix', 'BD-02', r, lineAt(src, m.index), 'an icon inside a badge: the badge has no icon any more (BD-02)');
   // FM-01: every labelled field of a form declares `req` (red *) or `opt` ("Optional"); a Select / SegmentedControl with a `label` is a form field too; a search box is not a form field
   if (jsx) for (const t of tags(src, FIELD)) {
     if (!prop(t.attrs, 'label') || /type=["']search["']/.test(t.attrs)) continue;
@@ -264,7 +267,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.131.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.132.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;

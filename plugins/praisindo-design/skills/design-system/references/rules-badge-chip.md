@@ -1,4 +1,4 @@
-# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.131.0, skill v2.131.0)
+# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.132.0, skill v2.132.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -6,11 +6,11 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 
 | The label is | Component |
 |---|---|
-| a status (Active, Pending, Rejected) or a category (segment, priority, risk) | `Badge` with intent and icon from `badgeFor(domain, value)` (`src/domain/badgeIcons.ts`) |
+| a status (Active, Pending, Rejected) or a category (segment, priority, risk) | `Badge` with the intent from `badgeFor(domain, value)` (`src/domain/badgeIcons.ts`) |
 | a count, a number, a tag, a name, a version, a permission | static `Chip` |
 | a choice the user makes, a filter, a removable value | interactive `Chip` (`onClick` / `selected` / `onRemove`) |
 
-A badge is never clickable. A pill made with CSS is never allowed. A new domain added to `badgeIcons.ts` (with its `bdg.d.<domain>` keys) is shown on the Design System page in the "This project" section: one Badge per value, so that intent and icon can be reviewed.
+A badge is never clickable. A pill made with CSS is never allowed. A new domain added to `badgeIcons.ts` (with its `bdg.d.<domain>` keys) is shown on the Design System page in the "This project" section: one Badge per value, so that the intent can be reviewed.
 
 ## Rules
 
@@ -27,55 +27,55 @@ A badge is never clickable. A pill made with CSS is never allowed. A new domain 
 **Guarded in Praisindo by** a unit test.
 
 ### BG-08
-**Rule.** A category label such as the data confidence of a recommendation (high, medium, low) is the Badge (`.bdg`, soft, with the confidence icon of the central map, never fill, never dot): High = success, Medium = warning, Low = danger, size sm, in the plan card, the pick summary, the compare table and the detail row; there is no `.rxp-cf` or any pill of its own
-**Meet.** Category values (for example High / Medium / Low) are entries of `badgeIcons.ts` with their intent and icon.
-**Check.** Look at the badges together: different icons.
+**Rule.** A category label such as the data confidence of a recommendation (high, medium, low) is the Badge (`.bdg`, soft, without an icon, never fill, never dot): High = success, Medium = warning, Low = danger, size sm, in the plan card, the pick summary, the compare table and the detail row; there is no `.rxp-cf` or any pill of its own
+**Meet.** Category values (for example High / Medium / Low) are entries of `badgeIcons.ts` with their intent.
+**Check.** Look at the badges together: different intents.
 **Guarded in Praisindo by** a browser test.
 
 ### BD-01
-**Rule.** There is ONE badge look, soft: a rectangle with the radius token `--r-badge` (8px; it was 4px until keputusan owner 2026-10-26, digantikan), background `--int-sub`, text and icon `--int-fg` of the intent, no border, not a full pill, no dot, no animation, no fill, no outline; one size (20px high, text `--fs-xs`, padding 0 4px (it was 0 8px until keputusan owner 2026-10-29, revisi UI), gap 4px); intents are the existing ones (brand, success, warning, danger, info, neutral, purple, cyan)
-**Meet.** `<Badge intent label icon />` only; never a pill class.
+**Rule.** There is ONE badge look, soft: a rectangle with the radius token `--r-badge` (8px; it was 4px until keputusan owner 2026-10-26, digantikan), background `--int-sub`, text `--int-fg` of the intent, no border, not a full pill, no dot, no animation, no fill, no outline; one size (20px high, text `--fs-xs`, padding 0 4px (it was 0 8px until keputusan owner 2026-10-29, revisi UI), gap 4px); intents are the existing ones (brand, success, warning, danger, info, neutral, purple, cyan)
+**Meet.** `<Badge intent label />` only; never a pill class.
 **Check.** Audit (dot / fill badge and pill checks).
 **Guarded in Praisindo by** a unit test.
 
 ### BD-02
-**Rule.** Every badge shows an icon (14px, `aria-hidden`, left of the text) that fits its value. A badge without an icon exists only through the explicit `noIcon` flag (version numbers, product names, permission names, tags, scenario labels); never by omission
-**Meet.** `Badge` takes its icon from `badgeFor(domain, key)`; `noIcon` only for version, product, permission, tag.
-**Check.** Audit (badge without icon).
-**Guarded in Praisindo by** a unit test.
+**Rule.** A badge NEVER has an icon (owner decision 2026-11-18: the variant of the badge with an icon is removed): `Badge` has no `icon` and no `noIcon` prop (a call with one does not compile) and the CSS has no icon rule for it; it is the text in the colour of its intent on its soft background, and the status or category is told by the text and the colour.
+**Meet.** `<Badge label intent />` and the wrappers that read `badgeFor(domain, key)`; never an icon element inside a `.bdg`.
+**Check.** Audit and the unit test: no `.ic` inside a `.bdg`, no `icon` or `noIcon` on a Badge.
+**Guarded in Praisindo by** a unit test and a browser test.
 
 ### BD-03
-**Rule.** Icons come from one central map (`src/domain/badgeIcons.ts`, built from docs/badge-icon-map.json): the same value has the same icon in the whole app, values that show together in one group have different icons, every value of the map has an icon, and no page has a map of its own
+**Rule.** Colours come from one central map (`src/domain/badgeIcons.ts`, built from docs/badge-icon-map.json): the same value has the same colour in the whole app, every value of the map has its intent (no icon), and no page has a map of its own
 **Meet.** Add every status / category value to `src/domain/badgeIcons.ts`; never a map in a page.
 **Check.** grep for icon maps outside `badgeIcons.ts`.
 **Guarded in Praisindo by** a unit test.
 
 ### BD-04
-**Rule.** Colours: the text and icon of a soft badge are the `--int-fg` of its intent; in light mode success, danger and info use `--color-surface-<intent>-strong-2` (7.00, 5.75 and 7.56:1 on their soft background), the other intents their `*-strong` foreground; in dark mode every intent uses its `*-strong` foreground (7.2:1 or more). Every intent reaches 4.5:1 in a new project (the Praisindo warning-in-light exception is not copied)
+**Rule.** Colours: the text of a soft badge are the `--int-fg` of its intent; in light mode success, danger and info use `--color-surface-<intent>-strong-2` (7.00, 5.75 and 7.56:1 on their soft background), the other intents their `*-strong` foreground; in dark mode every intent uses its `*-strong` foreground (7.2:1 or more). Every intent reaches 4.5:1 in a new project (the Praisindo warning-in-light exception is not copied)
 **Meet.** Nothing to write: `Badge` sets `--int-fg` / `--int-sub` per intent.
 **Check.** `contrast.mjs`.
 **Guarded in Praisindo by** a unit test.
 
 ### BD-05
-**Rule.** A badge is one line: a text that does not fit is cut with an ellipsis (the icon stays), and the badge then carries the full label in its `title`; the badge never grows wider than its container
+**Rule.** A badge is one line: a text that does not fit is cut with an ellipsis, and the badge then carries the full label in its `title`; the badge never grows wider than its container
 **Meet.** `Badge` cuts the text and sets `title`; do not set a width.
 **Check.** Put a long label in a narrow cell.
 **Guarded in Praisindo by** a browser test.
 
 ### BD-06
-**Rule.** The risk profile badge (Conservative, Moderate, Growth, Aggressive) has one colour per level, chosen by its position on the scale: info, success, warning, danger, with the icons `shield`, `balance`, `show_chart`, `trending_up`; the channel badge stays brand
-**Meet.** Profile-like categories: a neutral Badge with one icon per value in `badgeIcons.ts`.
+**Rule.** The risk profile badge (Conservative, Moderate, Growth, Aggressive) has one colour per level, chosen by its position on the scale: info, success, warning, danger; the channel badge stays brand
+**Meet.** Profile-like categories: a Badge with one intent per value in `badgeIcons.ts`.
 **Check.** Look at the three values together.
 **Guarded in Praisindo by** a unit test.
 
 ### BD-08
-**Rule.** The data confidence badge uses the icons `check_circle` (High, success), `error_outline` (Medium, warning), `help_outline` (Low, danger): the cellular-bar icons were unreadable at 14px. Two badges that show in one row never share an icon: "Score N/A" has `question_mark` for that reason (keputusan owner 2026-10-26)
-**Meet.** Pick icons that read at 14px (`check_circle`, `error_outline`, `help_outline`) and never repeat one in the same row.
+**Rule.** The data confidence badge is success (High), warning (Medium) and danger (Low), without an icon (BD-02; it had icons until 2026-11-18)
+**Meet.** High is success, Medium is warning, Low is danger.
 **Check.** Look at a row with two badges.
 **Guarded in Praisindo by** a unit test.
 
 ### BD-09
-**Rule.** The header of a Kanban lane is the one badge with the icon and intent of its status from the central map (`badgeFor('oppStatus', key)`), no pulse, no `DotBadge`; the title of a card stays a `<button>` with the `::after` cover, no `role=button`, no nested interactive element (keputusan owner 2026-10-26, decision 13)
+**Rule.** The header of a Kanban lane is the one badge with the intent of its status from the central map (`badgeFor('oppStatus', key)`), no pulse, no `DotBadge`; the title of a card stays a `<button>` with the `::after` cover, no `role=button`, no nested interactive element (keputusan owner 2026-10-26, decision 13)
 **Meet.** A board lane header is `Badge` from `badgeFor(domain, key)`; the card title is a `<button>`.
 **Check.** Look at the board lane headers.
 **Guarded in Praisindo by** a unit test.
@@ -134,18 +134,6 @@ A badge is never clickable. A pill made with CSS is never allowed. A new domain 
 **Check.** Audit.
 **Guarded in Praisindo by** a unit test.
 
-### BD-11
-**Rule.** `local_fire_department` (a flame) is the icon of every value that means "new": the opportunity status New, the rule run result New and the Kanban lane header New; no other value uses it (keputusan owner 2026-10-26; it was `fiber_new`)
-**Meet.** Map every "new" value to `local_fire_department` in `badgeIcons.ts`; no other value uses it.
-**Check.** Read the map.
-**Guarded in Praisindo by** a unit test.
-
-### BD-12
-**Rule.** The Badges of the Opportunity recommendation cards (the plan card, the compare table, the detail rows, the provenance tags, the selection summary and the signal row of the Opportunity detail) are `noIcon` Badges: the intent still comes from the central map, the icon is left out because the card is dense and the text is clear (keputusan owner 2026-10-26). `noIcon` stays a Badge variant. The "Top pick" ribbon (RB-01) is not a badge and is unchanged
-**Meet.** `<Badge noIcon />` inside dense recommendation-like cards; the intent still from the map.
-**Check.** Look at the card.
-**Guarded in Praisindo by** a unit test.
-
 ### BD-13
 **Rule.** Every badge says what it is for in a tooltip (the Tooltip bubble, dark with a tail) when the mouse is on it or it is tapped: a domain badge reads "<domain name> is <label>" ("Status is Active", "Risk profile is Moderate"; keys `bdg.d.<domain>`, `bdg.is`), a fixed single-value badge has its own sentence (`bdg.fx.<key>`), a badge outside the central map passes `what` or `tip`; a badge with no information has no tooltip. The bubble exists only while it is open and is drawn in the body, so the text of a badge or of its cell never changes; it never catches the pointer; Escape and a tap outside close it. Hover and tap only: a badge is never focusable (BD-10). A cut label still carries its `title` (BD-05)
 **Meet.** `Badge` shows its tooltip from `badgeTips.ts` (`bdg.d.<domain>`, `bdg.is`); add the domain name key in EN and ID.
@@ -153,7 +141,7 @@ A badge is never clickable. A pill made with CSS is never allowed. A new domain 
 **Guarded in Praisindo by** a unit test.
 
 ### PR-05
-**Rule.** A pill, tag or chip (category, level, label) is the Badge (`.bdg` soft); a status is the Badge with its icon; a count, a tag, a name, a version and an interactive tag are the Chip (CH-01). A selector outside the badge files that makes a text element a pill (radius 999px or more, or 50%) with a soft semantic background is a shadow badge and fails the guard unless it is in its written allowlist; a selector outside the badge files that uses `var(--r-badge)` is a shadow badge too Written exception: `.lga-pill` (the tagline pill on the sign-in aura, a decorative glass label and not a status or a tag; owner 2026-10-26)
+**Rule.** A pill, tag or chip (category, level, label) is the Badge (`.bdg` soft); a status is the Badge; a count, a tag, a name, a version and an interactive tag are the Chip (CH-01). A selector outside the badge files that makes a text element a pill (radius 999px or more, or 50%) with a soft semantic background is a shadow badge and fails the guard unless it is in its written allowlist; a selector outside the badge files that uses `var(--r-badge)` is a shadow badge too Written exception: `.lga-pill` (the tagline pill on the sign-in aura, a decorative glass label and not a status or a tag; owner 2026-10-26)
 **Meet.** A pill / tag / chip is `Badge` or `Chip`; never a class with `border-radius:999px` and a soft background.
 **Check.** Audit (home-made pill check).
 **Guarded in Praisindo by** a unit test.
@@ -165,7 +153,13 @@ A badge is never clickable. A pill made with CSS is never allowed. A new domain 
 **Guarded in Praisindo by** a unit test.
 
 ### BD-15
-**Rule.** The label and the icon of a badge always have the colour and the size of the badge itself, and the badge has its intent colour (`--int-fg`): no rule of the surroundings (a list, a card, a table, the documentation) may recolour or resize them. A descendant rule such as `.list span{color:...}` must name the texts it means (`.list>li>span`) and never reach a badge or its tooltip wrapper `.tt-wrap`.
+**Rule.** The label of a badge always has the colour and the size of the badge itself, and the badge has its intent colour (`--int-fg`): no rule of the surroundings (a list, a card, a table, the documentation) may recolour or resize them. A descendant rule such as `.list span{color:...}` must name the texts it means (`.list>li>span`) and never reach a badge or its tooltip wrapper `.tt-wrap`.
 **Meet.** Use `Badge` and write the CSS of a container with child selectors that name the texts; never `.container span`.
-**Check.** Compare the label and the icon of every badge with the badge (computed colour and font size) in the browser, on every page.
+**Check.** Compare the label of every badge with the badge (computed colour and font size) in the browser, on every page.
 **Guarded in Praisindo by** a browser audit of every badge of every route.
+
+### BD-16
+**Rule.** Data that is a TYPE or a CATEGORY with FIVE options or fewer (the type of a user: company or individual; a payment method: cash, in stages or instalments; a channel; a segment) is shown with the Badge, wherever it is a value of a row, a cell or a detail field: never as plain text and never as a Chip. A value with more than five options (a product category, a source system) stays text or a Chip; the free text of a sentence and a title are not values.
+**Meet.** Show a type or a category of five options or fewer as `<Badge label intent />` (HTML: `badge()`), its colour from the central map (BD-03).
+**Check.** Look at the detail fields and the table columns that hold a type: they are badges, not grey text.
+**Guarded in Praisindo by** a unit test.

@@ -1,5 +1,5 @@
 {
-  "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.131.0). Full text in references/rules-*.md.",
+  "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.132.0). Full text in references/rules-*.md.",
   "count": 359,
   "ids": [
     "AV-02",
@@ -17,10 +17,9 @@
     "BD-08",
     "BD-09",
     "BD-10",
-    "BD-11",
-    "BD-12",
     "BD-13",
     "BD-15",
+    "BD-16",
     "BG-04",
     "BG-05",
     "BG-07",

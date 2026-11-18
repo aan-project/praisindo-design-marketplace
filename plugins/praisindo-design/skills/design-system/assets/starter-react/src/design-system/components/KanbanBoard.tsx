@@ -2,8 +2,8 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { Badge } from './Badge';
 
-/** `intent` and `icon` come from the central badge map (`badgeFor('oppStatus', key)`): the lane header is the one badge (rule BD-01, owner decision 13 of 2026-10-26). */
-export interface KanbanColumn { key: string; label: string; intent: string; icon: string }
+/** `intent` comes from the central badge map (`badgeFor('oppStatus', key)`): the lane header is the one badge, without an icon (rules BD-01, BD-02). */
+export interface KanbanColumn { key: string; label: string; intent: string }
 export interface KanbanBoardProps<T> {
   columns: readonly KanbanColumn[]; items: readonly T[]; columnOf: (item: T) => string; keyOf: (item: T) => string; renderCard: (item: T) => ReactNode;
   emptyText: string; aria?: string;
@@ -30,7 +30,7 @@ export function KanbanBoard<T>({ columns, items, columnOf, keyOf, renderCard, em
         const col = items.filter((x) => columnOf(x) === c.key);
         return (
           <section key={c.key} className="kbl" aria-label={c.label} data-col={c.key}>
-            <header className="kbh"><Badge label={c.label} intent={c.intent} icon={c.icon} /><span className="kbn" aria-label={String(col.length)}>{col.length}</span></header>
+            <header className="kbh"><Badge label={c.label} intent={c.intent} /><span className="kbn" aria-label={String(col.length)}>{col.length}</span></header>
             {col.length
               ? <ul className="kbs">{col.map((x, i) => <li key={keyOf(x) + '#' + i}>{renderCard(x)}</li>)}</ul>
               : <div className="kbe">{emptyText}</div>}

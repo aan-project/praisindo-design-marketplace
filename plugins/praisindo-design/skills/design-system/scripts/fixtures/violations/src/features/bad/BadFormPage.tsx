@@ -3,6 +3,7 @@ import { PageHeader } from '../../app/shell/PageHead';
 import { Button } from '../../design-system/components/Button';
 import { Card, GroupTitle } from '../../design-system/components/Card';
 import { Input } from '../../design-system/components/Field';
+import { Badge } from '../../design-system/components/Badge';
 import { FormShell } from '../shared/FormShell';
 
 export function BadFormPage({ cancel, save }: { cancel: () => void; save: () => void }) {
@@ -21,3 +22,6 @@ export function BadFormPage({ cancel, save }: { cancel: () => void; save: () => 
 
 // DK-29 fixture: a Cancel button in the footer of a FormShell
 export const BadShell = ({ leave, save }: { leave: () => void; save: () => void }) => <FormShell title="Add" sub="x" parents={[]} crumb="Add" dirty onLeave={leave} tips={['x']} footer={() => <><Button label="Cancel" type="transparent" intent="neutral" onClick={leave} /><Button label="Save" onClick={save} /></>} />;
+
+// BD-02 fixture: a Badge with an icon
+export const IconBadge = () => <Badge label="Active" intent="success" icon="check_circle" />;

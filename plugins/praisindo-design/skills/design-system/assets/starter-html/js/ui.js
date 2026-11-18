@@ -39,12 +39,17 @@ const live = new Set();
 /** Closes every drawer and dialog that is open (a page change does not leave them behind). */
 export const closeOverlays = () => [...live].forEach((c) => c());
 /** Drawer (right side). `back` (a label) adds the Back button of the header (rule DR-03) and `onBack` runs on it; `layer` (for example 'l2') stacks a second drawer over the first. */
+let born = 0, lastHost = null;   // the drawers opened so far and the last one (a swap of two drawers does not slide, MO-10)
 export function drawer({ title, size = 'sm', bodyHtml, footerHtml = '', closeLabel = 'Close', onClose, back = '', onBack, layer = '' }) {
   const opener = document.activeElement, host = document.createElement('div');
   host.innerHTML = `<div class="scrim ${layer}"></div><aside class="drawer ${layer} dw-${size}" role="dialog" aria-modal="true" aria-label="${esc(title)}" tabindex="-1"><div class="dh">${back ? button({ icon: 'arrow_back', type: 'transparent', intent: 'neutral', aria: back, attrs: 'data-back' }) : ''}<h2>${esc(title)}</h2>${button({ icon: 'close', type: 'transparent', intent: 'neutral', aria: closeLabel, attrs: 'data-close' })}</div><div class="db">${bodyHtml}</div>${footerHtml ? `<div class="df">${footerHtml}</div>` : ''}</aside>`;
-  document.body.appendChild(host);
+  document.body.appendChild(host); born++; lastHost = host;
   // MO-10: a drawer slides in from the right and leaves to the right; the node stays for the length of the slide-out (`.dw-out`) and is removed after it. Still under data-motion="off".
-  const gone = () => { if (document.documentElement.dataset.motion !== 'on') { host.remove(); return; } host.inert = true; host.setAttribute('aria-hidden', 'true'); host.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); host.querySelector('.drawer').addEventListener('animationend', () => host.remove(), { once: true }); setTimeout(() => host.remove(), 600); };
+  const gone = () => {
+    if (document.documentElement.dataset.motion !== 'on') { host.remove(); return; }
+    const before = born; host.inert = true; host.setAttribute('aria-hidden', 'true'); host.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); host.querySelector('.drawer').addEventListener('animationend', () => host.remove(), { once: true }); setTimeout(() => host.remove(), 600);
+    queueMicrotask(() => { if (born === before) return; host.remove(); lastHost?.querySelectorAll('.scrim, .drawer').forEach((n) => { n.style.animation = 'none'; }); });   // another drawer took its place in the same moment: a swap, nothing slides over anything
+  };
   const close = () => { live.delete(close); document.removeEventListener('keydown', key); gone(); opener?.focus?.(); onClose?.(); };
   const key = (e) => { if (e.key === 'Escape') close(); };
   live.add(close); document.addEventListener('keydown', key);
