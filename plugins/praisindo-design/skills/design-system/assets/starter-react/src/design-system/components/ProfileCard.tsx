@@ -13,6 +13,7 @@ import { translate } from '../../i18n';
 import { initials } from '../../lib/text';
 import { LinkButton } from './Button';
 import { Icon } from './Icon';
+import { ProductLogo } from './ProductLogo';
 import { ttPlace, type Placed } from './Tooltip';
 
 export interface ProfileCardData {
@@ -26,6 +27,8 @@ export interface ProfileCardData {
   action?: { label: string; href: string };
   /** an actor that is not a person: the card says "System" and shows nothing else */
   system?: boolean;
+  /** the card of a product (rule PD-16): its logo (the issuer's) takes the place of the initials and the texts say product, not profile; only the most important facts are the rows */
+  logo?: { name: string; src?: string };
 }
 export interface ProfileCardProps {
   data: ProfileCardData;
@@ -40,6 +43,7 @@ let current: { close(): void } | null = null;
 
 /** The avatar of a person (initials) or of the system (icon), `size` 24 / 32 / 40 px through the class. */
 function Face({ data, size }: { data: ProfileCardData; size: 'sm' | 'xl' }) {
+  if (data.logo) return <span className={`pcx-f pcx-${size}`} aria-hidden="true"><ProductLogo size={size === 'xl' ? 'lg' : 'sm'} name={data.logo.name} src={data.logo.src} /></span>;
   return data.system
     ? <span className={`hav pcx-f pcx-${size} pcx-sys`} aria-hidden="true"><Icon name="auto_awesome" /></span>
     : <span className={`hav pcx-f pcx-${size}`} aria-hidden="true">{initials(data.name)}</span>;
@@ -50,7 +54,7 @@ export function ProfileCardBody({ data, id, label, preview }: { data: ProfileCar
   const p = usePrefsOptional(), t = (k: string) => (p ? p.t(k) : translate('en', k)), who = data.system ? t('lg.system') : data.name;
   const rows = data.system ? [] : data.rows ?? [];
   return (
-    <div className="pcx" role={preview ? 'group' : 'dialog'} aria-modal={preview ? undefined : 'false'} id={id} aria-label={label ?? fill(t('pc.card'), { n: who })}>
+    <div className="pcx" role={preview ? 'group' : 'dialog'} aria-modal={preview ? undefined : 'false'} id={id} aria-label={label ?? fill(t(data.logo ? 'pc.pcard' : 'pc.card'), { n: who })}>
       <Face data={data} size="xl" />
       <div className="pcx-n"><span className="fw6">{who}</span>{data.subtitle && !data.system ? <span className="mut">{data.subtitle}</span> : null}</div>
       {rows.length ? <dl className="pcx-r">{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl> : null}
@@ -100,7 +104,7 @@ export function ProfileCard({ data, trigger = 'name', forceOpen }: ProfileCardPr
   // A span with role="button", not a <button>: a button is one unbreakable box, and a name inside a sentence or a heading must wrap like the text around it (rule UN-01).
   const trig = (
     <span ref={btn} role="button" className={`pcx-t${trigger === 'avatar' ? ' pcx-ta' : ''}`} aria-haspopup="dialog" aria-expanded={shown} aria-controls={shown ? id : undefined}
-      aria-label={trigger === 'name' ? fill(t('pc.open'), { n: who }) : undefined} data-user={data.system ? undefined : data.name} {...aria}
+      aria-label={trigger === 'name' ? fill(t(data.logo ? 'pc.popen' : 'pc.open'), { n: who }) : undefined} data-user={data.system || data.logo ? undefined : data.name} data-product={data.logo ? data.name : undefined} {...aria}
       onPointerDown={(e) => { ptr.current = e.pointerType; }}
       onPointerEnter={(e) => { if (e.pointerType === 'mouse') later(openNow, HOVER_IN); }} onPointerLeave={(e) => { if (e.pointerType === 'mouse') later(close, HOVER_OUT); }}
       onFocus={(e) => { if (ptr.current === 'mouse' && e.currentTarget.matches(':focus-visible')) later(openNow, HOVER_IN); }} onBlur={() => later(close, HOVER_OUT)}

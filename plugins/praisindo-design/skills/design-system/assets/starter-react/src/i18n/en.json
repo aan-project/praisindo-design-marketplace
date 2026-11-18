@@ -590,5 +590,10 @@
  "ft.ex.2": "A field marked * is required; the others are optional.",
  "ft.ex.3": "Leaving with changes asks first; nothing is saved until you press Save supplier.",
  "ex.s.supplier": "Supplier",
- "ex.s.terms": "Terms and settings"
+ "ex.s.terms": "Terms and settings",
+ "pc.pcard": "Product {n}",
+ "pc.popen": "Show product {n}",
+ "pc.pcode": "Product code",
+ "pc.issuer": "Issuer",
+ "pc.pview": "View product"
 }

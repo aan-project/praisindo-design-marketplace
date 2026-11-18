@@ -1,5 +1,10 @@
 // Texts of the shared UI helpers and of the shell panel (date field calendar, required marker, Branding font weight, My Preferences panel items, sidebar search). Same keys in both languages; merged into DICT by i18n.js.
 export const UI_EN = {
+  "pc.pcard": "Product {n}",
+  "pc.popen": "Show product {n}",
+  "pc.pcode": "Product code",
+  "pc.issuer": "Issuer",
+  "pc.pview": "View product",
   "prefs.cd.statList": "List pages",
   "prefs.cd.statDetail": "Detail pages",
   "prefs.cd.statOther": "Other places",
@@ -94,6 +99,11 @@ export const UI_EN = {
   "pc.s.away": "Away",
 };
 export const UI_ID = {
+  "pc.pcard": "Produk {n}",
+  "pc.popen": "Tampilkan produk {n}",
+  "pc.pcode": "Kode produk",
+  "pc.issuer": "Penerbit",
+  "pc.pview": "Lihat produk",
   "prefs.cd.statList": "Halaman daftar",
   "prefs.cd.statDetail": "Halaman detail",
   "prefs.cd.statOther": "Tempat lain",

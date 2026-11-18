@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.126.0, skill v2.126.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.127.0, skill v2.127.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -166,6 +166,12 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Meet.** Every customer-like entity name shown as a value is the trigger of its card (same pattern as `ProfileCard`).
 **Check.** Hover names.
 **Guarded in Praisindo by** a browser test.
+
+### UN-03
+**Rule.** The name or label of a PRODUCT (a catalogue item, or the thing the product sells or manages) shows its quick view when the cursor is on it, as the name of a user (UN-01) and of a customer (UN-02) do, with only the most important facts. The card is the `ProfileCard` with `logo` (the image of the product or of its issuer instead of the initials, the texts say product): the name, the category under it, three or four rows (the code, the issuer or owner, one more fact such as risk or stock) and one link to the detail; the trigger is `ProductName` (HTML: `productName()`), a name from the product's own catalogue (`profile.config`): hover after a short delay, keyboard focus and tap, no text decoration, the font of the text around it. Not covered: a product name inside another interactive control (a link, a menu item, an option), chart labels, exported files, the title of the product's own detail page, and a category label that is not a catalogue item. A name that is not in the catalogue stays plain text.
+**Meet.** Never print a product name from a record as plain text: use `ProductName` (`profileProduct`, `productRows` in `profile.config`); give the card only the facts that matter.
+**Check.** Hover a product name in a table and in a sentence: the card opens with the logo, name, category, code, issuer and one fact, and View product opens the detail.
+**Guarded in Praisindo by** a unit test.
 
 ### OR-01
 **Rule.** Lists of events come NEWEST FIRST: the Activity log of a rule (the day, then the reverse of the order the events were written in), the Activity log of the application (time, then id, descending) and the notifications of every role (the date; a stable order inside a day). A new list of events follows the same order

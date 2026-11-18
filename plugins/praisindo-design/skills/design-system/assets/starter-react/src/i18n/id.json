@@ -590,5 +590,10 @@
  "ft.ex.2": "Field bertanda * wajib diisi; yang lain opsional.",
  "ft.ex.3": "Keluar dengan perubahan akan ditanyakan dulu; tidak ada yang tersimpan sebelum Anda menekan Simpan pemasok.",
  "ex.s.supplier": "Pemasok",
- "ex.s.terms": "Ketentuan dan pengaturan"
+ "ex.s.terms": "Ketentuan dan pengaturan",
+ "pc.pcard": "Produk {n}",
+ "pc.popen": "Tampilkan produk {n}",
+ "pc.pcode": "Kode produk",
+ "pc.issuer": "Penerbit",
+ "pc.pview": "Lihat produk"
 }

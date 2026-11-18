@@ -1,13 +1,13 @@
 {
   "name": "praisindo-design-marketplace",
   "owner": { "name": "Praisindo" },
-  "metadata": { "description": "Praisindo design for Claude Code", "version": "2.126.0" },
+  "metadata": { "description": "Praisindo design for Claude Code", "version": "2.127.0" },
   "plugins": [
     {
       "name": "praisindo-design",
       "source": "./plugins/praisindo-design",
       "description": "Praisindo design: the Praisindo design system as a skill (design-system): tokens, components, rules, shell, Design System and Branding pages.",
-      "version": "2.126.0"
+      "version": "2.127.0"
     }
   ]
 }

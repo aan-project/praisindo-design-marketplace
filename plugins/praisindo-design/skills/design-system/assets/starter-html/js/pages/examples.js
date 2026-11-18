@@ -3,7 +3,7 @@
 // <template data-main="..."> holds a state of the page (the form has default = vertical layout, invalid, h1 to h4 = the steps of the horizontal layout, DK-24; data-ex-main switches to a state), <template data-ov="..."> an overlay (drawer, dialog, menu) opened by the trigger marked data-ex="...".
 // This module only swaps those states so that the patterns can be seen and tried; the React files are the reference for the behaviour (validation, formatting, storage).
 import { logActivity } from '../activityLog.js';
-import { userName } from '../profile.js';
+import { productName, userName } from '../profile.js';
 import { lang, state, t } from '../shell.js';
 
 const cache = {};
@@ -32,7 +32,7 @@ function mount(main, page, html, first) {
     } else (ov.querySelector('.drawer, [role="alertdialog"], .mdl') || ov.firstElementChild)?.focus?.();
     return true;
   };
-  const show = (name) => { closeOv(); main.innerHTML = tpl('main', name) || tpl('main', 'default'); main.querySelectorAll('[data-user-name]').forEach((el) => { el.outerHTML = userName(el.dataset.userName); }); };   // a user name is the profile-card trigger (rule GN-04)
+  const show = (name) => { closeOv(); main.innerHTML = tpl('main', name) || tpl('main', 'default'); main.querySelectorAll('[data-user-name]').forEach((el) => { el.outerHTML = userName(el.dataset.userName); }); main.querySelectorAll('[data-product-name]').forEach((el) => { el.outerHTML = productName(el.dataset.productName); }); };   // a user name is the profile-card trigger (rule GN-04), a product name the product card (rule UN-03)
   show(first);
 
   const click = (e) => {
