@@ -1,4 +1,4 @@
-# Decision rules DK-01 to DK-20 (Praisindo DS v2.124.0)
+# Decision rules DK-01 to DK-20 (Praisindo DS v2.125.0)
 
 The ids are those of the Praisindo owner rules register (decisions of the owner, 2026-11-11). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. The decision table that uses them is `decisions.md`; read it first.
 
@@ -7,8 +7,8 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 ## Rules
 
 ### DK-01
-**Rule.** Adding or editing data, short or long, is a form PAGE (route `<list>/new`, `<list>/<id>/edit`; page layout `detail` like the Signal rule editor; breadcrumb back, footer Cancel then Save, the leave dialog DR-06, the menu entry stays highlighted), never a drawer or a dialog with a form. The exceptions are DK-03 (one value in place) and DK-04 (a contextual action). The guard `tools/dk01_allowlist.json` lists the DK-04 contextual actions (no conversion is waiting since DS 2.66); the list only shrinks
-**Meet.** Form page pattern at `<list>/new` and `<list>/<id>/edit` (the example `features/examples/FormPage.tsx`, route layout `detail`); footer Cancel then Save; leave dialog `warning`.
+**Rule.** Adding or editing data, short or long, is a form PAGE (route `<list>/new`, `<list>/<id>/edit`; page layout `detail` like the Signal rule editor; breadcrumb back, the buttons Cancel then Save in the card of actions on the right and never the footer of a card (DK-17, DK-24, DK-27), the leave dialog DR-06, the menu entry stays highlighted), never a drawer or a dialog with a form. The exceptions are DK-03 (one value in place) and DK-04 (a contextual action). The guard `tools/dk01_allowlist.json` lists the DK-04 contextual actions (no conversion is waiting since DS 2.66); the list only shrinks
+**Meet.** Form page pattern at `<list>/new` and `<list>/<id>/edit` (the example `features/examples/FormPage.tsx`, route layout `detail`); Cancel then Save in the card of actions on the right (`FormShell`); leave dialog `warning`.
 **Check.** Audit (DK-01: a `Drawer` with two or more fields and a Save / Add / Create / Update button; exception `/* ds-allow: <reason> */`). Open every add and edit flow: it is a page.
 **Guarded in Praisindo by** a unit test and a browser test.
 

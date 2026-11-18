@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.124.0, skill v2.124.2)
+# Forms and fields (Praisindo DS v2.125.0, skill v2.125.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -73,11 +73,11 @@ Five wrong uses (counter-examples; the reference application does not do these):
 
 ## Pattern: behaviour of a form
 
-- Label above the field (FM-01). Group related fields under `GroupTitle` (caption) inside one `Card`; never a card inside a card.
+- Label above the field (FM-01). On a form page every group of related fields is its own `Card` with a title that says what the group holds (DK-17, DK-27); never one `Card` with `GroupTitle` captions for the groups of a form page, and never a card inside a card. `GroupTitle` is for the sub-groups inside one card of a drawer or a detail block.
 - Validate a field when it loses focus and the whole form on submit. Do not show errors on first open. The error says what happened and what to do ("Enter a phone number of 9 to 13 digits.").
 - On submit with errors: move the focus to the first field in error; keep the values.
 - Phone: `PhoneInput`; money: `Input format="money" cur`; date: `DateField`; on/off: `Switch`; one of 2 to 4: `SegmentedControl`; one of more: `Select` or `RadioGroup`; tick: `<label class="chk"><input type="checkbox">`; shortcuts: `sugg`.
-- Footer (page form, drawer form): left to right `Cancel` (`type="transparent" intent="neutral"`) then the primary `Save` (`fill`). In a page form the footer is the `footer` of the `Card`; in a drawer it is the `footer` of `Drawer`.
+- Buttons (page form, drawer form): left to right `Cancel` (`type="transparent" intent="neutral"`) then the primary `Save` (`fill`, last). In a page form they are the card of actions without a header in the right column (`Card title=""`, DK-17, DK-24, DK-27), never the `footer` of a `Card`; in a drawer they are the `footer` of `Drawer`.
 - Leaving with unsaved changes (Cancel, Back, closing the drawer) asks in a centred `Dialog kind="warning"` (DR-06): "Leave without saving?" with Stay (cancel) and Leave (ok).
 - A disabled Save says why (helper text or Tooltip).
 - Controls that always hold a value (`Select` with a preselected option, `SegmentedControl`, `Switch`, `RadioGroup` with a default, a checkbox) need neither `req` nor `opt`. When such a control still needs a label with a hint, wrap it as `<div className="fld"><label><FieldLabel label={...} hint={...} /></label><SegmentedControl aria={...} ... /></div>`. A `Select` with an empty first option that must be chosen is required: give its label `FieldLabel req`.
@@ -85,7 +85,7 @@ Five wrong uses (counter-examples; the reference application does not do these):
 - Page or drawer? ALWAYS a page (DK-01, `decisions.md`): adding or editing data, short or long, is a form page with a breadcrumb back to the list; a full editor of an existing entity is `layout: 'detail'` with Back (SB-30, NV-01). A drawer is never the place to add or edit a record; the only exceptions are in `decisions.md` (one value in place, a contextual action with 1 to 5 inputs). [guidance]
 - A route for a form under a menu entry (`#/customers/new`) keeps the menu entry highlighted when its route key is the entry's key with an argument (route `customers`, arg `new`), or when `nav.config.ts` lists it as a kid. [guidance]
 - The unsaved-changes dialog covers Cancel, Back and closing a drawer; a click on a sidebar link is not intercepted by the shell.
-- Long forms: `Wizard` with Back / Next and `Accordion` for optional sections.
+- A form of several groups is a stepper form (DK-02, DK-24): `Wizard`, one step per group, horizontal with Back / Next in the card of actions or vertical as the rail; `Accordion` for optional sections. The frame is `FormShell` (the example `FormPage`).
 
 ## Rules
 

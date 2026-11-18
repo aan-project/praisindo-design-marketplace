@@ -322,6 +322,12 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Check.** Open an add form: Tips only; open an edit form: Tips and Recent activity; open a form that needs source data as any role: Data readiness is there and names the systems.
 **Guarded in Praisindo by** a unit test.
 
+### DK-27
+**Rule.** ONE rule for every form page (the whole of DK-17 and DK-24, with DK-01, DK-02, DK-21 and DK-26 as its parts), in the Design System, in the examples and in the starters: every group of fields is its own card whose title says what the group holds (never the page title, never one card with `GroupTitle` captions for the groups); a form of several groups is a stepper form (the `Wizard`, horizontal or vertical, DK-24) and a form of one group has one card and no Wizard; the buttons (Cancel transparent then the primary action fill, last; Back and Next in the horizontal layout) are the card of actions without a header (`Card title=""`) in the right column and never the footer of a card; the tools row (DK-26) is above that card; leaving with unsaved changes asks in the warning dialog (DR-06). `FormShell` does all of it.
+**Meet.** Build every add and edit page with `FormShell` (the example `features/examples/FormPage.tsx`): `groups` for several groups (one card and one step each) or `cardTitle` for one group, `footer` for the buttons, `tips`, `dirty` and `onLeave`. Never `<Card footer=...>` and never `GroupTitle` between the groups of a form page.
+**Check.** The audit flags a form page that has one `Card` with several `GroupTitle` and a form page whose `Cancel` and `Save` are the `footer` of a `Card`; open the example form: one card per group, the Wizard, the buttons in the card on the right.
+**Guarded in Praisindo by** a unit test and the audit.
+
 ### CT-02
 **Rule.** The legend of every chart is under the chart (`legend.position: 'bottom'`); it is done once in `withChart` (`legendBottom`); a chart that hides its legend keeps it hidden.
 **Meet.** Build every chart with `withChart` (the starter `optional/adapters/chartBase.ts` has `legendBottom`); do not move a legend to the top or the side.

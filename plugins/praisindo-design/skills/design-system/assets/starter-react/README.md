@@ -1,4 +1,4 @@
-# starter-react (skill design-system v2.124.2)
+# starter-react (skill design-system v2.125.0)
 
 A complete, building Vite + React 18 + TypeScript app with the Praisindo shell, the full Design System page and the Branding page. Typechecks with `npm run typecheck`, builds with `npm run build`.
 
@@ -18,7 +18,7 @@ A complete, building Vite + React 18 + TypeScript app with the Praisindo shell, 
 - `src/lib/reactStorage.ts` the only file that touches Web Storage; change `NS` to the app's namespace.
 - `docs/design-system/` `changelog.md` (read by "What's new") and `new-components.md` (the log for the DS owner).
 - `optional/` adapters that need extra libraries.
-- `src/features/examples/` **pattern examples, a REFERENCE, not product pages**: `ListPage` (list page), `FormPage` (form), `DetailPage` (detail, `layout: 'detail'`), `DialogsPage` (the six dialogs, drawer with Back, action menu), and `parts/` (columns drawer, row menu). Menu Admin > "Pattern examples (reference)", routes `ex-list`, `ex-form`, `ex-detail`, `ex-dialogs`. Each file lists in its header the rule ids it meets (`references/rules-*.md` of the skill). Build product pages the same way, then delete the folder, the four routes, the menu entry and the `ex.*` keys.
+- `src/features/examples/` **pattern examples, a REFERENCE, not product pages**: `ListPage` (list page), `FormPage` (form, built with `src/features/shared/FormShell.tsx` and `src/lib/formLayout.ts`: one card per group, the buttons in the card of actions on the right, DK-27; use `FormShell` for every add / edit page), `DetailPage` (detail, `layout: 'detail'`), `DialogsPage` (the six dialogs, drawer with Back, action menu), and `parts/` (columns drawer, row menu). Menu Admin > "Pattern examples (reference)", routes `ex-list`, `ex-form`, `ex-detail`, `ex-dialogs`. Each file lists in its header the rule ids it meets (`references/rules-*.md` of the skill). Build product pages the same way, then delete the folder, the four routes, the menu entry and the `ex.*` keys.
 
 ## Replace before shipping
 `src/features/home/HomePage.tsx` (placeholder), `src/app/session.ts` (placeholder), `src/features/examples/` with its routes and menu entry (reference), the Kanban/Table demo data is design-system sample data and stays.

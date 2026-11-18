@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.124.2). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.125.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -75,7 +75,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.124.2): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.125.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -112,6 +112,17 @@ for (const p of files) {
   const raw = text(p).replace(/<style>(?=(?:(?!<\/style>)[\s\S])*\.boot-s)[\s\S]*?<\/style>/, (x) => x.replace(/[^\n]/g, ' ')), jsx = e === 'tsx' || e === 'jsx';   // the loading skeleton of index.html is not project code (LD-01)
   // comments do not count (blanked with spaces so that line numbers stay); the ds-allow exception is read from the raw text
   const src = e === 'html' ? raw.replace(/<!--[\s\S]*?-->/g, (x) => x.replace(/[^\n]/g, ' ')) : raw.replace(/\/\*[\s\S]*?\*\/|(^|[^:'"`\\])\/\/[^\n]*/g, (x) => x.replace(/[^\n]/g, ' '));
+  // DK-27: ONE rule for a form page. A page with a Back arrow (onBack) and a Save / Submit / Create button is a form page: its buttons are the card of actions without a header in the right column (FormShell), never the `footer` of a Card, and
+  // every group of fields is its own Card (never one Card with several GroupTitle captions). Plain HTML: the same on a page with a breadcrumb (`.cf` card footer with Save, a card with two `.grpt` captions). Exception: /* ds-allow: <reason> */
+  if (jsx && /\bonBack=/.test(src) && !allowed(raw) && /(label=\{?\s*t\(['"`][^'"`)]*(save|submit|create)|label=["'`][^"'`]*\b(save|submit|create)\b)/i.test(src)) {
+    for (const t of tags(src, 'Card')) if (prop(t.attrs, 'footer') && /<Button\b|<button\b/.test(t.attrs)) add('Fix', 'DK-27', r, lineAt(src, t.i), 'the buttons of a form page are the footer of a Card: they are the card of actions without a header in the right column (FormShell, DK-17, DK-24, DK-27)');
+    const gt = [...src.matchAll(/<GroupTitle\b/g)];
+    if (gt.length >= 2) add('Fix', 'DK-27', r, lineAt(src, gt[1].index), 'a form page with several GroupTitle captions in one Card: one Card per group of fields and one step per group (FormShell groups, DK-17, DK-27)');
+  }
+  if (e === 'html' && /aria-label=["']Breadcrumb["']/.test(src) && !allowed(raw)) {
+    for (const m of src.matchAll(/<div class=["']cf["'][^>]*>/g)) if (/\b(save|submit|create)\b/i.test(block(src, m.index))) add('Fix', 'DK-27', r, lineAt(src, m.index), 'the buttons of a form page are the footer of a Card: they are the card of actions without a header in the right column (DK-17, DK-24, DK-27)');
+    for (const m of src.matchAll(/<section class=["'][^"']*\bcard\b[^"']*["'][^>]*>/g)) if ((block(src, m.index).match(/class=["']grpt["']/g) || []).length >= 2) add('Fix', 'DK-27', r, lineAt(src, m.index), 'a form page with several group captions (.grpt) in one card: one card per group of fields (DK-17, DK-27)');
+  }
   // FM-01: every labelled field of a form declares `req` (red *) or `opt` ("Optional"); a Select / SegmentedControl with a `label` is a form field too; a search box is not a form field
   if (jsx) for (const t of tags(src, FIELD)) {
     if (!prop(t.attrs, 'label') || /type=["']search["']/.test(t.attrs)) continue;
@@ -248,7 +259,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.124.2\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.125.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;

@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.124.0, skill v2.124.2)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.125.0, skill v2.125.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -72,7 +72,7 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a unit test.
 
 ### CD-09
-**Rule.** A card has a header (title + up to two actions) and a body separated by a divider; the footer is for actions
+**Rule.** A card has a header (title + up to two actions) and a body separated by a divider; the footer is for actions, except on a form page, where the buttons of the form are the card of actions without a header in the right column and never the footer of a card (DK-17, DK-24, DK-27)
 **Meet.** `<Card title actions body footer />`: at most two header actions.
 **Check.** Look at the card header.
 **Guarded in Praisindo by** a unit test.

@@ -1,4 +1,4 @@
-# Mandatory rules: index and summary (Praisindo DS v2.124.0, skill v2.124.2)
+# Mandatory rules: index and summary (Praisindo DS v2.125.0, skill v2.125.0)
 
 This file is the SUMMARY. The full text of every general rule of the Praisindo owner rules register, with how to meet it (component and prop) and how to check it, is in the area files below. Read the area file of what you build before you write code; `scripts/rules-coverage.mjs` checks that every general rule is in them.
 
@@ -15,7 +15,7 @@ This file is the SUMMARY. The full text of every general rule of the Praisindo o
 | `rules-kartu.md` | cards, Alert vs helper text vs Tooltip vs Disclaimers, states, detail frame, names (CD, IC, ES, DC, CU, OP, DT, PC, UN, OR) | DetailPage |
 | `rules-dialog.md` | six dialog kinds, drawer or dialog, action menu (DR, MN) | DialogsPage |
 | `decisions.md` | the decision table: the one surface for each intent (add / edit = form page) | all |
-| `rules-keputusan.md` | the text, Meet and Check of DK-01 to DK-20 | all |
+| `rules-keputusan.md` | the text, Meet and Check of DK-01 to DK-20 (DK-21 to DK-27 are in `rules-komponen.md`) | all |
 | `rules-export.md` | the export drawer: one screen, file types, Send via email, recipient suggestions (EX) | none (use the rules) |
 | `rules-design-page.md` | the Design System page (DS) | Design page |
 | `rules-teks.md` | UI text: capitalisation, buttons, messages, abbreviations, EN / ID (DS-03, BN-01) | all |
@@ -67,7 +67,7 @@ Rules marked **[default]** are Praisindo defaults you may adapt when the product
 
 ## 4. Surfaces, feedback, help
 
-- **CD-01 / CD-12 / CD-20** cards and card-like containers use `--r-card` (8px), one edit point. **CD-02** one card is one box: no card inside a card (use a group title or a divider). **CD-09** a card has a header (title + up to two actions) and a body separated by a divider; the footer is for actions.
+- **CD-01 / CD-12 / CD-20** cards and card-like containers use `--r-card` (8px), one edit point. **CD-02** one card is one box: no card inside a card (use a group title or a divider). **CD-09** a card has a header (title + up to two actions) and a body separated by a divider; the footer is for actions, except on a form page (DK-27: the buttons are the card of actions on the right).
 - **CD-03 alerts**: a card with a soft intent tint fading from the left, 1px subtle border, no shadow, an icon tile, optional title, optional action and close button. **CD-08 alerts only for real conditions** (an error or failed action, stale or partial data, denied permission, a blocking status, validation after the user acted). A page or drawer NEVER opens with an Alert on screen. A standing note is helper text (`p.mut`, `--fs-sm`), a tooltip next to the title, or one **Disclaimers** card at the very bottom of the page (DC-01: one card titled Disclaimers, one paragraph per note, nothing drawn without a note).
 - **CD-04 text hierarchy**: three stacked lines step down neutral default, subtle-4, subtle-3. **CD-05** group titles (captions) are small, uppercase, weight 500, subtle-3. **CD-06** detail rows: label xs subtle-3, value below it sm subtle-4. **CD-15 / IC-01** list rows have no side padding of their own (the container gives the inset, 16px in a flush card); the trailing chevron of a row is `--color-text-tertiary` from one shared rule.
 - **CD-07 / CD-10 / CD-11 tooltip**: dark bubble with a tail, left-aligned, at most 280px wide, opens on hover and focus, closes with Escape, `role=tooltip`; the trigger icon is a fixed 16px box. No CSS-only tips (`data-tip`), no browser `title` for important help. Essential information, errors and warnings are never only in a tooltip.
