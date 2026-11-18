@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Icon font detector test (rule LD-01, skill design-system v2.127.0): loads the index.html of each starter in headless Chromium and checks that <html data-icons> becomes "ready" within 5 seconds
+// Icon font detector test (rule LD-01, skill design-system v2.129.0): loads the index.html of each starter in headless Chromium and checks that <html data-icons> becomes "ready" within 5 seconds
 // and that an icon is not transparent. It fails on a detector that walks document.fonts with an array method called on it (a FontFaceSet is a Set and has no length, so nothing is ever found).
 //   node scripts/icons-check.mjs --playwright-from <dir with node_modules/playwright>   (needs network: the icon font comes from fonts.googleapis.com; exit 0 ok, 1 failed, 2 usage or no network)
 //   --file <index.html> (repeatable) tests other pages, for example the index.html of a project built from a starter.
