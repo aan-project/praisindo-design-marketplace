@@ -1,4 +1,4 @@
-# List pages: table, toolbar, pagination, board (Praisindo DS v2.133.0, skill v2.133.0)
+# List pages: table, toolbar, pagination, board (Praisindo DS v2.134.0, skill v2.134.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -223,3 +223,9 @@ The bulk layer sits INSIDE `.tb` (it covers the toolbar while rows are selected)
 **Meet.** Use `Pagination`; do not add text to the options of its list.
 **Check.** Open the rows per page list: only numbers.
 **Guarded in Praisindo by** a unit test.
+
+### LS-01
+**Rule.** A list page remembers what the person set on it: the tab, the sub class, the search, the filters, the sort, the page and the view. They stay while the person opens a detail or an action from the list and comes back with Back or the menu: from the tab Stocks of a catalogue, View a product, Back returns to the tab Stocks, never to the first tab. The memory is kept by the application (`ListMemoryProvider` and `useRemembered` / `useRememberedValue`, `src/lib/listMemory.tsx`), not by the page that unmounts; it starts fresh after a reload and, when the provider gets `who`, when another person signs in or the role changes. A seed queued by another page (a shortcut that opens a list filtered) wins over what was remembered.
+**Meet.** Keep the state of a list page (tab, search, filters, sort, page, view) with `useRemembered(key, init)` or `useRememberedValue(key, init)` instead of `useState`; the example `features/examples/ListPage.tsx` does it.
+**Check.** On a list page choose another tab, open a row, press Back: the same tab and filters are there.
+**Guarded in Praisindo by** a unit test and a browser test.

@@ -1,10 +1,11 @@
 // REFERENCE EXAMPLE (not a product page): the list page pattern of references/rules-tabel.md. Copy the structure, replace the data, columns and texts.
-// Rules met: NV-02, NV-03 (page head), BT-01, BN-01 (one primary action), TB-10, TB-12 (stat cards), TB-06 (search combo + Advanced filter), TB-07, TB-11 (Show / hide columns
+// Rules met: LS-01 (the list remembers its search, filters and page), NV-02, NV-03 (page head), BT-01, BN-01 (one primary action), TB-10, TB-12 (stat cards), TB-06 (search combo + Advanced filter), TB-07, TB-11 (Show / hide columns
 // right-most, stored per table), TB-08 (bulk layer), TB-01, TB-02, TB-04, TB-05 (frozen first and action columns, table size), TB-09 (View + one text action + more),
 // MN-01, MN-02 (action menu), TB-03, DS-11 (pagination), BT-04 (icon buttons named), BT-05 (size md), CH-07 (count in the button), BD-01..BD-03, BD-13 (status Badge
 // from the central map), ES-01 + states (loading, error with Retry, empty, no result), DR-05 (danger dialog), DC-01 (Disclaimers), CD-08 (no Alert on open), MB-03, DS-03.
 // States can be previewed with #/ex-list/loading, #/ex-list/error and #/ex-list/empty.
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
+import { useRememberedValue } from '../../lib/listMemory';
 import { usePrefs } from '../../app/providers/PrefsProvider';
 import { useToast } from '../../app/providers/ToastProvider';
 import { PageHeader } from '../../app/shell/PageHead';
@@ -41,8 +42,9 @@ export function ListPage({ preview }: { preview?: string }) {
   const load = (fail: boolean) => { setStatus('loading'); const id = setTimeout(() => setStatus(fail ? 'error' : 'ok'), 400); return () => clearTimeout(id); };
   useEffect(() => { if (preview !== 'loading') return load(preview === 'error'); setStatus('loading'); return undefined; }, [preview]);
 
-  const [field, setField] = useState('name'), [q, setQ] = useState(''), [stat, setStat] = useState('all'), [fStatus, setFStatus] = useState('');
-  const [page, setPage] = useState(1), [rpp, setRpp] = useState(10), [sel, setSel] = useState<ReadonlySet<string>>(new Set());
+  // LS-01: the list remembers the field, the search, the stat card (the tab of the list), the status filter, the page and the rows per page: Back from a supplier returns to the same list
+  const [field, setField] = useRememberedValue('exl-field', 'name'), [q, setQ] = useRememberedValue('exl-q', ''), [stat, setStat] = useRememberedValue('exl-stat', 'all'), [fStatus, setFStatus] = useRememberedValue('exl-fstatus', '');
+  const [page, setPage] = useRememberedValue('exl-page', 1), [rpp, setRpp] = useRememberedValue('exl-rpp', 10), [sel, setSel] = useState<ReadonlySet<string>>(new Set());
   const [cols, setCols] = useState(() => loadCols('ex-suppliers', COLS));
   const [panel, setPanel] = useState<'' | 'filter' | 'cols'>(''), [menu, setMenu] = useState<MenuPos | null>(null), [del, setDel] = useState<string | null>(null);
   const allRef = useRef<HTMLInputElement>(null);

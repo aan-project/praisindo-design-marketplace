@@ -2,11 +2,12 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.133.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.134.0). Add the project's updates above it, newest first.
 
 - **2.86+++** (2026-11-13) Starter HTML and React: the token `--color-surface-static-white` (PD-07) is written by `buildTokens`; sidebar labels are cut in the middle (SB-34, `midText`); HTML starter: the bell of the action row shows its count (`UTIL[].count`) and the user button shows the role.
 - **2.86++** (2026-11-13) Starter HTML and React: Branding has the default font weight (FW-01, RichSelect), Default mode as a Select (CP-06), the hint of the colour as an info tooltip, the note of the logo drawer as an info Alert (CD-08) and the Disclaimers as `p.mut` (DC-01); `normalizeBrand` keeps `fontWeight`. My Preferences is the User Control Panel (PP-04: info note, Font size, Table size, link Panel items, Reset to defaults and Apply) with the second drawer of panel items (PP-01); the shell has the sidebar search (SQ-01..SQ-04), the action row of three items with the "more" menu (PP-02) and the toolbar (PP-03).
 - **2.86+** (2026-11-13) Starter HTML: the behaviour of the date field with its calendar (`js/datefield.js`), the tooltip (`js/tooltip.js`) and the helpers `dialog`, `popover`, `menu`, `closeOverlays` (`js/ui.js`) were added, taken from a real migration; texts in `js/ui-texts.js`.
+- **2.134.0** (2026-11-18) A list page remembers its tab, search, filters, sort and page while a detail or an action is open and Back returns to them (LS-01): `lib/listMemory.tsx` and the example list page.
 - **2.133.0** (2026-11-18) The Badge page of the Design System shows the intents only; the drawer animation is a plain slide (.2 s in and out, MO-10).
 - **2.132.0** (2026-11-18) The badge has no icon (BD-02): `Badge` has no `icon` and no `noIcon`, the map holds intents only; a drawer that replaces another does not slide over it (MO-10); data of a type with five options or fewer is a Badge (BD-16).
 - **2.131.0** (2026-11-18) The detail page of a person or an organisation has the layout of Customer 360 (DT-17), the detail of a product the layout of the Product detail (DT-18), a finding or a filter note outside a card is an Alert (CD-29); the example detail page has the third (right) card.

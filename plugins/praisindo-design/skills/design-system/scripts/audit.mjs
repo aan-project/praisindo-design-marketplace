@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Praisindo Design System audit (skill design-system v2.133.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
+// Praisindo Design System audit (skill design-system v2.134.0). Zero dependencies: node scripts/audit.mjs <project-dir> [--json] [--strict]
 // Scans a web project for rule violations that a script can see, and checks that the mandatory outputs exist. It reports; it never changes a file.
 // Findings are classified Blocker / Fix / Cleanup (see references/audit.md). Exit code 1 when there is a Blocker (or any finding with --strict).
 // What it cannot see (visual checks, states, copy, contrast of composed screens) is listed at the end: check those by hand or with a browser.
@@ -75,7 +75,7 @@ for (const p of files) {
   });
 }
 
-// ---- page patterns (skill v2.133.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
+// ---- page patterns (skill v2.134.0): forms, list pages, buttons, alerts. File level, on the markup of JSX / TSX and of HTML (also HTML built in JS template strings).
 const enDict = (() => { for (const f of ['src/i18n/en.json']) { try { return JSON.parse(text(join(root, f))); } catch { /* none */ } } return {}; })();
 const lineAt = (src, i) => src.slice(0, i).split('\n').length;
 const allowed = (src) => /\/\*\s*ds-allow:\s*\S[^*]*\*\/|<!--\s*ds-allow:\s*\S.*?-->/.test(src);
@@ -267,7 +267,7 @@ F.sort((x, y) => order[x.cls] - order[y.cls] || x.file.localeCompare(y.file) || 
 const count = (c) => F.filter((f) => f.cls === c).length;
 if (asJson) { console.log(JSON.stringify({ root, scanned: files.length, counts: { Blocker: count('Blocker'), Fix: count('Fix'), Cleanup: count('Cleanup') }, mandatory: out, findings: F }, null, 2)); }
 else {
-  console.log(`# UI audit — ${root} — skill design-system v2.133.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
+  console.log(`# UI audit — ${root} — skill design-system v2.134.0\n\nScanned ${files.length} files. Blockers ${count('Blocker')}, Fixes ${count('Fix')}, Cleanups ${count('Cleanup')}.\n`);
   for (const c of ['Blocker', 'Fix', 'Cleanup']) {
     const list = F.filter((f) => f.cls === c);
     if (!list.length) continue;
