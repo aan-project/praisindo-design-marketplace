@@ -74,23 +74,13 @@ export function BadgesSection() {
   ];
   const rules2 = [
     B('One colour map per concept, in one place: domain/badgeMaps.ts (intents) and domain/badgeIcons.ts (intent and icon of every value). Use the badge component (Badge with badgeProps(domain, value)) — never a literal intent or a per-screen variant.', 'Satu peta warna per konsep, di satu tempat: domain/badgeMaps.ts (intent) dan domain/badgeIcons.ts (intent dan ikon tiap nilai). Pakai komponen badge (Badge with badgeProps(domain, value)) — jangan intent literal atau varian per layar.'),
-    B('The same label always has the same colour and icon: e.g. "Completed" is green with a checked circle and "Follow-up" is amber with an update arrow everywhere.', 'Label yang sama selalu berwarna dan berikon sama: mis. "Selesai" hijau dengan lingkaran centang dan "Tindak lanjut" kuning dengan panah update di mana pun.'),
+    B('The same label always has the same colour: e.g. "Completed" is green and "Follow-up" is amber everywhere.', 'Label yang sama selalu berwarna sama: mis. "Selesai" hijau dan "Tindak lanjut" kuning di mana pun.'),
     B('Hover (mouse) or tap (touch) on a badge shows a tooltip that says what it is for: "Status is Active", "Risk profile is Moderate". A domain badge builds it from its domain and label; a fixed badge has its own sentence; a badge outside the map passes what or tip. A badge is still never focusable.', 'Arahkan kursor (mouse) atau ketuk (sentuh) sebuah badge untuk melihat tooltip tentang fungsinya: "Status adalah Aktif", "Profil risiko adalah Moderate". Badge domain menyusunnya dari domain dan labelnya; badge tunggal punya kalimat sendiri; badge di luar peta memakai what atau tip. Badge tetap tidak pernah bisa difokus.'),
   ];
-  const keys = (d: BadgeDomain) => Object.keys(BADGE_MAP[d]);
-  const cap = (v: string) => { const x = v.replace(/_/g, ' '); return x.charAt(0).toUpperCase() + x.slice(1); };
   const Of = (domain: BadgeDomain, value: string, label: string) => { const b = badgeFor(domain, value); return <Badge key={domain + value} label={label} intent={b.intent} domain={domain} value={value} />; };
   return (
     <DsSec id="badges" title={B('Badge', 'Badge')} lead={B('One soft badge for categories and statuses: a rectangle with text in the colour of the intent, no icon. Never an icon, a dot, a fill or an outline.', 'Satu badge soft untuk kategori dan status: persegi dengan teks berwarna intent, tanpa ikon. Tidak pernah ikon, titik, fill, atau outline.')}>
       <DsDemo label={B('Intents', 'Intent') + ' · Badge'}>{INTENTS.map((i) => <Badge key={i} label={t('intent.' + i)} intent={i} />)}</DsDemo>
-      <DsDemo label={B('Long text · the badge is cut at 120px, the title has the full label', 'Teks panjang · badge dipotong di 120px, title berisi label penuh') + ' · Badge'}>
-        <span className="rw" style={sty('max-width:120px')}><Badge label={B('Waiting for the supervisor to review this request', 'Menunggu supervisor meninjau permintaan ini')} intent="info" /></span>
-      </DsDemo>
-      <DsTo p="badge" />
-      <DsH>{B('Values from the central map', 'Nilai dari peta pusat')}</DsH>
-      <DsDemo label={B('Status', 'Status') + ' · Badge badgeFor(status)'}>{keys('status').map((k) => Of('status', k, cap(k)))}</DsDemo>
-      <DsDemo label={B('Priority', 'Prioritas') + ' · Badge badgeFor(priority)'}>{keys('priority').map((k) => Of('priority', k, cap(k)))}</DsDemo>
-      <DsDemo label={B('Confidence', 'Keyakinan') + ' · Badge badgeFor(confidence)'}>{keys('confidence').map((k) => Of('confidence', k, cap(k)))}</DsDemo>
       <DsTo p="chip" />
       <DsH>{B('Badge or Chip?', 'Badge atau Chip?')}</DsH>
       <DsDemo label={B('Status → Badge · number → Chip', 'Status → Badge · angka → Chip')}>{Of('status', 'in_progress', 'In progress')}<Chip label="5" /></DsDemo>

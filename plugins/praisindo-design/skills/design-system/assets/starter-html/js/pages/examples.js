@@ -16,7 +16,7 @@ function mount(main, page, html, first) {
   let ov = null, opener = null;
   const closeOv = () => {
     if (!ov) return; const gone = ov, dw = gone.querySelector('.drawer'); ov = null;
-    if (dw && document.documentElement.dataset.motion === 'on') { gone.inert = true; gone.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); dw.addEventListener('animationend', () => gone.remove(), { once: true }); setTimeout(() => gone.remove(), 600); }   // MO-10: a drawer leaves to the right
+    if (dw && document.documentElement.dataset.motion === 'on') { gone.inert = true; gone.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); dw.addEventListener('animationend', () => gone.remove(), { once: true }); setTimeout(() => gone.remove(), 300); }   // MO-10: a drawer leaves to the right
     else gone.remove();
     opener?.focus?.();
   };

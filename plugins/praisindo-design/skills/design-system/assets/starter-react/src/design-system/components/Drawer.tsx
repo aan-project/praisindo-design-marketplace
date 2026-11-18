@@ -20,7 +20,7 @@ function slideOut(aside: HTMLElement | null): void {
     const c = n.cloneNode(true) as HTMLElement; c.removeAttribute('id'); c.querySelectorAll('[id]').forEach((e) => e.removeAttribute('id')); c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', ''); c.classList.add('dw-out'); host.appendChild(c); return c;
   });
   const done = () => copies.forEach((c) => c.remove());
-  copies[copies.length - 1]!.addEventListener('animationend', done, { once: true }); setTimeout(done, 600);
+  copies[copies.length - 1]!.addEventListener('animationend', done, { once: true }); setTimeout(done, 300);
   queueMicrotask(() => {   // after the commit, before the paint: did another drawer take its place?
     if (mounts === before) return;
     done(); host.querySelectorAll<HTMLElement>('[data-fresh]').forEach((n) => { n.style.animation = 'none'; });

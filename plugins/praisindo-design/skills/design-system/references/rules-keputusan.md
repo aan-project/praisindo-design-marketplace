@@ -1,4 +1,4 @@
-# Decision rules DK-01 to DK-20 (Praisindo DS v2.132.0)
+# Decision rules DK-01 to DK-20 (Praisindo DS v2.133.0)
 
 The ids are those of the Praisindo owner rules register (decisions of the owner, 2026-11-11). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. The decision table that uses them is `decisions.md`; read it first.
 

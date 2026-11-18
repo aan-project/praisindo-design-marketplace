@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.133.0** (2026-11-18) Synchronised with DS 2.133.0: the Badge page of the Design System shows the intents only (starter React follows), the drawer animation is a plain slide again (.2 s, ease-out in, ease-in out).
 - **2.132.0** (2026-11-18) Synchronised with DS 2.132.0: the badge has no icon (BD-02 changed, BD-11 and BD-12 removed), type data with five options or fewer is a Badge (BD-16), a drawer that replaces another does not slide over it (MO-10). Both starters follow; the audit flags `icon` and `noIcon` on a Badge.
 - **2.131.0** (2026-11-18) Synchronised with DS 2.131.0: DT-17 (detail page of a person or an organisation has the layout of Customer 360), DT-18 (detail page of a product has the layout of the Product detail), CD-29 (a finding or a filter note outside a card is an Alert). The example detail page of both starters has the third (right) card.
 - **2.130.0** (2026-11-18) Synchronised with DS 2.130.0: WG-15, the green and the red of a number that goes up or down are the strong variant of the foreground token (CSS 42, 10 and 50 copied to both starters).

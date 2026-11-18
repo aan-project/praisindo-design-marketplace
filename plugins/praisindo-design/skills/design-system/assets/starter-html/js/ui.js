@@ -47,7 +47,7 @@ export function drawer({ title, size = 'sm', bodyHtml, footerHtml = '', closeLab
   // MO-10: a drawer slides in from the right and leaves to the right; the node stays for the length of the slide-out (`.dw-out`) and is removed after it. Still under data-motion="off".
   const gone = () => {
     if (document.documentElement.dataset.motion !== 'on') { host.remove(); return; }
-    const before = born; host.inert = true; host.setAttribute('aria-hidden', 'true'); host.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); host.querySelector('.drawer').addEventListener('animationend', () => host.remove(), { once: true }); setTimeout(() => host.remove(), 600);
+    const before = born; host.inert = true; host.setAttribute('aria-hidden', 'true'); host.querySelectorAll('.scrim, .drawer').forEach((n) => n.classList.add('dw-out')); host.querySelector('.drawer').addEventListener('animationend', () => host.remove(), { once: true }); setTimeout(() => host.remove(), 300);
     queueMicrotask(() => { if (born === before) return; host.remove(); lastHost?.querySelectorAll('.scrim, .drawer').forEach((n) => { n.style.animation = 'none'; }); });   // another drawer took its place in the same moment: a swap, nothing slides over anything
   };
   const close = () => { live.delete(close); document.removeEventListener('keydown', key); gone(); opener?.focus?.(); onClose?.(); };
