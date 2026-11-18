@@ -38,7 +38,7 @@
 .stats,.kpis{--grp-line:var(--color-border-neutral-default)}
 html[data-sg=one] .stats,html[data-kg=one] .kpis{gap:0;background:var(--color-surface-neutral-primary);border:1px solid var(--grp-line);border-radius:var(--r-card);overflow:hidden}   /* WG-10: the cards of a row are one card with dividers */
 html[data-sg=one] .stats>.stat,html[data-sg=one] .stats>.wg,html[data-kg=one] .kpis>.kpi,html[data-kg=one] .kpis>.wg{border:0;border-radius:0;box-shadow:-1px 0 0 0 var(--grp-line),0 -1px 0 0 var(--grp-line)}   /* the dividers are shadows that the clipped container shows only between the cards */
-.tnd-up{color:var(--color-foreground-success-default)}.tnd-dn{color:var(--color-foreground-danger-default)}   /* WG-08: a number that goes up is green, one that goes down is red */
+.tnd-up{color:var(--color-foreground-success-strong)}.tnd-dn{color:var(--color-foreground-danger-strong)}   /* WG-08: a number that goes up is green, one that goes down is red */
 .wg.wg-soft{background:var(--int-sub);border-color:transparent}.wg.wg-soft .hp-ic{background:var(--color-surface-neutral-primary);border-radius:50%}   /* the soft look of a stat card: the soft colour of its intent */
 .wg.wg-solid{background:var(--int-def);color:var(--int-on);border-color:transparent}.wg.wg-solid .wg-v,.wg.wg-solid .wg-t{color:inherit}.wg.wg-solid .wg-t{opacity:.9}
 .wg.wg-solid .dlt{background:color-mix(in srgb,currentColor 20%,transparent);color:inherit}

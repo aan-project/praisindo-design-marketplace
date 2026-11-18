@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.129.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.130.0). Add the project's updates above it, newest first.
 
+- **2.130.0** (2026-11-18) The green and the red of a number that goes up or down are the strong variant of the foreground token (WG-15): CSS files 42, 10 and 50.
 - **2.129.0** (2026-11-18) The icon in the round avatar of an entity panel is 32px (`.c3av .ic`, CSS file 10-customer-360-three-panels).
 - **2.127.0** (2026-11-18) The name or label of a product shows its quick view on hover, the profile card with the logo and only the most important facts (UN-03): `ProductName` (HTML `productName()`), `PROFILE_PRODUCTS` in `profile.config`, `ProfileCard` `logo`.
 - **2.126.0** (2026-11-18) A step of a form page may hold several cards and the fields are grouped first (DK-28); the card of actions stacks Back, the action and Cancel last, `FormShell` draws Cancel (DK-29); a drawer slides in from the right and out to the right (MO-10); the example form is two steps of two cards.

@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.129.0, skill v2.129.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.130.0, skill v2.130.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -309,4 +309,10 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** The looks of the number cards are written once, in a registry (`STAT_LOOKS` and `KPI_LOOKS` in `design-system/tokens/cardLooks.ts`: id, the name in English and in Indonesian, the component that draws it). A look that is added to the registry is an option of Stat view or KPI view in My preferences by itself and a stored choice is checked against it; the component must draw it and the Design page must show it with its component.
 **Meet.** Add a new look to the registry, draw it in `StatCards` or `KPI` and give it a demo on the Design page; never list the looks by hand in the preferences.
 **Check.** Add a look to `STAT_LOOKS`: it is in the Stat view drawer without any other change, and the unit test fails until the component draws it.
+**Guarded in Praisindo by** a unit test.
+
+### WG-15
+**Rule.** The green and the red of a number or a label that goes up, means a gain, goes down or means a loss (WG-08) are the STRONG variant of the foreground token, not the default one: `--color-foreground-success-strong` and `--color-foreground-danger-strong` (the classes `.tnd-up` and `.tnd-dn`, the change in the entity panel `.c3chg.up` and `.c3chg.dn`, the trend text `.pmt.success` and `.pmt.danger`). The default variant is too light on the page surface.
+**Meet.** Use the classes of the system (`trendCls(n)`); when a text is coloured by hand for a gain or a loss, take the strong variant, never the default.
+**Check.** Open a table with a return column in light and dark: the green and the red of the numbers are the strong ones.
 **Guarded in Praisindo by** a unit test.

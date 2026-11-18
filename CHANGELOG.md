@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.130.0** (2026-11-18) Synchronised with DS 2.130.0: WG-15, the green and the red of a number that goes up or down are the strong variant of the foreground token (CSS 42, 10 and 50 copied to both starters).
 - **2.129.0** (2026-11-18) Synchronised with DS 2.129.0: the icon in the round avatar of an entity panel is 32px (CSS 10 copied to both starters). DS 2.128.0 (the Quick view cards page of the Design System) does not touch the skill.
 - **2.127.0** (2026-11-18) Synchronised with DS 2.127.0: UN-03, the name or label of a product shows its quick view on hover, the profile card with the logo and only the most important facts. Starter React: `ProfileCard` `logo`, `ProductName`, `PROFILE_PRODUCTS`; starter HTML: `productName()`.
 - **2.126.0** (2026-11-18) Synchronised with DS 2.126.0: DK-28 (a step of a form page may hold several cards, group the fields first), DK-29 (the card of actions ends with Cancel, FormShell draws it), MO-10 (a drawer slides in from the right and out to the right); UN-02 names the company. Starters: FormShell with `cards`, the example form is two steps of two cards, Drawer and `drawer()` slide, audit flags a Cancel in the footer of a FormShell.
