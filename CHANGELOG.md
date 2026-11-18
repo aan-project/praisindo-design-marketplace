@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.136.0** (2026-11-18) Synchronised with DS 2.136.0: PP-09, the toolbar of a desktop goes away on a scroll down and comes back on a small scroll up (sticky under the sidebar, so the Toggle sidebar button is not covered); starters React and HTML have it.
 - **2.134.0** (2026-11-18) Synchronised with DS 2.134.0: LS-01, a list page remembers its tab, search, filters, sort and page while a detail or an action is open and Back returns to them (`lib/listMemory.tsx`, the example list page of starter React).
 - **2.133.0** (2026-11-18) Synchronised with DS 2.133.0: the Badge page of the Design System shows the intents only (starter React follows), the drawer animation is a plain slide again (.2 s, ease-out in, ease-in out).
 - **2.132.0** (2026-11-18) Synchronised with DS 2.132.0: the badge has no icon (BD-02 changed, BD-11 and BD-12 removed), type data with five options or fewer is a Badge (BD-16), a drawer that replaces another does not slide over it (MO-10). Both starters follow; the audit flags `icon` and `noIcon` on a Badge.

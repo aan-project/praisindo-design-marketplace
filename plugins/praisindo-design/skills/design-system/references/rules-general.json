@@ -1,5 +1,5 @@
 {
-  "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.134.0). Full text in references/rules-*.md.",
+  "note": "General (U) rules of the Praisindo owner rules register, from the triage of 2026-11-05 (skill v2.136.0). Full text in references/rules-*.md.",
   "count": 359,
   "ids": [
     "AV-02",
@@ -259,6 +259,7 @@
     "PP-06",
     "PP-07",
     "PP-08",
+    "PP-09",
     "PR-01",
     "PR-02",
     "PR-04",

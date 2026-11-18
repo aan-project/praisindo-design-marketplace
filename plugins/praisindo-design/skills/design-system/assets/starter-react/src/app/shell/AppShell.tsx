@@ -1,7 +1,7 @@
 // The Praisindo shell (rules SB-01..SB-33): sidebar 232px / 68px rail, no desktop topbar, footer with language, theme and the user menu, edge toggle, bottom navigation on a phone.
 // It is the same in every application: do NOT restyle it. Only the menu (app/nav.config.ts), the brand (Branding page) and the routes change.
 import { midText } from '../../features/shared/midText';
-import { Fragment, useEffect, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Button, LinkButton } from '../../design-system/components/Button';
 import { Card } from '../../design-system/components/Card';
 import { Chip } from '../../design-system/components/Chip';
@@ -119,6 +119,19 @@ export function AppShell({ page, children }: { page: PageInfo; children: ReactNo
   const allowed = !(def?.admin && !sess.admin);
   // The items of the panel (rule PP-01): each one is in the sidebar or, on a desktop, in the toolbar at the top of the page (My Preferences); on a tablet or a phone they stay where they are (SB-33).
   const inTb = (k: PanelItem) => !below && prefs.items[k] === 'toolbar';
+  const toolRef = useRef<HTMLElement>(null), hasTool = (['search', 'lang', 'theme', 'notif', 'qa', 'profile'] as const).some(inTb);
+  useEffect(() => {
+    const el = toolRef.current; if (!el) return undefined;
+    let last = window.scrollY, acc = 0;
+    const on = () => {
+      const y = window.scrollY, dy = y - last; last = y;
+      if (y <= el.offsetHeight) { acc = 0; delete el.dataset.pin; return; }   // at the top, the toolbar is where it always is
+      acc = Math.sign(dy) === Math.sign(acc) ? acc + dy : dy;   // the distance scrolled in the current direction
+      if (acc > 8 && el.dataset.pin !== 'hide') el.dataset.pin = 'hide'; else if (acc < -12 && el.dataset.pin !== 'show') el.dataset.pin = 'show';
+    };
+    window.addEventListener('scroll', on, { passive: true }); on();
+    return () => { window.removeEventListener('scroll', on); delete el.dataset.pin; };
+  }, [hasTool, page.route]);
   const langNode = <>
     <div className="lgt" role="group" aria-label={t('hdr.lang')}>
       {([['en', 'EN', 'English'], ['id', 'ID', 'Bahasa Indonesia']] as const).map(([v, a, l]) => <button key={v} type="button" aria-pressed={prefs.lang === v} title={l} lang={v} onClick={() => setPref('lang', v)}>{a}</button>)}
@@ -156,7 +169,7 @@ export function AppShell({ page, children }: { page: PageInfo; children: ReactNo
       <div className="mn">
         {below ? <Topbar title={pageTitle} menuLabel={t('hdr.sidebar')} expanded={phone ? mnav : !coll} onMenu={() => (phone ? setMnav(!mnav) : toggleSb(false))} user={user('top')} /> : null}
         {(['search', 'lang', 'theme', 'notif', 'qa', 'profile'] as const).some(inTb) ? (
-          <header className="topbar tool" data-testid="toolbar" aria-label={t('tb.label')}>
+          <header ref={toolRef} className="topbar tool" data-testid="toolbar" aria-label={t('tb.label')}>
             {inTb('search') ? <div className="tool-s"><SidebarSearch placement="below" /></div> : null}
             <span className="grow" />
             {inTb('lang') ? langNode : null}{inTb('theme') ? themeNode : null}{UTIL.filter((u) => inTb(u.k)).map((u) => <Fragment key={u.k}>{u.node}</Fragment>)}{inTb('profile') ? user('top') : null}

@@ -83,9 +83,26 @@ export function renderChrome() {
   const inBar = ['search', 'lang', 'theme', ...UTIL.map((u) => u.k), 'profile'].filter(inTb);
   if (inBar.length) {
     if (!tool) { tool = document.createElement('header'); tool.className = 'topbar tool'; mn.prepend(tool); }
+    toolPin(tool);
     tool.setAttribute('aria-label', t('tb.label'));
     tool.innerHTML = `${inTb('search') ? `<div class="tool-s">${sideSearch({ id: 'sq-tool', placement: 'below' })}</div>` : ''}<span class="grow"></span>${inTb('lang') ? langNode : ''}${inTb('theme') ? themeNode : ''}${UTIL.filter((u) => inTb(u.k)).map(utilNode).join('')}${inTb('profile') ? userBtn(true) : ''}`;
   } else tool?.remove();
+}
+
+// PP-09: the toolbar goes away on a scroll down and comes back on a small scroll up; at the top of the page it is where it always is
+let pinOff = null;
+function toolPin(el) {
+  pinOff?.();
+  let last = window.scrollY, acc = 0;
+  const on = () => {
+    if (!el.isConnected) { pinOff?.(); return; }
+    const y = window.scrollY, dy = y - last; last = y;
+    if (y <= el.offsetHeight) { acc = 0; delete el.dataset.pin; return; }
+    acc = Math.sign(dy) === Math.sign(acc) ? acc + dy : dy;
+    if (acc > 8 && el.dataset.pin !== 'hide') el.dataset.pin = 'hide'; else if (acc < -12 && el.dataset.pin !== 'show') el.dataset.pin = 'show';
+  };
+  window.addEventListener('scroll', on, { passive: true }); on();
+  pinOff = () => { window.removeEventListener('scroll', on); pinOff = null; };
 }
 
 function userMenu(btn) {

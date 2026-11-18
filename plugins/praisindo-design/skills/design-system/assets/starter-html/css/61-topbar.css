@@ -9,7 +9,10 @@
 /* the small hero of the Design page sits under the topbar */
 @media(max-width:1099px){.dshero.mini,.dshero.hide{top:56px}}
 /* The toolbar of a desktop (DS 2.71, rule PP-03): the items of the panel that My Preferences puts at the top of the page. It is the same bar, but it is not frozen: it scrolls with the page. */
-.topbar.tool{position:static;z-index:auto}
+.topbar.tool{position:sticky;top:0;z-index:45}   /* PP-09: it goes away with the page on a scroll down and comes back on a small scroll up */
+:root:not([data-motion="off"]) .topbar.tool{transition:transform var(--dur-base) var(--ease-out)}
+.topbar.tool[data-pin="hide"]{transform:translateY(-100%)}
+.topbar.tool[data-pin="show"]{transform:none}
 .topbar.tool .tool-s{flex:0 1 360px;min-width:200px}
 .topbar.tool .lgt1{display:none}
 .topbar.tool .lgt{display:inline-flex}

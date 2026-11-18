@@ -81,9 +81,9 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Guarded in Praisindo by** a unit test.
 
 ### PP-03
-**Rule.** The toolbar (`header.topbar.tool`) holds the items put there by PP-01, on a desktop only (1100px and wider), at the top of the main column. It is NOT frozen: it scrolls with the page. The search opens its results under the field, the bell its popover and the profile its menu at the top right. With no item in the toolbar there is no toolbar
-**Meet.** Render `header.topbar.tool` only when at least one item has position toolbar and the width is 1100px or more; no `position: sticky`.
-**Check.** Move the profile to the toolbar: its menu opens at the top right; scroll the page: the toolbar goes with it; move it back: the toolbar is gone.
+**Rule.** The toolbar (`header.topbar.tool`) holds the items put there by PP-01, on a desktop only (1100px and wider), at the top of the main column. It is not part of the page frame: it goes away with the page on a scroll down and comes back on a small scroll up (PP-09). The search opens its results under the field, the bell its popover and the profile its menu at the top right. With no item in the toolbar there is no toolbar
+**Meet.** Render `header.topbar.tool` only when at least one item has position toolbar and the width is 1100px or more; `position: sticky` only as PP-09 says.
+**Check.** Move the profile to the toolbar: its menu opens at the top right; scroll the page down: the toolbar goes with it; move it back: the toolbar is gone.
 **Guarded in Praisindo by** a unit test.
 
 ### PP-04

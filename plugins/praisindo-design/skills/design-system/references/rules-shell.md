@@ -1,4 +1,4 @@
-# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.134.0, skill v2.134.0)
+# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.136.0, skill v2.136.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -365,3 +365,9 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 **Meet.** Use the same i18n text for the button and for the title of the drawer.
 **Check.** Open the user menu and press My preferences: the drawer is titled My preferences.
 **Guarded in Praisindo by** a unit test.
+
+### PP-09
+**Rule.** The toolbar of a desktop (PP-03) comes back with a small scroll up: it goes up and out of the window while the person scrolls down (after 8px in that direction, past the top of the page) and returns to the top of the window as soon as they scroll up by 12px, wherever they are on the page. At the top of the page it is in its own place. It sits under the sidebar (`z-index:45`, the sidebar is 46) so the edge toggle of the sidebar is never covered.
+**Meet.** `.topbar.tool{position:sticky;top:0;z-index:45}`, `data-pin="hide"` / `"show"` set by the shell on `window` scroll (the starters have it), a slide of `--dur-base` that stands still under `data-motion="off"`. Do not raise the z-index above 46.
+**Check.** Put the theme in the toolbar, scroll down a long page: the toolbar leaves; scroll up a little: it comes back over the content; the Toggle sidebar button is fully visible all the time.
+**Guarded in Praisindo by** a unit test and an e2e test.

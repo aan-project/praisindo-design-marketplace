@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// WCAG contrast checker (skill design-system v2.134.0). Zero dependencies.
+// WCAG contrast checker (skill design-system v2.136.0). Zero dependencies.
 //   node scripts/contrast.mjs <foreground> <background>        e.g. node scripts/contrast.mjs "#5c5c5c" "#ffffff"
 //   node scripts/contrast.mjs --brand <primary> [<secondary>]   checks a Branding choice against the Praisindo rules
 // Rules: text needs at least 4.5:1; the primary brand colour needs at least 3:1 against white (Branding form rule), because the engine derives the text colours from it.
