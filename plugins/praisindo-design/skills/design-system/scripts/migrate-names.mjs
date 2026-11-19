@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Name migration of the Praisindo Design System (skill design-system v2.140.0). Zero dependencies.
+// Name migration of the Praisindo Design System (skill design-system v2.141.0). Zero dependencies.
 //   node scripts/migrate-names.mjs <project-dir>            dry run: lists every old name found (file:line old -> new), writes nothing
 //   node scripts/migrate-names.mjs <project-dir> --apply    writes the new names into the files
 //   node scripts/migrate-names.mjs <project-dir> --json     the findings as JSON

@@ -1,4 +1,4 @@
-# Drawer, dialog, action menu (Praisindo DS v2.140.0, skill v2.140.0)
+# Drawer, dialog, action menu (Praisindo DS v2.141.0, skill v2.141.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -86,6 +86,12 @@ The `more_vert` button of a row or card opens a menu: `.pop role="menu"` positio
 **Rule.** When a card or list row has a third text (after the title and the second line, for example the date and time of the activity in the Reschedule preview, `.pv > .li > .x`), that text is softer than the second: `var(--color-text-tertiary)` (owner rule 2026-11-13).
 **Meet.** Put the third text in the stock slot (`.x`); do not set its colour.
 **Check.** Compare the third text with the second: it is lighter.
+**Guarded in Praisindo by** a unit test.
+
+### DR-13
+**Rule.** A drawer of size md or smaller never puts three fields in one row: a row holds one field or two (`.g2`), a third field goes to the next row. A drawer is narrow; three fields squeeze their labels and values.
+**Meet.** Use `.g2` for a pair of short fields (Minimum and Maximum) and one field per row for the rest; use `.g3` only on a page or in a drawer of size lg or xl.
+**Check.** Open a drawer md with a percent, a minimum and a maximum: the percent is alone on its row and the minimum and maximum share the next one.
 **Guarded in Praisindo by** a unit test.
 
 ### MN-01

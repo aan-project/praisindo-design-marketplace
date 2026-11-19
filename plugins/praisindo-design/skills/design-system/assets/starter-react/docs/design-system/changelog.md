@@ -2,8 +2,9 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.140.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.141.0). Add the project's updates above it, newest first.
 
+- **2.141.0** (2026-11-19) A drawer of size md or smaller never has three fields in one row (DR-13).
 - **2.140.0** (2026-11-19) The items that repeat in a form are a table with Add and Edit in a drawer (DK-31, replaces DK-30).
 - **2.139.0** (2026-11-19) A table scrolled sideways keeps its position on a sort or a page change (TB-32, `optional/adapters/keepScrollX.ts`); the items that repeat in a form are one card each (DK-30); one source for every fact (DA-01).
 - **2.136.0** (2026-11-18) The toolbar of a desktop goes away on a scroll down and comes back on a small scroll up (PP-09): `.topbar.tool` is sticky under the sidebar (z-index 45, so the Toggle sidebar button is never covered) and the shell sets `data-pin`.
