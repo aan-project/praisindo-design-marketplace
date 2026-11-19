@@ -1,4 +1,4 @@
-# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.136.0, skill v2.136.0)
+# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.139.0, skill v2.139.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -213,3 +213,9 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 **Meet.** Use `Wizard variant="vertical"` or `"status"` and the `.state.ok` tick; do not animate steps yourself.
 **Check.** A finished step draws its line down; the waiting step has a soft ring.
 **Guarded in Praisindo by** a browser test.
+
+### DA-01
+**Rule.** Every fact has ONE source and the screens that show it read that source; they never make a copy of their own. When a fact changes at one point (a confirmed request, a new product in the catalogue, an extra record), every point that shows it changes with it: other pages, totals, counts and lists. A screen that needs a number the source does not give gets it from a function of the source, not from a table of its own.
+**Meet.** Put what a customer holds (or any shared fact) in one domain function and import it in every screen, export and total; do not recompute it in a page. A change (a confirmation, an edit) is written to the source, never patched into one screen.
+**Check.** Change the source (confirm a purchase, add a product): the detail page, the list, the totals and the export all show the change; grep the screens for a second calculation of the same fact.
+**Guarded in Praisindo by** a unit test.

@@ -286,6 +286,12 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Check.** Press a stat card of a list page: the table keeps the rows of that group and the card shows pressed; press it again: every row is back.
 **Guarded in Praisindo by** a unit test.
 
+### TB-32
+**Rule.** A table the person scrolled sideways stays where it is when they sort by a column title, change the page or the page size. A table library that is rebuilt on those changes must not send the person back to the left edge.
+**Meet.** When the element that holds the table is made again (a new `key`), give the new element the `scrollLeft` of the old one (a callback ref that remembers it from the person's own scrolling and sets it again on each frame until the content is wide enough); never reset it to 0.
+**Check.** Scroll a wide table to the right and click a column title: the table is sorted and the columns you were looking at are still in view.
+**Guarded in Praisindo by** a browser test.
+
 ### BT-10
 **Rule.** The buttons of a choice group (`.seg`) are as wide as their label: no button grows to fill the row (no `flex` on `.seg .btn`); the group wraps to the next line when it does not fit.
 **Meet.** Use the `.seg` group of the system; do not give its buttons `flex:1` or `width:100%`.
@@ -339,6 +345,12 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Meet.** Pass `footer` with the action buttons only; do not put a Cancel button in it.
 **Check.** Open a form page in both layouts: Back (when there is one), then Next or the action, then Cancel at the bottom of the card; the audit flags a Cancel button in the `footer` of a `FormShell`.
 **Guarded in Praisindo by** a unit test and the audit.
+
+### DK-30
+**Rule.** A section of a form whose items repeat (recommendation candidates, contacts, any list the person adds to) draws each item as a card of its own, titled with its number ("Candidate 1") and with its remove button in the header of the card. The card before them says what the section is and holds the actions on the whole list (Add, Remove all). The items are never rows inside one card: a step holds one or more cards (DK-28).
+**Meet.** One `Card` for the section, then one `Card` per item (`title` with the number, `actions` with the remove icon button), inside one wrapper with the id of the section.
+**Check.** Open a form step with a repeating section and add two items: three cards, the second and third titled with their number and each with its own remove button.
+**Guarded in Praisindo by** a unit test.
 
 ### CT-02
 **Rule.** The legend of every chart is under the chart (`legend.position: 'bottom'`); it is done once in `withChart` (`legendBottom`); a chart that hides its legend keeps it hidden.
