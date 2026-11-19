@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.140.0** (2026-11-19) Synchronised with DS 2.140.0: DK-31, the items that repeat in a form are a table with Add and Edit in a drawer (replaces DK-30).
 - **2.139.0** (2026-11-19) Synchronised with DS 2.139.0: TB-32 (a table scrolled sideways keeps its position on a sort), DK-30 (repeating items of a form are one card each), DA-01 (one source for every fact); the Kora-only rules of 2.137.0 to 2.138.0 do not change the skill.
 - **2.136.0** (2026-11-18) Synchronised with DS 2.136.0: PP-09, the toolbar of a desktop goes away on a scroll down and comes back on a small scroll up (sticky under the sidebar, so the Toggle sidebar button is not covered); starters React and HTML have it.
 - **2.134.0** (2026-11-18) Synchronised with DS 2.134.0: LS-01, a list page remembers its tab, search, filters, sort and page while a detail or an action is open and Back returns to them (`lib/listMemory.tsx`, the example list page of starter React).

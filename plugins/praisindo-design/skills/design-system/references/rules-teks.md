@@ -1,4 +1,4 @@
-# UI text rules (Praisindo DS v2.139.0, skill v2.139.0)
+# UI text rules (Praisindo DS v2.140.0, skill v2.140.0)
 
 Ids are those of the Praisindo owner rules register. Lines marked **[guidance]** are this skill's reading of the principles of the DS (`principles.md` "Writing") for cases the register does not name; follow them unless the product has its own writing guide.
 

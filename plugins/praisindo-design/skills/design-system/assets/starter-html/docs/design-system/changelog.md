@@ -2,11 +2,12 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.139.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.140.0). Add the project's updates above it, newest first.
 
 - **2.86+++** (2026-11-13) Starter HTML and React: the token `--color-surface-static-white` (PD-07) is written by `buildTokens`; sidebar labels are cut in the middle (SB-34, `midText`); HTML starter: the bell of the action row shows its count (`UTIL[].count`) and the user button shows the role.
 - **2.86++** (2026-11-13) Starter HTML and React: Branding has the default font weight (FW-01, RichSelect), Default mode as a Select (CP-06), the hint of the colour as an info tooltip, the note of the logo drawer as an info Alert (CD-08) and the Disclaimers as `p.mut` (DC-01); `normalizeBrand` keeps `fontWeight`. My Preferences is the User Control Panel (PP-04: info note, Font size, Table size, link Panel items, Reset to defaults and Apply) with the second drawer of panel items (PP-01); the shell has the sidebar search (SQ-01..SQ-04), the action row of three items with the "more" menu (PP-02) and the toolbar (PP-03).
 - **2.86+** (2026-11-13) Starter HTML: the behaviour of the date field with its calendar (`js/datefield.js`), the tooltip (`js/tooltip.js`) and the helpers `dialog`, `popover`, `menu`, `closeOverlays` (`js/ui.js`) were added, taken from a real migration; texts in `js/ui-texts.js`.
+- **2.140.0** (2026-11-19) The items that repeat in a form are a table with Add and Edit in a drawer (DK-31, replaces DK-30).
 - **2.139.0** (2026-11-19) A table scrolled sideways keeps its position on a sort or a page change (TB-32, `optional/adapters/keepScrollX.ts`); the items that repeat in a form are one card each (DK-30); one source for every fact (DA-01).
 - **2.136.0** (2026-11-18) The toolbar of a desktop goes away on a scroll down and comes back on a small scroll up (PP-09): `.topbar.tool` is sticky under the sidebar (z-index 45, so the Toggle sidebar button is never covered) and the shell sets `data-pin`.
 - **2.134.0** (2026-11-18) A list page remembers its tab, search, filters, sort and page while a detail or an action is open and Back returns to them (LS-01): `lib/listMemory.tsx` and the example list page.

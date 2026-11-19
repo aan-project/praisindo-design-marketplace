@@ -346,10 +346,10 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Check.** Open a form page in both layouts: Back (when there is one), then Next or the action, then Cancel at the bottom of the card; the audit flags a Cancel button in the `footer` of a `FormShell`.
 **Guarded in Praisindo by** a unit test and the audit.
 
-### DK-30
-**Rule.** A section of a form whose items repeat (recommendation candidates, contacts, any list the person adds to) draws each item as a card of its own, titled with its number ("Candidate 1") and with its remove button in the header of the card. The card before them says what the section is and holds the actions on the whole list (Add, Remove all). The items are never rows inside one card: a step holds one or more cards (DK-28).
-**Meet.** One `Card` for the section, then one `Card` per item (`title` with the number, `actions` with the remove icon button), inside one wrapper with the id of the section.
-**Check.** Open a form step with a repeating section and add two items: three cards, the second and third titled with their number and each with its own remove button.
+### DK-31
+**Rule.** A section of a form whose items repeat (recommendation candidates, contacts, any list the person adds to) is ONE card with a table of the items: columns that say what each item is, and Edit and Remove on every row. Add (in the header of the card) and Edit open a drawer with the fields of ONE item, Cancel last (DK-29); Save checks the item and puts it in the table, so the table always shows the latest data; Cancel leaves the table as it was. The drawer is for an item of a list inside a form page; the record of the page itself is never edited in a drawer (DK-01). It replaces DK-30 (one card for each item), which confused the person.
+**Meet.** One `Card` with the actions Add and Remove all in its header, a table with the columns of the item and a last column with the icon buttons Edit and Remove (with `aria-label`); a `Drawer` with the fields and the footer Cancel, Save; the item is validated when Save is pressed and the table is changed only then.
+**Check.** Press Add: a drawer with the fields opens; fill it and Save: the new row is in the table and the drawer is closed; press Edit on a row, change a field and Save: the row shows the change; an invalid field keeps the drawer open with its message.
 **Guarded in Praisindo by** a unit test.
 
 ### CT-02
