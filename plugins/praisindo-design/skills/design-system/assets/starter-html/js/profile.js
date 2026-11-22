@@ -1,6 +1,6 @@
 // userName() and the profile card (rules GN-04, UN-01, PC-01..PC-03): wherever the name of a USER of the application is shown, this is the name. It is the trigger of the profile card: it opens on hover after a short delay, on keyboard
 // focus and on tap, closes with Escape or a tap outside, and keeps the focus on the trigger. No text decoration, the font of the text around it. A name that is not in the directory stays plain text. Never print a bare user name from a record.
-import { productRows, profileProduct, profileRows, profileUser } from './profile.config.js';
+import { productRows, profileProduct, profileRows, profileSide, profileUser } from './profile.config.js';
 import { fill, t } from './shell.js';
 import { esc } from './ui.js';
 
@@ -17,7 +17,12 @@ export function productName(name) {
   return `<span role="button" class="pcx-t" aria-haspopup="dialog" aria-expanded="false" aria-label="${esc(fill(t('pc.popen'), { n: p.name }))}" data-product="${esc(p.name)}" tabindex="0">${esc(p.name)}</span>`;
 }
 const bodyP = (p, id) => `<div class="pcx" role="dialog" aria-modal="false" id="${id}" aria-label="${esc(fill(t('pc.pcard'), { n: p.name }))}"><span class="pcx-f pcx-xl" aria-hidden="true"><span class="plg plg-lg plg-fb" role="img" aria-label="${esc(p.issuer)}">${esc(initials(p.issuer))}</span></span><div class="pcx-n"><span class="fw6">${esc(p.name)}</span><span class="mut">${esc(p.category)}</span></div><dl class="pcx-r">${productRows(p, t).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>${p.href ? `<a class="btn b-soft i-neutral s-md pcx-act" href="${esc(p.href)}">${esc(t('pc.pview'))}</a>` : ''}</div>`;
-const body = (u, id) => `<div class="pcx" role="dialog" aria-modal="false" id="${id}" aria-label="${esc(fill(t('pc.card'), { n: u.name }))}"><span class="hav pcx-f pcx-xl" aria-hidden="true">${esc(initials(u.name))}</span><div class="pcx-n"><span class="fw6">${esc(u.name)}</span><span class="mut">${esc(u.position)}</span></div><dl class="pcx-r">${profileRows(u, t).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div>`;
+const sideHtml = (side) => `<section class="pcx-sd" aria-label="${esc(side.title)}"><h3 class="pcx-sh">${esc(side.title)}</h3><ul class="pcx-si">${side.items.map((it) => `<li><div class="pcx-ih"><span class="hp-ic i-brand" aria-hidden="true"><span class="ic">${esc(it.icon)}</span></span><span><span class="fw6">${esc(it.title)}</span>${it.sub ? `<span class="mut">${esc(it.sub)}</span>` : ''}</span></div><dl class="pcx-r pcx-ri">${it.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></li>`).join('')}</ul></section>`;
+/** The card of a user (rule PC-06: with `profileSide` it has two columns, the facts on the left and a list of items on the right). */
+const body = (u, id) => {
+  const side = profileSide(u, t), inner = `<span class="hav pcx-f pcx-xl" aria-hidden="true">${esc(initials(u.name))}</span><div class="pcx-n"><span class="fw6">${esc(u.name)}</span><span class="mut">${esc(u.position)}</span></div><dl class="pcx-r">${profileRows(u, t).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
+  return `<div class="pcx${side ? ' pcx-2' : ''}" role="dialog" aria-modal="false" id="${id}" aria-label="${esc(fill(t('pc.card'), { n: u.name }))}">${side ? `<div class="pcx-m">${inner}</div>${sideHtml(side)}` : inner}</div>`;
+};
 let layer = null, owner = null, timer = 0, ptr = 'mouse';
 const cancel = () => { clearTimeout(timer); timer = 0; };
 const later = (fn, ms) => { cancel(); timer = setTimeout(fn, ms); };

@@ -2,8 +2,11 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.141.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.158.0). Add the project's updates above it, newest first.
 
+- **2.158.0** (2026-11-23) The profile card of a person with a list of entries (certifications, licences) has two columns, 640px: the facts on the left, the entries on the right with a Status badge and a Valid until date (PC-06, `ProfileCardData.side`); DT-16 (the icon in the round avatar of an entity panel is 32px).
+- **2.157.0** (2026-11-23) A hero that carries a chart (`.hero-chart`, `.ph.hero-one`): one full-width card, left aligned on a phone; the table kit gets the soft tint of a row that waits for an action (`.tr-act`, `.srna`); the card gap of `.cb` is 16px.
+- **2.142.0 to 2.156.0** (2026-11-19 to 2026-11-22) Changes of the Kora product only (areas, the tab Needs my action, the customer summary sheet, certifications, AUM and revenue, the response history, Marketing and the Outbox removed); no change of the skill.
 - **2.141.0** (2026-11-19) A drawer of size md or smaller never has three fields in one row (DR-13).
 - **2.140.0** (2026-11-19) The items that repeat in a form are a table with Add and Edit in a drawer (DK-31, replaces DK-30).
 - **2.139.0** (2026-11-19) A table scrolled sideways keeps its position on a sort or a page change (TB-32, `optional/adapters/keepScrollX.ts`); the items that repeat in a form are one card each (DK-30); one source for every fact (DA-01).

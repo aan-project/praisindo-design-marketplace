@@ -89,6 +89,7 @@ div.rs:last-child{border-bottom:0}
 .ph.hero{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:stretch}
 .hero-card{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:24px;padding:24px;border-radius:var(--r-card);background:var(--color-surface-brand-subtle-1);border:1px solid var(--color-border-brand-default)}
 .hero-txt{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+.ph.hero-one{grid-template-columns:minmax(0,1fr)}.hero-chart .cb{display:flex;flex-direction:column;gap:24px}.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}.hero-top .hero-txt{flex:1}.hero-chh{display:flex;justify-content:space-between;align-items:center;gap:16px}.hero-chh h2{margin:0;font-size:var(--fs-md);line-height:var(--lh-md);font-weight:calc(600 + var(--fw-shift,0))}
 .hero-txt .tag{color:var(--color-text-secondary)}
 .hero-txt p{margin:0}
 
@@ -104,7 +105,7 @@ div.rs:last-child{border-bottom:0}
 @keyframes mflt{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes msh{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.6);opacity:.5}}
 @media(max-width:1100px){.ph.hero{grid-template-columns:1fr}.hero-side{flex-direction:row}.hero-side .mini{flex:1}}
-@media(max-width:700px){.hero-card{grid-template-columns:1fr;justify-items:center;text-align:center}.hero-txt{align-items:center}.hero-side{flex-direction:column}}
+@media(max-width:700px){.hero-top{flex-direction:column}.hero-chh{flex-wrap:wrap}.hero-card{grid-template-columns:1fr;justify-items:center;text-align:center}.hero-txt{align-items:center}.hero-chart .hero-txt{align-items:flex-start}.hero-side{flex-direction:column}}
 .grp{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm)}
 .hav{width:36px;height:36px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0));background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong);border:1px solid var(--color-border-brand-default)}
 .li .m .pb{margin-top:8px;max-width:320px}

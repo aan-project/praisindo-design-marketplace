@@ -21,5 +21,16 @@
 .pcx-r dt{flex:none;color:var(--color-text-secondary)}
 .pcx-r dd{margin:0;font-weight:calc(500 + var(--fw-shift,0));text-align:right;overflow-wrap:anywhere}
 .pcx-act{width:100%;margin-top:24px}
+/* PC-06: the card of an RM has a second column (the certifications): wide, two columns, a hairline between them; one column again on a phone */
+.pcx.pcx-2{flex-direction:row;align-items:stretch;width:640px;padding:0}
+.pcx-2>.pcx-m{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;flex:none;width:280px;padding:24px}
+.pcx-2>.pcx-sd{box-sizing:border-box;flex:1;min-width:0;padding:24px;border-left:1px solid var(--color-border-neutral-default)}
+.pcx-sh{margin:0 0 16px;color:var(--color-text-secondary);font-size:var(--fs-xs);line-height:var(--lh-xs);font-weight:calc(400 + var(--fw-shift,0));letter-spacing:.08em;text-transform:uppercase}
+.pcx-si{display:flex;flex-direction:column;margin:0;padding:0;list-style:none}
+.pcx-si>li{display:flex;flex-direction:column;gap:12px;padding:16px 0;border-bottom:1px solid var(--color-border-neutral-default)}
+.pcx-si>li:first-child{padding-top:0}.pcx-si>li:last-child{padding-bottom:0;border-bottom:0}
+.pcx-ih{display:flex;align-items:center;gap:12px;min-width:0}.pcx-ih>span:last-child{display:flex;flex-direction:column;min-width:0}
+.pcx-r.pcx-ri{gap:8px;padding-top:0}
+@media(max-width:640px){.pcx.pcx-2{flex-direction:column;width:calc(100vw - 16px)}.pcx-2>.pcx-m{width:auto}.pcx-2>.pcx-sd{border-left:0;border-top:1px solid var(--color-border-neutral-default)}}
 /* a phone: the touch target is 40px high (padding of an inline box widens the hit area and does not move the lines of text) */
 @media(max-width:640px),(pointer:coarse){.pcx-t:not(.pcx-ta){padding:16px 0}.pcx-ta{margin:-8px;padding:8px}}

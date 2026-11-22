@@ -13,6 +13,7 @@ import { translate } from '../../i18n';
 import { initials } from '../../lib/text';
 import { LinkButton } from './Button';
 import { Icon } from './Icon';
+import { IconTile } from './Hints';
 import { ProductLogo } from './ProductLogo';
 import { ttPlace, type Placed } from './Tooltip';
 
@@ -27,7 +28,9 @@ export interface ProfileCardData {
   action?: { label: string; href: string };
   /** an actor that is not a person: the card says "System" and shows nothing else */
   system?: boolean;
-  /** the card of a product (rule PD-16): its logo (the issuer's) takes the place of the initials and the texts say product, not profile; only the most important facts are the rows */
+  /** a second column on the right (rule PC-06): a heading and items, each with an icon, a title, a line under it and rows (the certifications of an RM); the card is then wide, in two columns */
+  side?: { title: string; items: readonly { icon: string; title: string; sub?: string; rows: readonly (readonly [string, ReactNode])[] }[] };
+  /** the card of a product (rule UN-03): its logo (the issuer's) takes the place of the initials and the texts say product, not profile; only the most important facts are the rows */
   logo?: { name: string; src?: string };
 }
 export interface ProfileCardProps {
@@ -36,6 +39,8 @@ export interface ProfileCardProps {
   trigger?: 'name' | 'avatar';
   /** keep it open and in the flow (documentation previews, tests) */
   forceOpen?: boolean;
+  /** what the trigger shows instead of the name (for example the name cut in the middle in a table cell, TB-20); the card and the labels keep the name */
+  label?: ReactNode;
 }
 
 const HOVER_IN = 250, HOVER_OUT = 150;
@@ -53,12 +58,19 @@ function Face({ data, size }: { data: ProfileCardData; size: 'sm' | 'xl' }) {
 export function ProfileCardBody({ data, id, label, preview }: { data: ProfileCardData; id?: string; label?: string; /** a static preview on the Design page: a group, not a dialog */ preview?: boolean }) {
   const p = usePrefsOptional(), t = (k: string) => (p ? p.t(k) : translate('en', k)), who = data.system ? t('lg.system') : data.name;
   const rows = data.system ? [] : data.rows ?? [];
+  const inner = (<>
+    <Face data={data} size="xl" />
+    <div className="pcx-n"><span className="fw6">{who}</span>{data.subtitle && !data.system ? <span className="mut">{data.subtitle}</span> : null}</div>
+    {rows.length ? <dl className="pcx-r">{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl> : null}
+    {data.action && !data.system ? <LinkButton label={data.action.label} href={data.action.href} type="soft" intent="neutral" cls="pcx-act" /> : null}
+  </>), main = data.side && !data.system ? <div className="pcx-m">{inner}</div> : inner;
   return (
-    <div className="pcx" role={preview ? 'group' : 'dialog'} aria-modal={preview ? undefined : 'false'} id={id} aria-label={label ?? fill(t(data.logo ? 'pc.pcard' : 'pc.card'), { n: who })}>
-      <Face data={data} size="xl" />
-      <div className="pcx-n"><span className="fw6">{who}</span>{data.subtitle && !data.system ? <span className="mut">{data.subtitle}</span> : null}</div>
-      {rows.length ? <dl className="pcx-r">{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl> : null}
-      {data.action && !data.system ? <LinkButton label={data.action.label} href={data.action.href} type="soft" intent="neutral" cls="pcx-act" /> : null}
+    <div className={`pcx${data.side && !data.system ? ' pcx-2' : ''}`} role={preview ? 'group' : 'dialog'} aria-modal={preview ? undefined : 'false'} id={id} aria-label={label ?? fill(t(data.logo ? 'pc.pcard' : 'pc.card'), { n: who })}>
+      {main}
+      {data.side && !data.system ? <section className="pcx-sd" aria-label={data.side.title}><h3 className="pcx-sh">{data.side.title}</h3>
+        <ul className="pcx-si">{data.side.items.map((it) => (
+          <li key={it.title}><div className="pcx-ih"><IconTile icon={it.icon} /><span><span className="fw6">{it.title}</span>{it.sub ? <span className="mut">{it.sub}</span> : null}</span></div>
+            <dl className="pcx-r pcx-ri">{it.rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></li>))}</ul></section> : null}
     </div>
   );
 }
@@ -81,7 +93,7 @@ function CardLayer({ btn, card, data, id, onEnter, onLeave, onFocus, onBlur }: {
     </div>, document.body);
 }
 
-export function ProfileCard({ data, trigger = 'name', forceOpen }: ProfileCardProps) {
+export function ProfileCard({ data, trigger = 'name', forceOpen, label }: ProfileCardProps) {
   const p = usePrefsOptional(), t = (k: string) => (p ? p.t(k) : translate('en', k));
   const id = useId(), who = data.system ? t('lg.system') : data.name;
   const [open, setOpen] = useState(false), shown = open || !!forceOpen;
@@ -113,7 +125,7 @@ export function ProfileCard({ data, trigger = 'name', forceOpen }: ProfileCardPr
         else if (e.key === 'Tab' && !e.shiftKey && open) { const f = card.current?.querySelector<HTMLElement>('a,button'); if (f) { e.preventDefault(); cancel(); f.focus(); } }
       }}
       onClick={() => { if (ptr.current === 'touch' || ptr.current === 'pen') { cancel(); if (open) close(); else openNow(); } else openNow(); ptr.current = 'mouse'; }}>
-      {trigger === 'avatar' ? <Face data={data} size="sm" /> : who}
+      {trigger === 'avatar' ? <Face data={data} size="sm" /> : label ?? who}
     </span>
   );
   const enter = (e: PointerEvent<HTMLDivElement>) => { if (e.pointerType === 'mouse') cancel(); };

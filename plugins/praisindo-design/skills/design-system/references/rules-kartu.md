@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.141.0, skill v2.141.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.158.0, skill v2.158.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -144,7 +144,7 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a browser test.
 
 ### PC-03
-**Rule.** The profile card is placed next to its trigger (below by default, above when there is no room, shifted to stay inside the viewport) in a layer above the page (not clipped by a scroll container); at most 260px wide (owner revision 2026-10-25: was 320px) (owner revision 2026-10-25: was 280px, the card is larger); no overflow-x at 390
+**Rule.** The profile card is placed next to its trigger (below by default, above when there is no room, shifted to stay inside the viewport) in a layer above the page (not clipped by a scroll container); at most 260px wide, except a card with a second column (PC-06: 640px, two columns) (owner revision 2026-10-25: was 320px) (owner revision 2026-10-25: was 280px, the card is larger); no overflow-x at 390
 **Meet.** Use `ProfileCard` (overlay host placement).
 **Check.** Open a card near the bottom and the right edge.
 **Guarded in Praisindo by** a browser test.
@@ -153,6 +153,12 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** Layout of the profile card (owner reference image, revision 3), in tokens: a flat card (1px border, `--r-card`, no shadow, 260px wide, padding 16px) with the avatar centred on top (64px, initials; the system has an icon), the name below it (weight 600, centred), the subtitle (position of an internal user, segment of a customer) in muted text, then rows with the label on the left and the value on the right (label muted, value weight 500, status as the one badge (BD-01; keputusan owner 2026-10-26, it was a medium status dot badge)), and, for a customer, a full-width soft button (`b-soft`, neutral) "View Detail" at the bottom. Two variants: internal user and customer
 **Meet.** Use `ProfileCardBody`; do not restyle it.
 **Check.** Look at the card in light and dark.
+**Guarded in Praisindo by** a unit test.
+
+### PC-06
+**Rule.** The profile card of a person who has a list of things that belong to the person (for example certifications or licences) has two columns, 640px wide: on the left the avatar, name, position and the facts as before; on the right a heading in small capitals and one item per entry, separated by hairlines: an icon tile, a short title with what it covers under it, the row Status (the one badge: success when valid, neutral when expired) and the row Valid until with the date. The label of the date is "Valid until", never "Active date". It is `ProfileCardData.side` (`title`, `items` of `icon`, `title`, `sub`, `rows`); on a phone (640px and below) the two columns stack. The other cards stay one column of 260px (PC-03, PC-04).
+**Meet.** Give `ProfileCardData` a `side`; do not build a second card or widen the card with your own CSS; the colours of the status are the badge intents.
+**Check.** Open the card of a person with entries at 1440 and at 390; the facts are the rows of the first column, the entries the items of the second.
 **Guarded in Praisindo by** a unit test.
 
 ### UN-01
@@ -171,6 +177,12 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** The name or label of a PRODUCT (a catalogue item, or the thing the product sells or manages) shows its quick view when the cursor is on it, as the name of a user (UN-01) and of a customer (UN-02) do, with only the most important facts. The card is the `ProfileCard` with `logo` (the image of the product or of its issuer instead of the initials, the texts say product): the name, the category under it, three or four rows (the code, the issuer or owner, one more fact such as risk or stock) and one link to the detail; the trigger is `ProductName` (HTML: `productName()`), a name from the product's own catalogue (`profile.config`): hover after a short delay, keyboard focus and tap, no text decoration, the font of the text around it. Not covered: a product name inside another interactive control (a link, a menu item, an option), chart labels, exported files, the title of the product's own detail page, and a category label that is not a catalogue item. A name that is not in the catalogue stays plain text.
 **Meet.** Never print a product name from a record as plain text: use `ProductName` (`profileProduct`, `productRows` in `profile.config`); give the card only the facts that matter.
 **Check.** Hover a product name in a table and in a sentence: the card opens with the logo, name, category, code, issuer and one fact, and View product opens the detail.
+**Guarded in Praisindo by** a unit test.
+
+### DT-16
+**Rule.** The icon in the round avatar of an entity panel (the 80px circle of a detail page: the icon of a rule or of an opportunity) is 32px, not the 16px of the base icon: it fills the circle as the initials of a customer do.
+**Meet.** Use the entity panel of the DS (`.c3av`); do not set the icon size yourself.
+**Check.** Look at the avatar circle of a detail page: the icon fills it.
 **Guarded in Praisindo by** a unit test.
 
 ### DT-17

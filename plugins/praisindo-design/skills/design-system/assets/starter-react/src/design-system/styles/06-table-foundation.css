@@ -24,3 +24,6 @@
 /* A long name in a table cell (rule TB-20): the cell content is at most 320px wide; the middle of a longer name is cut with an ellipsis and its last word stays */
 .tcl{display:flex;align-items:center;gap:8px;max-width:320px;min-width:0}.tcl>span:last-child{min-width:0}.tcl .btn{max-width:100%;min-width:0}
 .mid{display:flex;min-width:0}.mid-s{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mid-e{flex:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:pre}
+/* rule AC-02 (owner decision 2026-11-20): a row that waits for an action of the person has a very soft brand tint, and a line of text says which action; the colour alone never carries it */
+.dtbl tbody tr.tr-act>td{background:color-mix(in srgb,var(--color-surface-brand-subtle-1) 45%,var(--color-surface-neutral-primary))}   /* opaque: a frozen cell must hide what scrolls under it */
+.srna{margin-top:4px;color:var(--color-foreground-brand-strong);font-size:var(--fs-sm)}

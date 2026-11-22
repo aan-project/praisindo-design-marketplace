@@ -5,6 +5,8 @@ export const PROFILE_USERS = [
   { name: 'Sam Rivera', position: 'Procurement lead', unit: 'Procurement', email: 'sam.rivera@example.com', phone: '+62 812 0000 0002', status: 'active' },
   { name: 'Maya Putri', position: 'Finance officer', unit: 'Finance', email: 'maya.putri@example.com', phone: '+62 812 0000 0003', status: 'away' },
 ];
+/** Rule PC-06: an optional second column of the card of a user: `{ title, items: [{ icon, title, sub, rows: [[label, value]] }] }` (for example the licences of a person); null for a card of one column. */
+export const profileSide = (u, t) => (u.side ? { title: t(u.side.title), items: u.side.items.map((it) => ({ ...it, rows: it.rows.map(([k, v]) => [t(k), v]) })) } : null);
 export const profileUser = (name) => PROFILE_USERS.find((u) => u.name === name);
 /** The quick view of a PRODUCT (rule UN-03): hovering the name or label of a product shows its card with only the most important facts: the logo (of the product or its issuer), the name, the category, the code, the issuer or owner, one more fact when it has one
  *  and a link to its detail. Replace PROFILE_PRODUCTS with the product's own catalogue. */

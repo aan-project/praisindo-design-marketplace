@@ -2,11 +2,14 @@
 
 One line per change, newest first, format `- **MAJOR.MINOR.PATCH** (date) text` (rule VN-01). The "What's new" panel of the Design page reads this file. The design system itself is owned by the Praisindo design-system owner: this log records which version the project follows and which updates were applied here.
 
-The history below is the design system's own, one condensed line per version (1.53.0 to 2.141.0). Add the project's updates above it, newest first.
+The history below is the design system's own, one condensed line per version (1.53.0 to 2.158.0). Add the project's updates above it, newest first.
 
 - **2.86+++** (2026-11-13) Starter HTML and React: the token `--color-surface-static-white` (PD-07) is written by `buildTokens`; sidebar labels are cut in the middle (SB-34, `midText`); HTML starter: the bell of the action row shows its count (`UTIL[].count`) and the user button shows the role.
 - **2.86++** (2026-11-13) Starter HTML and React: Branding has the default font weight (FW-01, RichSelect), Default mode as a Select (CP-06), the hint of the colour as an info tooltip, the note of the logo drawer as an info Alert (CD-08) and the Disclaimers as `p.mut` (DC-01); `normalizeBrand` keeps `fontWeight`. My Preferences is the User Control Panel (PP-04: info note, Font size, Table size, link Panel items, Reset to defaults and Apply) with the second drawer of panel items (PP-01); the shell has the sidebar search (SQ-01..SQ-04), the action row of three items with the "more" menu (PP-02) and the toolbar (PP-03).
 - **2.86+** (2026-11-13) Starter HTML: the behaviour of the date field with its calendar (`js/datefield.js`), the tooltip (`js/tooltip.js`) and the helpers `dialog`, `popover`, `menu`, `closeOverlays` (`js/ui.js`) were added, taken from a real migration; texts in `js/ui-texts.js`.
+- **2.158.0** (2026-11-23) The profile card of a person with a list of entries (certifications, licences) has two columns, 640px: the facts on the left, the entries on the right with a Status badge and a Valid until date (PC-06, `ProfileCardData.side`); DT-16 (the icon in the round avatar of an entity panel is 32px).
+- **2.157.0** (2026-11-23) A hero that carries a chart (`.hero-chart`, `.ph.hero-one`): one full-width card, left aligned on a phone; the table kit gets the soft tint of a row that waits for an action (`.tr-act`, `.srna`); the card gap of `.cb` is 16px.
+- **2.142.0 to 2.156.0** (2026-11-19 to 2026-11-22) Changes of the Kora product only (areas, the tab Needs my action, the customer summary sheet, certifications, AUM and revenue, the response history, Marketing and the Outbox removed); no change of the skill.
 - **2.141.0** (2026-11-19) A drawer of size md or smaller never has three fields in one row (DR-13).
 - **2.140.0** (2026-11-19) The items that repeat in a form are a table with Add and Edit in a drawer (DK-31, replaces DK-30).
 - **2.139.0** (2026-11-19) A table scrolled sideways keeps its position on a sort or a page change (TB-32, `optional/adapters/keepScrollX.ts`); the items that repeat in a form are one card each (DK-30); one source for every fact (DA-01).

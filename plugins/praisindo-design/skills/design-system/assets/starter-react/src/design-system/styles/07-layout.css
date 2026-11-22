@@ -29,7 +29,7 @@
 .card .card,.card .pv{border-radius:var(--r-card)}
 .ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px;border-bottom:1px solid var(--color-border-neutral-default)}
 .ch h2{font-weight:calc(600 + var(--fw-shift,0))}   /* the title of a card is 600; every other bold text is 500 (owner decision 2026-11-09, rule TH-13) */
-.cb{--card-gap:12px;padding:16px;display:flex;flex-direction:column;gap:var(--card-gap)}   /* --cbg: the gap, also read by the empty-state button rule (ES-01) */
+.cb{--card-gap:16px;padding:16px;display:flex;flex-direction:column;gap:var(--card-gap)}   /* --cbg: the gap, also read by the empty-state button rule (ES-01) */
 .pv{border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card)}
 .pv:has(>.li){padding:0 12px}   /* CD-15 (1.76) took the side padding off `.li`: a bordered preview box that holds list rows gives the inset (the Reschedule, Dismiss and Assign drawers drew their rows against the border) */
 .pv:has(>.li){container-type:inline-size}

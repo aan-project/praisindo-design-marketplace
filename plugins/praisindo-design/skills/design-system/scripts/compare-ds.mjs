@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.141.0).
+// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.158.0).
 // The audit checks a few mechanical rules; this checks that what is RENDERED is the same: CSS files, tokens and the DOM skeleton of the shell, Branding, the Preferences drawer and the Design page.
 //
 //   node scripts/compare-ds.mjs --ds <DS source root> --starter <starter root> [--ds-url http://localhost:5173] [--starter-url http://localhost:8123] [--user fikri.ramadhan] [--min 95]
@@ -50,7 +50,7 @@ const AREAS = [
   { name: 'Sidebar', hash: '#/home', sel: '.sb', min: 65 },   // the DS demo has a bell, a role line and a product menu the starter does not have
   { name: 'Branding page', hash: '#/branding', sel: 'main', after: 600 },
   { name: 'Preferences drawer', hash: '#/home', sel: '.drawer', open: async (p) => { await p.locator('button.user:visible').first().click(); await p.locator('[data-testid="prefs-open"], [data-prefs]').first().click(); await p.waitForSelector('.drawer'); } },
-  { name: 'Design page', hash: '#/design', sel: 'main', after: 600, min: 90 },   // the product examples (customer popover, logo, request wizard) are not in the starter
+  { name: 'Design page', hash: '#/design/all', sel: 'main', after: 600, min: 90 },   // the product examples (customer popover, logo, request wizard) are not in the starter
 ];
 
 const browser = await chromium.launch(); const results = [];
