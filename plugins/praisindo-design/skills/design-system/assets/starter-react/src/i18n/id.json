@@ -598,5 +598,9 @@
  "pc.pview": "Lihat produk",
  "cp.aria": "Salin {n}",
  "cp.done": "{n} disalin",
- "cp.fail": "Tidak dapat menyalin. Pilih teksnya dan salin manual."
+ "cp.fail": "Tidak dapat menyalin. Pilih teksnya dan salin manual.",
+ "cp.pw": "kata sandi",
+ "cp.email": "alamat email",
+ "cp.phone": "nomor telepon",
+ "cp.wa": "nomor WhatsApp"
 }

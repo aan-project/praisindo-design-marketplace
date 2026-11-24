@@ -11,6 +11,7 @@ import { Icon } from '../../design-system/components/Icon';
 import { Badge } from '../../design-system/components/Badge';
 import { Button, LinkButton } from '../../design-system/components/Button';
 import { Chip } from '../../design-system/components/Chip';
+import { CopyButton } from '../../design-system/components/CopyButton';
 import { badgeFor, BADGE_MAP, type BadgeDomain } from '../../domain/badgeIcons';
 import { DsApi, DsDemo, DsDo, DsH, DsSec, DsTo, sty, useB } from './ds';
 
@@ -183,8 +184,10 @@ export function WidgetsSection() {
     <DsSec id="widgets" title={B('Widget', 'Widget')} lead={B('Widgets are small self-contained cards that show data as a chart or a share: a line, an area, bars, a donut, a gauge, a list of progress. The cards that show one number are components of their own, on the pages Stat cards and KPI cards. Charts are inline SVG coloured only through intents, so they follow light and dark tokens. Every line or area chart is drawn like the Opportunity trend, with smooth lines: a soft fill, no markers and a tooltip that lists every series when the pointer is over a point (rule CT-01); the legend of every chart is under the chart (rule CT-02).', 'Widget adalah card kecil mandiri yang menampilkan data sebagai grafik atau porsi: garis, area, batang, donut, gauge, daftar progres. Card yang menampilkan satu angka adalah komponen tersendiri, di halaman Kartu stat dan Kartu KPI. Grafik berupa SVG inline yang diwarnai hanya lewat intent, sehingga mengikuti token terang dan gelap. Setiap grafik garis atau area digambar seperti Opportunity trend dengan garis halus (tidak kaku): isi lembut, tanpa penanda, dan tooltip yang menampilkan semua seri saat pointer di atas satu titik (aturan CT-01); legenda setiap grafik berada di bawah grafik (aturan CT-02).')}>
       <DsTo p="kpi" />
       <>
-        <WVar n={B('KPI with a note', 'KPI dengan catatan') + ' · KPI'}><KPI variant="card" label={B('Active opportunities', 'Peluang aktif')} n={16} note={B('6 high priority', '6 prioritas tinggi')} /></WVar>
-        <WVar n={B('KPI with a delta', 'KPI dengan delta') + ' · KPI delta'}><KPI variant="card" label={B('Conversions', 'Konversi')} n={12} delta={25} note={vs} /></WVar>
+        <WVar n={B('KPI with a change · icon card', 'KPI dengan perubahan · kartu ikon') + ' · KPI delta'}><KPI variant="card" label={B('Total revenue', 'Total pendapatan')} n="Rp 128,4 M" delta={16.8} note={vs} intent="brand" icon="payments" /></WVar>
+        <WVar n={B('KPI with a change · icon card', 'KPI dengan perubahan · kartu ikon') + ' · KPI delta'}><KPI variant="card" label={B('Total orders', 'Total order')} n="1.245" delta={12.5} note={vs} intent="success" icon="shopping_bag" /></WVar>
+        <WVar n={B('KPI with a change · icon card', 'KPI dengan perubahan · kartu ikon') + ' · KPI delta'}><KPI variant="card" label={B('Customers', 'Nasabah')} n="3.892" delta={-8.7} note={vs} intent="purple" icon="groups" /></WVar>
+        <WVar n={B('KPI with a change · icon card', 'KPI dengan perubahan · kartu ikon') + ' · KPI delta'}><KPI variant="card" label={B('Average order value', 'Rata-rata nilai order')} n="Rp 103,3 jt" delta={6.3} note={vs} intent="warning" icon="person" /></WVar>
         <WVar n={B('KPI with a sparkline', 'KPI dengan sparkline') + ' · KPI spark'}><KPI variant="card" label={B('Customers contacted', 'Customer dihubungi')} n={48} delta={-6} note={vs} spark={[12, 15, 11, 18, 16, 21, 19]} intent="info" /></WVar>
         <WVar n={B('Compact sparkline', 'Ringkas + sparkline') + ' · KpiCompact'}><KpiCompact title={B('Daily engagement', 'Engagement harian')} value="1.389" label={B('Interactions', 'Interaksi')} spark={[8, 12, 9, 14, 11, 16, 15, 18]} intent="info" /></WVar>
         <WVar n={B('Trend with footer band', 'Tren dengan pita bawah') + ' · KpiTrend'}><KpiTrend title={B('Total engagements', 'Total engagement')} value="1.870" spark={[18, 22, 17, 25, 21, 19, 24, 20, 18]} delta={-6} note={vs} /></WVar>
@@ -218,7 +221,7 @@ export function WidgetsSection() {
         <span className="rw" style={sty('gap:16px;align-items:center')}><Delta v={25} /><Delta v={-6} /><Delta v={0} /><span style={sty('width:120px')}><Spark vals={[4, 7, 5, 9, 8, 12]} label="demo" /></span><Ring pct={64} intent="success" /><span style={sty('width:160px')}><Meter v={64} /></span></span>
       </DsDemo>
       <DsApi rows={[
-        ['KPI({label, n, note, delta, good, spark, intent, size, slot, variant})', 'string · number · string · % · 1|-1 · number[]', 'size=md', B('Page-top number. Label (text-secondary) · value · note (text-tertiary); optional delta chip beside the value and a sparkline below.', 'Angka di atas halaman. Label (text-secondary) · nilai · catatan (text-tertiary); opsional chip delta di samping nilai dan sparkline di bawah.')],
+        ['KPI({label, n, note, delta, good, spark, intent, icon, size, slot, variant})', 'string · number · string · % · 1|-1 · number[]', 'size=md', B('Page-top number. Label (text-secondary) · value · note (text-tertiary); optional delta chip beside the value and a sparkline below.', 'Angka di atas halaman. Label (text-secondary) · nilai · catatan (text-tertiary); opsional chip delta di samping nilai dan sparkline di bawah.')],
         ['StatCards([{intent, n, label, pct, k, on}], size, slot, variant)', 'intent · number · string · 0–100', 'size=md', B('Stat cards above lists; with k the card is a filter toggle (aria-pressed). Every stat card above a table is a filter of that table (rule TB-31).', 'Kartu statistik di atas daftar; dengan k card menjadi toggle filter (aria-pressed). Setiap kartu statistik di atas tabel adalah filter tabel itu (aturan TB-31).')],
         ['StatIcon({icon, intent, value, label, delta, good})', '—', 'intent brand', B('Icon tile · value · label · delta chip.', 'Ikon · nilai · label · chip delta.')],
         ['StatRing({pct, label, intent, note})', '0–100', '—', B('Small ring with the percentage as the value.', 'Ring kecil dengan persentase sebagai nilai.')],
@@ -246,6 +249,7 @@ export function WidgetsSection() {
       ].map((x) => <li key={x}>{x}</li>)}</ul>
       <DsTo p="kpi" />
       <ul className="dsrules">{[
+        B('Every KPI card is the icon card: icon tile, label, number, and under them the change (coloured text, no badge) with the period it is compared with, or the note, and the sparkline (WG-16).', 'Setiap kartu KPI adalah kartu ikon: ikon, label, angka, dan di bawahnya perubahan (teks berwarna, tanpa badge) beserta periode pembandingnya atau catatan, lalu sparkline (WG-16).'),
         B('A KPI card answers one question; its label says what is counted.', 'Kartu KPI menjawab satu pertanyaan; labelnya menyebut apa yang dihitung.'),
         B('A change is always icon + sign + number; green when it goes up, red when it goes down (WG-01, WG-08).', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun (WG-01, WG-08).'),
         B('The chart of a number that goes up is brand and that of a number that goes down is red; KpiTrend follows its band, green and red (WG-09).', 'Chart angka yang naik berwarna brand dan angka yang turun merah; KpiTrend mengikuti band-nya, hijau dan merah (WG-09).'),
@@ -278,4 +282,28 @@ export function WidgetsSection() {
       ]} />
     </DsSec>
   );
+}
+
+/** The copy button (rule CB-01): a live example with the real component. */
+export function CopySection() {
+  const B = useB(), { t } = usePrefs();
+  const rules = [
+    B('Put a CopyButton right after every value the user has to carry to another place: a password, a one-time code (OTP), a phone or WhatsApp number, an email, an account or virtual-account number, an amount to pay, a reference or an ID. The value stays readable text.', 'Pasang CopyButton tepat setelah setiap nilai yang harus dibawa pengguna ke tempat lain: kata sandi, kode sekali pakai (OTP), nomor telepon atau WhatsApp, email, nomor rekening atau virtual account, nominal yang harus dibayar, referensi atau ID. Nilainya tetap berupa teks yang terbaca.'),
+    B('One click copies the value (not the label), the icon turns into a check for two seconds and a toast says it was copied; if the browser refuses, the toast says so. The accessible label names the value ("Copy password").', 'Satu klik menyalin nilainya (bukan labelnya), ikon menjadi centang selama dua detik dan toast menyatakan sudah disalin; bila browser menolak, toast mengatakannya. Label aksesibilitasnya menyebut nilainya ("Salin kata sandi").'),
+    B('Copy the value as the user will use it: a phone number as it is dialled, an amount as digits for the field of the payment app, a password as it is. Never a copy button on a value that is secret and not meant to be moved (a stored credential of someone else).', 'Salin nilai sebagaimana akan dipakai pengguna: nomor telepon seperti yang ditekan, nominal sebagai angka untuk kolom aplikasi pembayaran, kata sandi apa adanya. Jangan beri tombol salin pada nilai rahasia yang tidak untuk dipindahkan (kredensial milik orang lain).'),
+  ];
+  const Line = ({ k, v }: { k: string; v: string }) => <span className="rw" style={{ gap: '4px', alignItems: 'center' }}><span className="mut">{k}</span><span className="fw6">{v}</span><CopyButton value={v} label={k} /></span>;
+  return (
+    <DsSec id="copy" title={B('Copy button', 'Tombol salin')} lead={B('The icon button that copies a value to the clipboard: a password, a code, a number, an email, an amount.', 'Tombol ikon yang menyalin sebuah nilai ke clipboard: kata sandi, kode, nomor, email, nominal.')}>
+      <DsDemo label={B('After a value', 'Setelah sebuah nilai') + ' · CopyButton'}>
+        <Line k={t('cp.pw')} v="4EVET8YV" /><Line k={t('cp.email')} v="sam.rivera@example.com" /><Line k={t('cp.phone')} v="+62 812-3456-7890" /><Line k="OTP" v="482913" />
+      </DsDemo>
+      <DsDemo label={B('Payment details', 'Rincian pembayaran') + ' · CopyButton'}>
+        <Line k={B('Virtual account', 'Virtual account')} v="8808 1234 5678 9012" /><Line k={B('Amount', 'Nominal')} v="1500000" />
+      </DsDemo>
+      <ul className="dsrules">{rules.map((x) => <li key={x}>{x}</li>)}</ul>
+      <DsApi rows={[
+        ['CopyButton({value, label, size, onCopied})', 'string · string · sm | md · handler', 'size sm', B('An icon-only link Button (type link, intent neutral: soft text colour) with the icon content_copy; a click copies `value`, the icon is a check for 2 s, a toast confirms (cp.done) or reports a refusal (cp.fail). `label` names the value for the aria-label and the tooltip (cp.aria). `onCopied` lets a page record the copy.', 'Button link ikon saja (type link, intent neutral: warna teks lembut) berikon content_copy; klik menyalin `value`, ikon menjadi centang 2 dtk, toast mengonfirmasi (cp.done) atau melaporkan penolakan (cp.fail). `label` menamai nilai untuk aria-label dan tooltip (cp.aria). `onCopied` agar halaman dapat mencatat penyalinan.')],
+      ]} />
+    </DsSec>);
 }

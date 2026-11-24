@@ -598,5 +598,9 @@
  "pc.pview": "View product",
  "cp.aria": "Copy {n}",
  "cp.done": "{n} copied",
- "cp.fail": "Could not copy. Select the text and copy it by hand."
+ "cp.fail": "Could not copy. Select the text and copy it by hand.",
+ "cp.pw": "password",
+ "cp.email": "email address",
+ "cp.phone": "phone number",
+ "cp.wa": "WhatsApp number"
 }

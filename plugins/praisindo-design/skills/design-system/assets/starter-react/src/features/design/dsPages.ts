@@ -30,6 +30,7 @@ const RAW: readonly DsPageDef[] = [
 
   P('badge', 'comp', 'Badge', 'Badge', ['badges'], ['status', 'label', 'dot'], 'labels'),
   P('chip', 'comp', 'Chip', 'Chip', ['chips', 'badges'], ['tag', 'pill', 'filter cepat', 'count', 'hitungan'], 'labels'),
+  P('copy-button', 'comp', 'Copy button', 'Tombol salin', ['copy'], ['copy', 'salin', 'clipboard', 'password', 'kata sandi', 'otp', 'nomor rekening', 'virtual account', 'va', 'nominal', 'email', 'telepon', 'whatsapp'], 'actions'),
   P('tooltip', 'comp', 'Tooltip', 'Tooltip', ['tooltip'], ['hint', 'bantuan', 'petunjuk', 'tipicon'], 'labels'),
 
   P('text-field', 'comp', 'Text field', 'Field teks', ['forms'], ['input', 'form field', 'textarea', 'password', 'kata sandi', 'nominal', 'money', 'ktp', 'npwp'], 'inputs'),
@@ -103,7 +104,7 @@ export const dsPage = (id: string): DsPageDef | undefined => BY_ID.get(id);
 /** The first page of a section that is not split (or the page where a split section starts); used for the old links `#/design/<section id>`. */
 const SEC_LANDING: Record<string, string> = {
   start: 'start', changes: 'changes', principles: 'principles', project: 'project', colors: 'colors', type: 'type', space: 'space', grid4: 'grid4', icons: 'icons', motion: 'motion',
-  buttons: 'button', badges: 'badge', chips: 'chip', alerts: 'alert', forms: 'text-field', selection: 'checkbox-radio', tabs: 'tabs', cards: 'card',
+  buttons: 'button', badges: 'badge', chips: 'chip', copy: 'copy-button', alerts: 'alert', forms: 'text-field', selection: 'checkbox-radio', tabs: 'tabs', cards: 'card',
   tables: 'table', alog: 'activity-log', widgets: 'widgets', kanban: 'kanban', tooltip: 'tooltip', feedback: 'states', overlays: 'drawer', pagehead: 'page-header',
   layouts: 'page-layouts', nav: 'wizard', mobile: 'mobile', content: 'content',
 };

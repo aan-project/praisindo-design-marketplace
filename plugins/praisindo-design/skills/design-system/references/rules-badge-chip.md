@@ -1,4 +1,4 @@
-# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.172.0, skill v2.172.0)
+# Badge (status, category) and Chip (count, tag, name) (Praisindo DS v2.172.1, skill v2.172.1)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 

@@ -1,4 +1,4 @@
-# Tokens and components (DS v2.172.0)
+# Tokens and components (DS v2.172.1)
 
 Generated from the Praisindo design system document v2.30 (2026-11-03); the section "Changes up to DS 2.62" at the end lists what came after. The tables below leave out the components that came from the Praisindo domain. DomainBadges and RecommendationPickDrawer are not in the starters (build such pieces from `Badge` and the generic components). KanbanBoard / KanbanCard, ProfileCard / ProfileCardBody (the card of a person or a customer name, rules PC-02..PC-04, UN-01, UN-02), NotificationBell / NotificationPanel and the overlay helpers (`toOverlay`, `useActionMenu`) ARE in the starters and the rules require them: read their props in `assets/starter-react/src/design-system/components/`.
 
