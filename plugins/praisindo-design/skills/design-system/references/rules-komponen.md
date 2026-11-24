@@ -292,6 +292,18 @@ General rules added after the owner revisions of 2026-11-11 and 2026-11-12: note
 **Check.** Scroll a wide table to the right and click a column title: the table is sorted and the columns you were looking at are still in view.
 **Guarded in Praisindo by** a browser test.
 
+### TB-34
+**Rule.** EVERY tab bar (`Tabs`, the tab bar of a drawer: a page, a card, a panel, a drawer) that does not fit its width scrolls sideways, and not only with a scroll bar that many systems hide: the mouse wheel moves it sideways while the pointer is over it and a drag with the mouse moves it (a drag is not a click on the tab under the pointer; a plain click still selects). The active tab scrolls into view; a bar that fits is left alone; the bar never wraps and never cuts a tab without a way to reach it (TB-30). It is done once in the `Tabs` component, so every tab bar has it.
+**Meet.** Use `Tabs` of the system (React) or the markup `.tabs` with `js/ui.js` (HTML: the wheel and drag are delegated once for every `.tabs`); the CSS `.tabs.drag{cursor:grabbing;user-select:none}` is in `08-drawer.css`. Do not write a tab bar of your own.
+**Check.** Open a page whose tabs do not fit (a narrow window): the wheel moves the tab bar sideways, a drag with the mouse moves it, a click on a tab still selects it.
+**Guarded in Praisindo by** a unit test.
+
+### CB-01
+**Rule.** The COPY BUTTON (`CopyButton`; it is for any application): every value the user has to carry to another place has an icon button right after it that copies it: a password, a one-time code (OTP), a phone or WhatsApp number, an email, an account or virtual-account number, an amount to pay, a reference or an ID; the value stays readable text. The button is an icon-only link Button (type link, intent neutral, small; `md` for a field-size line) with the icon `content_copy` and the accessible label and tooltip "Copy {name of the value}"; one click copies the value as the user will use it (not the label); the icon is a check for two seconds and a toast says that the value was copied; when the browser refuses the toast says so (danger). It never sits on a secret that is not meant to be moved.
+**Meet.** React: `<CopyButton value label />` after the value (`lib/copyText.ts` is the clipboard helper, with the texts `cp.aria`, `cp.done`, `cp.fail`). HTML: `copyButton({ value, label })` of `js/copybutton.js`, the click is handled once for the page.
+**Check.** Open a screen that shows a password, a code, a number or an email: each has the small copy icon after it; click it: the value is on the clipboard, the icon is a check and a toast says so.
+**Guarded in Praisindo by** a unit test.
+
 ### BT-10
 **Rule.** The buttons of a choice group (`.seg`) are as wide as their label: no button grows to fill the row (no `flex` on `.seg .btn`); the group wraps to the next line when it does not fit.
 **Meet.** Use the `.seg` group of the system; do not give its buttons `flex:1` or `width:100%`.

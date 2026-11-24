@@ -109,3 +109,13 @@ export function menu(trigger, items, opts) {
 
 /** HighlightText (rules WG-03, HT-01): a small text and a highlighted value, the look of the content of a widget. `align` 'left' | 'right'; `valueFirst` puts the big text above the small one (the DOM order stays label, value); `size` 'sm' | 'md' | 'lg'. */
 export const highlightText = ({ label, value, align = 'left', valueFirst = false, size = 'md', cls = '' }) => `<div class="hlt hlt-${size}${align === 'right' ? ' hlt-r' : ''}${valueFirst ? ' hlt-vf' : ''}${cls ? ' ' + cls : ''}"><span class="hlt-l">${esc(label)}</span><span class="hlt-v">${esc(value)}</span></div>`;
+
+/** Tab bars that do not fit scroll sideways with the mouse too (rule TB-34): the wheel moves the bar and a drag moves it (a drag is not a click on the tab under the pointer). Delegated once for every `.tabs` of the page. */
+{
+  let bar = null, moved = false, sx = 0, sl = 0;
+  document.addEventListener('wheel', (e) => { const b = e.target.closest?.('.tabs'); if (!b || b.scrollWidth <= b.clientWidth || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return; b.scrollLeft += e.deltaY; e.preventDefault(); }, { passive: false });
+  document.addEventListener('pointerdown', (e) => { const b = e.target.closest?.('.tabs'); if (!b || e.pointerType !== 'mouse' || e.button !== 0 || b.scrollWidth <= b.clientWidth) return; bar = b; moved = false; sx = e.clientX; sl = b.scrollLeft; });
+  window.addEventListener('pointermove', (e) => { if (!bar) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) { moved = true; bar.classList.add('drag'); } if (moved) bar.scrollLeft = sl - dx; });
+  window.addEventListener('pointerup', () => { bar?.classList.remove('drag'); bar = null; });
+  document.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+}

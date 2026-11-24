@@ -2,7 +2,7 @@
 .scrim{position:fixed;inset:0;z-index:50;background:var(--color-scrim)}
 .drawer{position:fixed;top:0;right:0;bottom:0;z-index:51;max-width:100vw;display:flex;flex-direction:column;background:var(--color-background-neutral-default);border-left:1px solid var(--color-border-neutral-default);border-radius:0}
 #qadrawer.still{animation:none}
-.tabs{overflow-x:auto;scrollbar-width:thin}.tab{flex:none}.combo{min-width:0}.combo .inp{min-width:0}
+.tabs{overflow-x:auto;scrollbar-width:thin}.tabs.drag{cursor:grabbing;user-select:none}.tab{flex:none}.combo{min-width:0}.combo .inp{min-width:0}
 @media(max-width:640px){.ph{flex-wrap:wrap}.ph>div{min-width:0}}
 .bp{font-weight:calc(400 + var(--fw-shift,0));border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);overflow:hidden;background:var(--color-background-neutral-page);color:var(--color-text-primary);font-family:var(--ff)}
 .bp-app{display:grid;grid-template-columns:152px minmax(0,1fr)}

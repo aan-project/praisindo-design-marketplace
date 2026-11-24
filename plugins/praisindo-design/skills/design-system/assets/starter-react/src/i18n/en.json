@@ -595,5 +595,8 @@
  "pc.popen": "Show product {n}",
  "pc.pcode": "Product code",
  "pc.issuer": "Issuer",
- "pc.pview": "View product"
+ "pc.pview": "View product",
+ "cp.aria": "Copy {n}",
+ "cp.done": "{n} copied",
+ "cp.fail": "Could not copy. Select the text and copy it by hand."
 }

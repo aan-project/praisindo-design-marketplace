@@ -10,6 +10,7 @@ import { initColorFields } from './colorfield.js';
 import { initUploads } from './upload.js';
 import { initSideSearch } from './sidesearch.js';
 import { initTooltips } from './tooltip.js';
+import './copybutton.js';   // CopyButton (CB-01): one click handler for every [data-copy] button
 import { cachedBrand, normalizeBrand } from './brand/brandStore.js';
 import { ROUTE_META, UTIL, UTIL_RUN } from './nav.config.js';
 import { renderBranding } from './pages/branding.js';

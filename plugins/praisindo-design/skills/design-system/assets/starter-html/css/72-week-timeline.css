@@ -1,0 +1,15 @@
+.wtl{border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary);overflow:hidden}   /* SM-06: the week of one RM as seven day columns */
+.wtl-sc{overflow-x:auto}
+.wtl-hd,.wtl-bd{display:grid;grid-template-columns:56px repeat(var(--wn,7),minmax(112px,1fr));min-width:calc(56px + var(--wn,7) * 112px)}
+.wtl-hd{border-bottom:1px solid var(--color-border-neutral-default)}
+.wtl-dh{padding:8px;font-size:var(--fs-sm);line-height:var(--lh-sm);font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-secondary);border-left:1px solid var(--color-border-neutral-subtle)}
+.wtl-dh.on{color:var(--color-foreground-brand-strong)}
+.wtl-bd>.wtl-ax{position:relative}
+.wtl-ax>span{position:absolute;right:8px;transform:translateY(-8px);font-size:var(--fs-xs);line-height:var(--lh-xs);color:var(--color-text-tertiary)}
+.wtl-bd>.wtl-ax>span:first-child{transform:none}
+.wtl-c{position:relative;border-left:1px solid var(--color-border-neutral-subtle)}
+.wtl-c.on{background:var(--color-surface-brand-subtle-1)}
+.wtl-l{position:absolute;left:0;right:0;border-top:1px solid var(--color-border-neutral-subtle)}
+.wtl-b{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;gap:0;min-width:0;padding:0 8px;overflow:hidden;font-size:var(--fs-xs);line-height:var(--lh-xs);text-decoration:none;color:var(--color-text-primary);background:var(--color-surface-neutral-secondary);border:1px solid var(--color-border-neutral-default);border-left-width:4px;border-radius:4px}
+.wtl-b>span{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a.wtl-b:focus-visible{outline:2px solid var(--color-border-brand-default);outline-offset:-2px}

@@ -771,3 +771,16 @@ The working file of the skill sync (`node scripts/rules-coverage.mjs --triage tr
 | RS-09 | (2.158.0 sync) | (2.158.0 sync) rule of the Kora product or a regression row | D | tidak |
 | RS-10 | (2.158.0 sync) | (2.158.0 sync) rule of the Kora product or a regression row | D | tidak |
 | RS-11 | (2.158.0 sync) | (2.158.0 sync) rule of the Kora product or a regression row | D | tidak |
+| CD-30 | (2.172.0 sync) | (2.172.0 sync) general rule | U | ya |
+| HM-06 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| DT-19 | (2.172.0 sync) | (2.172.0 sync) general rule | U | ya |
+| CB-01 | (2.172.0 sync) | (2.172.0 sync) general rule | U | ya |
+| TB-34 | (2.172.0 sync) | (2.172.0 sync) general rule | U | ya |
+| PD-16 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| WG-16 | (2.172.0 sync) | (2.172.0 sync) general rule | U | ya |
+| SM-01 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| SM-02 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| SM-03 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| SM-04 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| SM-05 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| SM-06 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |

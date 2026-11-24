@@ -3,13 +3,16 @@
 import type { ReactNode } from 'react';
 import { Icon } from './Icon';
 import { DetailList } from './DetailList';
+import { DetailPageContext } from '../detailContext';
 
 /** Two-column frame: `panel` (a DetailPanel) on the left, `children` (alerts, DetailSummary, tabs, body) in the right column. With `side="right"` the wide column comes first and `panel` (one DetailPanel, or an `.odside` stack of cards) is the narrow column on the right (rule DT-06); one column under 1100px in both. */
 export function DetailLayout({ panel, children, side = 'left', wide, third }: { panel: ReactNode; children?: ReactNode; side?: 'left' | 'right'; /** the narrow column is 360px instead of 288px (the product detail, rule PD-05); with `side="right"` only */ wide?: boolean; /** three panels as Customer 360 (rule DK-18): `panel` on the left, `children` in the centre and `third` (a card or a stack of cards) on the right; it moves below the centre under 1360px; `side` and `wide` do not apply */ third?: ReactNode }) {
-  if (third) return <div className="c3">{panel}<section className="c3m">{children}</section><div className="c3r">{third}</div></div>;
-  return side === 'right'
-    ? <div className={`c3 od od-r${wide ? ' od-w' : ''}`}><section className="c3m">{children}</section>{panel}</div>
-    : <div className="c3 od">{panel}<section className="c3m">{children}</section></div>;
+  const frame = third
+    ? <div className="c3">{panel}<section className="c3m">{children}</section><div className="c3r">{third}</div></div>
+    : side === 'right'
+      ? <div className={`c3 od od-r${wide ? ' od-w' : ''}`}><section className="c3m">{children}</section>{panel}</div>
+      : <div className="c3 od">{panel}<section className="c3m">{children}</section></div>;
+  return <DetailPageContext.Provider value>{frame}</DetailPageContext.Provider>;   // rule DT-19: the tabs inside are segmented
 }
 
 /** Entity panel: identity block, optional quick actions, optional small tabs, the field list and a footnote. */

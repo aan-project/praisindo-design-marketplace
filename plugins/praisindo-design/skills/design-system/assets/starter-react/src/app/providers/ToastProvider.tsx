@@ -25,6 +25,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   );
 }
 
+/** The toast of the page when there is one; null where the page is drawn without the provider (the static markup of the Design page in the golden tests). */
+export function useToastOptional(): ToastApi | null { return useContext(Ctx); }
+
 export function useToast(): ToastApi {
   const v = useContext(Ctx);
   if (!v) throw new Error('useToast must be used inside <ToastProvider>');

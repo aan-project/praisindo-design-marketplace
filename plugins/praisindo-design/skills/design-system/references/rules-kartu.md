@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.158.0, skill v2.158.0)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.172.0, skill v2.172.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -192,9 +192,15 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Guarded in Praisindo by** a unit test.
 
 ### DT-18
-**Rule.** A detail page that shows a PRODUCT (an investment product or any other) in detail uses the layout of the Product detail: a full page with a breadcrumb back to its list, `DetailLayout side="right" wide` (the wide column on the left: the head `DetailSummary` with the logo, the charts and the tables; the right column of 360px: availability, documents and key information), never a drawer and never a layout of its own.
-**Meet.** Build the detail of a product with `DetailLayout side="right" wide panel={<div className="odside">...</div>}`.
-**Check.** Open the detail of a product: wide column with the charts and tables on the left, the narrow column with availability, documents and key information on the right.
+**Rule.** A detail page that shows a PRODUCT (an investment product or any other) in detail uses the layout of the Product detail: a full page with a breadcrumb back to its list and THREE columns like the detail of a person (DT-17): `DetailLayout` with `third`; on the left (272px) the card with the key information of the product (its small tabs stay segmented and scroll sideways when they do not fit); in the middle the head (`DetailSummary` with the logo, the code, the name and the chips) and under it the segmented tabs (Overview, Performance, Composition, Holders as the product has them) with the content of the open tab; on the right (288px) availability, documents and disclaimers. Never a drawer and never a layout of its own. Under 1100px the three columns stack.
+**Meet.** Build the detail of a product with `DetailLayout panel={<DetailPanel .../>} third={<>...</>}`; the number cards of the price or NAV go inside the chart card.
+**Check.** Open the detail of a product: key information on the left, head and tabs in the centre, availability and documents on the right; the tabs are segmented.
+**Guarded in Praisindo by** a unit test.
+
+### DT-19
+**Rule.** On a DETAIL PAGE (inside `DetailLayout`: the detail of a person, an opportunity, a rule, a product) every `Tabs` is the SEGMENTED variant by itself, without the page asking for it, so a new detail page cannot get the underline tabs. A page may still pass `variant` on purpose, and a tab bar outside a detail page keeps its own variant (the tab bar of a drawer is always segmented).
+**Meet.** Put the tabs inside the `DetailLayout` (its children); the layout gives them the segmented look through `DetailPageContext` (`design-system/detailContext.ts`). Do not pass `variant="seg"` by hand to make it work.
+**Check.** Open any detail page: the tabs of the main column are segmented (`t-seg`) although the page did not ask; a list page keeps its own tabs.
 **Guarded in Praisindo by** a unit test.
 
 ### CD-29
@@ -346,3 +352,16 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Meet.** Use the classes of the system (`trendCls(n)`); when a text is coloured by hand for a gain or a loss, take the strong variant, never the default.
 **Check.** Open a table with a return column in light and dark: the green and the red of the numbers are the strong ones.
 **Guarded in Praisindo by** a unit test.
+
+### WG-16
+**Rule.** EVERY KPI card is the ICON CARD (the plain KPI card is gone): an icon tile (`IconTile`, the soft tile of its intent; the `icon` prop or the icon of its intent like a stat card), then the label and the number under it, and under them, only when there is something to say, the change as coloured text with its arrow, sign and number and NO badge background (green up, red down, WG-01, WG-08) followed by the note, which names the period it is compared with ("vs last month") or says what the number counts; a sparkline goes last. The icon sits at the RIGHT of the label and the number; when the card is narrower than 180px it becomes small (28px tile, 16px glyph) at the TOP LEFT, above the label (a container query on the card). The gap between the parts is 8px. The note is one line, cut with an ellipsis, and its whole text is its title. It is the look `card` of `KPI` (the class `.kpi.kpi-dl`), not a new component; Compact and Trend are unchanged.
+**Meet.** Use `KPI` with `icon`, `delta` and `note`; copy `42-widgets.css` from the starter. Do not build a KPI card by hand and do not put the change in a badge.
+**Check.** Open a page with KPI cards: the icon tile is at the right of the label, the change is coloured text without a background, and a narrow card (under 180px) shows the small icon above the label.
+**Guarded in Praisindo by** a unit test.
+
+### CD-30
+**Rule.** The label of every KPI card and stat card (`KPI`, `KpiCompact`, `KpiTrend`, `StatCards`, `StatIcon`, `StatRing`, `StatSolid`, `StatSoft`) is ONE line: a label that does not fit is cut at the end with an ellipsis and the whole text is its `title`, so it appears on hover; the card never grows taller because of its label.
+**Meet.** Use the components of the system: they carry the class (`.kpi-tx .l`, `.stat .l`, `.wg-t1`) and the `title`; do not wrap or shrink a label to make it fit, and do not write a card by hand.
+**Check.** Give a KPI a very long label: it is one line with an ellipsis, the card keeps its height, and hovering shows the whole text.
+**Guarded in Praisindo by** a unit test.
+

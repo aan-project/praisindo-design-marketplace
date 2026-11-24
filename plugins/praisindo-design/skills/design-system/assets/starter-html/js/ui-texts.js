@@ -1,5 +1,8 @@
 // Texts of the shared UI helpers and of the shell panel (date field calendar, required marker, Branding font weight, My Preferences panel items, sidebar search). Same keys in both languages; merged into DICT by i18n.js.
 export const UI_EN = {
+  "cp.aria": "Copy {n}",
+  "cp.done": "{n} copied",
+  "cp.fail": "Could not copy. Select the text and copy it by hand.",
   "pc.pcard": "Product {n}",
   "pc.popen": "Show product {n}",
   "pc.pcode": "Product code",
@@ -99,6 +102,9 @@ export const UI_EN = {
   "pc.s.away": "Away",
 };
 export const UI_ID = {
+  "cp.aria": "Salin {n}",
+  "cp.done": "{n} disalin",
+  "cp.fail": "Tidak dapat menyalin. Pilih teksnya dan salin manual.",
   "pc.pcard": "Produk {n}",
   "pc.popen": "Tampilkan produk {n}",
   "pc.pcode": "Kode produk",

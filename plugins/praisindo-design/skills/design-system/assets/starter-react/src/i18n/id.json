@@ -595,5 +595,8 @@
  "pc.popen": "Tampilkan produk {n}",
  "pc.pcode": "Kode produk",
  "pc.issuer": "Penerbit",
- "pc.pview": "Lihat produk"
+ "pc.pview": "Lihat produk",
+ "cp.aria": "Salin {n}",
+ "cp.done": "{n} disalin",
+ "cp.fail": "Tidak dapat menyalin. Pilih teksnya dan salin manual."
 }
