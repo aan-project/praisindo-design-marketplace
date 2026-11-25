@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.172.1).
+// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.183.0).
 // The audit checks a few mechanical rules; this checks that what is RENDERED is the same: CSS files, tokens and the DOM skeleton of the shell, Branding, the Preferences drawer and the Design page.
 //
 //   node scripts/compare-ds.mjs --ds <DS source root> --starter <starter root> [--ds-url http://localhost:5173] [--starter-url http://localhost:8123] [--user fikri.ramadhan] [--min 95]

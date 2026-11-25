@@ -39,9 +39,9 @@
 @media(max-width:1100px){.od,.od.od-r{grid-template-columns:minmax(0,1fr)}.od .c3m{display:contents}.od>.cpanel,.od>.odside{order:2}.od .c3m>*{order:3}.od .c3m>.al{order:0}.od .c3m>.odp{order:1}.od .c3m>.odbar{order:4}}
 @media(max-width:760px){.odh{flex-wrap:wrap}.odcta{width:100%}}
 /* Section: plain variant of a card (no frame) */
-.sect{display:flex;flex-direction:column;gap:16px;min-width:0}
+.sect{display:flex;flex-direction:column;gap:8px;min-width:0}
 .secth{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.secth h2{margin:0;font-size:18px;line-height:28px;font-weight:calc(600 + var(--fw-shift,0))}.secth .sp{flex:1}
-.sect>.sect-d{margin:-8px 0 0;font-size:var(--fs-sm)}
+.sect>.sect-d{margin:0;font-size:var(--fs-sm)}
 .sectb{display:flex;flex-direction:column;gap:12px;min-width:0}.sectb>.al{margin:0}
 /* Recommendation item (compact) */
 .rxi-tg,.rxi-sc{display:flex;flex-wrap:wrap;align-items:center;gap:8px 8px;font-size:var(--fs-xs)}

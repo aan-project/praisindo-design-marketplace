@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.172.1, skill v2.172.1)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.183.0, skill v2.183.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -351,6 +351,18 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** The green and the red of a number or a label that goes up, means a gain, goes down or means a loss (WG-08) are the STRONG variant of the foreground token, not the default one: `--color-foreground-success-strong` and `--color-foreground-danger-strong` (the classes `.tnd-up` and `.tnd-dn`, the change in the entity panel `.c3chg.up` and `.c3chg.dn`, the trend text `.pmt.success` and `.pmt.danger`). The default variant is too light on the page surface.
 **Meet.** Use the classes of the system (`trendCls(n)`); when a text is coloured by hand for a gain or a loss, take the strong variant, never the default.
 **Check.** Open a table with a return column in light and dark: the green and the red of the numbers are the strong ones.
+**Guarded in Praisindo by** a unit test.
+
+### CD-31
+**Rule.** The one-line description of a TAB or of a SECTION of a long page is an info `Alert` (the normal one: icon in its tile, `role="status"`), not helper text. The sub line under the page title and the notes inside a table or a form stay helper text; a page that must show no Alert (a help centre) keeps helper text.
+**Meet.** `<Alert intent="info" role="status" text={...} />` at the top of the panel of a tab or of the card of a section.
+**Check.** Open a page with tabs: the description of the open tab is an info Alert under the tabs.
+**Guarded in Praisindo by** a unit test.
+
+### CD-32
+**Rule.** On a detail page, the title of a card in the body of a tab or in the wide column is OUTSIDE the card: the title (18px, weight 600), its count and its actions are above the card (`PlainSection`: `.sect` with `.secth`, 8px between them), and the card under it has no header (`<Card title="">`, `flush` for a table); this holds for a tab with one card too. The cards of the panels (entity panel, side panel, narrow column), of list pages and of forms keep their title inside. A description is an info Alert (CD-31) between the title and the card.
+**Meet.** Use `PlainSection` with `body={<Card title="" ... />}`; do not draw the title inside the card of a tab.
+**Check.** Open a detail page: each card of the tab has its title above it.
 **Guarded in Praisindo by** a unit test.
 
 ### WG-16

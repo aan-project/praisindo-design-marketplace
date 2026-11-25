@@ -130,7 +130,6 @@
 .sbexp code{overflow-wrap:anywhere;font-size:var(--fs-sm)}
 .sbfam{align-items:center;gap:8px}
 .sbsw{align-items:center;gap:8px;margin-bottom:12px}
-.srtabs{margin-bottom:8px}
 .sbrt{align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .sbpg{justify-content:center;align-items:center;margin-top:12px}
 @media(max-width:900px){.sbrow{grid-template-columns:auto 24px minmax(0,1fr) auto}.sbo,.sbv{grid-column:3 / -1}.sbfps{grid-template-columns:minmax(0,1fr)}.g3{grid-template-columns:minmax(0,1fr)}}
@@ -281,17 +280,17 @@ mark.sbdf{background:var(--color-surface-warning-subtle-1);color:inherit;border-
 .mdl.i-info{--dlg-glow:var(--color-surface-info-subtle-1);--dlg-fg:var(--color-foreground-info-strong)}
 .mdl.i-warning{--dlg-glow:var(--color-surface-warning-subtle-1);--dlg-fg:var(--color-foreground-warning-strong)}
 .mdl.i-danger{--dlg-glow:var(--color-surface-danger-subtle-1);--dlg-fg:var(--color-foreground-danger-strong)}
-.mdl.fx{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:93;width:min(400px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 8px 28px rgba(16,24,40,.16)}
+.mdl.fx{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:93;width:min(400px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 8px 28px color-mix(in srgb,var(--color-scrim) 36%,transparent)}
 .mdl:focus{outline:none}
 .mdl-g{position:absolute;z-index:-1;left:0;right:0;top:0;height:172px;background:radial-gradient(ellipse 75% 100% at 50% 0%,var(--dlg-glow),transparent 78%)}
-.mdl-ic{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:8px;border-radius:999px;background:var(--color-surface-neutral-primary);color:var(--dlg-fg);box-shadow:0 2px 10px rgba(16,24,40,.14)}
+.mdl-ic{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:8px;border-radius:999px;background:var(--color-surface-neutral-primary);color:var(--dlg-fg);box-shadow:0 2px 10px color-mix(in srgb,var(--color-scrim) 31%,transparent)}
 .mdl-ic .ic{font-size:24px}
 .mdl h2{margin:0;font-size:var(--fs-lg);font-weight:calc(600 + var(--fw-shift,0))}
 .mdl-s2{margin:0;font-size:var(--fs-md);font-weight:calc(500 + var(--fw-shift,0))}
 .mdl-b{display:flex;flex-direction:column;gap:8px;font-size:var(--fs-sm);flex:1 0 auto}.mdl-b p{margin:0}
 .mdl-f{display:flex;justify-content:center;gap:12px;width:100%;margin-top:auto;padding-top:16px}
 .mdl-f .btn{flex:1}
-.mdl.static{box-shadow:0 1px 6px rgba(16,24,40,.08)}
+.mdl.static{box-shadow:0 1px 6px color-mix(in srgb,var(--color-scrim) 18%,transparent)}
 .mdlg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;width:100%}
 @media(max-width:640px){.mdl.fx{padding:28px 16px 16px}.mdl-f{flex-wrap:wrap}}
 
@@ -341,7 +340,7 @@ mark.sbdf{background:var(--color-surface-warning-subtle-1);color:inherit;border-
 .wz-chevron .wz-s:first-child .wz-b{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);padding-left:16px}
 .wz-chevron .wz-s+.wz-s{margin-left:-8px}
 .wz-chevron .wz-s.done .wz-b{background:var(--color-surface-brand-strong-2);color:var(--color-text-white)}
-/* F9 (1.81): `brand-strong-2` is the dark navy in light mode but almost white (#f2f8ff) in dark mode, so the finished step was a white box with white text; dark uses brand-default (white text 4.6:1) */
+/* F9 (1.81): `brand-strong-2` is the dark navy in light mode but almost white in dark mode, so the finished step was a white box with white text; dark uses brand-default (white text 4.6:1) */
 [data-theme="dark"] .wz-chevron .wz-s.done .wz-b{background:var(--color-surface-brand-default)}
 .wz-chevron .wz-s.done .wz-t{color:inherit;opacity:.8}
 .wz-chevron .wz-s.cur .wz-b{background:var(--color-surface-brand-subtle-1);color:var(--color-foreground-brand-strong)}

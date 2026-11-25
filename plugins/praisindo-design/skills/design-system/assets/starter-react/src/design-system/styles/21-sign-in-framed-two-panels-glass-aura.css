@@ -10,7 +10,7 @@
 @keyframes lgau2{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-22%,-14%) scale(1.2)}100%{transform:translate(-8%,18%) scale(1)}}
 @keyframes lgau3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(20%,-18%) scale(1.1)}100%{transform:translate(-12%,-6%) scale(1.2)}}
 .lga::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--color-surface-brand-strong-2) 55%,transparent))}
-/* F2 (1.79): in dark mode brand-strong-2 is almost white (#f2f8ff) and cyan-default is light, so the white story text had 1.07:1 at the top; the dark gradient is brand-default and info-default mixed with the deep subtle surface (white text 4.5:1 or more with the aura) and the bottom veil uses the deep subtle surface (rule LG-04) */
+/* F2 (1.79): in dark mode brand-strong-2 is almost white and cyan-default is light, so the white story text had 1.07:1 at the top; the dark gradient is brand-default and info-default mixed with the deep subtle surface (white text 4.5:1 or more with the aura) and the bottom veil uses the deep subtle surface (rule LG-04) */
 [data-theme="dark"] .lga{background:linear-gradient(155deg,color-mix(in srgb,var(--color-surface-brand-default) 70%,var(--color-surface-brand-subtle-1)) 0%,color-mix(in srgb,var(--color-surface-brand-default) 85%,var(--color-surface-brand-subtle-1)) 45%,color-mix(in srgb,var(--color-surface-info-default) 85%,var(--color-surface-brand-subtle-1)) 100%)}
 [data-theme="dark"] .lga .au{opacity:.35}
 [data-theme="dark"] .lga::after{background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--color-surface-brand-subtle-1) 70%,transparent))}

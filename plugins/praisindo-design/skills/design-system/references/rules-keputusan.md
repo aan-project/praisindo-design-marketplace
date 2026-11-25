@@ -1,4 +1,4 @@
-# Decision rules DK-01 to DK-20 (Praisindo DS v2.172.1)
+# Decision rules DK-01 to DK-20 (Praisindo DS v2.183.0)
 
 The ids are those of the Praisindo owner rules register (decisions of the owner, 2026-11-11). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. The decision table that uses them is `decisions.md`; read it first.
 
@@ -11,6 +11,12 @@ Example pages: `features/examples/FormPage.tsx` (add / edit), `ListPage.tsx` (li
 **Meet.** Form page pattern at `<list>/new` and `<list>/<id>/edit` (the example `features/examples/FormPage.tsx`, route layout `detail`); Save and then Cancel (last, at the bottom) in the card of actions on the right (`FormShell`); leave dialog `warning`.
 **Check.** Audit (DK-01: a `Drawer` with two or more fields and a Save / Add / Create / Update button; exception `/* ds-allow: <reason> */`). Open every add and edit flow: it is a page.
 **Guarded in Praisindo by** a unit test and a browser test.
+
+### DK-33
+**Rule.** The template of a detail page follows what it shows: a PERSON or a PROFILE (a customer, an employee, a user) uses the layout of Customer 360 (three panels: the entity panel on the left, the tabs and cards in the middle, the side panel on the right; `DetailLayout` with `third`); a product, or any record that is complex and needs very detailed information, uses the layout of the product detail (the key facts card on the left, the tabs in the middle, documents and notes on the right); every other record uses the layout of the rule detail (the wide column and a narrow column on the right, `DetailLayout side="right"`). A new detail page picks one and does not invent a layout; one that fits none stops and asks the owner.
+**Meet.** Choose the template by the subject of the page before building it.
+**Check.** A detail page matches one of the three layouts.
+**Guarded in Praisindo by** a unit test.
 
 ### DK-02
 **Rule.** A form page of several groups of fields, and a flow with several steps, is a stepper form page: every group of fields is a step of the `Wizard` (the numbered Wizard in the horizontal layout, the vertical Wizard as the rail in the vertical layout, DK-24); Back and Next are in the card of actions on the right; a step with an error turns red; a summary at the last step of a flow; a form of one group has no Wizard; `Wizard` is never inside a drawer

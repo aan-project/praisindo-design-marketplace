@@ -1,4 +1,4 @@
-# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.172.1, skill v2.172.1)
+# Shell, navigation, mobile, branding, notifications (Praisindo DS v2.183.0, skill v2.183.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -7,7 +7,7 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 ## Rules
 
 ### AV-02
-**Rule.** The header (avatar, name, email, three stats) is a static block: no button, role, tabindex, chevron or handler, and no Profile entry exists
+**Rule.** The header (avatar, name, email, three stats) is a static block: no button, role, tabindex, chevron or handler, and the header is never the entry to the profile: My profile is a menu item of its own (AV-06)
 **Meet.** Keep `UserMenu` of the starter: the header is a static block.
 **Check.** Open the user menu: the header is not focusable.
 **Guarded in Praisindo by** a unit test.
@@ -186,10 +186,16 @@ The shell is mandatory and complete in the starters (`references/shell.md`). Onl
 **Check.** Audit (page head check); every page shows a description.
 **Guarded in Praisindo by** a unit test.
 
+### AV-06
+**Rule.** The avatar menu has the item My profile directly ABOVE My preferences; it opens a drawer (size sm) with the detail of the signed-in person: avatar, name, position or role, the facts the project has (email, branch, team, certifications) and, when the project has a page for the person, a View detail button to it. It is read only. The header of the menu stays a static block (AV-02).
+**Meet.** Add the item `profile-open` (icon `badge`) above `prefs-open` and a read-only drawer built from `Drawer` and `DetailList`.
+**Check.** Open the avatar menu: My profile is above My preferences; it opens the detail of the person.
+**Guarded in Praisindo by** a unit test.
+
 ### NV-04
-**Rule.** A new page opens at the top; Back returns to the previous scroll position
-**Meet.** Use the starter routing (`routing.ts`); do not keep scroll by hand.
-**Check.** Scroll a list, open a detail, press Back.
+**Rule.** Every page opens at the top, also when Back returns to it (owner decision 2026-11-24): a layout effect on the route scrolls to 0 and the browser does not restore the scroll by itself.
+**Meet.** Use the starter routing (`routing.ts`: `history.scrollRestoration = 'manual'`) and scroll to the top when the route changes; do not keep scroll by hand.
+**Check.** Scroll a list, open a detail, press Back: the list is at the top.
 **Guarded in Praisindo by** a browser test.
 
 ### NV-09

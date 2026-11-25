@@ -5,7 +5,7 @@ import { usePrefs } from '../providers/PrefsProvider';
 import { useSession } from '../session';
 import { PROFILE_NAV } from '../nav.config';
 
-export function UserMenu({ onPrefs, variant = 'side' }: { onPrefs: () => void; variant?: 'side' | 'top' }) {
+export function UserMenu({ onProfile, onPrefs, variant = 'side' }: { onProfile: () => void; onPrefs: () => void; variant?: 'side' | 'top' }) {
   const { t } = usePrefs(), { sess, signOut } = useSession();
   const [open, setOpen] = useState(false), [left, setLeft] = useState(0);
   const btn = useRef<HTMLButtonElement>(null), pop = useRef<HTMLDivElement>(null);
@@ -37,6 +37,7 @@ export function UserMenu({ onPrefs, variant = 'side' }: { onPrefs: () => void; v
           <div className="upop-scrim" aria-hidden="true" onClick={close} />
           <div ref={pop} className={`pop upop${top ? ' upop-top' : ''}`} role="menu" aria-label={t('hdr.user')} style={top ? undefined : { left }}>
             <div className="uhb"><span className="uh"><span className="av">{ini}</span><span className="uname"><span className="fw6">{sess.name}</span><span className="sub">{sess.email}</span></span></span></div>
+            <button type="button" className={item} role="menuitem" data-testid="profile-open" onClick={() => { close(); onProfile(); }}><Icon name="badge" />{t('hdr.profile')}</button>   {/* My profile (AV-06): above My preferences */}
             <button type="button" className={item} role="menuitem" onClick={() => { close(); onPrefs(); }}><Icon name="tune" />{t('hdr.prefs')}</button>
             <a className={item} role="menuitem" href="#/mylog" data-testid="mylog" onClick={close}><Icon name="history" />{t('nav.mylog')}</a>   {/* Activity history: under My preferences, above the divider (rule GN-01) */}
             {PROFILE_NAV.length ? <hr /> : null}

@@ -1,4 +1,4 @@
-# List pages: table, toolbar, pagination, board (Praisindo DS v2.172.1, skill v2.172.1)
+# List pages: table, toolbar, pagination, board (Praisindo DS v2.183.0, skill v2.183.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -201,10 +201,16 @@ The bulk layer sits INSIDE `.tb` (it covers the toolbar while rows are selected)
 **Guarded in Praisindo by** a browser test.
 
 ### TB-21
-**Rule.** The tabs of a list page sit in a `.srtabs` wrapper inside the card body (Users & Roles, Signal rules, Marketing and the product tabs; Activities has no tabs since 2026-11-10: one list with every status, the status cards narrow it), 8px under them (owner decision 2026-11-10: the HTML of every list page has the same structure); the tabs of Key information in the product detail are segmented (`variant="seg"`)
-**Meet.** Put the tabs of a list page in a `.srtabs` wrapper inside the card body, 8px above the toolbar; the same HTML structure on every list page.
+**Rule.** The tabs of a list page sit in a `.srtabs` wrapper inside the card body (Users & Roles, Signal rules, Marketing and the product tabs; Activities has no tabs since 2026-11-10: one list with every status, the status cards narrow it), with no margin under them since 2026-11-25 (owner decision; it was 8px; the HTML of every list page has the same structure); the tabs of Key information in the product detail are segmented (`variant="seg"`)
+**Meet.** Put the tabs of a list page in a `.srtabs` wrapper inside the card body, with no margin under it; the same HTML structure on every list page.
 **Check.** Compare the tab wrapper of two list pages: same structure and spacing.
 **Guarded in Praisindo by** a browser test.
+
+### LS-02
+**Rule.** The long lists of a detail page (the History tab, the Engagement timeline) show 10 rows; at the end of the list a loading state shows and the next 10 come by themselves, and so on, until the list is over. Without `IntersectionObserver` every row shows.
+**Meet.** Use a hook such as `useLoadMore(rows)` that returns the rows to show and a `tail` element placed right under the list (a `LoadingState` while it loads, 500 ms); do not page a timeline with buttons or numbers.
+**Check.** Open a detail page whose history has more than 10 rows: 10 show, scroll to the end, a loading state shows and 10 more appear.
+**Guarded in Praisindo by** a unit test.
 
 ### TB-23
 **Rule.** The line under the main text of a table cell (a code, an id, a date: `.mut`) is `--fs-xs` with 4px above it, as the direct `.mut` of a cell (TB rule of the other tables); a cell that holds a logo next to the text (`.tcl`, the Products & rates table) follows the same

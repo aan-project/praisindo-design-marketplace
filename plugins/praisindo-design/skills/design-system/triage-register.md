@@ -13,7 +13,7 @@ The working file of the skill sync (`node scripts/rules-coverage.mjs --triage tr
 | RLG-07 | Konflik (perlu keputusan owner) | The column For of the Rules log (DS, Skill, or both) is read from `docs/design-system/rules-audience.json` (a default, the prefixes, the exceptions by | D | tidak |
 | RLG-08 | Konflik (perlu keputusan owner) | The data of the Rules log is generated from the register by `tools/gen_rules_log.mjs` (run by `npm run docs:ds`) into `src/features/design/rulesLog.ge | D | tidak |
 | AV-01 | Shell / Sidebar | Order: header with the three stats, My preferences, Activity history, divider, Sign out, divider, role switcher | D | tidak |
-| AV-02 | Shell / Sidebar | The header (avatar, name, email, three stats) is a static block: no button, role, tabindex, chevron or handler, and no Profile entry exists | U | ya |
+| AV-02 | Shell / Sidebar | The header (avatar, name, email, three stats) is a static block: no button, role, tabindex, chevron or handler, and the header is never the entry to the profile: My profile is a menu item of its own (AV-06) | U | ya |
 | AV-03 | Shell / Sidebar | The menu buttons have no min-height override and the stat cards use the card radius token | U | ya |
 | AV-04 | Shell / Sidebar | Sign out is the danger item; My preferences opens the preferences drawer and Activity history goes to the log | U | ya |
 | AV-05 | Shell / Sidebar | The avatar menu: stat cards use the card radius (8px), buttons are at least 36px high, the order is stats / preferences / history / sign out / role sw | D | tidak |
@@ -784,3 +784,13 @@ The working file of the skill sync (`node scripts/rules-coverage.mjs --triage tr
 | SM-04 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
 | SM-05 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
 | SM-06 | (2.172.0 sync) | (2.172.0 sync) rule of the Kora product or a regression row | D | tidak |
+| AV-06 | Shell / Sidebar | My profile above My preferences in the avatar menu, a read-only drawer with the detail of the person | U | ya |
+| LS-02 | (2.183.0 sync) | long lists of a detail page: 10 rows, then 10 more at the end | U | ya |
+| TK-01 | (2.183.0 sync) | no hardcoded colour or shadow in styles | U | ya |
+| CD-31 | (2.183.0 sync) | description of a tab or section is an info Alert | U | ya |
+| CD-32 | (2.183.0 sync) | title of a card of a tab is above the card on detail pages | U | ya |
+| DK-33 | (2.183.0 sync) | detail page template by subject | U | ya |
+| AN-01 | (2.183.0 sync) | Analytics sections are tabs | D | tidak |
+| RD-01 | (2.183.0 sync) | page of one RM | D | tidak |
+| PC-07 | (2.183.0 sync) | RM profile card View Detail button | D | tidak |
+| DK-32 | (2.183.0 sync) | Take Action in three steps (exception) | X | tidak |

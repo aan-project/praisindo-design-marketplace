@@ -111,15 +111,23 @@ function userMenu(btn) {
   const top = btn.classList.contains('user-top'), sb = btn.closest('.sb'), left = (sb ? sb.getBoundingClientRect().right : 0) + 8;
   const ini = session.name.split(' ').map((w) => w[0]).join('').slice(0, 2), it = 'btn b-transparent i-neutral s-md';
   const wrap = document.createElement('div');
-  wrap.innerHTML = `<div class="upop-scrim" aria-hidden="true"></div><div class="pop upop${top ? ' upop-top' : ''}" role="menu" aria-label="${esc(t('hdr.user'))}"${top ? '' : ` style="left:${left}px"`}><div class="uhb"><span class="uh"><span class="av">${esc(ini)}</span><span class="uname"><span class="fw6">${esc(session.name)}</span><span class="sub">${esc(session.email)}</span></span></span></div><button type="button" class="${it}" role="menuitem" data-prefs>${icon('tune')}${esc(t('hdr.prefs'))}</button><a class="${it}" role="menuitem" href="#/mylog" data-testid="mylog">${icon('history')}${esc(t('nav.mylog'))}</a>${PROFILE_NAV.length ? '<hr>' : ''}${PROFILE_NAV.map(([k, ic, label, href]) => `<a class="${it}" role="menuitem" href="${href}" data-testid="user-${k}">${icon(ic)}${esc(t(label))}</a>`).join('')}${signOut ? `<hr><button type="button" class="${it} danger" role="menuitem" data-signout>${icon('logout')}${esc(t('hdr.logout'))}</button>` : ''}</div>`;
+  wrap.innerHTML = `<div class="upop-scrim" aria-hidden="true"></div><div class="pop upop${top ? ' upop-top' : ''}" role="menu" aria-label="${esc(t('hdr.user'))}"${top ? '' : ` style="left:${left}px"`}><div class="uhb"><span class="uh"><span class="av">${esc(ini)}</span><span class="uname"><span class="fw6">${esc(session.name)}</span><span class="sub">${esc(session.email)}</span></span></span></div><button type="button" class="${it}" role="menuitem" data-profile data-testid="profile-open">${icon('badge')}${esc(t('hdr.profile'))}</button><button type="button" class="${it}" role="menuitem" data-prefs>${icon('tune')}${esc(t('hdr.prefs'))}</button><a class="${it}" role="menuitem" href="#/mylog" data-testid="mylog">${icon('history')}${esc(t('nav.mylog'))}</a>${PROFILE_NAV.length ? '<hr>' : ''}${PROFILE_NAV.map(([k, ic, label, href]) => `<a class="${it}" role="menuitem" href="${href}" data-testid="user-${k}">${icon(ic)}${esc(t(label))}</a>`).join('')}${signOut ? `<hr><button type="button" class="${it} danger" role="menuitem" data-signout>${icon('logout')}${esc(t('hdr.logout'))}</button>` : ''}</div>`;
   btn.parentElement.append(...wrap.children); btn.setAttribute('aria-expanded', 'true');
   const pop = btn.parentElement.querySelector('.upop'), close = () => { pop.remove(); btn.parentElement.querySelector('.upop-scrim')?.remove(); btn.setAttribute('aria-expanded', 'false'); document.removeEventListener('keydown', key); };
   const key = (e) => { if (e.key === 'Escape') { close(); btn.focus(); } };
   document.addEventListener('keydown', key);
   btn.parentElement.querySelector('.upop-scrim').addEventListener('click', close);
+  pop.querySelector('[data-profile]').addEventListener('click', () => { close(); profileDrawer(); });
   pop.querySelector('[data-prefs]').addEventListener('click', () => { close(); prefsDrawer(); });
   pop.querySelector('[data-signout]')?.addEventListener('click', () => { close(); signOut(); });
   pop.querySelector('[role=menuitem]')?.focus();
+}
+/** My profile (rule AV-06): the detail of the signed-in person, opened from the avatar menu above My preferences. Read only: the session has a name, an email and a role; a product with a user directory adds its facts to the rows. */
+function profileDrawer() {
+  const ini = session.name.split(' ').map((w) => w[0]).join('').slice(0, 2), role = t(session.admin ? 'mp.admin' : 'mp.user');
+  const body = `<div class="c3id" data-testid="mp-head"><div class="c3av">${esc(ini)}</div><h2>${esc(session.name)}</h2><span class="c3sub">${esc(role)}</span></div><div class="dl-rows"><div class="dl-row"><span class="mut">${esc(t('mp.email'))}</span><div>${esc(session.email)}</div></div><div class="dl-row"><span class="mut">${esc(t('mp.role'))}</span><div>${esc(role)}</div></div></div>`;
+  const d = drawer({ title: t('mp.title'), bodyHtml: body, closeLabel: t('lg.close'), footerHtml: button({ label: t('lg.close'), attrs: 'data-done' }) });
+  d.el.querySelector('[data-done]').addEventListener('click', d.close);
 }
 function prefsDrawer() {
   const p = prefs(S.brand);

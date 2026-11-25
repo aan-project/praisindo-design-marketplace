@@ -17,6 +17,7 @@ import { useSession } from '../session';
 import { setActivityAccount } from '../../domain/log/activityLog';
 import type { PanelItem } from '../providers/prefsModel';
 import { PrefsDrawer } from './PrefsDrawer';
+import { MyProfileDrawer } from './MyProfileDrawer';
 import { SidebarSearch } from './SidebarSearch';
 import { Topbar, useMediaQuery } from './Topbar';
 import { UtilMore } from './UtilMore';
@@ -97,7 +98,7 @@ export function AppShell({ page, children }: { page: PageInfo; children: ReactNo
   const { sess } = useSession();
   useEffect(() => { setActivityAccount(sess.email); }, [sess.email]);   // who the Activity history belongs to (rule GN-01)
   const [mnav, setMnav] = useState(false);
-  const [drawer, setDrawer] = useState<null | 'prefs'>(null);
+  const [drawer, setDrawer] = useState<null | 'prefs' | 'profile'>(null);
   useEffect(() => { setDrawer(null); setMnav(false); }, [page.route, page.arg, page.sub]);
   const isDark = prefs.mode === 'dark';
   // Sidebar (rules SB-04..SB-07, SB-28, SB-30). A detail page (ROUTES[..].layout) always starts collapsed. On other pages My Preferences decides: Auto = expanded (collapsed below 1100px), Expanded, Collapsed.
@@ -147,7 +148,7 @@ export function AppShell({ page, children }: { page: PageInfo; children: ReactNo
     ...UTIL.map((u): RowItem => ({ k: u.k, node: u.node, label: t(u.labelKey), ic: u.icon, run: () => undefined })),
   ].filter((i) => !inTb(i.k));
   const vis = rowItems.slice(0, 3), more = rowItems.slice(3);
-  const user = (variant?: 'top') => <UserMenu variant={variant} onPrefs={() => setDrawer('prefs')} />;
+  const user = (variant?: 'top') => <UserMenu variant={variant} onProfile={() => setDrawer('profile')} onPrefs={() => setDrawer('prefs')} />;
   return (
     <div className={`shell${coll ? ' coll' : ''}${still && coll ? ' nohov' : ''}${mnav ? ' mnav' : ''}`}>
       <aside className="sb" onMouseLeave={() => setStill((v) => (v === 'ptr' ? false : v))} onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setStill((v) => (v === 'kbd' ? false : v)); }}>
@@ -165,6 +166,7 @@ export function AppShell({ page, children }: { page: PageInfo; children: ReactNo
         </div>
       </aside>
       {drawer === 'prefs' && <PrefsDrawer onClose={() => setDrawer(null)} />}
+      {drawer === 'profile' && <MyProfileDrawer onClose={() => setDrawer(null)} />}
       <MobileNav cur={routeKeyOf(page)} open={mnav} setOpen={setMnav} />
       <div className="mn">
         {below ? <Topbar title={pageTitle} menuLabel={t('hdr.sidebar')} expanded={phone ? mnav : !coll} onMenu={() => (phone ? setMnav(!mnav) : toggleSb(false))} user={user('top')} /> : null}

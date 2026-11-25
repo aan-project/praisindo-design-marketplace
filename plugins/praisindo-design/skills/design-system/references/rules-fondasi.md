@@ -1,8 +1,14 @@
-# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.172.1, skill v2.172.1)
+# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.183.0, skill v2.183.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
 ## Rules
+
+### TK-01
+**Rule.** No hardcoded style: a stylesheet and a component never write a colour (hex, `rgb()`, `rgba()`, `hsl()`): a shadow is `box-shadow: <offsets> color-mix(in srgb, var(--color-scrim) N%, transparent)`, a tint of white on a coloured surface is `color-mix(in srgb, var(--color-text-white) N%, transparent)`, a tint of the brand is a mix of `--color-surface-brand-default`; the text on a chart segment is `--color-text-black` or `--color-text-white` read through the token; sizes follow LY-01 and font sizes and radii are tokens. Exceptions are values that are data: the colour a person picks, the colour of a logo or a sample image, the SVG of a favicon.
+**Meet.** Use the tokens; if a value is missing, ask for a token, do not write the number.
+**Check.** Search the CSS of the project for `#`, `rgb(`, `rgba(` and `hsl(` outside comments: nothing.
+**Guarded in Praisindo by** a unit test.
 
 ### BG-07
 **Rule.** No large decorative shape sits behind the content of a work page: no element wider or higher than 600px with a radius of 50% or more, and no large radial gradient or blur on a content ancestor, outside the sign-in screen, the modal glow and the page-transition veil (the places that are designed to have an aura). The sliding thumb of a SegmentedControl stays inside its own toggle (position relative on `.sgc`)

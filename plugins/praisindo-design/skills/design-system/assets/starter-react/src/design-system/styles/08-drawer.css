@@ -28,7 +28,7 @@
 .db{--drawer-pad:24px;flex:1;overflow:auto;padding:var(--drawer-pad);display:flex;flex-direction:column;gap:16px}
 .df{display:flex;justify-content:space-between;gap:8px;padding:16px 24px;border-top:1px solid var(--color-border-neutral-default)}
 .qa-h{background:var(--color-surface-warning-subtle-1)}
-.sec{display:flex;flex-direction:column;gap:8px}
+.sec{display:flex;flex-direction:column;gap:16px}
 .sec>.fw6{font-size:var(--fs-sm);font-weight:calc(500 + var(--fw-shift,0))}
 .seg{display:flex;gap:8px;flex-wrap:wrap}
 .tb{position:relative;display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:44px}
@@ -114,3 +114,6 @@
 .exhero{display:flex;flex-direction:column;gap:12px;padding:16px;background:var(--color-surface-brand-subtle-1);border-radius:var(--r-card)}
 .exhero .exf{display:flex;align-items:center;gap:12px}.exhero .exf .fld{flex:1;min-width:0;margin:0}
 .exstep{display:flex;flex-direction:column;gap:16px}.exlist{border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card)}.exlist .li{padding:12px 16px}
+/* DS 2.174.0 (DK-32): the Take Action drawer holds the vertical Wizard as a rail on the left and the step on the right */
+.tkw{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;align-items:start}.tkc{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(max-width:640px){.tkw{grid-template-columns:minmax(0,1fr);gap:16px}}
