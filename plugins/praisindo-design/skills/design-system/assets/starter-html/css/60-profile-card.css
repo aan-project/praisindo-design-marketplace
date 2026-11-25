@@ -31,6 +31,6 @@
 .pcx-si>li:first-child{padding-top:0}.pcx-si>li:last-child{padding-bottom:0;border-bottom:0}
 .pcx-ih{display:flex;align-items:center;gap:12px;min-width:0}.pcx-ih>span:last-child{display:flex;flex-direction:column;min-width:0}
 .pcx-r.pcx-ri{gap:8px;padding-top:0}
-@media(max-width:640px){.pcx.pcx-2{flex-direction:column;width:calc(100vw - 16px)}.pcx-2>.pcx-m{width:auto}.pcx-2>.pcx-sd{border-left:0;border-top:1px solid var(--color-border-neutral-default)}}
+@media(max-width:640px){.pcx.pcx-2{flex-direction:column;width:calc(100vw - 16px)}.dsv .pcx.pcx-2{width:100%}.pcx-2>.pcx-m{width:auto}.pcx-2>.pcx-sd{border-left:0;border-top:1px solid var(--color-border-neutral-default)}}
 /* a phone: the touch target is 40px high (padding of an inline box widens the hit area and does not move the lines of text) */
 @media(max-width:640px),(pointer:coarse){.pcx-t:not(.pcx-ta){padding:16px 0}.pcx-ta{margin:-8px;padding:8px}}

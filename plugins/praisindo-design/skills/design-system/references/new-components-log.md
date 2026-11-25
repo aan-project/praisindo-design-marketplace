@@ -7,7 +7,7 @@ In a project that uses this skill nobody can grant permission to add to the DS m
 `docs/design-system/new-components.md` (create it with the project; keep it in git). Sections:
 
 ```
-# New components, variants and proposals — <project> (skill design-system v2.183.0)
+# New components, variants and proposals — <project> (skill design-system v2.184.0)
 
 ## New components and variants
 ### <Name> — <date>

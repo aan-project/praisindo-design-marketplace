@@ -1,4 +1,4 @@
-# Export drawer (Praisindo DS, skill v2.183.0)
+# Export drawer (Praisindo DS, skill v2.184.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/` and waits for the owner.
 
