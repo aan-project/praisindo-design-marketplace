@@ -45,7 +45,8 @@ const RAW: readonly DsPageDef[] = [
   P('number-input', 'comp', 'Number input', 'Input angka', ['forms'], ['stepper angka', 'number stepper', 'plus minus', 'spinner', 'angka', 'jumlah'], 'inputs'),
   P('file-drop', 'comp', 'File drop', 'Unggah file', ['forms'], ['upload', 'unggah', 'file', 'dokumen', 'drag'], 'inputs'),
 
-  P('avatar', 'comp', 'Logo', 'Logo', ['tables'], ['logo', 'avatar', 'productlogo', 'penerbit', 'issuer', 'merek'], 'labels'),
+  P('list-rows', 'comp', 'List rows', 'Baris daftar', ['lists'], ['baris', 'row', 'item', 'daftar'], 'data'),
+  P('avatar', 'comp', 'Logo', 'Logo', ['lists'], ['logo', 'avatar', 'productlogo', 'penerbit', 'issuer', 'merek'], 'labels'),
   P('tabs', 'comp', 'Tabs', 'Tab', ['tabs'], ['tab', 'drawertabs'], 'navigation'),
   P('activity-log', 'pat', 'Activity log', 'Log aktivitas', ['alog'], ['log', 'timeline', 'history', 'riwayat aktivitas', 'logactivity', 'loglist']),
   P('wizard', 'comp', 'Wizard', 'Wizard', ['nav'], ['stepper', 'steps', 'langkah', 'step form', 'progress', 'form bertahap'], 'navigation'),
@@ -61,7 +62,7 @@ const RAW: readonly DsPageDef[] = [
   P('modal', 'comp', 'Modal and dialog', 'Modal dan dialog', ['overlays'], ['dialog', 'konfirmasi', 'confirm', 'popup', 'modal'], 'containers'),
   P('menu', 'comp', 'Menu and popover', 'Menu dan popover', ['overlays'], ['dropdown menu', 'aksi baris', 'row menu', 'popover', 'more'], 'containers'),
 
-  P('table', 'comp', 'Table', 'Tabel', ['tables'], ['tabel', 'daftar', 'list', 'grid', 'listtable'], 'data'),
+  P('table', 'comp', 'Table', 'Tabel', ['tables', 'lists'], ['tabel', 'daftar', 'list', 'grid', 'listtable'], 'data'),
   P('stat', 'comp', 'Stat cards', 'Kartu stat', ['widgets'], ['stat', 'statistik', 'stat card', 'kartu statistik', 'kartu angka', 'angka', 'number card', 'filter', 'ringkasan'], 'data'),
   P('kpi', 'comp', 'KPI cards', 'Kartu KPI', ['widgets'], ['kpi', 'indikator', 'kartu angka', 'angka', 'number card', 'delta', 'ringkasan', 'sparkline'], 'data'),
   P('widgets', 'asm', 'Widgets', 'Widget', ['widgets'], ['grafik', 'chart', 'sparkline', 'ring', 'donut', 'gauge', 'tren', 'trend', 'bar', 'line', 'area']),
@@ -105,7 +106,7 @@ export const dsPage = (id: string): DsPageDef | undefined => BY_ID.get(id);
 const SEC_LANDING: Record<string, string> = {
   start: 'start', changes: 'changes', principles: 'principles', project: 'project', colors: 'colors', type: 'type', space: 'space', grid4: 'grid4', icons: 'icons', motion: 'motion',
   buttons: 'button', badges: 'badge', chips: 'chip', copy: 'copy-button', alerts: 'alert', forms: 'text-field', selection: 'checkbox-radio', tabs: 'tabs', cards: 'card',
-  tables: 'table', alog: 'activity-log', widgets: 'widgets', kanban: 'kanban', tooltip: 'tooltip', feedback: 'states', overlays: 'drawer', pagehead: 'page-header',
+  lists: 'list-rows', tables: 'table', alog: 'activity-log', widgets: 'widgets', kanban: 'kanban', tooltip: 'tooltip', feedback: 'states', overlays: 'drawer', pagehead: 'page-header',
   layouts: 'page-layouts', nav: 'wizard', mobile: 'mobile', content: 'content',
 };
 /** Resolves the id in `#/design/<id>` to a page: a page id, an old section id (kept as an alias), or the first page for nothing/unknown. */
@@ -157,7 +158,8 @@ export const DS_ROUTE: Readonly<Record<string, DsRoute>> = {
   selection: { rest: 'checkbox-radio', rules: [['.chk checkbox', 'checkbox-radio'], ['RadioGroup', 'checkbox-radio'], ['RadioCard', 'checkbox-radio'], ['.seg Button', 'button'], ['Switch', 'switch'], ['.lgt', 'segmented'], ['SegmentedControl', 'segmented'], ['GlobalSearch', 'search']] },
   badges: { rest: 'badge', rules: [['Chip', 'chip']] },
   cards: { rest: 'card', rules: [['DetailList', 'detail-list'], ['DetailItem', 'detail-list']] },
-  tables: { rest: 'table', rules: [['ProductLogo', 'avatar']] },
+  lists: { rest: 'list-rows', rules: [['ProductLogo', 'avatar'], ['.tcl', 'table']] },
+  tables: { rest: 'table' },
   widgets: { rest: 'widgets', rules: [['HighlightText', 'highlight-text'], ['KPI', 'kpi'], ['KpiCompact', 'kpi'], ['KpiTrend', 'kpi'], ['StatCards', 'stat'], ['StatIcon', 'stat'], ['StatRing', 'stat'], ['StatSolid', 'stat'], ['StatSoft', 'stat']] },
   feedback: { rest: 'states', rules: [['AlertAction', 'alert']] },
   overlays: { rest: 'drawer', rules: [['Toast', 'toast'], ['ActionMenu', 'menu'], ['NotificationBell', 'notifications'], ['NotificationItem', 'notifications'], ['NotificationPopover', 'notifications'], ['NotificationPanel', 'notifications'], ['DialogCard', 'modal'], ['Modal', 'modal'], ['.odbar', 'page-layouts']] },

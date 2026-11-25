@@ -12,7 +12,6 @@ import { Badge } from '../../design-system/components/Badge';
 import { Button, LinkButton } from '../../design-system/components/Button';
 import { Chip } from '../../design-system/components/Chip';
 import { CopyButton } from '../../design-system/components/CopyButton';
-import { badgeFor, BADGE_MAP, type BadgeDomain } from '../../domain/badgeIcons';
 import { DsApi, DsDemo, DsDo, DsH, DsSec, DsTo, sty, useB } from './ds';
 
 const SIZES = ['sm', 'md', 'lg'] as const;
@@ -74,27 +73,19 @@ export function BadgesSection() {
     B('Contrast: in light mode success, danger and info use the darker surface-*-strong-2 token (7.00, 5.75 and 7.56:1), the others their strong foreground. Warning in light is 1.92:1, a known and accepted exception of the owner (CL-04): the icon and the label carry the meaning.', 'Kontras: di mode terang success, danger, dan info memakai token surface-*-strong-2 yang lebih gelap (7,00; 5,75; 7,56:1), yang lain foreground strong-nya. Warning di terang 1,92:1, pengecualian yang diketahui dan diterima owner (CL-04): ikon dan label membawa makna.'),
   ];
   const rules2 = [
-    B('One colour map per concept, in one place: domain/badgeMaps.ts (intents) and domain/badgeIcons.ts (intent and icon of every value). Use the badge component (Badge with badgeProps(domain, value)) — never a literal intent or a per-screen variant.', 'Satu peta warna per konsep, di satu tempat: domain/badgeMaps.ts (intent) dan domain/badgeIcons.ts (intent dan ikon tiap nilai). Pakai komponen badge (Badge with badgeProps(domain, value)) — jangan intent literal atau varian per layar.'),
+    B('One colour map per concept, in one place: domain/badgeMaps.ts (intents) and domain/badgeIcons.ts (the intent of every value). Use the badge component (Badge with badgeProps(domain, value)) — never a literal intent or a per-screen variant.', 'Satu peta warna per konsep, di satu tempat: domain/badgeMaps.ts (intent) dan domain/badgeIcons.ts (intent dan ikon tiap nilai). Pakai komponen badge (Badge with badgeProps(domain, value)) — jangan intent literal atau varian per layar.'),
     B('The same label always has the same colour: e.g. "Completed" is green and "Follow-up" is amber everywhere.', 'Label yang sama selalu berwarna sama: mis. "Selesai" hijau dan "Tindak lanjut" kuning di mana pun.'),
     B('Hover (mouse) or tap (touch) on a badge shows a tooltip that says what it is for: "Status is Active", "Risk profile is Moderate". A domain badge builds it from its domain and label; a fixed badge has its own sentence; a badge outside the map passes what or tip. A badge is still never focusable.', 'Arahkan kursor (mouse) atau ketuk (sentuh) sebuah badge untuk melihat tooltip tentang fungsinya: "Status adalah Aktif", "Profil risiko adalah Moderate". Badge domain menyusunnya dari domain dan labelnya; badge tunggal punya kalimat sendiri; badge di luar peta memakai what atau tip. Badge tetap tidak pernah bisa difokus.'),
   ];
-  const Of = (domain: BadgeDomain, value: string, label: string) => { const b = badgeFor(domain, value); return <Badge key={domain + value} label={label} intent={b.intent} domain={domain} value={value} />; };
   return (
     <DsSec id="badges" title={B('Badge', 'Badge')} lead={B('One soft badge for categories and statuses: a rectangle with text in the colour of the intent, no icon. Never an icon, a dot, a fill or an outline.', 'Satu badge soft untuk kategori dan status: persegi dengan teks berwarna intent, tanpa ikon. Tidak pernah ikon, titik, fill, atau outline.')}>
       <DsDemo label={B('Intents', 'Intent') + ' · Badge'}>{INTENTS.map((i) => <Badge key={i} label={t('intent.' + i)} intent={i} />)}</DsDemo>
-      <DsTo p="chip" />
-      <DsH>{B('Badge or Chip?', 'Badge atau Chip?')}</DsH>
-      <DsDemo label={B('Status → Badge · number → Chip', 'Status → Badge · angka → Chip')}>{Of('status', 'in_progress', 'In progress')}<Chip label="5" /></DsDemo>
-      <DsDemo label={B('Priority → Badge · tag → Chip', 'Prioritas → Badge · tag → Chip')}>{Of('priority', 'high', 'High')}<Chip label="VIP" /></DsDemo>
-      <DsDemo label={B('Confidence → Badge · name → Chip', 'Keyakinan → Badge · nama → Chip')}>{Of('confidence', 'medium', 'Medium')}<Chip label="Mutual Fund" /></DsDemo>
-      <DsDemo label={B('Status → Badge · a removable tag → Chip', 'Status → Badge · tag yang bisa dihapus → Chip')}>{Of('status', 'active', 'Active')}<Chip label="Priority" removeLabel={B('Remove Priority', 'Hapus Priority')} onRemove={() => undefined} /></DsDemo>
-      <DsDemo label={B('Overdue → Badge · "3 improved" → Chip', 'Terlambat → Badge · "3 membaik" → Chip')}>{Of('status', 'expired', 'Overdue')}<Chip label={B('3 improved', '3 membaik')} /></DsDemo>
       <DsTo p="badge" />
       <ul className="dsrules">{rules1.map((x) => <li key={x}>{x}</li>)}</ul>
       <ul className="dsrules">{rules2.map((x) => <li key={x}>{x}</li>)}</ul>
       <DsApi rows={[
         ['Badge({label, intent, title, domain, value, what, tip})', 'string · intent · string', B('intent = brand', 'intent = brand'), B('The one badge, without an icon (BD-02: there is no icon and no noIcon prop). title is the native title; when the text is cut and no title is given, the label is the title. domain and value (from badgeProps) or what or tip give the hover tooltip (BD-13). The badge has one size (20px high).', 'Satu-satunya badge, tanpa ikon (BD-02: tidak ada ikon dan tidak ada prop noIcon). title adalah title bawaan; bila teks terpotong dan title kosong, label menjadi title. domain dan value (dari badgeProps) atau what atau tip memberi tooltip hover (BD-13). Badge satu ukuran (tinggi 20px).')],
-        ['badgeFor(domain, value)', 'domain · value', '—', B('Returns { intent, icon } of a value from domain/badgeIcons.ts; badgeProps adds the domain and value for the hover tooltip. A domain wrapper of your product uses it.', 'Mengembalikan { intent, icon } sebuah nilai dari domain/badgeIcons.ts; badgeProps menambah domain dan value untuk tooltip hover. StBadge, AStBadge, BStBadge, CStBadge, OutBadge, SegBadge, dan PriBadge memakainya.')],
+        ['badgeFor(domain, value)', 'domain · value', '—', B('Returns { intent } of a value from domain/badgeIcons.ts; badgeProps adds the domain and value for the hover tooltip. A domain wrapper of your product uses it.', 'Mengembalikan { intent } sebuah nilai dari domain/badgeIcons.ts; badgeProps menambah domain dan value untuk tooltip hover. Pembungkus domain produk Anda memakainya.')],
       ]} />
     </DsSec>
   );
@@ -249,8 +240,8 @@ export function WidgetsSection() {
       ].map((x) => <li key={x}>{x}</li>)}</ul>
       <DsTo p="kpi" />
       <ul className="dsrules">{[
-        B('Every KPI card is the icon card: icon tile, label, number, and under them the change (coloured text, no badge) with the period it is compared with, or the note, and the sparkline (WG-16).', 'Setiap kartu KPI adalah kartu ikon: ikon, label, angka, dan di bawahnya perubahan (teks berwarna, tanpa badge) beserta periode pembandingnya atau catatan, lalu sparkline (WG-16).'),
         B('A KPI card answers one question; its label says what is counted.', 'Kartu KPI menjawab satu pertanyaan; labelnya menyebut apa yang dihitung.'),
+        B('Every KPI card is the icon card: icon tile, label, number, and under them the change (coloured text, no badge) with the period it is compared with, or the note, and the sparkline (WG-16).', 'Setiap kartu KPI adalah kartu ikon: ikon, label, angka, dan di bawahnya perubahan (teks berwarna, tanpa badge) beserta periode pembandingnya atau catatan, lalu sparkline (WG-16).'),
         B('A change is always icon + sign + number; green when it goes up, red when it goes down (WG-01, WG-08).', 'Perubahan selalu ikon + tanda + angka; hijau bila naik, merah bila turun (WG-01, WG-08).'),
         B('The chart of a number that goes up is brand and that of a number that goes down is red; KpiTrend follows its band, green and red (WG-09).', 'Chart angka yang naik berwarna brand dan angka yang turun merah; KpiTrend mengikuti band-nya, hijau dan merah (WG-09).'),
         B('The looks are Card (KPI), Compact (KpiCompact) and Trend (KpiTrend); a Trend with neither a sparkline nor a change is the Card. A place (the slot prop) reads its look from My preferences, KPI view; the variant prop sets a look of its own (WG-07).', 'Tampilannya Card (KPI), Compact (KpiCompact) dan Trend (KpiTrend); Trend tanpa sparkline dan tanpa perubahan adalah Card. Sebuah tempat (prop slot) membaca tampilannya dari My preferences, Tampilan KPI; prop variant menetapkan tampilan sendiri (WG-07).'),
@@ -284,7 +275,7 @@ export function WidgetsSection() {
   );
 }
 
-/** The copy button (rule CB-01): a live example with the real component. */
+/** The copy button (rule CP-01): a live example with the real component. */
 export function CopySection() {
   const B = useB(), { t } = usePrefs();
   const rules = [

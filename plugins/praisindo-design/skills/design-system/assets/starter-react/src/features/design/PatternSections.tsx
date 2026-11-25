@@ -138,6 +138,11 @@ export function LayoutsSection() {
           <Card title={B('The report', 'Laporan')} body={<p className="mut">{B('The content in the centre column.', 'Konten di kolom tengah.')}</p>} />
         </DetailLayout>
       </DsDemo>
+      <DsDemo label={B('DetailSummary with a logo: the prop avatar replaces the icon tile (the head of a product or company detail)', 'DetailSummary dengan logo: prop avatar menggantikan tile ikon (kepala detail produk atau perusahaan)') + ' · DetailSummary'}>
+        <DetailSummary label={B('Product', 'Produk')} avatar={<ProductLogo size="lg" name="Northwind Trading" />} kicker="NW-D02 · Northwind" title="Northwind Standard Plan"
+          badges={<><Chip label={B('Subscription', 'Langganan')} /><Chip label={B('Annual', 'Tahunan')} /><Badge label={B('Medium', 'Menengah')} {...badgeProps('priority', 'medium')} /></>}
+          next={<div className="odnx none"><Icon name="info" /><span className="mut">{B('Synced 03 Oct 2026 from the catalogue', 'Disinkronkan 03 Okt 2026 dari katalog')}</span></div>} />
+      </DsDemo>
       <DsApi rows={[['DetailLayout({panel,children,side,third})', "side: 'left' | 'right'; third: node", 'left', B('right puts the wide column first and the panel (a DetailPanel or an .odside stack of cards) on the right.', 'right menaruh kolom lebar di depan dan panel (DetailPanel atau tumpukan kartu .odside) di kanan.')]]} />
     </DsSec>
   );

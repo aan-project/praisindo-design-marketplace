@@ -38,7 +38,7 @@ export function UserMenu({ onProfile, onPrefs, variant = 'side' }: { onProfile: 
           <div ref={pop} className={`pop upop${top ? ' upop-top' : ''}`} role="menu" aria-label={t('hdr.user')} style={top ? undefined : { left }}>
             <div className="uhb"><span className="uh"><span className="av">{ini}</span><span className="uname"><span className="fw6">{sess.name}</span><span className="sub">{sess.email}</span></span></span></div>
             <button type="button" className={item} role="menuitem" data-testid="profile-open" onClick={() => { close(); onProfile(); }}><Icon name="badge" />{t('hdr.profile')}</button>   {/* My profile (AV-06): above My preferences */}
-            <button type="button" className={item} role="menuitem" onClick={() => { close(); onPrefs(); }}><Icon name="tune" />{t('hdr.prefs')}</button>
+            <button type="button" className={item} role="menuitem" data-testid="prefs-open" onClick={() => { close(); onPrefs(); }}><Icon name="tune" />{t('hdr.prefs')}</button>
             <a className={item} role="menuitem" href="#/mylog" data-testid="mylog" onClick={close}><Icon name="history" />{t('nav.mylog')}</a>   {/* Activity history: under My preferences, above the divider (rule GN-01) */}
             {PROFILE_NAV.length ? <hr /> : null}
             {PROFILE_NAV.map(([k, ic, label, href]) => <a key={k} className={item} role="menuitem" href={href} data-testid={'user-' + k} onClick={close}><Icon name={ic} />{t(label)}</a>)}

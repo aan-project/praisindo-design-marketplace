@@ -2,7 +2,7 @@
 
 Nama: plugin **Praisindo design** (`praisindo-design`), skill `design-system`, marketplace `praisindo-design-marketplace`. Panggil skill dengan `/design-system` atau `praisindo-design:design-system`; skill juga aktif sendiri untuk pekerjaan UI. Zip untuk claude.ai: `praisindo-design-v2.112.0.zip` (menggantikan semua zip lama: `praisindo-design-system-v2.88.zip`, v2.62, v2.31 dan sebelumnya).
 
-Versi tiga bagian `MAJOR.MINOR.PATCH` (aturan VN-01): `MAJOR.MINOR` = nomor Praisindo DS yang disinkronkan dengan skill (2.184.0 berarti DS 2.183, 26 Nov 2026); `PATCH` = perbaikan skill saja (DS tidak berubah) dan kembali ke 0 saat DS naik; `MAJOR` naik hanya bila proyek yang memakai skill harus dikerjakan ulang (keputusan owner).
+Versi tiga bagian `MAJOR.MINOR.PATCH` (aturan VN-01): `MAJOR.MINOR` = nomor Praisindo DS yang disinkronkan dengan skill (2.184.1 berarti DS 2.183, 26 Nov 2026); `PATCH` = perbaikan skill saja (DS tidak berubah) dan kembali ke 0 saat DS naik; `MAJOR` naik hanya bila proyek yang memakai skill harus dikerjakan ulang (keputusan owner).
 
 ## Memasang
 - **Claude Code (marketplace, disarankan):** `/plugin marketplace add aan-project/praisindo-design-marketplace`, lalu `/plugin install praisindo-design@praisindo-design-marketplace` (atau di aplikasi: "Install for me"). Pembaruan datang lewat versi di `plugin.json`.

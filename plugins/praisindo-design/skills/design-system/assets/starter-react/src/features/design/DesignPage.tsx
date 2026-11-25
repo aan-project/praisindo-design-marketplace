@@ -15,7 +15,7 @@ import { ChangesSection, ColorsSection, IconsSection, PrinciplesSection, SpaceSe
 import { AlertsSection, BadgesSection, ButtonsSection, ChipsSection, CopySection, WidgetsSection } from './ComponentSections';
 import { OverlaysSection } from './OverlaySections';
 import { TooltipSection } from './TooltipSection';
-import { TablesSection } from './ListSections';
+import { ListsSection, TablesSection } from './ListSections';
 import { ActivityLogSection } from './ActivitySection';
 import { ProjectSection } from './ProjectSection';
 import { ContentSection, FeedbackSection, KanbanSection, MotionSection, LayoutsSection, MobileSection, NavSection, PageheadSection } from './PatternSections';
@@ -31,9 +31,9 @@ import { Chip } from '../../design-system/components/Chip';
 
 
 /** Section ids (the old long page, shown whole at `#/design/all`). A project adds its own components in ProjectSection, never in the standard sections. */
-export const DS_ORDER = ['start', 'changes', 'principles', 'project', 'colors', 'type', 'space', 'grid4', 'icons', 'motion', 'buttons', 'badges', 'chips', 'copy', 'alerts', 'forms', 'selection', 'tabs', 'cards', 'tables', 'alog', 'widgets', 'kanban', 'tooltip', 'feedback', 'overlays', 'pagehead', 'layouts', 'nav', 'mobile', 'content'] as const;
+export const DS_ORDER = ['start', 'changes', 'principles', 'project', 'colors', 'type', 'space', 'grid4', 'icons', 'motion', 'buttons', 'badges', 'chips', 'copy', 'alerts', 'forms', 'selection', 'tabs', 'cards', 'lists', 'tables', 'alog', 'widgets', 'kanban', 'tooltip', 'feedback', 'overlays', 'pagehead', 'layouts', 'nav', 'mobile', 'content'] as const;
 /** Sections added after the migration (not in the frozen prototype, so not in the golden files). */
-export const DS_ADDED: ReadonlySet<string> = new Set(['kanban', 'motion', 'tooltip', 'grid4', 'chips', 'copy', 'alog']);
+export const DS_ADDED: ReadonlySet<string> = new Set(['kanban', 'motion', 'tooltip', 'grid4', 'chips', 'copy', 'alog', 'lists']);
 const reduced = (): boolean => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /** Clipboard copy with the prototype's fallback (hidden textarea + execCommand). Resolves to whether it worked. */
@@ -105,7 +105,7 @@ function useDsSections({ onToast, onVeil }: Pick<DesignPageProps, 'onToast' | 'o
     start: <StartSection />, changes: <ChangesSection onOpenLog={() => setLog(true)} />, principles: <PrinciplesSection />, colors: <ColorsSection onCopy={copy} />,
     type: <TypeSection />, space: <SpaceSection />, grid4: <Grid4Section />, icons: <IconsSection />,
     buttons: <ButtonsSection />, badges: <BadgesSection />, chips: <ChipsSection />, copy: <CopySection />, alerts: <AlertsSection />,
-    forms: <FormsSection />, selection: <SelectionSection />, tabs: <TabsSection />, cards: <CardsSection />, widgets: <WidgetsSection />, tables: <TablesSection />, alog: <ActivityLogSection />, kanban: <KanbanSection />, motion: <MotionSection onVeil={onVeil} />, tooltip: <TooltipSection />,
+    forms: <FormsSection />, selection: <SelectionSection />, tabs: <TabsSection />, cards: <CardsSection />, widgets: <WidgetsSection />, lists: <ListsSection />, tables: <TablesSection />, alog: <ActivityLogSection />, kanban: <KanbanSection />, motion: <MotionSection onVeil={onVeil} />, tooltip: <TooltipSection />,
     overlays: <OverlaysSection onDrawer={(_d, size) => setDemo(size)} onToast={() => onToast?.(sample)} onModal={setModal} />,
     feedback: <FeedbackSection />, pagehead: <PageheadSection />, layouts: <LayoutsSection />, nav: <NavSection />, mobile: <MobileSection />, content: <ContentSection />, project: <ProjectSection />,
   };
