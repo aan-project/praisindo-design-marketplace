@@ -1,4 +1,4 @@
-# Tokens and components (DS v2.193.0)
+# Tokens and components (DS v2.193.1)
 
 Generated from the Praisindo design system document v2.30 (2026-11-03); the section "Changes up to DS 2.62" at the end lists what came after. The tables below leave out the components that came from the Praisindo domain. DomainBadges and RecommendationPickDrawer are not in the starters (build such pieces from `Badge` and the generic components). KanbanBoard / KanbanCard, ProfileCard / ProfileCardBody (the card of a person or a customer name, rules PC-02..PC-04, UN-01, UN-02), NotificationBell / NotificationPanel and the overlay helpers (`toOverlay`, `useActionMenu`) ARE in the starters and the rules require them: read their props in `assets/starter-react/src/design-system/components/`.
 
@@ -540,7 +540,7 @@ Names changed in DS 2.76 (components, classes) and DS 2.79 (custom properties). 
 | Renamed | `Wizard` (was StepNav), `NumberInput` (Stepper), `SegmentedControl` (SegToggle), `Avatar` (Av), `IconTile` (LiIc), `GroupTitle` (GroupT), `DetailRow` (DR), `ShortcutChips` (Sugg), `LinkButton`, `RetryButton`, `AlertAction`, `ActionMenu` (RowMenu), `InfoTooltip` (TipIcon), `AnchorNav` (JumpLayout), `SidebarToggle` (EdgeToggle), `RadioCard` (OptionCard), `Accordion` (CollapseCard), `PageHeader` (StdHead), `SearchBar` (SearchCombo), `GlobalSearch` (SiteSearch), `Table` (SimpleTbl), `GroupedNumberInput` (GroupInput), `FileUpload` (FileDrop), `Dialog` (DialogTpl), `DialogCard` (ModalCard), `PlainSection` (Section). | DS-23 |
 | Custom properties | `--color-text-*` (neutral text), `--ff`, `--fw-shift`, `--page-pad`, `--color-scrim`, `--int-*`, `--card-gap`, `--drawer-pad`, `--hero-*`, `--dlg-*`, `--frozen-r`, `--tbl-*`, `--seg-*`, `--ring-*`, `--sign-glow`. | DS-26 |
 
-## Changes in DS 2.185.0 to 2.193.0
+## Changes in DS 2.185.0 to 2.193.1
 - Dark neutral borders: `--color-border-neutral-default` #222932, `-subtle` #1a1f26, `-strong` #3d4652 (CL-05). `--color-surface-neutral-tertiary` follows to #222932.
 - New token `--color-surface-neutral-field` (white in light, #10141a in dark), the background of every field box, checkbox and file drop zone (CL-06).
 - New tokens `--color-icon-<intent>` and `--color-icon-neutral` (3.5:1 on the soft tile, IC-02); `.i-<intent>` sets `--int-ic`; icons on tiles use `var(--int-ic,var(--int-def))`.

@@ -62,7 +62,7 @@ const INTENTS = ['brand', 'secondary', 'success', 'warning', 'danger', 'info', '
 
 export function ColorsSection({ onCopy, down, onRetry }: { onCopy?: (hex: string) => void; down?: boolean; onRetry?: () => void }) {
   const B = useB();
-  const dark: [string, string, string][] = [['page', '#0b0e13', B('Page', 'Halaman')], ['card', '#151a21', B('Card / surface', 'Card / permukaan')], ['raised', '#1e242d', B('Raised / secondary', 'Naik / sekunder')], ['line', '#2d3540', B('Border', 'Border')], ['text', '#e6e9ee', B('Text · 14.4:1', 'Teks · 14,4:1')], ['s4', '#aab1bd', B('Secondary text · 8.1:1', 'Teks sekunder · 8,1:1')], ['s3', '#8a93a1', B('Tertiary text · 5.6:1', 'Teks tersier · 5,6:1')]];
+  const dark: [string, string, string][] = [['page', '#0b0e13', B('Page', 'Halaman')], ['card', '#151a21', B('Card / surface', 'Card / permukaan')], ['raised', '#1e242d', B('Raised / secondary', 'Naik / sekunder')], ['field', '#10141a', B('Field fill', 'Fill field')], ['line', '#222932', B('Border', 'Border')], ['text', '#e6e9ee', B('Text · 14.4:1', 'Teks · 14,4:1')], ['s4', '#aab1bd', B('Secondary text · 8.1:1', 'Teks sekunder · 8,1:1')], ['s3', '#8a93a1', B('Tertiary text · 5.6:1', 'Teks tersier · 5,6:1')]];
   return (
     <DsSec id="colors" title={B('Color', 'Warna')} lead={B('Colors are design tokens generated from the brand colors and fixed neutral and intent ramps, in a light and a dark theme.', 'Warna adalah design token yang dibuat dari warna brand serta ramp netral dan intent yang tetap, dalam tema terang dan gelap.')}>
       {down ? (
@@ -92,7 +92,7 @@ export function ColorsSection({ onCopy, down, onRetry }: { onCopy?: (hex: string
       <DsH>{B('Dark mode', 'Mode gelap')}</DsH>
       <div className="dsframe" style={sty('display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:8px')}>{dark.map(([k, h, l]) => (
         <div key={k} style={sty('display:flex;align-items:center;gap:8px')}>
-          <span style={sty(`width:28px;height:28px;border-radius:6px;border:1px solid #2d3540;background:${h};flex:none`)} />
+          <span style={sty(`width:28px;height:28px;border-radius:6px;border:1px solid #222932;background:${h};flex:none`)} />
           <span><span className="fw6" style={sty('font-size:var(--fs-sm)')}>{l}</span><br /><span className="mut" style={sty('font-size:var(--fs-xs)')}>{h}</span></span>
         </div>
       ))}</div>

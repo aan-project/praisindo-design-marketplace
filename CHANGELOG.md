@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.193.1** (2026-11-26) Design pages of both starters regenerated for DS 2.193.0 (pages Drawer summary and Plan card, Field fill swatch; 58 pages); compare-ds run: CSS identical, Design page 91.3% (HTML) and 91.9% (React); skill-only patch.
 - **2.193.0** (2026-11-26) Synchronised with DS 2.185.0 to 2.193.0: CL-05 (softer dark borders), CL-06 (darker field fill in dark), IC-02 (icon contrast 3.5:1 on soft tiles, tokens color-icon-*), FM-25 (form label is the .fld label), DT-20 to DT-24 (detail page tables as three blocks, 220px stat cards, activities timeline, one-row toolbar with More menu, 5 rows a page), LS-02 amended (5 rows), DR-14 (DrawerSummary), DR-15 (PlanCard); 397 general rules; 8 CSS files and the token builder copied to both starters; DrawerSummary and PlanCard added to the React starter. Not done: Design pages of the starters not regenerated for the new components, rendered compare-ds not run.
 - **2.184.2** (2026-11-26) (2026-11-26) Design pages of the HTML starter recaptured from the React starter (page List rows, contents list aliases, copy values); compare-ds compares the Design page as a bag of lines; skill-only patch.
 - **2.184.1** (2026-11-25) (2026-11-26) Design page of the React starter brought closer to DS 2.184.0 (page List rows, DetailSummary with a logo, prefs-open test id; compare-ds Design page 90.3%, Preferences drawer 100%); skill-only patch.

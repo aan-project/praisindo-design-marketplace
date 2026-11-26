@@ -4,6 +4,9 @@ import { usePrefs } from '../../app/providers/PrefsProvider';
 import { Button } from '../../design-system/components/Button';
 import { DialogCard } from '../../design-system/components/Modal';
 import { Icon } from '../../design-system/components/Icon';
+import { DrawerSummary } from '../../design-system/components/DrawerSummary';
+import { PlanCard } from '../../design-system/components/PlanCard';
+import { Badge } from '../../design-system/components/Badge';
 import { NotificationBell, NotificationItem, NotificationPanel, NotificationPopover, type NotificationRow } from '../../design-system/components/Notification';
 import { fill } from '../../i18n/fill';
 import { MD_INT, MD_KINDS } from '../../domain/nav';
@@ -100,6 +103,23 @@ export function OverlaysSection({ onDrawer, onToast, onModal }: OverlayDemoHandl
       <DsH>{B('Drawer with Back', 'Drawer dengan Kembali')}</DsH>
       {P(B("A drawer opened from another drawer shows an arrow Back button before its title and in the footer. Back returns to the previous drawer; Close closes everything. Example: Data readiness > Open data sources.", "Drawer yang dibuka dari drawer lain menampilkan tombol panah Kembali sebelum judul dan di footer. Kembali ke drawer sebelumnya; Tutup menutup semuanya. Contoh: Kesiapan data > Buka sumber data."))}
       <DsApi rows={[['Drawer({title,body,footer,back,actions})', 'back: label of the Back button · actions: buttons of the header, left of Close', '—', B('Action dback returns to ui.drawer.back. The body gap is 16px (.db).', 'Aksi dback kembali ke ui.drawer.back. Jarak isi 16px (.db).')]]} />
+      <DsTo p="drawer-summary" />
+      <DsH>{B('Summary at the top of a drawer', 'Ringkasan di atas drawer')}</DsH>
+      {P(B('The record the drawer is about: the icon tile, three lines that get softer (the name, what it is, the code and the details) and one badge at the right. The code is always on its own line because a title can be long (rule DR-14).', 'Rekaman yang dibahas drawer: tile ikon, tiga baris yang makin lembut (nama, apa itu, kode dan rincian) dan satu badge di kanan. Kode selalu di baris sendiri karena judul bisa panjang (aturan DR-14).'))}
+      <DsDemo label={B('An activity and an opportunity', 'Sebuah activity dan opportunity') + ' · DrawerSummary'}><div style={sty('flex:1 1 100%;display:flex;flex-direction:column;gap:12px;max-width:520px')}>
+        <DrawerSummary icon="mail" title="Bambang Susilo" sub={B('Send email', 'Kirim email')} meta={'ACT-0003 · 02 Oct 2026 · 11:00 · Andi Wijaya'} badge={<Badge label="Email" intent="info" />} />
+        <DrawerSummary icon="lightbulb" title="Tika Kurniawan" sub={B('Fixed Income Campaign Eligibility for the customers of the branch', 'Kelayakan kampanye Fixed Income untuk customer cabang')} meta="OPP-0039" badge={<Badge label={B('In progress', 'Dalam proses')} intent="warning" />} />
+      </div></DsDemo>
+      <DsApi rows={[['DrawerSummary({icon, intent, title, sub, meta, badge})', 'string · string · node · node · node · node', 'intent = brand', B('The summary card at the top of Activity Outcome, Reschedule activity, Dismiss opportunities, Take Action and Select a recommendation.', 'Kartu ringkasan di atas Activity Outcome, Reschedule activity, Dismiss opportunities, Take Action dan Select a recommendation.')]]} />
+      <DsTo p="plan-card" />
+      <DsH>{B('Plan card', 'Kartu rencana')}</DsH>
+      {P(B('A recommendation to choose: a header strip with the label (Best match, Alternative 2) and the stars, then the title, the amount and score, a thin score meter and the tags. The chosen card has a 2px brand border and a check (rule DR-15).', 'Rekomendasi yang dipilih: strip header berisi label (Paling cocok, Alternatif 2) dan bintang, lalu judul, nominal dan skor, meter skor tipis dan tag. Kartu terpilih berborder brand 2px dengan centang (aturan DR-15).'))}
+      <DsDemo label={B('Selected and not selected', 'Terpilih dan tidak terpilih') + ' · PlanCard'}><div role="radiogroup" aria-label={B('Plans', 'Rencana')} style={sty('flex:1 1 100%;display:flex;flex-direction:column;gap:12px;max-width:520px')}>
+        <PlanCard label={B('Best match', 'Paling cocok')} stars={4} title={B('Time Deposit 3 months, Rp1,000,000,000', 'Deposito 3 bulan, Rp1.000.000.000')} desc={B('Rp1.0B · Score 90/100', 'Rp1,0 M · Skor 90/100')} score={90} selected selLabel={B('Selected', 'Terpilih')} />
+        <PlanCard label={B('Alternative 2', 'Alternatif 2')} stars={3} title={B('Mutual Fund, Rp500,000,000', 'Reksa Dana, Rp500.000.000')} desc={B('Rp0.5B · Score 72/100', 'Rp0,5 M · Skor 72/100')} score={72} selected={false} />
+      </div></DsDemo>
+      <DsDemo label={B('Read only: the plan already chosen (Take Action)', 'Hanya baca: rencana yang sudah dipilih (Take Action)') + ' · PlanCard fixed'}><div style={sty('flex:1 1 100%;max-width:520px')}><PlanCard fixed selected label={B('Selected recommendation', 'Rekomendasi terpilih')} stars={4} title={B('Time Deposit 3 months, Rp1,000,000,000', 'Deposito 3 bulan, Rp1.000.000.000')} desc={B('Rp1.0B · Score 90/100', 'Rp1,0 M · Skor 90/100')} score={90} /></div></DsDemo>
+      <DsApi rows={[['PlanCard({fixed, label, stars, title, desc, score, tags, selected, selLabel, onSelect})', 'string · 0–5 · string · string · 0–100', '—', B('A radio card (role radio, aria-checked). RecommendationPickDrawer draws one for each plan of the engine, the first as Best match.', 'Kartu radio (role radio, aria-checked). RecommendationPickDrawer menggambar satu untuk tiap rencana mesin, yang pertama sebagai Paling cocok.')]]} />
       <DsTo p="action-bars" />
       <DsH>{B('Decision bar', 'Decision bar')}</DsH>
       {P(B("A layer for a pending choice or the state of the current page, in two variations. Pick by the page: a choice made from a list uses the bottom bar; a long form uses the aside.", "Lapisan untuk pilihan yang belum selesai atau status halaman saat ini, dalam dua variasi. Pilih menurut halaman: pilihan dari daftar memakai bar bawah; form panjang memakai aside."))}
