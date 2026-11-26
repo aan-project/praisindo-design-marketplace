@@ -2,6 +2,7 @@
 
 One line per release, newest first.
 
+- **2.184.2** (2026-11-26) (2026-11-26) Design pages of the HTML starter recaptured from the React starter (page List rows, contents list aliases, copy values); compare-ds compares the Design page as a bag of lines; skill-only patch.
 - **2.184.1** (2026-11-25) (2026-11-26) Design page of the React starter brought closer to DS 2.184.0 (page List rows, DetailSummary with a logo, prefs-open test id; compare-ds Design page 90.3%, Preferences drawer 100%); skill-only patch.
 - **2.184.0** (2026-11-25) (2026-11-25) Synchronised with DS 2.184.0: RM profile card is full width at 390 (VR-02); CSS of both starters byte for byte (60-profile-card.css).
 - **2.183.0** (2026-11-26) Synchronised with DS 2.183.0: LS-02 (long lists of a detail page load 10 at a time), TK-01 (no hardcoded colour or shadow: tokens and `color-mix`), CD-31 (the description of a tab or section is an info Alert), CD-32 (the title of a card of a tab is above the card on detail pages), DK-33 (detail page template by subject: person = Customer 360, complex product = product detail, other = rule detail), AV-06 (My profile above My preferences in the avatar menu; both starters have the item and a read-only drawer), NV-04 amended (every page opens at the top, also on Back), TB-21 amended (no margin under `.srtabs`), AV-02 amended; twelve CSS files copied to both starters (386 general rules).

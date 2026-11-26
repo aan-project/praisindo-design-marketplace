@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.184.1).
+// Compare a starter (or a product built from it) with the real Design System app (skill design-system v2.184.2).
 // The audit checks a few mechanical rules; this checks that what is RENDERED is the same: CSS files, tokens and the DOM skeleton of the shell, Branding, the Preferences drawer and the Design page.
 //
 //   node scripts/compare-ds.mjs --ds <DS source root> --starter <starter root> [--ds-url http://localhost:5173] [--starter-url http://localhost:8123] [--user fikri.ramadhan] [--min 95]
@@ -7,7 +7,7 @@
 //   Static part (always, no browser):  css/*.css of the starter against src/design-system/styles/*.css of the DS (byte for byte).
 //   Rendered part (when both URLs are given; needs `playwright` resolvable from the DS root): the DOM skeleton (tag + sorted classes + role/type) of
 //     sidebar, Branding page, Preferences drawer, Design page sections, in light mode, compared line by line. Prints a match percentage per area and the differing lines.
-//   Exit code 0 when the static part is identical and every rendered area reaches its minimum (--min, default 95; Sidebar 65 and Design page 90 because of product content the starter lacks), 1 otherwise, 2 on a usage or setup error.
+//   Exit code 0 when the static part is identical and every rendered area reaches its minimum (--min, default 95; Sidebar 65 and Design page 90 because of product content the starter lacks; the Design page is compared as a bag of lines, order does not count), 1 otherwise, 2 on a usage or setup error.
 //
 // Start both apps first:   (DS root) npm run dev          (starter) node scripts/serve-nocache.mjs 8123 .   — a plain `python3 -m http.server` caches ES modules and shows an OLD starter.
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
@@ -50,7 +50,7 @@ const AREAS = [
   { name: 'Sidebar', hash: '#/home', sel: '.sb', min: 65 },   // the DS demo has a bell, a role line and a product menu the starter does not have
   { name: 'Branding page', hash: '#/branding', sel: 'main', after: 600 },
   { name: 'Preferences drawer', hash: '#/home', sel: '.drawer', open: async (p) => { await p.locator('button.user:visible').first().click(); await p.locator('[data-testid="prefs-open"], [data-prefs]').first().click(); await p.waitForSelector('.drawer'); } },
-  { name: 'Design page', hash: '#/design/all', sel: 'main', after: 600, min: 90 },   // the product examples (customer popover, logo, request wizard) are not in the starter
+  { name: 'Design page', hash: '#/design/all', sel: '.dsmain', after: 600, min: 90, bag: true },   // the product examples (customer popover, logo, request wizard) are not in the starter
 ];
 
 const browser = await chromium.launch(); const results = [];
@@ -77,11 +77,18 @@ function ratio(a, b) {
   for (let i = 1; i <= n; i++) { const cur = new Array(m + 1).fill(0); for (let j = 1; j <= m; j++) cur[j] = a[i - 1] === b[j - 1] ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]); prev = cur; }
   return (2 * prev[m]) / (n + m);
 }
+// The Design page is compared as a bag of lines (order does not count): the DS page is one long page of sections, a starter HTML page is one section per page (rule DS-19), so the same content comes in another order.
+// The lines are the DOM skeleton of `.dsmain` (the wrapper of the hero and the contents list is left out); the share of lines the two pages have in common must reach the minimum.
+function bagRatio(a, b) {
+  const count = (l) => { const m = new Map(); l.forEach((x) => { const k = x.trim(); m.set(k, (m.get(k) || 0) + 1); }); return m; };
+  const A = count(a), B = count(b); let same = 0; for (const [k, v] of A) same += Math.min(v, B.get(k) || 0);
+  return (2 * same) / (a.length + b.length);
+}
 console.log('\nRendered DOM skeleton (light, 1440px):');
 for (const a of AREAS) {
   const x = ds[a.name], y = st[a.name];
   if (x == null || y == null) { bad(`${a.name}: could not be read (DS ${x == null ? 'no' : 'yes'}, starter ${y == null ? 'no' : 'yes'})`); continue; }
-  const la = x.split('\n'), lb = y.split('\n'), r = ratio(la, lb) * 100, need = a.min ?? min;
+  const la = x.split('\n'), lb = y.split('\n'), r = (a.bag ? bagRatio(la, lb) : ratio(la, lb)) * 100, need = a.min ?? min;
   console.log(`  ${r >= need ? '✔' : '✘'} ${a.name.padEnd(20)} ${r.toFixed(1)}%   (DS ${la.length} lines, starter ${lb.length}, needs ${need}%)`);
   if (r < need) failed = true;
   if (r < 100) { const sa = new Set(la), sb = new Set(lb); const only = (s, o, tag) => [...new Set(s.filter((l) => !o.has(l)).map((l) => l.trim()))].slice(0, 8).forEach((l) => console.log(`      ${tag} ${l}`)); only(la, sb, 'DS only     '); only(lb, sa, 'starter only'); }
