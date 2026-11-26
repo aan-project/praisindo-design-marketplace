@@ -73,7 +73,7 @@
 .dl-row:last-child{border-bottom:0}
 .dl-rows{display:flex;flex-direction:column;gap:0}.dl-rows>.grpt{margin:0;padding-bottom:8px}   /* a group of split rows: its title has no line (rule DR-08) */
 .al{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--r-card);border:1px solid var(--color-border-neutral-subtle);background:linear-gradient(90deg,var(--int-sub) 0%,var(--color-surface-neutral-primary) 40%),var(--color-surface-neutral-primary);color:var(--color-text-primary)}
-.al>.ic{position:relative;isolation:isolate;flex:none;box-sizing:content-box;width:20px;height:20px;line-height:20px;padding:8px;border-radius:var(--r-card);color:var(--int-def);font-size:20px}
+.al>.ic{position:relative;isolation:isolate;flex:none;box-sizing:content-box;width:20px;height:20px;line-height:20px;padding:8px;border-radius:var(--r-card);color:var(--int-ic,var(--int-def));font-size:20px}
 .al>.ic::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:var(--r-card);background:var(--color-surface-neutral-primary)}
 .al.i-warning>.ic{color:var(--color-foreground-warning-strong)}
 /* CD-26: only the glyph of the icon of an Alert rings like a bell, for a moment when the alert shows and again every 10 seconds, while the tile behind it stands still (the tile is the ::before, turned back by the same angle: alringback); it stands still for reduced motion */
@@ -117,3 +117,25 @@
 /* DS 2.174.0 (DK-32): the Take Action drawer holds the vertical Wizard as a rail on the left and the step on the right */
 .tkw{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;align-items:start}.tkc{display:flex;flex-direction:column;gap:16px;min-width:0}
 @media(max-width:640px){.tkw{grid-template-columns:minmax(0,1fr);gap:16px}}
+/* DR-14: the summary of the record at the top of a drawer (DrawerSummary): the tile, three lines that get softer (CD-04), one badge */
+.dsum{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:linear-gradient(135deg,var(--color-surface-brand-subtle-1),transparent 70%)}
+.dsum>.hp-ic{width:48px;height:48px;border-radius:12px;flex:none}.dsum>.hp-ic .ic{font-size:24px}
+.dsum>.m{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.dsum .t{font-size:var(--fs-md);font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-primary)}
+.dsum .s{font-size:var(--fs-sm);color:var(--color-text-secondary)}
+.dsum .x{font-size:var(--fs-xs);color:var(--color-text-tertiary)}
+.dsum>.bdg{flex:none;align-self:flex-start}
+/* DR-15: a recommendation plan to choose (PlanCard): header strip, body, thin score meter, a selected state with a 2px brand border */
+.plc{display:flex;flex-direction:column;align-items:stretch;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;overflow:hidden;border:1px solid var(--color-border-neutral-default);border-radius:var(--r-card);background:var(--color-surface-neutral-primary)}
+.plc:hover{border-color:var(--color-border-brand-default)}.plc:focus-visible{outline:2px solid var(--color-border-brand-default);outline-offset:2px}
+.plc.on{border:2px solid var(--color-border-brand-default)}
+.plc-h{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--color-surface-neutral-secondary)}.plc.on .plc-h{background:var(--color-surface-brand-subtle-1)}
+.plc-ck{width:20px;height:20px;flex:none;border-radius:999px;border:2px solid var(--color-border-neutral-strong);display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface-neutral-primary)}
+.plc.on .plc-ck{border-color:var(--color-surface-brand-default);background:var(--color-surface-brand-default);color:var(--color-text-white)}.plc-ck .ic{font-size:14px}
+.plc-l{flex:1;font-size:var(--fs-xs);letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-secondary)}
+.plc-st{display:inline-flex;color:var(--color-icon-warning)}.plc-st .ic{font-size:16px}
+.plc-b{display:flex;flex-direction:column;gap:8px;padding:16px}
+.plc-t{font-weight:calc(500 + var(--fw-shift,0));color:var(--color-text-primary)}
+.plc-d{font-size:var(--fs-sm);color:var(--color-text-secondary)}
+.plc-m{display:block;height:4px;border-radius:999px;background:var(--color-surface-neutral-tertiary);overflow:hidden}.plc-m>i{display:block;height:100%;background:var(--color-surface-brand-default)}
+.plc.fixed{cursor:default}.plc.fixed:hover{border-color:var(--color-border-brand-default)}

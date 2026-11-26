@@ -1,7 +1,9 @@
 // Ported from the prototype: buildTokens(b, scope). The only change is that the prototype's
 // global `prefs.fs` is an explicit parameter (`fs`, default 'regular'), so the function stays pure.
 import { A, BDEF, CY, DK, DK_INTENT, FS, G, IB, N, PU, R } from './palette.js';
-import { darkIntent, ramp } from './colorEngine.js';
+import { cRatio, darkIntent, mix, ramp, rgb } from './colorEngine.js';
+/** The colour of an icon on a soft tile (rule IC-02): the given colour, moved towards black (light) or white (dark) until it is at least 3.5:1 on the tile. */
+const iconTone = (fg, bg, toward) => { let c = fg, w = 0; while (cRatio(c, bg) < 3.5 && w < 1) { w = Math.round((w + 0.05) * 100) / 100; c = mix(rgb(fg), toward, w); } return c; };
 export function buildTokens(b = BDEF, scope = ':root', fs = 'regular') {
     const L = {}, D = {};
     const set = (k, l, d) => { L[k] = l; D[k] = d === undefined ? l : d; };
@@ -10,6 +12,7 @@ export function buildTokens(b = BDEF, scope = ':root', fs = 'regular') {
     set('color-surface-neutral-primary', N[0], DK.card);
     set('color-surface-neutral-secondary', '#f7f7f7', DK.raised);
     set('color-surface-neutral-tertiary', N[300], DK.line);
+    set('color-surface-neutral-field', N[0], DK.field);
     set('color-text-primary', N[900], DK.text);
     set('color-text-faint', N[300], DK.s1);
     set('color-text-muted', N[400], DK.s2);
@@ -54,9 +57,11 @@ export function buildTokens(b = BDEF, scope = ':root', fs = 'regular') {
                     D[`color-${k.split('-')[0]}-${x}-${k.split('-').slice(1).join('-')}`] = v;
             }
         }
-        cls += `.i-${x}{--int-def:var(--color-surface-${x}-default);--int-hov:var(--color-surface-${x}-strong-1);--int-prs:var(--color-surface-${x}-strong-2);--int-sub:var(--color-surface-${x}-subtle-1);--int-fg:var(--color-foreground-${x}-strong);--int-bd:var(--color-border-${x}-default);--int-on:var(--color-text-${w ? 'black' : 'white'})}`;
+        L[`color-icon-${x}`] = iconTone(P[500], P[50], [0, 0, 0]); D[`color-icon-${x}`] = iconTone(D[`color-foreground-${x}-default`], D[`color-surface-${x}-subtle-1`], [255, 255, 255]);
+        cls += `.i-${x}{--int-ic:var(--color-icon-${x});--int-def:var(--color-surface-${x}-default);--int-hov:var(--color-surface-${x}-strong-1);--int-prs:var(--color-surface-${x}-strong-2);--int-sub:var(--color-surface-${x}-subtle-1);--int-fg:var(--color-foreground-${x}-strong);--int-bd:var(--color-border-${x}-default);--int-on:var(--color-text-${w ? 'black' : 'white'})}`;
     });
-    cls += '.i-neutral{--int-def:var(--color-surface-neutral-tertiary);--int-hov:var(--color-border-neutral-strong);--int-prs:var(--color-border-neutral-strong);--int-sub:var(--color-surface-neutral-secondary);--int-fg:var(--color-text-secondary);--int-bd:var(--color-border-neutral-default);--int-on:var(--color-text-primary)}';
+    L['color-icon-neutral'] = iconTone(N[500], '#f7f7f7', [0, 0, 0]); D['color-icon-neutral'] = iconTone(DK.s3, DK.raised, [255, 255, 255]);   // on --color-surface-neutral-secondary
+    cls += '.i-neutral{--int-ic:var(--color-icon-neutral);--int-def:var(--color-surface-neutral-tertiary);--int-hov:var(--color-border-neutral-strong);--int-prs:var(--color-border-neutral-strong);--int-sub:var(--color-surface-neutral-secondary);--int-fg:var(--color-text-secondary);--int-bd:var(--color-border-neutral-default);--int-on:var(--color-text-primary)}';
     const dump = (o) => Object.keys(o).map((k) => `--${k}:${o[k]};`).join('');
     const f = FS[fs] || FS.regular;
     const font = `'${b.font}','Figtree',system-ui,sans-serif`;

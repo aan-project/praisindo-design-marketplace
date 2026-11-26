@@ -1,4 +1,4 @@
-# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.184.2, skill v2.184.2)
+# Cards, Alert, Tooltip, Disclaimers, states, detail frame, names (Praisindo DS v2.193.0, skill v2.193.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -105,6 +105,12 @@ Example page: `features/examples/DetailPage.tsx` (React) and `pages/examples/det
 **Rule.** The trailing chevron icon of a list row (chevron_right, expand_more and the like in `.li`, `.rem`, `.alog-chev`) uses `var(--color-text-tertiary)`, from one shared CSS rule (`.li>.ic, .rem>.ic, .alog-chev>.ic`), not per component. Leading tile icons (`.hp-ic`, `IconTile`) keep their intent colour, and an icon inside a button keeps the button colour
 **Meet.** Use `.li` and its trailing `<Icon />`; never colour the chevron by hand.
 **Check.** Look at list rows in dark mode.
+**Guarded in Praisindo by** a unit test.
+
+### IC-02
+**Rule.** The icon on a soft tile (the icon tile `IconTile`, the KPI tile, the circle of an activity, the avatar, the Alert icon, the stat icon and ring) is at least 3.5:1 on its tile in light and in dark, for every intent and for neutral. The token `--color-icon-<intent>` (and `--color-icon-neutral`) is the foreground colour moved towards black (light) or white (dark) until it reaches 3.5:1 (`iconTone` in `buildTokens.ts`); `.i-<intent>` sets `--int-ic` to it and the icon rules colour the icon with `var(--int-ic,var(--int-def))`. The fills of buttons, bars and dots keep `--int-def`.
+**Meet.** Colour a tile icon with `var(--int-ic,var(--int-def))`; never use the grey fill token for a neutral icon.
+**Check.** Open a screen with neutral, success, info and warning tiles in light and in dark: every icon is clearly visible.
 **Guarded in Praisindo by** a unit test.
 
 ### CD-20

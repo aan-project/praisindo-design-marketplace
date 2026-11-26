@@ -79,7 +79,7 @@ div.rs:last-child{border-bottom:0}
 .si2 .st{display:flex;align-items:center;padding-right:12px}
 .rem{display:flex;align-items:center;gap:12px;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--color-border-neutral-subtle);background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .rem:last-of-type{border-bottom:0}
-.rem .ri{width:40px;height:40px;flex:none;border-radius:999px;background:var(--int-sub);color:var(--int-def);display:flex;align-items:center;justify-content:center}
+.rem .ri{width:40px;height:40px;flex:none;border-radius:999px;background:var(--int-sub);color:var(--int-ic,var(--int-def));display:flex;align-items:center;justify-content:center}
 .rem.i-warning .ri{color:var(--color-foreground-warning-default)}
 .rem .rt{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
 .rem .rt .fw6{color:var(--color-text-primary);font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}
@@ -115,7 +115,7 @@ a.rem{text-decoration:none}
 .li .m .pb,.mini .pb,.rs>.pb{flex:none;height:8px;width:100%}
 .hp{display:grid;grid-template-columns:40px minmax(0,1fr) auto auto;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid var(--color-border-neutral-subtle)}
 .hp:last-child{border-bottom:0}.hp:hover{background:var(--color-surface-neutral-secondary)}
-.hp-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-def)}
+.hp-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-ic,var(--int-def))}
 .hp-m{display:flex;flex-direction:column;gap:4px;min-width:0;color:inherit;text-decoration:none;font:inherit;text-align:left;background:none;border:0;padding:0;cursor:pointer;width:100%}
 .hp-m:focus-visible{outline:2px solid var(--color-border-brand-strong);outline-offset:2px;border-radius:4px}
 .hp-t{display:flex;align-items:center;gap:8px;min-width:0}.hp-t .fw6{font-weight:calc(500 + var(--fw-shift,0));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hp-t .bdg{flex:none}

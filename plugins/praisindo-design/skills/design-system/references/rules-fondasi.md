@@ -1,4 +1,4 @@
-# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.184.2, skill v2.184.2)
+# Foundations: tokens, colour, type, grid, accessibility, code, process (Praisindo DS v2.193.0, skill v2.193.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -92,6 +92,18 @@ The ids are those of the Praisindo owner rules register (general rules only; pro
 **Rule.** A dark intent value written in `DK_INTENT` (palette.ts, empty today) is used verbatim by `buildTokens`; the other tokens of that intent stay derived
 **Meet.** A dark value that must be fixed goes in `DK_INTENT` of `palette.ts`.
 **Check.** Read the generated token in dark mode.
+**Guarded in Praisindo by** a unit test.
+
+### CL-05
+**Rule.** The neutral borders of dark mode are soft: `--color-border-neutral-default` #222932, `--color-border-neutral-subtle` #1a1f26 and `--color-border-neutral-strong` #3d4652 (they are `DK.line`, `DK.lineS` and `DK.lineX` of `palette.ts`, CL-01); the light values and every intent border are unchanged. `--color-surface-neutral-tertiary` (the grey fill of a neutral button) is `DK.line`, so it follows.
+**Meet.** Copy `palette.ts` and `buildTokens.ts` from the starter; never write a dark border colour by hand.
+**Check.** Open a card, a table and a field in dark mode: the borders are visible but not harsh.
+**Guarded in Praisindo by** a unit test.
+
+### CL-06
+**Rule.** The fill of a field box in dark mode is darker than the card so it reads as a box: the token `--color-surface-neutral-field` is `DK.field` #10141a in dark and the same white as `--color-surface-neutral-primary` in light. `.inp` (text field, textarea, search field), `.sel`, `.combo`, `.otpd`, the checkbox box and the file drop zone (`.fdz`) use it as their background; a list, a popover, a card and a button keep `--color-surface-neutral-primary`.
+**Meet.** Use the classes of the design system for every field and checkbox; do not set a background on a field.
+**Check.** Open a form in dark mode: every field, the checkboxes and the drop zone are darker than the card around them.
 **Guarded in Praisindo by** a unit test.
 
 ### LY-01

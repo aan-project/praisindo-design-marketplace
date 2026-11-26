@@ -4,7 +4,7 @@
 .sec>.fw6{display:flex;align-items:center;gap:4px}
 .req{color:var(--color-foreground-danger-default);font-weight:calc(500 + var(--fw-shift,0))}
 .opt{font-weight:calc(400 + var(--fw-shift,0));font-size:var(--fs-xs);color:var(--color-text-secondary)}
-.inp{display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px;color:var(--color-text-secondary)}
+.inp{display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--color-surface-neutral-field);border:1px solid var(--color-border-neutral-default);border-radius:8px;color:var(--color-text-secondary)}
 .inp:focus-within{border-color:var(--color-border-brand-strong)}
 .inp.err{border-color:var(--color-border-danger-strong)}
 .selw.err>.sel,.sgc.err{border-color:var(--color-border-danger-strong)}   /* 2.31 (FM-12): a Select / SegToggle that is a form field shows its error like .inp.err */
@@ -17,10 +17,10 @@
 .selw{position:relative;display:inline-grid;max-width:100%}.selw>.sel{width:100%}
 .fld>.selw,.sec>.selw{display:grid;width:100%}
 .selw>.ic{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--color-text-secondary)}
-.sel{appearance:none;-webkit-appearance:none;font:inherit;color:var(--color-text-primary);background:var(--color-surface-neutral-primary);border:1px solid var(--color-border-neutral-default);border-radius:8px;padding:0 32px 0 12px;max-width:100%}
+.sel{appearance:none;-webkit-appearance:none;font:inherit;color:var(--color-text-primary);background:var(--color-surface-neutral-field);border:1px solid var(--color-border-neutral-default);border-radius:8px;padding:0 32px 0 12px;max-width:100%}
 .sel.s-sm{height:32px;font-size:var(--fs-sm)}.sel.s-md{height:44px}.sel.s-lg{height:56px;font-size:var(--fs-lg)}
 .sel:focus-visible{border-color:var(--color-border-brand-strong)}
-.combo{display:flex;border:1px solid var(--color-border-neutral-default);border-radius:8px;overflow:hidden;background:var(--color-surface-neutral-primary);max-width:520px;width:100%}
+.combo{display:flex;border:1px solid var(--color-border-neutral-default);border-radius:8px;overflow:hidden;background:var(--color-surface-neutral-field);max-width:520px;width:100%}
 .combo .selw{flex:none}.combo .sel{border:0;border-right:1px solid var(--color-border-neutral-default);border-radius:0;background:var(--color-surface-neutral-secondary)}
 .combo .inp{border:0;border-radius:0;flex:1}
 .combo:focus-within{border-color:var(--color-border-brand-strong)}

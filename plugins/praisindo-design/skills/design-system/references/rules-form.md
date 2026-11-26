@@ -1,4 +1,4 @@
-# Forms and fields (Praisindo DS v2.184.2, skill v2.184.2)
+# Forms and fields (Praisindo DS v2.193.0, skill v2.193.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -249,4 +249,10 @@ Five wrong uses (counter-examples; the reference application does not do these):
 **Rule.** The `SegmentedControl` is only for a small space: the header of a card, a toolbar, a drawer, a table cell or the page head. It is not the control of a field of a form page: that is a `Select` (FM-17) or the chips of FM-21.
 **Meet.** Use `Select` or `RadioGroup` for a field of a form; keep the segmented control to a view switch or a setting in a small space.
 **Check.** Open a form page: no segmented control among the fields; the segmented controls of the app sit in card headers, toolbars, drawers or the page head.
+**Guarded in Praisindo by** a unit test.
+
+### FM-25
+**Rule.** A control that is a form field never has a home-made label block: no section with a bold span label above a Select, RichSelect, MultiSelect, Input or the like (the gap from label to field would be 16px instead of the 4px of the field). The label is the `<label>` of a `.fld` (FM-12): the `label` prop of the component, or a small shared helper that renders a `.fld` with a `<label htmlFor>` and the error text. Screens that group fields in a drawer use the same.
+**Meet.** Pass `label` to the field component; wrap a bare control in `.fld` with a `<label>`.
+**Check.** Open a drawer with filters: every label sits 4px above its field and clicking the label focuses the field.
 **Guarded in Praisindo by** a unit test.

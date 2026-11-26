@@ -7,6 +7,6 @@ export const CY = { 50: '#e0f7fa', 100: '#b2ebf2', 200: '#80deea', 300: '#4dd0e1
 export const IB = { 50: '#e3f2fd', 100: '#bbdefb', 200: '#90caf9', 300: '#64b5f6', 500: '#2196f3', 600: '#1e88e5', 700: '#1976d2', 900: '#0d47a1' };
 export const BR0 = { 50: '#f2f8ff', 100: '#d9ebff', 200: '#bfdeff', 300: '#73b6ff', 400: '#409cff', 500: '#007bff', 600: '#006fe6', 700: '#0056b3', 800: '#004a99', 900: '#003e80', 950: '#001f40' };
 export const FS = { small: { xs: 10, sm: 12, md: 13, lg: 15, h1: 24, h2: 20, h3: 18, h4: 15 }, regular: { xs: 11, sm: 13, md: 14, lg: 16, h1: 28, h2: 24, h3: 20, h4: 16 }, large: { xs: 12, sm: 14, md: 15, lg: 18, h1: 32, h2: 28, h3: 24, h4: 18 } };
-export const DK = { page: '#0b0e13', card: '#151a21', raised: '#1e242d', line: '#2d3540', lineS: '#222932', lineX: '#5b6574', text: '#e6e9ee', s1: '#2d3540', s2: '#6b7482', s3: '#8a93a1', s4: '#aab1bd' };
+export const DK = { page: '#0b0e13', card: '#151a21', raised: '#1e242d', field: '#10141a', line: '#222932', lineS: '#1a1f26', lineX: '#3d4652', text: '#e6e9ee', s1: '#2d3540', s2: '#6b7482', s3: '#8a93a1', s4: '#aab1bd' };
 export const DK_INTENT = {};
 export const BDEF = { appName: 'My App', primary: '#007bff', secondary: '#7e57c2', logoLight: '', logoDark: '', favicon: '', font: 'Figtree', fontWeight: 400, defaultMode: 'light', defaultLang: 'en' };

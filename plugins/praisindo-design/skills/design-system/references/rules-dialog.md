@@ -1,4 +1,4 @@
-# Drawer, dialog, action menu (Praisindo DS v2.184.2, skill v2.184.2)
+# Drawer, dialog, action menu (Praisindo DS v2.193.0, skill v2.193.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -92,6 +92,18 @@ The `more_vert` button of a row or card opens a menu: `.pop role="menu"` positio
 **Rule.** A drawer of size md or smaller never puts three fields in one row: a row holds one field or two (`.g2`), a third field goes to the next row. A drawer is narrow; three fields squeeze their labels and values.
 **Meet.** Use `.g2` for a pair of short fields (Minimum and Maximum) and one field per row for the rest; use `.g3` only on a page or in a drawer of size lg or xl.
 **Check.** Open a drawer md with a percent, a minimum and a maximum: the percent is alone on its row and the minimum and maximum share the next one.
+**Guarded in Praisindo by** a unit test.
+
+### DR-14
+**Rule.** The summary of the record at the top of a drawer is the `DrawerSummary`: a soft brand gradient card with the icon tile of the record (48px), then three lines, each softer than the one above (CD-04: primary, secondary, tertiary text): the NAME (medium size, semibold), the SECOND line (what it is) and the THIRD line (the code and the details, always on its own line because a title can be long), and at the right ONE badge (the channel or the status). It replaces the plain box of label and value rows at the top of a drawer that is about one record.
+**Meet.** Use `DrawerSummary` with `icon`, `title`, `sub`, `meta` and `badge`; copy `08-drawer.css`.
+**Check.** Open a drawer about one record: the card at the top has the tile, three lines that get softer, and one badge.
+**Guarded in Praisindo by** a unit test.
+
+### DR-15
+**Rule.** Choosing one plan from several (a recommendation, a package) is a list of `PlanCard`s: each card is a radio (`role=radio`, `aria-checked`) with a header strip (the label, "Best match" for the first and "Alternative n" for the others, in small capitals, and the stars of the plan at the right) and a body (the title in medium weight, the amount and the score in the muted line, a thin meter of the score, the tags). The selected card has a 2px brand border, the brand soft header strip and a check circle before the label; the others have a neutral border and the hover is the brand border. The choice already made, shown elsewhere, is the same card read-only (`PlanCard fixed`: a `div`, always in the selected look), not a box of label and value rows.
+**Meet.** Use `PlanCard` inside a `role="radiogroup"`; use `fixed` to show the chosen plan; copy `08-drawer.css`.
+**Check.** Open a drawer with three plans: one card is selected with the brand border; the chosen plan shown later has the same look and cannot be clicked.
 **Guarded in Praisindo by** a unit test.
 
 ### MN-01

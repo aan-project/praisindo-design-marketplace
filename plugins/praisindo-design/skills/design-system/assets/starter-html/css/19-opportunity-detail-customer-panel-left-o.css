@@ -13,7 +13,7 @@
 .odh{display:flex;gap:16px;align-items:flex-start;padding:16px}
 .odh .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .odh .c3sub{overflow-wrap:anywhere}.odh h2{margin:0;font-size:20px;line-height:28px;font-weight:calc(600 + var(--fw-shift,0));overflow-wrap:anywhere}
-.odav{width:48px;height:48px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-def)}.odav .ic{font-size:26px}
+.odav{width:48px;height:48px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-ic,var(--int-def))}.odav .ic{font-size:26px}
 .odbdg{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:4px}
 .odue{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);color:var(--color-text-secondary)}.odue .ic{font-size:16px}.odue.over{color:var(--color-foreground-danger-default)}
 .odcta{flex:none;width:232px;display:flex;flex-direction:column;align-items:stretch;gap:8px}.odcta .btn{width:100%;justify-content:center}.odcta .c3hint{margin:0;text-align:left;font-size:var(--fs-xs)}

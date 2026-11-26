@@ -35,7 +35,7 @@
 .c3c>.fw6{font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm);line-height:20px}.c3c>.mut{font-size:var(--fs-xs)}
 .c3ct{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .c3a,.c3e{display:flex;align-items:center;gap:12px}.c3a .m,.c3e .m{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.c3a .m .fw6,.c3e .m .fw6{font-weight:calc(500 + var(--fw-shift,0));font-size:var(--fs-sm)}.c3a .m .mut,.c3e .m .mut{font-size:var(--fs-xs)}.c3a .mut.dn{color:var(--color-foreground-danger-default)}
-.c3a .ci{width:32px;height:32px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-def)}.c3a .ci .ic{font-size:18px}
+.c3a .ci{width:32px;height:32px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--int-sub);color:var(--int-ic,var(--int-def))}.c3a .ci .ic{font-size:18px}
 .c3e{padding:16px 16px;border-bottom:1px solid var(--color-border-neutral-subtle)}.c3e:last-child{border-bottom:0}
 .c3e .ci{width:36px;height:36px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--color-surface-neutral-secondary);color:var(--color-text-secondary)}
 .c3src{margin:0;padding:16px;font-size:var(--fs-xs);color:var(--color-text-tertiary)}   /* owner 2026-10-24: as-of footnote of the Customer 360 and detail panels, subtle-3 */
@@ -43,3 +43,10 @@
 .card .tw{border:0;border-radius:0}
 /* Customer 360 tab strip: never clip a label; the strip scrolls sideways with a thin visible scrollbar as the cue (the active tab scrolls into view) */
 .c3tabs .tabs{overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--color-border-neutral-strong) transparent}.c3tabs .tab{flex:none}
+.c3m .stats{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:4px;scrollbar-width:thin}
+.c3m .stats>*{flex:0 0 220px;width:220px;min-height:80px}
+html[data-sg=one] .c3m .stats{gap:0}
+.c3m .tb{flex-wrap:nowrap}
+.c3m .tb>.combo{min-width:0}
+.c3m .tb>.combo .inp{min-width:0}
+.c3m .tb>.btn,.c3m .tb>.bulk{flex:none}

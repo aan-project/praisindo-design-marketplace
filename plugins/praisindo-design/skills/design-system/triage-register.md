@@ -794,3 +794,16 @@ The working file of the skill sync (`node scripts/rules-coverage.mjs --triage tr
 | RD-01 | (2.183.0 sync) | page of one RM | D | tidak |
 | PC-07 | (2.183.0 sync) | RM profile card View Detail button | D | tidak |
 | DK-32 | (2.183.0 sync) | Take Action in three steps (exception) | X | tidak |
+| AN-02 | (2.193.0 sync) | Analytics Advanced filter drawer | D | tidak |
+| DT-25 | (2.193.0 sync) | Opportunity detail tables (Kora detail) | D | tidak |
+| FM-25 | (2.193.0 sync) | form field label is a .fld label | U | ya |
+| IC-02 | (2.193.0 sync) | icon contrast on soft tiles | U | ya |
+| DR-14 | (2.193.0 sync) | DrawerSummary at top of a drawer | U | ya |
+| DR-15 | (2.193.0 sync) | PlanCard choice and read-only chosen plan | U | ya |
+| DT-20 | (2.193.0 sync) | table on a detail page as three blocks | U | ya |
+| DT-21 | (2.193.0 sync) | stat cards 220px scroll | U | ya |
+| DT-22 | (2.193.0 sync) | activities as timeline | U | ya |
+| DT-23 | (2.193.0 sync) | one-row toolbar with More menu | U | ya |
+| DT-24 | (2.193.0 sync) | detail page size 5 | U | ya |
+| CL-05 | (2.193.0 sync) | softer dark borders | U | ya |
+| CL-06 | (2.193.0 sync) | darker field fill in dark | U | ya |

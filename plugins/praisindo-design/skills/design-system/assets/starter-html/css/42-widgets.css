@@ -13,11 +13,11 @@
 .dlt .ic{font-size:14px}
 .wg-spark{display:block;overflow:visible}.wg-spark .ln{fill:none;stroke:var(--int-def);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.wg-spark .ar{fill:var(--int-sub);stroke:none;opacity:.8}.wg-spark .dt{fill:var(--int-def);stroke:var(--color-surface-neutral-primary);stroke-width:2}
 .wg-tr{display:flex;align-items:flex-end;gap:12px}.wg-sp{flex:0 0 45%;min-width:0}
-.wg-f{display:flex;align-items:center;gap:8px;margin:4px -16px -16px;padding:12px 16px;background:var(--int-sub);color:var(--int-fg);font-size:var(--fs-sm)}.wg-f .ic{font-size:18px;color:var(--int-def)}.wg-f.i-neutral .ic{color:var(--color-text-secondary)}.wg-f .fw6{font-weight:calc(500 + var(--fw-shift,0))}.wg-f span{color:var(--color-text-secondary)}
+.wg-f{display:flex;align-items:center;gap:8px;margin:4px -16px -16px;padding:12px 16px;background:var(--int-sub);color:var(--int-fg);font-size:var(--fs-sm)}.wg-f .ic{font-size:18px;color:var(--int-ic,var(--int-def))}.wg-f.i-neutral .ic{color:var(--color-text-secondary)}.wg-f .fw6{font-weight:calc(500 + var(--fw-shift,0))}.wg-f span{color:var(--color-text-secondary)}
 .wg-f.i-neutral{color:var(--color-text-secondary)}
 .wg-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none}.wg-ring svg{display:block}
 .wg-ring .bg{fill:none;stroke:var(--color-surface-neutral-secondary)}.wg-ring .fg{fill:none;stroke:var(--int-def);stroke-linecap:round}.wg-ring .sg{fill:none;stroke:var(--int-def)}
-.wg-ri{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--int-def)}.wg-ri .fw6{font-size:var(--fs-h-md);font-weight:calc(700 + var(--fw-shift,0));color:var(--color-text-primary)}.wg-ri .ic{font-size:20px}
+.wg-ri{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--int-ic,var(--int-def))}.wg-ri .fw6{font-size:var(--fs-h-md);font-weight:calc(700 + var(--fw-shift,0));color:var(--color-text-primary)}.wg-ri .ic{font-size:20px}
 .wg-mid{align-items:center}
 .wg-bars{display:flex;align-items:flex-end;gap:8px;height:112px;padding-bottom:20px}
 .wg-b{position:relative;flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center}

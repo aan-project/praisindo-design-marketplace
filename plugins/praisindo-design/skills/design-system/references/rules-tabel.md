@@ -1,4 +1,4 @@
-# List pages: table, toolbar, pagination, board (Praisindo DS v2.184.2, skill v2.184.2)
+# List pages: table, toolbar, pagination, board (Praisindo DS v2.193.0, skill v2.193.0)
 
 The ids are those of the Praisindo owner rules register (general rules only; product-domain rules are not in the skill). Every rule is permanent: do not change, loosen or re-interpret it; a need for something else goes to "Rule proposals" in `docs/design-system/new-components.md`. Examples in brackets name pages of the Praisindo reference application; apply the rule to the equivalent page of your product.
 
@@ -207,9 +207,39 @@ The bulk layer sits INSIDE `.tb` (it covers the toolbar while rows are selected)
 **Guarded in Praisindo by** a browser test.
 
 ### LS-02
-**Rule.** The long lists of a detail page (the History tab, the Engagement timeline) show 10 rows; at the end of the list a loading state shows and the next 10 come by themselves, and so on, until the list is over. Without `IntersectionObserver` every row shows.
+**Rule.** The long lists of a detail page (the History tab, the Engagement timeline, the Activities timeline) show 5 rows at first (DT-24); at the end of the list a loading state shows and the next 5 come by themselves, and so on, until the list is over. Without `IntersectionObserver` every row shows.
 **Meet.** Use a hook such as `useLoadMore(rows)` that returns the rows to show and a `tail` element placed right under the list (a `LoadingState` while it loads, 500 ms); do not page a timeline with buttons or numbers.
-**Check.** Open a detail page whose history has more than 10 rows: 10 show, scroll to the end, a loading state shows and 10 more appear.
+**Check.** Open a detail page whose history has more than 5 rows: 5 show, scroll to the end, a loading state shows and 5 more appear.
+**Guarded in Praisindo by** a unit test.
+
+### DT-20
+**Rule.** A table with a search row on a detail page (a tab, the holders of a product) is three blocks one under the other, never one card around all of them: the toolbar (search, advanced filter, show / hide columns) in its own row, then the table in its own bordered box, then the standard Pagination in its own row. The section title is above them (CD-32). `ListTable` is exactly this when it is put in the section without a `Card` around it.
+**Meet.** Use `ListTable` in a `PlainSection`; do not wrap it in a `Card`.
+**Check.** Open a detail page tab with a table: the search row, the table box and the pagination are three separate blocks.
+**Guarded in Praisindo by** a unit test.
+
+### DT-21
+**Rule.** The stat cards of a detail page (inside the wide column of the three-panel layout) do not shrink to fit the column: the row scrolls sideways (`overflow-x:auto`) and every card is exactly 220px wide and at least 80px high, so the label and the value are always readable; a row of few cards leaves room on the right, a row of many cards scrolls. The grouped look scrolls the same way.
+**Meet.** Copy `10-customer-360-three-panels.css`; do not set another width on the stat cards of a detail page.
+**Check.** Open a detail page at 1440px: every stat card is 220px and the row scrolls when it does not fit.
+**Guarded in Praisindo by** a unit test.
+
+### DT-22
+**Rule.** A list of activities on a detail page is a timeline (`.tl` and `.ti`): on the left the date and the status badge (or the time since), a round dot with the icon of the channel, and on the right the title in medium weight, a muted line (who and what), then the channel badge, the outcome badge and the time; 5 rows at first and 5 more at the end of the list (LS-02, DT-24), inside a flush card under the section title (CD-32).
+**Meet.** Build the list of activities as the timeline of the engagement history; do not use a table for it.
+**Check.** Open the activities tab: it looks like the engagement history, with 5 rows and more on scroll.
+**Guarded in Praisindo by** a unit test.
+
+### DT-23
+**Rule.** The toolbar of a table on a detail page is one row, never wrapped. In the wide column of a detail page (the toolbar is narrower than 760px) the order is: the search combo at its usual size (narrowed only when the row has no room), the Advanced filter as an ICON-ONLY button (`filter_list`, aria-label, with the count of filters in use), a spacer, and at the far RIGHT one "More actions" button (`more_vert`) whose menu holds Export (when the table has it) and Show / hide columns. Wider than 760px the toolbar is the full one: search, Advanced filter with its label, Export, Show / hide columns.
+**Meet.** Use a hook that measures the toolbar (`useToolbarMore`, a ResizeObserver with the 760px limit) and an action menu; do not wrap the buttons.
+**Check.** Open a detail page table at 1440px (three panels): one row, filter icon only, More menu at the far right with Export and Show / hide columns.
+**Guarded in Praisindo by** a unit test.
+
+### DT-24
+**Rule.** The page size of a detail page is 5: every table of a detail page starts at 5 rows a page (the person can still choose 10 or 25), and every long list of a detail page (history, engagement, activities, LS-02) shows 5 rows at first and 5 more each time the end is reached.
+**Meet.** Start the table with 5 rows a page and use a load-more step of 5.
+**Check.** Open a detail page: tables show 5 rows; lists show 5 and load 5 more at the end.
 **Guarded in Praisindo by** a unit test.
 
 ### TB-23

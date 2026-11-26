@@ -13,7 +13,7 @@ export const BR0: Ramp = {50:'#f2f8ff',100:'#d9ebff',200:'#bfdeff',300:'#73b6ff'
 
 export type FontScale = Readonly<{ xs: number; sm: number; md: number; lg: number; h1: number; h2: number; h3: number; h4: number }>;
 export const FS: Readonly<Record<'small' | 'regular' | 'large', FontScale>> = {small:{xs:10,sm:12,md:13,lg:15,h1:24,h2:20,h3:18,h4:15},regular:{xs:11,sm:13,md:14,lg:16,h1:28,h2:24,h3:20,h4:16},large:{xs:12,sm:14,md:15,lg:18,h1:32,h2:28,h3:24,h4:18}};
-export const DK = {page:'#0b0e13',card:'#151a21',raised:'#1e242d',line:'#2d3540',lineS:'#222932',lineX:'#5b6574',text:'#e6e9ee',s1:'#2d3540',s2:'#6b7482',s3:'#8a93a1',s4:'#aab1bd'} as const;
+export const DK = {page:'#0b0e13',card:'#151a21',raised:'#1e242d',field:'#10141a',line:'#222932',lineS:'#1a1f26',lineX:'#3d4652',text:'#e6e9ee',s1:'#2d3540',s2:'#6b7482',s3:'#8a93a1',s4:'#aab1bd'} as const;
 
 /**
  * Optional dark-mode values for the intent colours. Nothing is written here yet: every dark intent token is then derived by the contrast engine (colorEngine.ts `darkIntent`).
